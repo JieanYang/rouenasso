@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test/', function () {
+    $tests = \App\Test::all();
+
+	echo $tests;
+});
