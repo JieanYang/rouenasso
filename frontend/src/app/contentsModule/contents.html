@@ -1,8 +1,9 @@
 <div class="jumbotron">
-  <h1>{{ $ctrl.a }}</h1>
+  <h1>{{vm.contents[0].a}}</h1>
   <p>
-    {{ $ctrl.b }}
+    {{vm.contents[0].b}}
   </p>
   <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-  <img id="img" ng-src="./app/images/sample.jpg" alt="500" />
+
+  <img ng-src="./app/images/sample.jpg" alt="image"/>
 </div>

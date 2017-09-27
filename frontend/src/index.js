@@ -1,16 +1,18 @@
 var angular = require('angular');
 
-var app = 'app';
-module.exports = app;
+var contentsModule = require('./app/contentsModule/index');
 require('angular-ui-router');
 var routesConfig = require('./routes');
+
+var main = require('./app/main');
+var header = require('./app/views/header');
+var footer = require('./app/views/footer');
 
 require('./index.css');
 
 angular
-  .module(app, ['ui.router'])
-  .config(routesConfig);
-
-var rouenasso = require('./app/rouenasso');
-
-angular.module('app').component('app', rouenasso);
+  .module('app', [contentsModule, 'ui.router'])
+  .config(routesConfig)
+  .component('app', main)
+  .component('fountainHeader', header)
+  .component('fountainFooter', footer);
