@@ -18,7 +18,8 @@ Route::get('/', function () {
 Route::get('/test/', function () {
     $tests = \App\Test::all();
 
-	echo $tests;
+	return response($tests, 200)
+                  ->header('Access-Control-Allow-Origin', 'http://localhost:3000');
 });
 
 Route::resource('users', 'UserController');
