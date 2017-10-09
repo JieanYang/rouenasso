@@ -1,14 +1,14 @@
 var angular = require('angular');
 
-var contentsModule = require('./app/contentsModule/index');
+var contentsModule = require('./scripts/index');
 require('angular-ui-router');
 var routesConfig = require('./routes');
 
-var main = require('./app/main');
-var header = require('./app/views/header');
-var footer = require('./app/views/footer');
+var main = require('./scripts/main');
+var header = require('./scripts/scripts_base/header');
+var footer = require('./scripts/scripts_base/footer');
 
-require('./index.css');
+require('./styles/index.css');
 
 angular
   .module('app', [contentsModule, 'ui.router'])

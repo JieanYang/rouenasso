@@ -1,5 +1,5 @@
 module.exports = {
-  template: require('./data.html'),
+  template: require('../../views/views_Module/data.html'),
   controller: DataController,
   controllerAs: 'vm'
 };

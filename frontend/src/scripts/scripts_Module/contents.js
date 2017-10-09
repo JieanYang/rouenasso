@@ -1,5 +1,5 @@
 module.exports = {
-  template: require('./contents.html'),
+  template: require('../../views/views_Module/contents.html'),
   controller: ContentsController,
   controllerAs: 'vm'
 };

@@ -1,7 +1,7 @@
 var angular = require('angular');
 
-var contents = require('./contents');
-var data = require('./data');
+var contents = require('./scripts_Module/contents');
+var data = require('./scripts_Module/data');
 
 var contentsModule = 'contents';
 
