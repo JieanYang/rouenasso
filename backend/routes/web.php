@@ -20,3 +20,5 @@ Route::get('/test/', function () {
 
 	echo $tests;
 });
+
+Route::resource('users', 'UserController');
