@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -22,13 +24,13 @@ class UserController extends Controller
     /**
      * GET /users/create
      * 
-     * Deprecated. Use post /user instead
+     * Deprecated.  Use post /user instead
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('404');
     }
 
     /**
@@ -41,6 +43,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'email' => 'required|unique:users|max:255',
+            'name' => 'required|max:100',
+            'department' => 'required|max:100',
+            'position' => 'required|max:100',
+            'school' => 'required|max:100',
+            'phone_number' => 'required|digits_between:10,15',
+            'birthday' => 'required|date',
+            'arrive_date' => 'required|date',
+            'password' => 'required'
+        ]);
+        // 验证失败自动返回错误
+
         $user = new User;
 
         $user->name = $request->name;
@@ -57,6 +72,8 @@ class UserController extends Controller
         $user->isAvaible = True;
         
         $user->save();
+
+        return 'ok';
     }
 
     /**
@@ -67,7 +84,7 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show($id)
     {
         return User::where('id', $id)
                     ->get();
@@ -82,7 +99,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-
+        return view('404');
     }
 
     /**
@@ -90,25 +107,61 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, int $id)
     {
-
-        error_log('in');
         
-        $userDb <- User::where('id', $request -> input('id'))
-                    ->get();
+        $userDb = User::find($id);
 
         if ($userDb === null) {
             return 'User not exists';
         }
 
+        if($request->name) {
+            $userDb->name = $request->name;
+        }
+        if($request->email) {
+            $userDb->email = $request->email;
+        }
+        if($request->department) {
+            $userDb->department = $request->department;
+        }
+        if($request->position) {
+            $userDb->position = $request->position;
+        }
+        if($request->school) {
+            $userDb->school = $request->school;
+        }
+        if($request->phone_number) {
+            $userDb->phone_number = $request->phone_number;
+        }
+        if($request->birthday) {
+            $userDb->birthday = $request->birthday;
+        }
+        if($request->arrive_date) {
+            $userDb->arrive_date = $request->arrive_date;
+        }
+        if($request->password) {
+            $userDb->password = $request->password;
+        }
+        if($request->isWorking) {
+            $userDb->isWorking = $request->isWorking;
+        }
+        if($request->isAvaible) {
+            $userDb->isAvaible = $request->isAvaible;
+        }
+        if($request->dimission_date) {
+            $userDb->dimission_date = $request->dimission_date;
+        }
 
 
-        $user->isAvaible = $request->input('isAvaible');
-        $user->dimission_date = $request->input('dimission_date');
+        error_log($userDb);
+
+        $userDb->save();
+
+        return 'ok';
     }
 
     /**

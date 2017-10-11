@@ -22,6 +22,8 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+    // TODO: db建立注册用tocken表，检查连接的token，允许或者拒绝注册
+
     /**
      * Where to redirect users after registration.
      *
