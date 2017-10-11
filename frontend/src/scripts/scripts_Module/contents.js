@@ -1,5 +1,5 @@
 module.exports = {
-  template: require('./contents.html'),
+  template: require('../../views/views_Module/contents.html'),
   controller: ContentsController,
   controllerAs: 'vm'
 };
@@ -9,7 +9,7 @@ function ContentsController($http) {
   var vm = this;
 
   $http
-.get('app/contentsModule/contents.json')
+.get('../../databases/contents.json')
 .then(function (response) {
   vm.contents = response.data;
 });
