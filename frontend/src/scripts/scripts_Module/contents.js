@@ -1,7 +1,7 @@
 module.exports = {
   template: require('../../views/views_Module/contents.html'),
   controller: ContentsController,
-  controllerAs: 'vm'
+  controllerAs: 'controller'
 };
 
 /** @ngInject */
