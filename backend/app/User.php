@@ -15,7 +15,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'department', 'position', 'birthday', 'school', 'phone_number', 'isWorking', 'isAvaible', 'arrive_date', 'dimission_date'
+        'name', 'email', 'password', 'department', 'position', 'birthday', 'school', 'phone_number', 
+        'isWorking', 'isAvaible', 'arrive_date', 'dimission_date'
     ];
 
     /**
@@ -27,4 +28,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     
+    /**
+     * Get the posts belongs to the user.
+     */
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
 }

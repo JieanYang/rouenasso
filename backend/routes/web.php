@@ -15,10 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function() {
+	
+});
+
+
+
 /**
  * RESTful api
  */
 Route::resource('users', 'UserController')->middleware('auth.basic.once');
+Route::resource('posts', 'PostController')->middleware('auth.basic.once');
+
+Route::get('users/{id}/posts', 'UserController@showPostsByUserId')->middleware('auth.basic.once');
 
 /**
  * Auth

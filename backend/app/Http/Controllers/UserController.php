@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Validator;
+use Illuminate\Validation\Rule;
 
 
 class UserController extends Controller
 {
     /**
-     * GET /user
+     * GET /users
      * 
      * Display a listing of the resource.
      *
@@ -24,7 +25,7 @@ class UserController extends Controller
     /**
      * GET /users/create
      * 
-     * Deprecated.  Use post /user instead
+     * Deprecated.  Use POST /user instead
      *
      * @return \Illuminate\Http\Response
      */
@@ -34,7 +35,7 @@ class UserController extends Controller
     }
 
     /**
-     * Post /users
+     * POST /users
      * 
      * Store a newly created resource in storage.
      *
@@ -43,18 +44,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|max:255',
             'name' => 'required|max:100',
-            'department' => 'required|max:100',
-            'position' => 'required|max:100',
+            'department' => 'required|in:' . implode(",", \App\Model\Department::getValues()),
+            'position' => 'required|in:' . implode(",", \App\Model\Position::getValues()),
             'school' => 'required|max:100',
             'phone_number' => 'required|digits_between:10,15',
             'birthday' => 'required|date',
             'arrive_date' => 'required|date',
             'password' => 'required'
         ]);
-        // 验证失败自动返回错误
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        
 
         $user = new User;
 
@@ -73,7 +78,7 @@ class UserController extends Controller
         
         $user->save();
 
-        return 'ok';
+        return response()->json(['status' => 200, 'msg' => 'success']);
     }
 
     /**
@@ -91,6 +96,8 @@ class UserController extends Controller
     }
 
     /**
+     * GET /users/{user}/edit
+     *
      * Deprecated.
      * Use POST /users instead
      *
@@ -103,7 +110,8 @@ class UserController extends Controller
     }
 
     /**
-     * POST /users/{user.id}
+     * PUT/PATCH /users/{user.id}
+     *
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -111,12 +119,38 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, int $id)
-    {
+    {   
+        $messages = [
+            'boolean' =>  'The :attribute field must be 1 or 0.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'email' => [
+                'max:100',
+                Rule::unique('users')->ignore($id),
+            ],
+            'name' => 'max:100',
+            'department' => 'in:' . implode(",", \App\Model\Department::getValues()),
+            'position' => 'in:' . implode(",", \App\Model\Position::getValues()),
+            'school' => 'max:100',
+            'phone_number' => 'digits_between:10,15',
+            'birthday' => 'date',
+            'arrive_date' => 'date',
+            'dimission_date' => 'date',
+            'isAvaible' => 'boolean',
+            'isWorking' => 'boolean'
+        ], 
+        $messages);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        
         
         $userDb = User::find($id);
 
         if ($userDb === null) {
-            return 'User not exists';
+            return response()->json(['status' => 500, 'msg' => 'User not exists']);
         }
 
         if($request->name) {
@@ -156,17 +190,17 @@ class UserController extends Controller
             $userDb->dimission_date = $request->dimission_date;
         }
 
-
-        error_log($userDb);
-
         $userDb->save();
 
-        return 'ok';
+        return response()->json(['status' => 200, 'msg' => 'success']);
     }
 
     /**
+     * DELETE /users/{user}
+     *
      * Deprecated.
      * Not allowed
+     *
      * Remove the specified resource from storage.
      *
      * @param  \App\User  $user
@@ -175,5 +209,17 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         
+    }
+
+    /**
+     * GET /users/{user.id}/post
+     *
+     * Get all post of a user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showPostsByUserId(int $id) {
+        return User::find($id)->posts()->get();
     }
 }
