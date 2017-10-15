@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->date('birthday');
             $table->date('arrive_date');
             $table->date('dimission_date')->nullable();
+            $table->softDeletes();
 
             $table->rememberToken();
             $table->timestamps();

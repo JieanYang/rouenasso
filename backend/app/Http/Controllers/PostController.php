@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -44,6 +45,7 @@ class PostController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
+            'catagory' => 'required|integer',
             'user_id' => 'required|integer',
             'html_content' => 'required'
         ]);
@@ -56,6 +58,7 @@ class PostController extends Controller
         $post = new Post;
 
         $post->title = $request->title;
+        $post->catagory = $request->catagory;
         $post->user_id = $request->user_id;
         $post->html_content = $request->html_content;
         $post->published_at = date("Y-m-d H:i:s");
@@ -108,6 +111,7 @@ class PostController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
+            'catagory' => 'required|integer',
             'html_content' => 'required'
         ]);
 
@@ -122,6 +126,7 @@ class PostController extends Controller
         }
 
         $postDB->title = $request->title;
+        $postDB->catagory = $request->catagory;
         $postDB->html_content = $request->html_content;
 
         $postDB->save();
@@ -130,7 +135,7 @@ class PostController extends Controller
     }
 
     /**
-     * DELETE /posts/{post}
+     * DELETE /posts/{post.id}
      *
      * Soft delete the specified resource from storage.
      *
@@ -148,6 +153,20 @@ class PostController extends Controller
         $postDel->delete();
 
         return response()->json(['status' => 200, 'msg' => 'success']);
+    }
+
+
+    /**
+     * GET /posts/catagory/{catagory.id}
+     *
+     * Get all posts of a given catagory.
+     *
+     * @param  int  $catagory_id
+     * @return \Illuminate\Http\Response
+     */
+    public function showPostsByCatagoryId(int $catagory_id)
+    {
+        return Post::where('catagory', $catagory_id)->get();
     }
 
 }

@@ -16,8 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function() {
-	
-});
+	return Auth::user();
+})->middleware('auth.basic.once');
 
 
 
@@ -28,6 +28,7 @@ Route::resource('users', 'UserController')->middleware('auth.basic.once');
 Route::resource('posts', 'PostController')->middleware('auth.basic.once');
 
 Route::get('users/{id}/posts', 'UserController@showPostsByUserId')->middleware('auth.basic.once');
+Route::get('posts/catagory/{id}', 'PostController@showPostsByCatagoryId')->middleware('auth.basic.once');
 
 /**
  * Auth

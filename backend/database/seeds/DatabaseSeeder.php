@@ -31,18 +31,49 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-        	'name' => '小宋',
-        	'email' => 'xiaosong@test.com',
-        	'password' => bcrypt('song'),
-        	'department' => Department::ZHUXITUAN,
-        	'position' => Position::FUZHUXI,
-        	'school' => 'ESIGELEC',
-        	'phone_number' => '06 05 04 03 01',
-        	'isWorking' => True,
-        	'isAvaible' => True,
-        	'birthday' => date('1993-01-02'),
-        	'arrive_date' => date('2012-01-02'),
-        	'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'name' => '小宋',
+            'email' => 'xiaosong@test.com',
+            'password' => bcrypt('song'),
+            'department' => Department::ZHUXITUAN,
+            'position' => Position::FUZHUXI,
+            'school' => 'ESIGELEC',
+            'phone_number' => '06 05 04 03 01',
+            'isWorking' => True,
+            'isAvaible' => True,
+            'birthday' => date('1993-01-02'),
+            'arrive_date' => date('2012-01-02'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('posts')->insert([
+            'title' => 'title 1',
+            'user_id' => '1',
+            'html_content' => 'h',
+            'catagory' => 1
+        ]);
+        DB::table('posts')->insert([
+            'title' => 'title 2',
+            'user_id' => '1',
+            'html_content' => 'hh',
+            'catagory' => 1
+        ]);
+        DB::table('posts')->insert([
+            'title' => 'title 3',
+            'user_id' => '1',
+            'html_content' => 'hhh',
+            'catagory' => 2
+        ]);
+        DB::table('posts')->insert([
+            'title' => 'title 4',
+            'user_id' => '2',
+            'html_content' => 'hhhh',
+            'catagory' => 2
+        ]);
+        DB::table('posts')->insert([
+            'title' => 'title 5',
+            'user_id' => '2',
+            'html_content' => 'hhhhh',
+            'catagory' => 3
         ]);
     }
 }

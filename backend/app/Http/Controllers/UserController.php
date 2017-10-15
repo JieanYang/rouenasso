@@ -6,10 +6,24 @@ use App\User;
 use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Validation\Rule;
-
+use App\Model\Department;
+use App\Model\Position;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    private $department;
+    private $position;
+
+    public function __construct() {
+        $this->middleware(function ($request, $next) {
+            $this->department = Auth::user()->department;
+            $this->position = Auth::user()->position;
+
+            return $next($request);
+        });
+    }
+
     /**
      * GET /users
      * 
@@ -19,6 +33,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        // 搜索查看成员 => 主席团&秘书部
+        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+        }
         return User::All();
     }
 
@@ -44,6 +62,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // 新增成员 => 主席团&秘书部
+        if(!($this->$department == Department::ZHUXITUAN || $this->$department == Department::MISHUBU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+        }
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|max:255',
             'name' => 'required|max:100',
@@ -196,23 +219,28 @@ class UserController extends Controller
     }
 
     /**
-     * DELETE /users/{user}
-     *
-     * Deprecated.
-     * Not allowed
+     * DELETE /users/{user_id}
      *
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\User  $user_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user_id)
     {
+        $userDel = User::find($id);
+
+        if ($userDel === null) {
+            return response()->json(['status' => 500, 'msg' => 'User not exists']);
+        }
+
+        $userDel->delete();
         
+        return response()->json(['status' => 200, 'msg' => 'success']);
     }
 
     /**
-     * GET /users/{user.id}/post
+     * GET /users/{user.id}/posts
      *
      * Get all post of a user.
      *
