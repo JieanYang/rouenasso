@@ -37,6 +37,7 @@ class UserController extends Controller
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden']);
         }
+        
         return User::All();
     }
 

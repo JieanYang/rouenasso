@@ -5,10 +5,25 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Validation\Rule;
+use App\Model\Department;
+use App\Model\Position;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    private $department;
+    private $position;
+
+    public function __construct() {
+        $this->middleware(function ($request, $next) {
+            $this->department = Auth::user()->department;
+            $this->position = Auth::user()->position;
+
+            return $next($request);
+        });
+    }
+
     /**
      * GET /posts
      *
@@ -44,6 +59,10 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // 新增内容 => 主席团&宣传部
+        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+        }
+        
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'catagory' => 'required|integer',
@@ -62,7 +81,7 @@ class PostController extends Controller
         $post->catagory = $request->catagory;
         $post->user_id = $request->user_id;
         $post->html_content = $request->html_content;
-        $post->published_at = date("Y-m-d H:i:s");
+        $post->published_at = $request->published_at;
 
         $post->save();
 
@@ -110,10 +129,16 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // 修改草稿 => 主席团&宣传部
+        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+        }
+
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'catagory' => 'required|integer',
             'html_content' => 'required'
+            'published_at' => 'date'
         ]);
 
         if ($validator->fails()) {
@@ -146,10 +171,22 @@ class PostController extends Controller
     public function destroy($id)
     {
         // 删除内容 => 主席团&宣传部部长&宣传部副部长
+        // 删除草稿 => 主席团&宣传部
+        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+        }
+
         $postDel = Post::find($id);
 
         if($postDel === null) {
             return response()->json(['status' => 500, 'msg' => 'Post not exists']);
+        }
+
+        if($postDel->published_at != null) { // 已发布 非草稿
+            if(!($this->department == Department::ZHUXITUAN || ($this->department == Department::XUANCHUANBU
+                && ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG) ))) {
+                return response()->json(['status' => 403, 'msg' => 'forbidden']);
+            }
         }
 
         $postDel->delete();
