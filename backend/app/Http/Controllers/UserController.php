@@ -63,7 +63,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // 新增成员 => 主席团&秘书部
-        if(!($this->$department == Department::ZHUXITUAN || $this->$department == Department::MISHUBU)) {
+        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden']);
         }
 
@@ -114,6 +114,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        // 搜索查看成员 => 主席团&秘书部
+        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+        }
+
         return User::where('id', $id)
                     ->get();
     }
@@ -128,7 +133,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-    {
+    {       
         return view('404');
     }
 
@@ -143,6 +148,13 @@ class UserController extends Controller
      */
     public function update(Request $request, int $id)
     {   
+        // 修改成员 => 主席团&秘书部部长&秘书部副部长
+        if(!($this->$department == Department::ZHUXITUAN || 
+            ($this->$department == Department::MISHUBU && 
+                ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG)))) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+        }
+
         $messages = [
             'boolean' =>  'The :attribute field must be 1 or 0.',
         ];
@@ -228,10 +240,20 @@ class UserController extends Controller
      */
     public function destroy(User $user_id)
     {
-        $userDel = User::find($id);
+        // 删除 => 主席团&秘书部部长&秘书部副部长
+        if(!($this->department == Department::ZHUXITUAN || 
+            ($this->department == Department::MISHUBU && 
+                ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG)))) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+        }
+        
+        $userDel = User::find($user_id);
 
         if ($userDel === null) {
             return response()->json(['status' => 500, 'msg' => 'User not exists']);
+        }
+        if ($userDel->id === $user_id) {
+            return response()->json(['status' => 500, 'msg' => 'You can not delete your self']);
         }
 
         $userDel->delete();

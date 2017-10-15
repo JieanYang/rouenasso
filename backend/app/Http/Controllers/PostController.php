@@ -43,6 +43,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // 新增内容 => 主席团&宣传部
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'catagory' => 'required|integer',
@@ -144,6 +145,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
+        // 删除内容 => 主席团&宣传部部长&宣传部副部长
         $postDel = Post::find($id);
 
         if($postDel === null) {
