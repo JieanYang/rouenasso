@@ -6,8 +6,32 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-    .state('app', {
+    .state('home', {
       url: '/',
-      component: 'app'
-    });
+      // this two forms are valid writing
+      // component: 'app'
+      // template: '<app></app>'
+      views: {
+        header: {
+          component: 'fountainHeader'
+        },
+        content: {
+          component: 'fountainContents'
+        },
+        footer: {
+          component: 'fountainFooter'
+        }
+      }
+    })
+    .state('home.data', {
+      url: 'data',
+      views: {
+        // this change the content views in the state home
+        // and hold the header and footer views
+        'content@': {
+          template: '<h2>I\'m the home.data page</h2>'
+        }
+      }
+    })
+    ;
 }
