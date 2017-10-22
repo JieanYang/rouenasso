@@ -5,7 +5,8 @@ require('angular-ui-router');
 var routesConfig = require('./routes');
 
 var main = require('./scripts/main');
-var header = require('./scripts/scripts_base/header');
+var bigHeader = require('./scripts/scripts_base/BigHeader');
+var smallHeader = require('./scripts/scripts_base/SmallHeader');
 var footer = require('./scripts/scripts_base/footer');
 
 require('./styles/index.css');
@@ -14,5 +15,6 @@ angular
   .module('app', [contentsModule, 'ui.router'])
   .config(routesConfig)
   .component('app', main)
-  .component('fountainHeader', header)
+  .component('bigHeader', bigHeader)
+  .component('smallHeader', smallHeader)
   .component('fountainFooter', footer);

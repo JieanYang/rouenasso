@@ -13,7 +13,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       // template: '<app></app>'
       views: {
         header: {
-          component: 'fountainHeader'
+          component: 'bigHeader'
         },
         content: {
           component: 'fountainContents'
@@ -28,8 +28,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       views: {
         // this change the content views in the state home
         // and hold the header and footer views
+        'header@': {
+          component: 'smallHeader'
+        },
         'content@': {
-          template: '<h2>I\'m the home.data page</h2>'
+          template: '<h2>I\'m the home.data page</h2><h2>I\'m the home.data page</h2><h2>I\'m the home.data page</h2><h2>I\'m the home.data page</h2><h2>I\'m the home.data page</h2><h2>I\'m the home.data page</h2><h2>I\'m the home.data page</h2><h2>I\'m the home.data page</h2><h2>I\'m the home.data page</h2><h2>I\'m the home.data page</h2><h2>I\'m the home.data page</h2><h2>I\'m the home.data page</h2><h2>I\'m the home.data page</h2><h2>I\'m the home.data page</h2>'
         }
       }
     })
