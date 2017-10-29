@@ -29,6 +29,9 @@ Route::resource('posts', 'PostController')->middleware('auth.basic.once');
 
 Route::get('users/{id}/posts', 'UserController@showPostsByUserId')->middleware('auth.basic.once');
 Route::get('posts/catagory/{id}', 'PostController@showPostsByCatagoryId')->middleware('auth.basic.once');
+Route::post('/register',[
+  'uses' => 'UserController@store'
+]);
 
 
 /**
