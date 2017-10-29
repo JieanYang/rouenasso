@@ -19,3 +19,17 @@
     border-radius: 0;
     box-shadow: 0;
  }
+
+.nav-logo {
+  height: 50px ! important;
+  width: auto;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #5aadbb;
+}
