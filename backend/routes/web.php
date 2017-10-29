@@ -19,8 +19,6 @@ Route::get('/test', function() {
 	return Auth::user();
 })->middleware('auth.basic.once');
 
-
-
 /**
  * RESTful api
  */
@@ -29,11 +27,9 @@ Route::resource('posts', 'PostController')->middleware('auth.basic.once');
 
 Route::get('users/{id}/posts', 'UserController@showPostsByUserId')->middleware('auth.basic.once');
 Route::get('posts/catagory/{id}', 'PostController@showPostsByCatagoryId')->middleware('auth.basic.once');
-Route::post('/register',[
-  'uses' => 'UserController@store'
-]);
-
-
+// Route::post('/register',['uses' => 'UserController@store']);//固定路由注册
+Route::post('/register/{link}',['uses'=>'UserController@store']); //随机链接路由注册
+Route::post('/createlink',['uses'=>'CreatelinkController@store'])->middleware('auth.basic.once');//测试创建链接
 /**
  * Home
  */
