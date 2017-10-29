@@ -49,31 +49,45 @@ class DatabaseSeeder extends Seeder
             'title' => 'title 1',
             'user_id' => '1',
             'html_content' => 'h',
-            'catagory' => 1
+            'catagory' => 1,    
+            'published_at' => '2017-01-02'
         ]);
         DB::table('posts')->insert([
             'title' => 'title 2',
             'user_id' => '1',
             'html_content' => 'hh',
-            'catagory' => 1
+            'catagory' => 1,
+            'published_at' => '2017-01-03'
         ]);
         DB::table('posts')->insert([
             'title' => 'title 3',
             'user_id' => '1',
             'html_content' => 'hhh',
-            'catagory' => 2
+            'catagory' => 2,
+            'published_at' => '2017-01-04'
         ]);
         DB::table('posts')->insert([
             'title' => 'title 4',
             'user_id' => '2',
             'html_content' => 'hhhh',
-            'catagory' => 2
+            'catagory' => 2,
+            'published_at' => '2017-01-05'
         ]);
         DB::table('posts')->insert([
             'title' => 'title 5',
             'user_id' => '2',
             'html_content' => 'hhhhh',
-            'catagory' => 3
+            'catagory' => 3,
+            'published_at' => '2017-01-01'
+        ]);
+        DB::table('posts')->insert([
+            'title' => 'show',
+            'user_id' => '2',
+            'html_content' => '
+                <h4 class="light muted">Hi，小朋友们大家好，还记得我是谁吗？对了！我就是为蓝猫配音的演员，葛平！</h4>
+                <img src="//upload.wikimedia.org/wikipedia/zh/c/cf/Ge_Ping_2.JPG" alt="葛平"/>',
+            'catagory' => 99, // 公告
+            'published_at' => '2017-01-01'
         ]);
     }
 }
