@@ -21,12 +21,12 @@ class UserController extends Controller
             $this->position = Auth::user()->position;
 
             return $next($request);
-        });
+        })->except('store');
     }
 
     /**
      * GET /users
-     * 
+     *
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -37,13 +37,13 @@ class UserController extends Controller
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden']);
         }
-        
+
         return User::All();
     }
 
     /**
      * GET /users/create
-     * 
+     *
      * Deprecated.  Use POST /user instead
      *
      * @return \Illuminate\Http\Response
@@ -55,7 +55,7 @@ class UserController extends Controller
 
     /**
      * POST /users
-     * 
+     *
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -63,11 +63,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // 新增成员 => 主席团&秘书部
-        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden']);
-        }
-
         $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|max:255',
             'name' => 'required|max:100',
@@ -83,7 +78,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         }
-        
+
 
         $user = new User;
 
@@ -99,7 +94,7 @@ class UserController extends Controller
 
         $user->isWorking = True;
         $user->isAvaible = True;
-        
+
         $user->save();
 
         return response()->json(['status' => 200, 'msg' => 'success']);
@@ -107,7 +102,7 @@ class UserController extends Controller
 
     /**
      * GET /users/{user.id}
-     * 
+     *
      * Display the specified resource.
      *
      * @param  \App\User  $user
@@ -134,7 +129,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-    {       
+    {
         return view('404');
     }
 
@@ -148,10 +143,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, int $id)
-    {   
+    {
         // 修改成员 => 主席团&秘书部部长&秘书部副部长
-        if(!($this->$department == Department::ZHUXITUAN || 
-            ($this->$department == Department::MISHUBU && 
+        if(!($this->$department == Department::ZHUXITUAN ||
+            ($this->$department == Department::MISHUBU &&
                 ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG)))) {
             return response()->json(['status' => 403, 'msg' => 'forbidden']);
         }
@@ -175,14 +170,14 @@ class UserController extends Controller
             'dimission_date' => 'date',
             'isAvaible' => 'boolean',
             'isWorking' => 'boolean'
-        ], 
+        ],
         $messages);
 
         if ($validator->fails()) {
             return $validator->errors();
         }
-        
-        
+
+
         $userDb = User::find($id);
 
         if ($userDb === null) {
@@ -242,12 +237,12 @@ class UserController extends Controller
     public function destroy(User $user_id)
     {
         // 删除 => 主席团&秘书部部长&秘书部副部长
-        if(!($this->department == Department::ZHUXITUAN || 
-            ($this->department == Department::MISHUBU && 
+        if(!($this->department == Department::ZHUXITUAN ||
+            ($this->department == Department::MISHUBU &&
                 ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG)))) {
             return response()->json(['status' => 403, 'msg' => 'forbidden']);
         }
-        
+
         $userDel = User::find($user_id);
 
         if ($userDel === null) {
@@ -258,7 +253,7 @@ class UserController extends Controller
         }
 
         $userDel->delete();
-        
+
         return response()->json(['status' => 200, 'msg' => 'success']);
     }
 
