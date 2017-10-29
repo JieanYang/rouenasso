@@ -11,14 +11,15 @@ xhr.setRequestHeader("Content-type", "application/json");
 // } 
 // };
 
-xhr.send(JSON.stringify({ "name" : "yang",
-						  "email" : "yang@test.com",
+xhr.send(JSON.stringify({ "name" : "b",
+						  "email" : "b@test.com",
 						  "department":"项目开发部",
 						  "position": "成员",
 						  "school": "INSA",
 						  "phone_number": "0654983278",
 						  "birthday": "1995-10-29",
-						  "arrive_date": "2099-10-18",
+						  "arrive_date": "2025-10-18",
+						  // arrive_date 有一个2037问题
 						  "password": "yang"})); 
 
 
