@@ -1,0 +1,21 @@
+.contactLogo {
+  width: 33px;
+  height: auto;
+}
+#div1 {
+   display: none;
+ }
+ .showPicture {
+   width: 120px;
+   height: auto;
+ }
+ .form-select {
+   font-size: 12px;
+    position: relative;
+    left: 0;
+    height: auto;
+    padding: 5px 5px;
+    border: 1px;
+    border-radius: 0;
+    box-shadow: 0;
+ }
