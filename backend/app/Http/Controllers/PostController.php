@@ -21,7 +21,7 @@ class PostController extends Controller
             $this->position = Auth::user()->position;
 
             return $next($request);
-        });
+        })->except(['index', 'show', 'showPostsByCatagoryId']);
     }
 
     /**
@@ -137,7 +137,7 @@ class PostController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'catagory' => 'required|integer',
-            'html_content' => 'required'
+            'html_content' => 'required',
             'published_at' => 'date'
         ]);
 

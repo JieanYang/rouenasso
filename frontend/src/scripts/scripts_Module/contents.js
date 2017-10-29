@@ -5,12 +5,18 @@ module.exports = {
 };
 
 /** @ngInject */
-function ContentsController($http) {
+function ContentsController($http, $sce) {
   var vm = this;
 
   $http
 .get('../../databases/contents.json')
 .then(function (response) {
   vm.contents = response.data;
+});
+
+  $http
+.get('//localhost:8000/posts/catagory/99')
+.then(function (response) {
+  vm.announcement = $sce.trustAsHtml(response.data[0].html_content);
 });
 }

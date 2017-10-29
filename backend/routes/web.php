@@ -30,6 +30,11 @@ Route::get('posts/catagory/{id}', 'PostController@showPostsByCatagoryId')->middl
 // Route::post('/register',['uses' => 'UserController@store']);//固定路由注册
 Route::post('/register/{link}',['uses'=>'UserController@store']); //随机链接路由注册
 Route::post('/createlink',['uses'=>'CreatelinkController@store'])->middleware('auth.basic.once');//测试创建链接
+Route::get('posts/catagory/{id}', 'PostController@showPostsByCatagoryId');
+Route::post('/register',[
+  'uses' => 'UserController@store'
+]);
+
 /**
  * Home
  */
