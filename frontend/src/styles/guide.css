@@ -1,0 +1,13 @@
+/*guide page*/
+.guide_divs{
+  background: black;
+}
+.guide_div{
+  /*margin: 15px;*/
+  width: 150px;
+  padding: 0;
+  text-align: center;
+}
+.btn_div{
+  width:150px;
+}

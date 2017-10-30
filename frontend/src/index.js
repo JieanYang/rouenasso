@@ -10,6 +10,7 @@ var smallHeader = require('./scripts/scripts_base/SmallHeader');
 var footer = require('./scripts/scripts_base/footer');
 
 require('./styles/index.css');
+require('./styles/guide.css');
 
 angular
   .module('app', [contentsModule, 'ui.router'])
