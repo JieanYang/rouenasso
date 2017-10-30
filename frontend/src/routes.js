@@ -54,14 +54,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       views: {
         // this change the content views in the state home
         // and hold the header and footer views
-        header: {
+        'header@': {
           component: 'smallHeader'
         },
-        content: {
+        'content@': {
           component: 'guide'
-        },
-        footer: {
-          component: 'fountainFooter'
         }
       }
     })
