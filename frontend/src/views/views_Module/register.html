@@ -27,48 +27,62 @@ xhr.send(JSON.stringify({ "name" : "b",
 
 <form method="POST">
 	<div class="form-group">
+		<label for="email">邮箱</label>
+		<input type="email" class="form-control" id="email" ng-model="email" placeholder="Email" required>
+	</div>
+	<div class="form-group">
+		<label for="groupe">密码</label>
+		<input type="password" class="form-control" id="password" placeholder="password" required>
+		<small class="form-text text-muted">we have 8 groups</small>
+	</div>
+	<div class="form-group">
 		<!-- check -->
 		<!-- <div id="info" style="display:none"></div>
 			<input name="creer" value="1" type="hidden" /> -->
 		<label for="name">名字</label>
-		<input type="text" class="form-control" id="name" ng-model=vm.name placeholder="Name" required>
-	</div>
-	<div class="form-group">
-		<label for="email">邮箱</label>
-		<input type="email" class="form-control" id="email" placeholder="Email" required>
+		<input type="text" class="form-control" id="name" ng-model="name" placeholder="Name" required>
 	</div>
 	<div class="form-group">
 		<label for="department">部门</label>	
-	    <select class="form-control"  id="department">
+	    <select class="form-control"  id="department" ng-model="department">
 	      <option>项目开发部</option>
 	      <option>组织部</option>
 	      <option>安全部</option>
 	    </select>
 	</div>
 	<div class="form-group">
-		<label for="department">身份</label>	
-	    <select class="form-control"  id="department">
+		<label for="position">身份</label>	
+	    <select class="form-control"  id="position" ng-model="position">
 	      <option>成员</option>
-	      <option>1</option>
-	      <option>2</option>
+	      <option></option>
+	      <option></option>
 	    </select>
 	</div>
 	<div class="form-group">
-		<label for="date">date</label>
-		<input type="datetime-local" class="form-control" id="date" name="date" required>
-		<small class="form-text text-muted">Please entrer day/month/year/hour/minute</small>
+		<label for="school">学校</label>
+		<input type="text" class="form-control" id="school" ng-model="school" placeholder="School" required>
+	</div>
+	<div class="form-group">
+		<label for="phone_number">手机号码</label>
+		<input type="phone" class="form-control" id="phone_number" ng-model="phone_number" placeholder="Number" required>
+	</div>
+
+	<div class="form-group">
+		<label for="birthday">生日</label>
+		<input type="date" class="form-control" id="birthday" ng-model="birthday" required>
+		<small class="form-text text-muted">Please entrer day/month/year</small>
+	</div>
+
+	<div class="form-group">
+		<label for="arrive_date">入会时间</label>
+		<input type="date" class="form-control" id="arrive_date" ng-model="arrive_date" required>
+		<small class="form-text text-muted">Please entrer day/month/year</small>
 	</div>
 	
-	<div class="form-group">
-		<label for="groupe">groupe</label>
-		<input type="number" min="1" max="8" class="form-control" id="groupe" name="groupe" placeholder="num de groupe" required>
-		<small class="form-text text-muted">we have 8 groups</small>
-	</div>
-	
 	
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary active">creer</button>
-		<a class="btn btn-primary active" href="enseignant_0.php">retour</a>
+		<button type="submit" class="btn btn-primary active">注册</button>
+		<a class="btn btn-primary active" href="#">取消</a>
 	</div>
 </form>
 
