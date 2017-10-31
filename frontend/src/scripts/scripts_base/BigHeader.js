@@ -4,8 +4,10 @@ module.exports = {
   controllerAs: 'controller'
 };
 
+var mainjs = require('../../js/main.js');
+
 function Controller() {
   angular.element(function () {
-    initBigHeader();
+    mainjs.initBigHeader();
   });
 }

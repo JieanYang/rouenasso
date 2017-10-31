@@ -1,5 +1,7 @@
-"use strict";
-// Author Code Here
+module.exports = {
+  initBigHeader: initBigHeader,
+  initSmallHeader: initSmallHeader
+};
 
 console.log("loaded");
 
@@ -9,14 +11,13 @@ var ratio = 2;
 // Window Load
 function initBigHeader() {
     // Preloader
-    /*
     $('.intro-tables, .parallax, header').css('opacity', '0');
     $('.preloader').addClass('animated fadeOut').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
         $('.preloader').hide();
         $('.parallax, header').addClass('animated fadeIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
             $('.intro-tables').addClass('animated fadeInUp').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend');
         });
-    });*/
+    });
 
     // Header Init
     if ($(window).height() > $(window).width()) {
@@ -37,23 +38,34 @@ function initBigHeader() {
     $('nav').addClass('original').clone().insertAfter('nav').addClass('navbar-fixed-top').css('position', 'fixed').css('top', '0').css('margin-top', '0').removeClass('original');
     $('.mobile-nav ul').html($('nav .navbar-nav').html());
     $('nav.navbar-fixed-top .navbar-brand img').attr('src', $('nav.navbar-fixed-top .navbar-brand img').data("active-url"));
+
+    // Typing Intro Init
+    $(".typed").typewriter({
+        speed: 120
+    });
 };
 
 function initSmallHeader() {
+    // Preloader
+    $('.intro-tables, .parallax, header').css('opacity', '0');
+    $('.preloader').addClass('animated fadeOut').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+        $('.preloader').hide();
+        $('.parallax, header').addClass('animated fadeIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+            $('.intro-tables').addClass('animated fadeInUp').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend');
+        });
+    });
+
     // Navbar Init
     $('nav').addClass('original').clone().insertAfter('nav').addClass('navbar-fixed-top').css('position', 'fixed').css('top', '0').css('margin-top', '0').removeClass('original');
     $('.mobile-nav ul').html($('nav .navbar-nav').html());
     $('nav.navbar-fixed-top .navbar-brand img').attr('src', $('nav.navbar-fixed-top .navbar-brand img').data("active-url"));
     $('nav.original').css('opacity', '1');
     $('nav.navbar-fixed-top').css('opacity', '0');
-    // Typing Intro Init
-    $(".typed").typewriter({
-        speed: 60
-    });
+
     $('#placeHolder').height(160).css('background-color', '#66ccff');
 };
 
-$(window).load(function() {
+$(window).load(function () {
     // Sliders Init
     $('.owl-schedule').owlCarousel({
         singleItem: true,
@@ -66,11 +78,6 @@ $(window).load(function() {
     $('.owl-twitter').owlCarousel({
         singleItem: true,
         pagination: true
-    });
-
-    // Typing Intro Init
-    $(".typed").typewriter({
-        speed: 60
     });
 
     // Popup Form Init
@@ -86,12 +93,12 @@ $(window).load(function() {
     });
 
     // Onepage Nav
-    $('.navbar.navbar-fixed-top .navbar-nav').onePageNav({
+    /*$('.navbar.navbar-fixed-top .navbar-nav').onePageNav({
         currentClass: 'active',
         changeHash: false,
         scrollSpeed: 400,
         filter: ':not(.btn)'
-    });
+    });*/
 });
 
 // Window Scroll
@@ -145,10 +152,12 @@ $('body').on('click', '.mobile-nav a', function (event) {
     }
 });
 
+/*
 $('body').on('click', '.mobile-nav a.close-link', function (event) {
     $('.mobile-nav').removeClass('active');
     event.preventDefault();
 });
+
 
 $('body').on('click', 'nav.original .navbar-nav a:not([data-toggle])', function () {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -163,7 +172,9 @@ $('body').on('click', 'nav.original .navbar-nav a:not([data-toggle])', function 
         }
     }
 });
+*/
 
+/*
 function centerModal() {
     $(this).css('display', 'block');
     var $dialog = $(this).find(".modal-dialog"),
@@ -187,3 +198,4 @@ $('.modal-popup .close-link').click(function (event) {
 $(window).on("resize", function () {
     $('.modal:visible').each(centerModal);
 });
+*/
