@@ -41,7 +41,15 @@ module.exports = {
         loaders: [
           'html-loader'
         ]
-      }
+      },
+	  {
+          test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
+          loader: 'file-loader?name=[name].[ext]'  // <-- retain original file name
+      },
+      { 
+		  test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
+		  loader: 'url-loader?limit=100000' 
+	  }
     ]
   },
   plugins: [
@@ -56,7 +64,12 @@ module.exports = {
         postcss: () => [autoprefixer]
       },
       debug: true
-    })
+    }),
+	new webpack.ProvidePlugin({
+	  'window.jQuery': 'jquery',
+	  $: 'jquery',
+	  jQuery: 'jquery'
+	})
   ],
   devtool: 'source-map',
   output: {

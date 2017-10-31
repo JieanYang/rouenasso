@@ -19,7 +19,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: [/js/, /node_modules/],
         loader: 'eslint-loader',
         enforce: 'pre'
       },
@@ -42,7 +42,15 @@ module.exports = {
         loaders: [
           'html-loader'
         ]
-      }
+      },
+	  {
+          test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
+          loader: 'file-loader?name=[name].[ext]'  // <-- retain original file name
+      },
+      { 
+		  test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
+		  loader: 'url-loader?limit=100000' 
+	  }
     ]
   },
   plugins: [
@@ -62,7 +70,12 @@ module.exports = {
       options: {
         postcss: () => [autoprefixer]
       }
-    })
+    }),
+	new webpack.ProvidePlugin({
+	  'window.jQuery': 'jquery',
+	  $: 'jquery',
+	  jQuery: 'jquery'
+	})
   ],
   output: {
     path: path.join(process.cwd(), conf.paths.dist),

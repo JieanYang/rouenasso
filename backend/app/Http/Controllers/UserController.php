@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use App\Model\Department;
 use App\Model\Position;
 use Illuminate\Support\Facades\Auth;
+use App\Createlink;
 
 class UserController extends Controller
 {
@@ -19,7 +20,6 @@ class UserController extends Controller
         $this->middleware(function ($request, $next) {
             $this->department = Auth::user()->department;
             $this->position = Auth::user()->position;
-
             return $next($request);
         })->except('store');
     }
@@ -61,7 +61,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,string $link)
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|max:255',
@@ -79,9 +79,12 @@ class UserController extends Controller
             return $validator->errors();
         }
 
-
+//尝试加入搜索link功能,如果找到可以注册，找不到返回一个错误
+$searchlink = Createlink::find($link);
+if($searchlink == null) {
+    return response()->json(['status' => 500, 'msg' => 'this link does not exist!']);
+}
         $user = new User;
-
         $user->name = $request->name;
         $user->email = $request->email;
         $user->department = $request->department;
