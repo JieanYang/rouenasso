@@ -1,13 +1,18 @@
 /*guide page*/
-.guide_divs{
+.guide_navs{
   background: black;
 }
-.guide_div{
+.guide_nav{
   /*margin: 15px;*/
-  width: 150px;
+  width: 145px;
   padding: 0;
   text-align: center;
 }
 .btn_div{
   width:150px;
+}
+
+.panel{
+	height: 600px;
+	margin: 0;
 }

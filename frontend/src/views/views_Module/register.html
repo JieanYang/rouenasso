@@ -17,7 +17,7 @@
 		<label for="password_confirm">确认密码</label>
 		<input type="password" class="form-control register_input" id="password_confirm" ng-model="vm.password_confirm" name="password_confirm" placeholder="password confirm" required>
 		<span ng-show="registerForm.password_confirm.$error.required && !registerForm.password_confirm.$pristine" class="help-block">Your password_confirm is required.</span>
-		<span ng-show="registerForm.password_confirm.$dirty&&vm.password_confirm!=vm.register.password">两次密码不一样</span>
+		<span ng-show="registerForm.password_confirm.$dirty&&vm.password_confirm!=vm.register.password" class="help-block">两次密码不一样</span>
 	</div>
 	<div class="form-group" ng-class="{ 'has-error' : registerForm.name.$error.required && !registerForm.name.$pristine }">
 		<label for="name">名字</label>

@@ -1,4 +1,4 @@
-<div class="row guide_divs">
+<!-- <div class="row guide_divs">
 	<div class="col-sm-1 guide_div"><a class="btn btn-primary btn_div">交通</a></div>
 	<div class="col-sm-1 guide_div"><a class="btn btn-primary btn_div">运营商</a></div>
 	<div class="col-sm-1 guide_div"><a class="btn btn-primary btn_div">生活饮食</a></div>
@@ -7,8 +7,76 @@
 	<div class="col-sm-1 guide_div"><a class="btn btn-primary btn_div">房补</a></div>
 	<div class="col-sm-1 guide_div"><a class="btn btn-primary btn_div">就医指南</a></div>
 	<div class="col-sm-1 guide_div"><a class="btn btn-primary btn_div">银行</a></div>
-	<div class="col-sm-1 guide_div"><a class="btn btn-primary btn_div">应用推荐</a></div>
-</div>
-<div style="height: 500px;">
+	<div class="col-sm-1 guide_div"><a class="btn btn-primary btn_div">应用推荐</a></div>	
+</div> -->
+
+<ul class="nav nav-pills guide_navs">
+	  <li style="padding: 6px;"></li>
+      <li ng-class="{ active: vm.tab===1 }" class="guide_nav">
+        <a href="" ng-click="vm.tab=1"><h5>交通</h5></a>
+      </li>
+      <li ng-class="{ active: vm.tab===2 }" class="guide_nav">
+        <a href="" ng-click="vm.tab=2"><h5>运营商</h5></a>
+      </li>
+      <li ng-class="{ active: vm.tab===3 }" class="guide_nav">
+        <a href="" ng-click="vm.tab=3"><h5>生活饮食</h5></a>
+      </li>
+      <li ng-class="{ active: vm.tab===4 }" class="guide_nav">
+        <a href="" ng-click="vm.tab=4"><h5>运动</h5></a>
+      </li>
+      <li ng-class="{ active: vm.tab===5 }" class="guide_nav">
+        <a href="" ng-click="vm.tab=5"><h5>娱乐</h5></a>
+      </li>
+      <li ng-class="{ active: vm.tab===6 }" class="guide_nav">
+        <a href="" ng-click="vm.tab=6"><h5>房补</h5></a>
+      </li>
+      <li ng-class="{ active: vm.tab===7 }" class="guide_nav">
+        <a href="" ng-click="vm.tab=7"><h5>就医指南</h5></a>
+      </li>
+      <li ng-class="{ active: vm.tab===8 }" class="guide_nav">
+        <a href="" ng-click="vm.tab=8"><h5>银行</h5></a>
+      </li>
+      <li ng-class="{ active: vm.tab===9 }" class="guide_nav">
+        <a href="" ng-click="vm.tab=9"><h5>应用推荐</h5></a>
+      </li>
+</ul>
+
+<div class="panel" ng-show="vm.tab===0">
 	
+</div>
+<div class="panel" ng-show="vm.tab===1">
+  <h4>交通</h4>
+  <p>...</p>
+</div>
+<div class="panel" ng-show="vm.tab===2">
+  <h4>运营商</h4>
+  <p>...</p>
+</div>
+<div class="panel" ng-show="vm.tab===3">
+  <h4>生活饮食</h4>
+  <p>...</p>
+</div>
+<div class="panel" ng-show="vm.tab===4">
+  <h4>运动</h4>
+  <p>...</p>
+</div>
+<div class="panel" ng-show="vm.tab===5">
+  <h4>娱乐</h4>
+  <p>...</p>
+</div>
+<div class="panel" ng-show="vm.tab===6">
+  <h4>房补</h4>
+  <p>...</p>
+</div>
+<div class="panel" ng-show="vm.tab===7">
+  <h4>就医指南</h4>
+  <p>...</p>
+</div>
+<div class="panel" ng-show="vm.tab===8">
+  <h4>银行</h4>
+  <p>...</p>
+</div>
+<div class="panel" ng-show="vm.tab===9">
+  <h4>应用推荐</h4>
+  <p>...</p>
 </div>

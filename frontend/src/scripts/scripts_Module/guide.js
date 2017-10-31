@@ -6,11 +6,6 @@ module.exports = {
 
 /** @ngInject */
 function GuideController() {
-  // var vm = this;
-//   $http
-// .get('http://localhost:8000/test')
-// .then(function (response) {
-//   vm.contents = response.data;
-//   $log.log(vm.contents);
-// });
+  var vm = this;
+  vm.tab=0;
 }
