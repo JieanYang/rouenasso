@@ -1,74 +1,58 @@
-<script type="text/javascript">
-var xhr = new XMLHttpRequest(); 
-xhr.open("POST", "http://localhost:8000/register", true); 
-xhr.setRequestHeader("Content-type", "application/json"); 
-// xhr.setRequestHeader("kbn-version", "5.3.0"); 
-// xhr.onreadystatechange = function() { 
-// if (xhr.readyState == 4) { 
-// if (xhr.status == 200) { 
-// window.location.href = us.nextUrl; 
-// } 
-// } 
-// };
 
-xhr.send(JSON.stringify({ "name" : "b",
-						  "email" : "b@test.com",
-						  "department":"项目开发部",
-						  "position": "成员",
-						  "school": "INSA",
-						  "phone_number": "0654983278",
-						  "birthday": "1995-10-29",
-						  "arrive_date": "2025-10-18",
-						  // arrive_date 有一个2037问题
-						  "password": "yang"})); 
-
-
-</script>
-
-<form method="POST">
-	<div class="form-group">
-		<!-- check -->
-		<!-- <div id="info" style="display:none"></div>
-			<input name="creer" value="1" type="hidden" /> -->
-		<label for="name">名字</label>
-		<input type="text" class="form-control" id="name" ng-model=vm.name placeholder="Name" required>
-	</div>
+<form  name="registerForm" ng-submit="vm.sendRegister()">
+	
 	<div class="form-group">
 		<label for="email">邮箱</label>
-		<input type="email" class="form-control" id="email" placeholder="Email" required>
+		<input type="email" class="form-control" id="email" name="email" ng-model="vm.register.email" placeholder="Email" required>
+	</div>
+	<div class="form-group">
+		<label for="groupe">密码</label>
+		<input type="password" class="form-control" id="password" ng-model="vm.register.password" name="password" placeholder="password" required>
+		<small class="form-text text-muted">we have 8 groups</small>
+	</div>
+	<div class="form-group">
+		<label for="name">名字</label>
+		<input type="text" class="form-control" id="name" name="name" ng-model="vm.register.name" placeholder="Name" required>
 	</div>
 	<div class="form-group">
 		<label for="department">部门</label>	
-	    <select class="form-control"  id="department">
-	      <option>项目开发部</option>
-	      <option>组织部</option>
-	      <option>安全部</option>
+	    <select class="form-control"  id="department" name="department" ng-model="vm.register.department" ng-options="department_channel.value as department_channel.label for department_channel in vm.department_channels">
 	    </select>
+	    {{vm.register.department}}
 	</div>
 	<div class="form-group">
-		<label for="department">身份</label>	
-	    <select class="form-control"  id="department">
-	      <option>成员</option>
-	      <option>1</option>
-	      <option>2</option>
+		<label for="position">身份</label>	
+	    <select class="form-control"  id="position" name="position" ng-model="vm.register.position" ng-options="position.value as position.label for position in vm.positions">
 	    </select>
+	    {{vm.register.position}}
 	</div>
 	<div class="form-group">
-		<label for="date">date</label>
-		<input type="datetime-local" class="form-control" id="date" name="date" required>
-		<small class="form-text text-muted">Please entrer day/month/year/hour/minute</small>
+		<label for="school">学校</label>
+		<input type="text" class="form-control" id="school" name="school" ng-model="vm.register.school" placeholder="School" required>
 	</div>
+	<div class="form-group">
+		<label for="phone_number">手机号码</label>
+		<input type="phone" class="form-control" id="phone_number" name="phone_number" ng-model="vm.register.phone_number" placeholder="Number" required>
+	</div>
+
+	<div class="form-group">
+		<label for="birthday">生日</label>
+		<input type="date" class="form-control" id="birthday" name="birthday" ng-model="vm.birthday" required>
+		{{vm.birthday}}
+		<small class="form-text text-muted">Please entrer day/month/year</small>
+	</div>
+
+	<div class="form-group">
+		<label for="arrive_date">入会时间</label>
+		<input type="date" class="form-control" id="arrive_date" name="arrive_date" ng-model="vm.arrive_date" required>
+		{{vm.arrive_date}}
+		<small class="form-text text-muted">Please entrer day/month/year</small>
+	</div>
+	 
 	
 	<div class="form-group">
-		<label for="groupe">groupe</label>
-		<input type="number" min="1" max="8" class="form-control" id="groupe" name="groupe" placeholder="num de groupe" required>
-		<small class="form-text text-muted">we have 8 groups</small>
-	</div>
-	
-	
-	<div class="form-group">
-		<button type="submit" class="btn btn-primary active">creer</button>
-		<a class="btn btn-primary active" href="enseignant_0.php">retour</a>
+		<button type="submit" class="btn btn-primary active">注册</button>
+		<a class="btn btn-primary active" href="#">取消</a>
 	</div>
 </form>
 
