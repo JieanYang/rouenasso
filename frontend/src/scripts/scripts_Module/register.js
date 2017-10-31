@@ -15,17 +15,22 @@ function registerController($http) {
 
   vm.birthday;//input birthday
   vm.arrive_date;//input arrive_date
+
+  vm.password_confirm;
   
   //initialize information of register
-  // vm.register = {"name" : "",
-		// 		"email" : "",
-		// 		"department":"",
-	 //    		"position": "",
-		// 		"school": "",
-		// 		"phone_number": "",
-		// 		"birthday": "",
-		// 		"arrive_date": "",
-		// 		"password": ""};
+  // vm.register = {				
+				// 	"name" : "b",
+				// 	"email" : "b@test.com",
+				// 	"department":"项目开发部",
+				// 	"position": "成员",
+				// 	"school": "INSA",
+				// 	"phone_number": "0654983278",
+				// 	"birthday": "1995-10-29",
+				// 	"arrive_date": "2025-10-18",
+				// 	"password": "yang"
+				// }
+
   vm.sendRegister = function () {
   	vm.register.birthday = vm.birthday.toLocaleDateString('zh-Hans-CN');
   	vm.register.arrive_date = vm.arrive_date.toLocaleDateString('zh-Hans-CN');
@@ -44,7 +49,7 @@ function registerController($http) {
   		}
   		
   	},function(){
-  		console.log("It meet a error!");
+  		console.log("It meets an error!");
   	});
   };
 }

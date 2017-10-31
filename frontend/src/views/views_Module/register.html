@@ -1,58 +1,75 @@
 
-<form  name="registerForm" ng-submit="vm.sendRegister()">
+<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+		<form  name="registerForm" ng-submit="vm.sendRegister()" novalidate>
+	
+	<div class="form-group" ng-class="{ 'has-error' : registerForm.email.$error.required && !registerForm.email.$pristine }">
+		<label for="email">邮箱</label>
+		<input type="email" class="form-control register_input" id="email" name="email" ng-model="vm.register.email" placeholder="Email" required>
+		<span ng-show="registerForm.email.$error.required && !registerForm.email.$pristine" class="help-block">Your email is required.</span>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error' : registerForm.password.$error.required && !registerForm.password.$pristine }">
+		<label for="password">密码</label>
+		<input type="password" class="form-control register_input" id="password" ng-model="vm.register.password" name="password" placeholder="password" required>
+		<span ng-show="registerForm.password.$error.required && !registerForm.password.$pristine" class="help-block">Your password is required.</span>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error' : (registerForm.password_confirm.$error.required && !registerForm.password_confirm.$pristine) || registerForm.password_confirm.$dirty&&vm.password_confirm!=vm.register.password}">
+		<label for="password_confirm">确认密码</label>
+		<input type="password" class="form-control register_input" id="password_confirm" ng-model="vm.password_confirm" name="password_confirm" placeholder="password confirm" required>
+		<span ng-show="registerForm.password_confirm.$error.required && !registerForm.password_confirm.$pristine" class="help-block">Your password_confirm is required.</span>
+		<span ng-show="registerForm.password_confirm.$dirty&&vm.password_confirm!=vm.register.password">两次密码不一样</span>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error' : registerForm.name.$error.required && !registerForm.name.$pristine }">
+		<label for="name">名字</label>
+		<input type="text" class="form-control register_input" id="name" name="name" ng-model="vm.register.name" placeholder="Name" required>
+		<span ng-show="registerForm.name.$error.required && !registerForm.name.$pristine" class="help-block">Your name is required.</span>
+	</div>
 	
 	<div class="form-group">
-		<label for="email">邮箱</label>
-		<input type="email" class="form-control" id="email" name="email" ng-model="vm.register.email" placeholder="Email" required>
-	</div>
-	<div class="form-group">
-		<label for="groupe">密码</label>
-		<input type="password" class="form-control" id="password" ng-model="vm.register.password" name="password" placeholder="password" required>
-		<small class="form-text text-muted">we have 8 groups</small>
-	</div>
-	<div class="form-group">
-		<label for="name">名字</label>
-		<input type="text" class="form-control" id="name" name="name" ng-model="vm.register.name" placeholder="Name" required>
-	</div>
-	<div class="form-group">
 		<label for="department">部门</label>	
-	    <select class="form-control"  id="department" name="department" ng-model="vm.register.department" ng-options="department_channel.value as department_channel.label for department_channel in vm.department_channels">
+	    <select class="form-control register_input"  id="department" name="department" ng-model="vm.register.department" ng-options="department_channel.value as department_channel.label for department_channel in vm.department_channels" required>
 	    </select>
 	    {{vm.register.department}}
 	</div>
+	
 	<div class="form-group">
 		<label for="position">身份</label>	
-	    <select class="form-control"  id="position" name="position" ng-model="vm.register.position" ng-options="position.value as position.label for position in vm.positions">
+	    <select class="form-control register_input"  id="position" name="position" ng-model="vm.register.position" ng-options="position.value as position.label for position in vm.positions" required>
 	    </select>
 	    {{vm.register.position}}
 	</div>
-	<div class="form-group">
+	
+	<div class="form-group" ng-class="{ 'has-error' : registerForm.school.$error.required && !registerForm.school.$pristine }">
 		<label for="school">学校</label>
-		<input type="text" class="form-control" id="school" name="school" ng-model="vm.register.school" placeholder="School" required>
+		<input type="text" class="form-control register_input" id="school" name="school" ng-model="vm.register.school" placeholder="School" required>
+		<span ng-show="registerForm.school.$error.required && !registerForm.school.$pristine" class="help-block">Your school is required.</span>
 	</div>
-	<div class="form-group">
+	<div class="form-group" ng-class="{ 'has-error' : (registerForm.phone_number.$error.required && !registerForm.phone_number.$pristine) || ((registerForm.phone_number.$error.minlength || registerForm.phone_number.$error.maxlength) && registerForm.phone_number.$dirty) }">
 		<label for="phone_number">手机号码</label>
-		<input type="phone" class="form-control" id="phone_number" name="phone_number" ng-model="vm.register.phone_number" placeholder="Number" required>
+		<input type="phone" class="form-control register_input" id="phone_number" name="phone_number" ng-model="vm.register.phone_number" ng-minlength="10" ng-maxlength="10" placeholder="Number" required>
+		<span ng-show="registerForm.phone_number.$error.required && !registerForm.phone_number.$pristine" class="help-block">Your phone_number is required.</span>
+		<span ng-show="((registerForm.phone_number.$error.minlength || registerForm.phone_number.$error.maxlength) && registerForm.phone_number.$dirty)" class="help-block">电话号码需要10位.</span>
 	</div>
 
 	<div class="form-group">
 		<label for="birthday">生日</label>
-		<input type="date" class="form-control" id="birthday" name="birthday" ng-model="vm.birthday" required>
+		<input type="date" class="form-control register_input" id="birthday" name="birthday" ng-model="vm.birthday" required>
 		{{vm.birthday}}
-		<small class="form-text text-muted">Please entrer day/month/year</small>
 	</div>
 
 	<div class="form-group">
 		<label for="arrive_date">入会时间</label>
-		<input type="date" class="form-control" id="arrive_date" name="arrive_date" ng-model="vm.arrive_date" required>
+		<input type="date" class="form-control register_input" id="arrive_date" name="arrive_date" ng-model="vm.arrive_date" required>
 		{{vm.arrive_date}}
-		<small class="form-text text-muted">Please entrer day/month/year</small>
-	</div>
+	</div> 
 	 
 	
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary active">注册</button>
-		<a class="btn btn-primary active" href="#">取消</a>
+		<button type="submit" class="btn btn-primary active" ng-disabled="registerForm.$invalid">注册</button>
+		<a class="btn btn-primary active" href="http://localhost:3000/">取消</a>
 	</div>
 </form>
 
+
+	</div>
+</div>

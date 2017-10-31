@@ -11,6 +11,7 @@ var footer = require('./scripts/scripts_base/footer');
 
 require('./styles/index.css');
 require('./styles/guide.css');
+require('./styles/register.css');
 
 angular
   .module('app', [contentsModule, 'ui.router'])
