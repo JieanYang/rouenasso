@@ -17,11 +17,10 @@ class PostController extends Controller
 
     public function __construct() {
         $this->middleware(function ($request, $next) {
-            $this->department = Auth::user()->department;
-            $this->position = Auth::user()->position;
-
+            $this->department = Auth::user() ? Auth::user()->department : null;
+            $this->position = Auth::user() ? Auth::user()->position : null;
             return $next($request);
-        })->except(['index', 'show', 'showPostsByCatagoryId']);
+        }, ['except' => ['index', 'showPostsBycategoryId']]);
     }
 
     /**
@@ -65,7 +64,7 @@ class PostController extends Controller
         
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'catagory' => 'required|integer',
+            'category' => 'required|integer',
             'user_id' => 'required|integer',
             'html_content' => 'required'
         ]);
@@ -78,7 +77,7 @@ class PostController extends Controller
         $post = new Post;
 
         $post->title = $request->title;
-        $post->catagory = $request->catagory;
+        $post->category = $request->category;
         $post->user_id = $request->user_id;
         $post->html_content = $request->html_content;
         $post->published_at = $request->published_at;
@@ -144,7 +143,7 @@ class PostController extends Controller
         
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'catagory' => 'required|integer',
+            'category' => 'required|integer',
             'html_content' => 'required',
             'published_at' => 'date'
         ]);
@@ -160,7 +159,7 @@ class PostController extends Controller
         }
 
         $postDB->title = $request->title;
-        $postDB->catagory = $request->catagory;
+        $postDB->category = $request->category;
         $postDB->html_content = $request->html_content;
 
         $postDB->save();
@@ -208,21 +207,19 @@ class PostController extends Controller
 
 
     /**
-     * GET /posts/catagory/{catagory.id}
+     * GET /posts/category/{category.id}
      *
-     * Get all or apart or latest post(s) of a given catagory, or count number of post of a catagory
+     * Get all or apart or latest post(s) of a given category, or count number of post of a category
      *
-     * @param  $catagory_id
+     * @param  $category_id
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function showPostsByCatagoryId(Request $request, $catagory_id)
+    public function showPostsBycategoryId(Request $request, $category_id)
     {
-        if(!ctype_digit($catagory_id)) {
+        if(!ctype_digit($category_id)) {
             return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
         }
-        
-        $published = $request->published ? true : false;
         
         $count = $request->count;
         $split = $request->split;
@@ -238,41 +235,49 @@ class PostController extends Controller
         
         // count
         $postsCount = 0;
-        if($published) {
-            $postsCount = Post::where([['catagory', $catagory_id], ['published_at', '!=', null]])->get()->count();
-        } else {
-            $postsCount = Post::where('catagory', $catagory_id)->get()->count();
-        }
+        $postsCount = Post::where([['category', $category_id], ['published_at', '!=', null]])->get()->count();
         
         if($count){
-            return response()->json(['catagory' => $catagory_id, 'count' => $postsCount]);
+            return response()->json(['category' => $category_id, 'count' => $postsCount]);
         }
         
         // split
         if($split) {
             $offset = $request->offset ? intval($request->offset) : 0;
             $length = $request->length ? intval($request->length) : intval($postsCount);
-            return $published ? 
-                array_slice(Post::where
+            return array_slice(Post::where
                            ([
-                                ['catagory', $catagory_id], 
+                                ['category', $category_id], 
                                 ['published_at', '!=', null]
                             ])
                            ->get()
-                           ->toArray(), $offset, $length)
-                    :
-                array_slice(Post::where('catagory', $catagory_id)->get()->toArray(), $offset, $length);
+                           ->toArray(), $offset, $length);
         }
         
         // latest
         if($latest) {
-            return Post::where('catagory', $catagory_id)->orderBy('published_at', 'desc')->first();
+            return Post::where('category', $category_id)->orderBy('published_at', 'desc')->first();
         }
         
         // all
-        return $published ? Post::where([['catagory', $catagory_id], ['published_at', '!=', null]])->get() 
-                :
-            Post::where('catagory', $catagory_id)->get();
+        return Post::where([['category', $category_id], ['published_at', '!=', null]])->get();
+    }
+    
+    /**
+     * GET /posts/category/{category.id}/drafts
+     *
+     * Get all draft of a given category
+     *
+     * @param  $category_id
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function showDraftsByCategoryId(Request $request, $category_id) {
+        // 草稿 => 主席团&宣传部
+        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+        }
+        return Post::where([['category', $category_id], ['published_at', '=', null]])->get();
     }
 
 }
