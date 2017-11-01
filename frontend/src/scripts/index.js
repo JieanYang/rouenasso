@@ -4,6 +4,7 @@ var contents = require('./scripts_Module/contents');
 var data = require('./scripts_Module/data');
 var guide = require('./scripts_Module/guide');
 var register = require('./scripts_Module/register');
+var contactus = require('./scripts_Module/contactus')
 
 var contentsModule = 'contents';
 
@@ -14,4 +15,5 @@ angular
   .component('fountainContents', contents)
   .component('testData', data)
   .component('guide', guide)
-  .component('register', register);
+  .component('register', register)
+  .component('contactus', contactus);

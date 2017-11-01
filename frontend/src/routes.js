@@ -65,5 +65,21 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         }
       }
     })
+    .state('contactus', {
+      url: '/contactus',
+      views: {
+        // this change the content views in the state home
+        // and hold the header and footer views
+        header: {
+          component: 'smallHeader'
+        },
+        content: {
+          component: 'contactus'
+        },
+        footer: {
+          component: 'fountainFooter'
+        }
+      }
+    })
     ;
 }

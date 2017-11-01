@@ -40,6 +40,7 @@ var main = require('./scripts/main');
 require('./styles/index.css');
 require('./styles/guide.css');
 require('./styles/register.css');
+require('./styles/contactus.css');
 
 
 angular
