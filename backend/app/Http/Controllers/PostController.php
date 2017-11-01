@@ -93,11 +93,15 @@ class PostController extends Controller
      * 
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
+        if(!ctype_digit($id)) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+        }
+        
         return Post::where('id', $id)
                     ->get();
     }
@@ -110,7 +114,7 @@ class PostController extends Controller
 
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -129,11 +133,15 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(!ctype_digit($id)) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+        }
+        
         // 修改草稿 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden']);
         }
-
+        
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'catagory' => 'required|integer',
@@ -165,11 +173,15 @@ class PostController extends Controller
      *
      * Soft delete the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
+        if(!ctype_digit($id)) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+        }
+        
         // 删除内容 => 主席团&宣传部部长&宣传部副部长
         // 删除草稿 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
@@ -198,14 +210,69 @@ class PostController extends Controller
     /**
      * GET /posts/catagory/{catagory.id}
      *
-     * Get all posts of a given catagory.
+     * Get all or apart or latest post(s) of a given catagory, or count number of post of a catagory
      *
-     * @param  int  $catagory_id
+     * @param  $catagory_id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function showPostsByCatagoryId(int $catagory_id)
+    public function showPostsByCatagoryId(Request $request, $catagory_id)
     {
-        return Post::where('catagory', $catagory_id)->get();
+        if(!ctype_digit($catagory_id)) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+        }
+        
+        $published = $request->published ? true : false;
+        
+        $count = $request->count;
+        $split = $request->split;
+        $latest = $request->latest;
+        
+        $paramCount = 0;
+        if($count){ $paramCount++; }
+        if($split){ $paramCount++; }
+        if($latest){ $paramCount++; }
+        if($paramCount > 1) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Mixed params.']);
+        }
+        
+        // count
+        $postsCount = 0;
+        if($published) {
+            $postsCount = Post::where([['catagory', $catagory_id], ['published_at', '!=', null]])->get()->count();
+        } else {
+            $postsCount = Post::where('catagory', $catagory_id)->get()->count();
+        }
+        
+        if($count){
+            return response()->json(['catagory' => $catagory_id, 'count' => $postsCount]);
+        }
+        
+        // split
+        if($split) {
+            $offset = $request->offset ? intval($request->offset) : 0;
+            $length = $request->length ? intval($request->length) : intval($postsCount);
+            return $published ? 
+                array_slice(Post::where
+                           ([
+                                ['catagory', $catagory_id], 
+                                ['published_at', '!=', null]
+                            ])
+                           ->get()
+                           ->toArray(), $offset, $length)
+                    :
+                array_slice(Post::where('catagory', $catagory_id)->get()->toArray(), $offset, $length);
+        }
+        
+        // latest
+        if($latest) {
+            return Post::where('catagory', $catagory_id)->orderBy('published_at', 'desc')->first();
+        }
+        
+        // all
+        return $published ? Post::where([['catagory', $catagory_id], ['published_at', '!=', null]])->get() 
+                :
+            Post::where('catagory', $catagory_id)->get();
     }
 
 }

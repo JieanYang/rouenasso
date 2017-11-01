@@ -89,5 +89,24 @@ class DatabaseSeeder extends Seeder
             'catagory' => 99, // 公告
             'published_at' => '2017-01-01'
         ]);
+        // 草稿 （无published——at）
+        DB::table('posts')->insert([
+            'title' => 'title 6',
+            'user_id' => '1',
+            'html_content' => 'non pub',
+            'catagory' => 1
+        ]);
+        DB::table('posts')->insert([
+            'title' => 'title 7',
+            'user_id' => '1',
+            'html_content' => 'non pub',
+            'catagory' => 2
+        ]);
+        DB::table('posts')->insert([
+            'title' => 'title 8',
+            'user_id' => '1',
+            'html_content' => 'non pub',
+            'catagory' => 3
+        ]);
     }
 }

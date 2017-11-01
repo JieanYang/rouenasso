@@ -63,6 +63,12 @@ class UserController extends Controller
      */
     public function store(Request $request,string $link)
     {
+        //尝试加入搜索link功能,如果找到可以注册，找不到返回一个错误
+        $searchlink = Createlink::find($link);
+        if($searchlink == null) {
+            return response()->json(['status' => 400, 'msg' => 'Invalid token!']);
+        }
+        
         $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|max:255',
             'name' => 'required|max:100',
@@ -78,12 +84,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         }
-
-//尝试加入搜索link功能,如果找到可以注册，找不到返回一个错误
-$searchlink = Createlink::find($link);
-if($searchlink == null) {
-    return response()->json(['status' => 500, 'msg' => 'this link does not exist!']);
-}
+        
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
@@ -113,6 +114,10 @@ if($searchlink == null) {
      */
     public function show($id)
     {
+        if(!ctype_digit($id)) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+        }
+        
         // 搜索查看成员 => 主席团&秘书部
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden']);
@@ -145,8 +150,12 @@ if($searchlink == null) {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, $id)
     {
+        if(!ctype_digit($id)) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+        }
+        
         // 修改成员 => 主席团&秘书部部长&秘书部副部长
         if(!($this->$department == Department::ZHUXITUAN ||
             ($this->$department == Department::MISHUBU &&
@@ -184,7 +193,7 @@ if($searchlink == null) {
         $userDb = User::find($id);
 
         if ($userDb === null) {
-            return response()->json(['status' => 500, 'msg' => 'User not exists']);
+            return response()->json(['status' => 400, 'msg' => 'User not exists']);
         }
 
         if($request->name) {
@@ -237,8 +246,12 @@ if($searchlink == null) {
      * @param  \App\User  $user_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user_id)
+    public function destroy($user_id)
     {
+        if(!ctype_digit($user_id)) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+        }
+        
         // 删除 => 主席团&秘书部部长&秘书部副部长
         if(!($this->department == Department::ZHUXITUAN ||
             ($this->department == Department::MISHUBU &&
@@ -249,10 +262,10 @@ if($searchlink == null) {
         $userDel = User::find($user_id);
 
         if ($userDel === null) {
-            return response()->json(['status' => 500, 'msg' => 'User not exists']);
+            return response()->json(['status' => 400, 'msg' => 'User not exists']);
         }
         if ($userDel->id === $user_id) {
-            return response()->json(['status' => 500, 'msg' => 'You can not delete your self']);
+            return response()->json(['status' => 400, 'msg' => 'You can not delete your self']);
         }
 
         $userDel->delete();
@@ -269,6 +282,10 @@ if($searchlink == null) {
      * @return \Illuminate\Http\Response
      */
     public function showPostsByUserId(int $id) {
+        if(!ctype_digit($id)) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+        }
+        
         return User::find($id)->posts()->get();
     }
 }
