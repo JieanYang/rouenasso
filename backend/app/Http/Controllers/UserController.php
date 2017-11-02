@@ -16,7 +16,8 @@ class UserController extends Controller
     private $department;
     private $position;
 
-    public function __construct() {
+    public function __construct() 
+    {
         $this->middleware('auth.basic.once', ['except' => ['store']]);
         
         $this->middleware(function ($request, $next) {
