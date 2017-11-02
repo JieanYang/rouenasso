@@ -37,7 +37,7 @@ class UserController extends Controller
     {
         // 搜索查看成员 => 主席团&秘书部
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
 
         return User::All();
@@ -68,7 +68,7 @@ class UserController extends Controller
         //尝试加入搜索link功能,如果找到可以注册，找不到返回一个错误
         $searchlink = Createlink::find($link);
         if($searchlink == null) {
-            return response()->json(['status' => 400, 'msg' => 'Invalid token!']);
+            return response()->json(['status' => 400, 'msg' => 'Invalid token!'], 400);
         }
         
         $validator = Validator::make($request->all(), [
@@ -117,12 +117,12 @@ class UserController extends Controller
     public function show($id)
     {
         if(!ctype_digit($id)) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
         
         // 搜索查看成员 => 主席团&秘书部
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
 
         return User::where('id', $id)
@@ -155,14 +155,14 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         if(!ctype_digit($id)) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
         
         // 修改成员 => 主席团&秘书部部长&秘书部副部长
         if(!($this->$department == Department::ZHUXITUAN ||
             ($this->$department == Department::MISHUBU &&
                 ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG)))) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
 
         $messages = [
@@ -195,7 +195,7 @@ class UserController extends Controller
         $userDb = User::find($id);
 
         if ($userDb === null) {
-            return response()->json(['status' => 400, 'msg' => 'User not exists']);
+            return response()->json(['status' => 400, 'msg' => 'User not exists'], 403);
         }
 
         if($request->name) {
@@ -251,23 +251,23 @@ class UserController extends Controller
     public function destroy($user_id)
     {
         if(!ctype_digit($user_id)) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
         
         // 删除 => 主席团&秘书部部长&秘书部副部长
         if(!($this->department == Department::ZHUXITUAN ||
             ($this->department == Department::MISHUBU &&
                 ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG)))) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
 
         $userDel = User::find($user_id);
 
         if ($userDel === null) {
-            return response()->json(['status' => 400, 'msg' => 'User not exists']);
+            return response()->json(['status' => 400, 'msg' => 'User not exists'], 403);
         }
         if ($userDel->id === $user_id) {
-            return response()->json(['status' => 400, 'msg' => 'You can not delete your self']);
+            return response()->json(['status' => 400, 'msg' => 'You can not delete your self'], 400);
         }
 
         $userDel->delete();
@@ -285,7 +285,7 @@ class UserController extends Controller
      */
     public function showPostsByUserId($id) {
         if(!ctype_digit($id)) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
         
         return User::find($id)->posts()->get();

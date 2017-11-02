@@ -24,7 +24,7 @@ class PostNoAuthController extends Controller
     public function showPostsBycategoryId(Request $request, $category_id)
     {
         if(!ctype_digit($category_id)) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
         
         $count = $request->count;
@@ -36,7 +36,7 @@ class PostNoAuthController extends Controller
         if($split){ $paramCount++; }
         if($latest){ $paramCount++; }
         if($paramCount > 1) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Mixed params.']);
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Mixed params.'], 400);
         }
         
         // count
@@ -80,13 +80,13 @@ class PostNoAuthController extends Controller
     public function showPost($id)
     {
         if(!ctype_digit($id)) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
         
         $p = Post::find($id);
         
         return $p ? (
-                        $p->published_at ? $p : Response()->json(['status' => 404, 'msg' => 'Post not found.'])
-                    ) : Response()->json(['status' => 404, 'msg' => 'Post not found.']);
+                        $p->published_at ? $p : Response()->json(['status' => 404, 'msg' => 'Post not found.'], 400)
+                    ) : Response()->json(['status' => 404, 'msg' => 'Post not found.'], 404);
     }
 }

@@ -31,7 +31,7 @@ class CreatelinkController extends Controller
     public function store(Request $request)
     {
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
 
         // $validator = Validator::make($request->all(), [

@@ -34,7 +34,7 @@ class PostController extends Controller
     {
         // 所有 包括草稿 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         return Post::All();
     }
@@ -63,7 +63,7 @@ class PostController extends Controller
     {
         // 新增内容 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         
         $validator = Validator::make($request->all(), [
@@ -103,14 +103,14 @@ class PostController extends Controller
     {
         // 所有 包括草稿 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         if(!ctype_digit($id)) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
         
         $p = Post::find($id);
-        return $p ? $p : Response()->json(['status' => 404, 'msg' => 'Not found']);
+        return $p ? $p : Response()->json(['status' => 404, 'msg' => 'Not found'], 404);
     }
 
     /**
@@ -141,12 +141,12 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         if(!ctype_digit($id)) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
         
         // 修改草稿 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         
         $validator = Validator::make($request->all(), [
@@ -163,7 +163,7 @@ class PostController extends Controller
         $postDB = Post::find($id);
 
         if($postDB === null) {
-            return response()->json(['status' => 500, 'msg' => 'Post not exists']);
+            return response()->json(['status' => 400, 'msg' => 'Post not exists'], 400);
         }
 
         $postDB->title = $request->title;
@@ -186,25 +186,25 @@ class PostController extends Controller
     public function destroy($id)
     {
         if(!ctype_digit($id)) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
         
         // 删除内容 => 主席团&宣传部部长&宣传部副部长
         // 删除草稿 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
 
         $postDel = Post::find($id);
 
         if($postDel === null) {
-            return response()->json(['status' => 500, 'msg' => 'Post not exists']);
+            return response()->json(['status' => 400, 'msg' => 'Post not exists'], 400);
         }
 
         if($postDel->published_at != null) { // 已发布 非草稿
             if(!($this->department == Department::ZHUXITUAN || ($this->department == Department::XUANCHUANBU
                 && ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG) ))) {
-                return response()->json(['status' => 403, 'msg' => 'forbidden']);
+                return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
             }
         }
 
@@ -225,7 +225,7 @@ class PostController extends Controller
     public function showDraftsByCategoryId(Request $request, $category_id) {
         // 草稿 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         return Post::where([['category', $category_id], ['published_at', '=', null]])->get();
     }

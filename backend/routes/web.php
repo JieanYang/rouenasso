@@ -40,10 +40,3 @@ Route::post('/register',[
  * Home
  */
 Route::get('/home', 'HomeController@index')->name('home');
-
-/**
- * All other page redirect to 404 error
- */
-Route::any('{all}', function(){
-    return view('404');
-})->where('all', '.*');
