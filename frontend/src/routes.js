@@ -81,5 +81,19 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         }
       }
     })
+    .state('login', {
+      url: '/login',
+      views: {
+        header: {
+          component: 'smallHeader'
+        },
+        content: {
+          component: 'login'
+        },
+        footer: {
+          component: 'fountainFooter'
+        }
+      }
+    })
     ;
 }

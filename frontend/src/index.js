@@ -27,6 +27,7 @@ require('./img/favicons/manifest.json');
 // angular
 var angular = require('angular');
 require('angular-ui-router');
+require('angular-base64')
 
 var routesConfig = require('./routes');
 var contentsModule = require('./scripts/index');
@@ -44,7 +45,7 @@ require('./styles/contactus.css');
 
 
 angular
-  .module('app', [contentsModule, 'ui.router'])
+  .module('app', [contentsModule, 'ui.router', 'base64'])
   .config(routesConfig)
   .component('app', main)
   .component('bigHeader', bigHeader)

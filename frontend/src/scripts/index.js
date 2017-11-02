@@ -4,7 +4,8 @@ var contents = require('./scripts_Module/contents');
 var data = require('./scripts_Module/data');
 var guide = require('./scripts_Module/guide');
 var register = require('./scripts_Module/register');
-var contactus = require('./scripts_Module/contactus')
+var contactus = require('./scripts_Module/contactus');
+var login = require('./scripts_Module/loginSample');
 
 var contentsModule = 'contents';
 
@@ -16,4 +17,5 @@ angular
   .component('testData', data)
   .component('guide', guide)
   .component('register', register)
-  .component('contactus', contactus);
+  .component('contactus', contactus)
+  .component('login', login);
