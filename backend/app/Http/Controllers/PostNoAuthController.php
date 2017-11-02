@@ -86,7 +86,21 @@ class PostNoAuthController extends Controller
         $p = Post::find($id);
         
         return $p ? (
-                        $p->published_at ? $p : Response()->json(['status' => 404, 'msg' => 'Post not found.'], 400)
+                        $p->published_at ? $this->incrementView($p)
+                        :
+                        Response()->json(['status' => 404, 'msg' => 'Post not found.'], 400)
                     ) : Response()->json(['status' => 404, 'msg' => 'Post not found.'], 404);
+    }
+
+    /**
+     * increment View times of a post
+     *
+     * @param  $id post id
+     * @return \Illuminate\Http\Response
+     */
+    private function incrementView(Post $p) {
+        $p->view++;
+        $p->save();
+        return $p;
     }
 }

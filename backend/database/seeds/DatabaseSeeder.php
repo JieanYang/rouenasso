@@ -50,35 +50,40 @@ class DatabaseSeeder extends Seeder
             'user_id' => '1',
             'html_content' => 'h',
             'category' => 1,    
-            'published_at' => '2017-01-02'
+            'published_at' => '2017-01-02',
+            'view' => 15
         ]);
         DB::table('posts')->insert([
             'title' => 'title 2',
             'user_id' => '1',
             'html_content' => 'hh',
             'category' => 1,
-            'published_at' => '2017-01-03'
+            'published_at' => '2017-01-03',
+            'view' => 20
         ]);
         DB::table('posts')->insert([
             'title' => 'title 3',
             'user_id' => '1',
             'html_content' => 'hhh',
             'category' => 2,
-            'published_at' => '2017-01-04'
+            'published_at' => '2017-01-04',
+            'view' => 25
         ]);
         DB::table('posts')->insert([
             'title' => 'title 4',
             'user_id' => '2',
             'html_content' => 'hhhh',
             'category' => 2,
-            'published_at' => '2017-01-05'
+            'published_at' => '2017-01-05',
+            'view' => 30
         ]);
         DB::table('posts')->insert([
             'title' => 'title 5',
             'user_id' => '2',
             'html_content' => 'hhhhh',
             'category' => 3,
-            'published_at' => '2017-01-01'
+            'published_at' => '2017-01-01',
+            'view' => 35
         ]);
         DB::table('posts')->insert([
             'title' => 'show',
@@ -87,26 +92,30 @@ class DatabaseSeeder extends Seeder
                 <h4 class="light muted">Hi，小朋友们大家好，还记得我是谁吗？对了！我就是为蓝猫配音的演员，葛平！</h4>
                 <img src="//upload.wikimedia.org/wikipedia/zh/c/cf/Ge_Ping_2.JPG" alt="葛平"/>',
             'category' => 99, // 公告
-            'published_at' => '2017-01-01'
+            'published_at' => '2017-01-01',
+            'view' => 99
         ]);
         // 草稿 （无published——at）
         DB::table('posts')->insert([
             'title' => 'title 6',
             'user_id' => '1',
             'html_content' => 'non pub',
-            'category' => 1
+            'category' => 1,
+            'view' => 0
         ]);
         DB::table('posts')->insert([
             'title' => 'title 7',
             'user_id' => '1',
             'html_content' => 'non pub',
-            'category' => 2
+            'category' => 2,
+            'view' => 0
         ]);
         DB::table('posts')->insert([
             'title' => 'title 8',
             'user_id' => '1',
             'html_content' => 'non pub',
-            'category' => 3
+            'category' => 3,
+            'view' => 0
         ]);
     }
 }

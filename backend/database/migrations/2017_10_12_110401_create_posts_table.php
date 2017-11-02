@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->integer('category')->nullable(false);
             $table->longText('html_content')->nullable(false);
             $table->timestamp('published_at')->nullable()->index();
+            $table->bigInteger('view')->unsigned()->nullable(false);
             $table->timestamps();
             $table->softDeletes();
         });

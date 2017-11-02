@@ -85,6 +85,7 @@ class PostController extends Controller
         $post->user_id = $request->user_id;
         $post->html_content = $request->html_content;
         $post->published_at = $request->published_at;
+        $post->view = 0;
 
         $post->save();
 
@@ -110,7 +111,7 @@ class PostController extends Controller
         }
         
         $p = Post::find($id);
-        return $p ? $p : Response()->json(['status' => 404, 'msg' => 'Not found'], 404);
+        return $p ? $this->incrementView($p) : Response()->json(['status' => 404, 'msg' => 'Not found'], 404);
     }
 
     /**
@@ -230,4 +231,17 @@ class PostController extends Controller
         return Post::where([['category', $category_id], ['published_at', '=', null]])->get();
     }
 
+    /**
+     * increment View times of a post
+     *
+     * @param  $id post id
+     * @return \Illuminate\Http\Response
+     */
+    private function incrementView(Post $p) {
+        if($p->published_at){
+            $p->view++;
+            $p->save();
+        }
+        return $p;
+    }
 }
