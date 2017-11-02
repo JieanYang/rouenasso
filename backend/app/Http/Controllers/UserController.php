@@ -18,11 +18,11 @@ class UserController extends Controller
 
     public function __construct() 
     {
-        $this->middleware('auth.basic.once', ['except' => ['store']]);
+        $this->middleware('auth.basic.once', ['except' => ['store', 'countUser']]);
         
         $this->middleware(function ($request, $next) {
-            $this->department = Auth::user()->department;
-            $this->position = Auth::user()->position;
+            $this->department = Auth::user() ? Auth::user()->department : null;
+            $this->position = Auth::user() ? Auth::user()->position : null;
             return $next($request);
         })->except('store');
     }
@@ -119,7 +119,11 @@ class UserController extends Controller
     public function show($id)
     {
         if(!ctype_digit($id)) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
+            if($id == 'count') {
+                return $this->countUser();
+            } else {
+                return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
+            }
         }
         
         // 搜索查看成员 => 主席团&秘书部
@@ -281,6 +285,26 @@ class UserController extends Controller
     }
 
     /**
+     * GET /users/count
+     *
+     * count user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function countUser()
+    {
+        // 搜索查看成员 => 主席团&秘书部
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::MISHUBU 
+             || $this->department == Department::XUANCHUANBU 
+             || $this->department == Department::XIANGMUKAIFABU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+        }
+
+        return User::All()->count();
+    }
+
+    /**
      * GET /users/{user.id}/posts
      *
      * Get all post of a user.
@@ -288,7 +312,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showPostsByUserId($id) {
+    private function showPostsByUserId($id) {
         if(!ctype_digit($id)) {
             return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
