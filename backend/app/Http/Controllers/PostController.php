@@ -20,7 +20,7 @@ class PostController extends Controller
             $this->department = Auth::user() ? Auth::user()->department : null;
             $this->position = Auth::user() ? Auth::user()->position : null;
             return $next($request);
-        }, ['except' => ['index', 'showPostsBycategoryId']]);
+        });
     }
 
     /**
@@ -32,6 +32,10 @@ class PostController extends Controller
      */
     public function index()
     {
+        // 所有 包括草稿 => 主席团&宣传部
+        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+        }
         return Post::All();
     }
 
@@ -97,12 +101,16 @@ class PostController extends Controller
      */
     public function show($id)
     {
+        // 所有 包括草稿 => 主席团&宣传部
+        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden']);
+        }
         if(!ctype_digit($id)) {
             return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
         }
         
-        return Post::where('id', $id)
-                    ->get();
+        $p = Post::find($id);
+        return $p ? $p : Response()->json(['status' => 404, 'msg' => 'Not found']);
     }
 
     /**
@@ -205,64 +213,6 @@ class PostController extends Controller
         return response()->json(['status' => 200, 'msg' => 'success']);
     }
 
-
-    /**
-     * GET /posts/category/{category.id}
-     *
-     * Get all or apart or latest post(s) of a given category, or count number of post of a category
-     *
-     * @param  $category_id
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function showPostsBycategoryId(Request $request, $category_id)
-    {
-        if(!ctype_digit($category_id)) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
-        }
-        
-        $count = $request->count;
-        $split = $request->split;
-        $latest = $request->latest;
-        
-        $paramCount = 0;
-        if($count){ $paramCount++; }
-        if($split){ $paramCount++; }
-        if($latest){ $paramCount++; }
-        if($paramCount > 1) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Mixed params.']);
-        }
-        
-        // count
-        $postsCount = 0;
-        $postsCount = Post::where([['category', $category_id], ['published_at', '!=', null]])->get()->count();
-        
-        if($count){
-            return response()->json(['category' => $category_id, 'count' => $postsCount]);
-        }
-        
-        // split
-        if($split) {
-            $offset = $request->offset ? intval($request->offset) : 0;
-            $length = $request->length ? intval($request->length) : intval($postsCount);
-            return array_slice(Post::where
-                           ([
-                                ['category', $category_id], 
-                                ['published_at', '!=', null]
-                            ])
-                           ->get()
-                           ->toArray(), $offset, $length);
-        }
-        
-        // latest
-        if($latest) {
-            return Post::where('category', $category_id)->orderBy('published_at', 'desc')->first();
-        }
-        
-        // all
-        return Post::where([['category', $category_id], ['published_at', '!=', null]])->get();
-    }
-    
     /**
      * GET /posts/category/{category.id}/drafts
      *

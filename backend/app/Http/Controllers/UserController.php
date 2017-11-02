@@ -17,6 +17,8 @@ class UserController extends Controller
     private $position;
 
     public function __construct() {
+        $this->middleware('auth.basic.once', ['except' => ['store']]);
+        
         $this->middleware(function ($request, $next) {
             $this->department = Auth::user()->department;
             $this->position = Auth::user()->position;
@@ -61,7 +63,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,string $link)
+    public function store(Request $request, string $link)
     {
         //尝试加入搜索link功能,如果找到可以注册，找不到返回一个错误
         $searchlink = Createlink::find($link);
@@ -281,7 +283,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showPostsByUserId(int $id) {
+    public function showPostsByUserId($id) {
         if(!ctype_digit($id)) {
             return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.']);
         }
