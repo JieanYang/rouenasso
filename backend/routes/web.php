@@ -39,6 +39,11 @@ Route::post('/register',[
 ]);
 
 /**
+ * View Log
+ */
+Route::get('log/', 'ViewLogController@addLog');
+
+/**
  * Home
  */
 Route::get('/home', 'HomeController@index')->name('home');
