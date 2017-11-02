@@ -99,18 +99,24 @@ class PostController extends Controller
      * 
      * Display the specified resource.
      *
+     * @param  Request $request
      * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        if(!ctype_digit($id)) {
+            if($id == 'count') {
+                return $this->countPost($request);
+            } else {
+                return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
+            }
+        }
+        
         // 所有 包括草稿 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN 
              || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
-        }
-        if(!ctype_digit($id)) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
         
         $p = Post::find($id);
@@ -218,6 +224,37 @@ class PostController extends Controller
         $postDel->delete();
 
         return response()->json(['status' => 200, 'msg' => 'success']);
+    }
+
+    /**
+     * GET /posts/count
+     *
+     * count post
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function countPost($request)
+    {
+        // 搜索查看成员 => 主席团&秘书部
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::MISHUBU 
+             || $this->department == Department::XUANCHUANBU 
+             || $this->department == Department::XIANGMUKAIFABU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+        }
+        
+        if($request->published && $request->draft) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Mixed param.'], 400);
+        }
+        
+        if($request->published) {
+            return Post::where('published_at', '!=', null)->count();
+        } else if ($request->draft) {
+            return Post::where('published_at', '=', null)->count();
+        } else {
+            return Post::All()->count();
+        }
     }
 
     /**
