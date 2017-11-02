@@ -33,7 +33,8 @@ class PostController extends Controller
     public function index()
     {
         // 所有 包括草稿 => 主席团&宣传部
-        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         return Post::All();
@@ -62,7 +63,8 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // 新增内容 => 主席团&宣传部
-        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         
@@ -103,7 +105,8 @@ class PostController extends Controller
     public function show($id)
     {
         // 所有 包括草稿 => 主席团&宣传部
-        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         if(!ctype_digit($id)) {
@@ -146,7 +149,8 @@ class PostController extends Controller
         }
         
         // 修改草稿 => 主席团&宣传部
-        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         
@@ -192,7 +196,8 @@ class PostController extends Controller
         
         // 删除内容 => 主席团&宣传部部长&宣传部副部长
         // 删除草稿 => 主席团&宣传部
-        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
 
@@ -203,7 +208,8 @@ class PostController extends Controller
         }
 
         if($postDel->published_at != null) { // 已发布 非草稿
-            if(!($this->department == Department::ZHUXITUAN || ($this->department == Department::XUANCHUANBU
+            if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XIANGMUKAIFABU
+                || ($this->department == Department::XUANCHUANBU
                 && ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG) ))) {
                 return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
             }
@@ -225,10 +231,17 @@ class PostController extends Controller
      */
     public function showDraftsByCategoryId(Request $request, $category_id) {
         // 草稿 => 主席团&宣传部
-        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
-        return Post::where([['category', $category_id], ['published_at', '=', null]])->get();
+        
+        // hide html content
+        $result = Post::where([['category', $category_id], ['published_at', '=', null]])->get();
+        foreach($result as $p){
+            $p->setHidden(['html_content']);
+        };
+        return $result;
     }
 
     /**

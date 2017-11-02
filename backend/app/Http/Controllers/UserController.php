@@ -37,7 +37,8 @@ class UserController extends Controller
     public function index()
     {
         // 搜索查看成员 => 主席团&秘书部
-        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU)) {
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::MISHUBU || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
 
@@ -122,7 +123,8 @@ class UserController extends Controller
         }
         
         // 搜索查看成员 => 主席团&秘书部
-        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU)) {
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::MISHUBU || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
 
@@ -160,7 +162,8 @@ class UserController extends Controller
         }
         
         // 修改成员 => 主席团&秘书部部长&秘书部副部长
-        if(!($this->$department == Department::ZHUXITUAN ||
+        if(!($this->$department == Department::ZHUXITUAN || 
+             $this->department == Department::XIANGMUKAIFABU ||
             ($this->$department == Department::MISHUBU &&
                 ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG)))) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
@@ -257,6 +260,7 @@ class UserController extends Controller
         
         // 删除 => 主席团&秘书部部长&秘书部副部长
         if(!($this->department == Department::ZHUXITUAN ||
+            $this->department == Department::XIANGMUKAIFABU ||
             ($this->department == Department::MISHUBU &&
                 ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG)))) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
@@ -289,6 +293,10 @@ class UserController extends Controller
             return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
         
-        return User::find($id)->posts()->get();
+        $result = User::find($id)->posts()->get();
+        foreach($result as $p){
+            $p->setHidden(['html_content']);
+        };
+        return $result;
     }
 }

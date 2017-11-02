@@ -44,29 +44,40 @@ class PostNoAuthController extends Controller
         $postsCount = Post::where([['category', $category_id], ['published_at', '!=', null]])->get()->count();
         
         if($count){
-            return response()->json(['category' => $category_id, 'count' => $postsCount]);
-        }
+            $result = response()->json(['category' => $category_id, 'count' => $postsCount]);
+        } 
         
-        // split
-        if($split) {
+        else if($split) {
             $offset = $request->offset ? intval($request->offset) : 0;
             $length = $request->length ? intval($request->length) : intval($postsCount);
-            return array_slice(Post::where
+            $result = Post::where
                            ([
                                 ['category', $category_id], 
                                 ['published_at', '!=', null]
                             ])
-                           ->get()
-                           ->toArray(), $offset, $length);
-        }
+                           ->get();
+        } 
         
-        // latest
-        if($latest) {
-            return Post::where('category', $category_id)->orderBy('published_at', 'desc')->first();
-        }
+        else if($latest) {
+            $result = Post::where('category', $category_id)->orderBy('published_at', 'desc')->first();
+        } 
         
+        else {
         // all
-        return Post::where([['category', $category_id], ['published_at', '!=', null]])->get();
+            $result = Post::where([['category', $category_id], ['published_at', '!=', null]])->get();
+        }
+        
+        // hide html content
+        if(!($count || $latest)){
+            foreach($result as $p){
+                $p->setHidden(['html_content']);
+            };
+            
+            if($split) {
+                $result = array_slice($result->toArray(), $offset, $length);
+            }
+        }
+        return $result;
     }
     
     /**
