@@ -60,7 +60,7 @@ gulp.task('minify-js', ['js'], function() {
         }))
 });
 
-// Copy vendor libraries from /bower_components into /vendor
+// Copy vendor libraries from /bower_components into /vendor, copy img
 gulp.task('copy', function() {
     gulp.src(['bower_components/bootstrap/dist/**/*', '!**/npm.js', '!**/bootstrap-theme.*', '!**/*.map'])
         .pipe(gulp.dest('vendor/bootstrap'))
@@ -97,7 +97,6 @@ gulp.task('copy', function() {
 
     gulp.src(['bower_components/raphael/raphael.js', 'bower_components/raphael/raphael.min.js'])
         .pipe(gulp.dest('vendor/raphael'))
-
 })
 
 // Run everything
@@ -109,6 +108,7 @@ gulp.task('browserSync', function() {
         server: {
             baseDir: ''
         },
+        port: 4000
     })
 })
 
