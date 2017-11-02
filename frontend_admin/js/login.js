@@ -1,4 +1,4 @@
-function attemptLogin() {
+function attemptLogin() {    
     var email = $('#email').val();
     var pw = $('#password').val();
     var auth = 'Basic ' + btoa(email + ':' + pw);
@@ -7,12 +7,12 @@ function attemptLogin() {
     $("#btn-submit").prop('disabled', true);
 
     attempt(auth, function (response) {
-        $("#hint").text("欢迎，" + response.name); 
+        $("#hint").text("欢迎，" + response.name);
         $("#hint").css('color', 'green');
         $("#hint").show();
         $("#loader").removeClass("show");
 
-        setAuthCookie(auth); 
+        setAuthCookie(auth);
 
         setTimeout(
             function () {
@@ -25,12 +25,12 @@ function attemptLogin() {
         $("#btn-submit").prop('disabled', false);
         $("#loader").removeClass("show");
     });
-
+    
     return false;
 }
 
 function attempt(auth, success, error) {
-    $.ajax({
+    return $.ajax({
         url: 'https://api.acecrouen.com/login',
         type: 'post',
         headers: {
