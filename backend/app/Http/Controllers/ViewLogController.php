@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\ViewLog;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 use App\Model\Department;
 use App\Model\Position;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ViewLogController extends Controller
 {
@@ -90,5 +91,31 @@ class ViewLogController extends Controller
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         return ViewLog::whereDate('created_at', '=', date($date))->get();
+    }
+    
+    /**
+     * Get given day's view count
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getHistoryCount(Request $request) {
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::XUANCHUANBU 
+             || $this->department == Department::MISHUBU 
+             || $this->department == Department::XIANGMUKAIFABU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+        }
+        
+        $start = $request->start;
+        $end = $request->end;
+        
+        if(!($start && $end)) {
+            return response()->json(['status' => 400, 'msg' => 'Bad input, param incorrect'], 400);
+        }
+        
+        return DB::table('viewlogs')->select(DB::raw('date(created_at) as date'), DB::raw('count(*) as count'))->where(
+            [['created_at', '>=', $start],['created_at', '<=', $end]]
+        )->groupBy('created_at')->get();
     }
 }

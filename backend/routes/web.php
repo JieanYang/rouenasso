@@ -46,6 +46,7 @@ Route::get('log/today', 'ViewLogController@getTodayCount')->middleware('auth.bas
 Route::get('log/today/detail', 'ViewLogController@getToday')->middleware('auth.basic.once');
 Route::get('log/oneday/{date}', 'ViewLogController@getOneDayCount')->middleware('auth.basic.once');
 Route::get('log/oneday/{date}/detail', 'ViewLogController@getOneDay')->middleware('auth.basic.once');
+Route::get('log/history', 'ViewLogController@getHistoryCount')->middleware('auth.basic.once');
 
 /**
  * Home

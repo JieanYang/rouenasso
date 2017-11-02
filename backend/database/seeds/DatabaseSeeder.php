@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        /* Users */
         DB::table('users')->insert([
         	'name' => '小何',
         	'email' => 'xiaohe@test.com',
@@ -58,6 +59,7 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
+        /* Posts */
         DB::table('posts')->insert([
             'title' => 'title 1',
             'user_id' => '1',
@@ -129,6 +131,128 @@ class DatabaseSeeder extends Seeder
             'html_content' => 'non pub',
             'category' => 3,
             'view' => 0
+        ]);
+        
+        /* View Logs */
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-11-01'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-11-02'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-11-02'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-11-03'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-11-03'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-11-03'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-11-04'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-11-04'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-11-05'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-10-31'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-10-31'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-10-31'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-10-31'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-10-30'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-10-29'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-10-29'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.1',
+            'user' => '1',
+            'created_at' => '2017-10-28'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.18',
+            'user' => '1',
+            'created_at' => '2017-10-28'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.17',
+            'user' => '1',
+            'created_at' => '2017-10-28'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.16',
+            'user' => '1',
+            'created_at' => '2017-10-27'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.15',
+            'user' => '1',
+            'created_at' => '2017-10-27'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.14',
+            'user' => '1',
+            'created_at' => '2017-10-26'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.13',
+            'user' => '1',
+            'created_at' => '2017-10-25'
+        ]);
+        DB::table('viewlogs')->insert([
+            'ip' => '1.1.1.12',
+            'user' => '1',
+            'created_at' => '2017-10-25'
         ]);
     }
 }
