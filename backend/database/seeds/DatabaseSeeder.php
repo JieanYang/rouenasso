@@ -29,13 +29,26 @@ class DatabaseSeeder extends Seeder
         	'dimission_date' => date('2018-01-01'),
         	'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
-
         DB::table('users')->insert([
             'name' => '小宋',
             'email' => 'xiaosong@test.com',
             'password' => bcrypt('song'),
             'department' => Department::ZHUXITUAN,
             'position' => Position::FUZHUXI,
+            'school' => 'ESIGELEC',
+            'phone_number' => '06 05 04 03 01',
+            'isWorking' => True,
+            'isAvaible' => True,
+            'birthday' => date('1993-01-02'),
+            'arrive_date' => date('2012-01-02'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('users')->insert([
+            'name' => '开发',
+            'email' => 'kaifa@test.com',
+            'password' => bcrypt('kaifa'),
+            'department' => Department::XIANGMUKAIFABU,
+            'position' => Position::CHENGYUAN,
             'school' => 'ESIGELEC',
             'phone_number' => '06 05 04 03 01',
             'isWorking' => True,
