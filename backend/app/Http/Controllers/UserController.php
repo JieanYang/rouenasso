@@ -119,11 +119,7 @@ class UserController extends Controller
     public function show($id)
     {
         if(!ctype_digit($id)) {
-            if($id == 'count') {
-                return $this->countUser();
-            } else {
-                return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
-            }
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
         
         // 搜索查看成员 => 主席团&秘书部
@@ -285,7 +281,7 @@ class UserController extends Controller
     }
 
     /**
-     * GET /users/count
+     * GET /users/count/show
      *
      * count user
      *

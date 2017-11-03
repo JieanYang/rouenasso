@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
-use Illuminate\Http\Request;
 use Validator;
-use Illuminate\Validation\Rule;
+use App\Post;
 use App\Model\Department;
 use App\Model\Position;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -106,11 +107,7 @@ class PostController extends Controller
     public function show(Request $request, $id)
     {
         if(!ctype_digit($id)) {
-            if($id == 'count') {
-                return $this->countPost($request);
-            } else {
-                return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
-            }
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
         
         // 所有 包括草稿 => 主席团&宣传部
@@ -227,14 +224,14 @@ class PostController extends Controller
     }
 
     /**
-     * GET /posts/count
+     * GET /posts/count/show
      *
      * count post
      *
      * @param  Request $request
      * @return \Illuminate\Http\Response
      */
-    public function countPost($request)
+    public function countPost(Request $request)
     {
         // 搜索查看成员 => 主席团&秘书部
         if(!($this->department == Department::ZHUXITUAN 
@@ -268,8 +265,9 @@ class PostController extends Controller
      */
     public function showDraftsByCategoryId(Request $request, $category_id) {
         // 草稿 => 主席团&宣传部
-        if(!($this->department == Department::ZHUXITUAN 
-             || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
+        if(!($this->department == Department::ZHUXITUAN || 
+             $this->department == Department::XUANCHUANBU || 
+             $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         
@@ -279,6 +277,28 @@ class PostController extends Controller
             $p->setHidden(['html_content']);
         };
         return $result;
+    }
+    
+    /**
+     * GET /posts/calendar/show
+     *
+     * Show posts record as calendar events
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showPostsCalendar() {
+        if(!($this->department == Department::ZHUXITUAN || 
+             $this->department == Department::XUANCHUANBU || 
+             $this->department == Department::MISHUBU || 
+             $this->department == Department::XIANGMUKAIFABU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+        }
+        
+        return DB::table('posts')
+            ->select('title', 
+                     DB::raw('date(created_at) as start'),
+                     'published_at')
+            ->get();
     }
 
     /**

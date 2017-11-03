@@ -66,7 +66,8 @@ class DatabaseSeeder extends Seeder
             'html_content' => 'h',
             'category' => 1,    
             'published_at' => '2017-01-02',
-            'view' => 15
+            'view' => 15,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('posts')->insert([
             'title' => 'title 2',
@@ -74,6 +75,7 @@ class DatabaseSeeder extends Seeder
             'html_content' => 'hh',
             'category' => 1,
             'published_at' => '2017-01-03',
+            'created_at' => '2017-11-02',
             'view' => 20
         ]);
         DB::table('posts')->insert([
@@ -82,6 +84,7 @@ class DatabaseSeeder extends Seeder
             'html_content' => 'hhh',
             'category' => 2,
             'published_at' => '2017-01-04',
+            'created_at' => '2017-11-02',
             'view' => 25
         ]);
         DB::table('posts')->insert([
@@ -90,6 +93,7 @@ class DatabaseSeeder extends Seeder
             'html_content' => 'hhhh',
             'category' => 2,
             'published_at' => '2017-01-05',
+            'created_at' => '2017-11-01',
             'view' => 30
         ]);
         DB::table('posts')->insert([
@@ -98,6 +102,7 @@ class DatabaseSeeder extends Seeder
             'html_content' => 'hhhhh',
             'category' => 3,
             'published_at' => '2017-01-01',
+            'created_at' => '2017-11-01',
             'view' => 35
         ]);
         DB::table('posts')->insert([
@@ -108,6 +113,7 @@ class DatabaseSeeder extends Seeder
                 <img src="//upload.wikimedia.org/wikipedia/zh/c/cf/Ge_Ping_2.JPG" alt="葛平"/>',
             'category' => 99, // 公告
             'published_at' => '2017-01-01',
+            'created_at' => '2017-11-01',
             'view' => 99
         ]);
         // 草稿 （无published——at）
@@ -116,6 +122,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => '1',
             'html_content' => 'non pub',
             'category' => 1,
+            'created_at' => '2017-11-02',
             'view' => 0
         ]);
         DB::table('posts')->insert([
@@ -123,6 +130,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => '1',
             'html_content' => 'non pub',
             'category' => 2,
+            'created_at' => '2017-11-01',
             'view' => 0
         ]);
         DB::table('posts')->insert([
@@ -130,6 +138,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => '1',
             'html_content' => 'non pub',
             'category' => 3,
+            'created_at' => '2017-11-01',
             'view' => 0
         ]);
         

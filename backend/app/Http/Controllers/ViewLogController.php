@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\ViewLog;
 use App\Model\Department;
 use App\Model\Position;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class ViewLogController extends Controller
 {

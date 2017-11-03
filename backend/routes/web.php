@@ -23,12 +23,15 @@ Route::get('/test', function() {
  * RESTful api
  */
 Route::resource('users', 'UserController');
-Route::resource('posts', 'PostController')->middleware('auth.basic.once');
-
 Route::get('users/{id}/posts', 'UserController@showPostsByUserId')->middleware('auth.basic.once');
+Route::get('users/count/show', 'UserController@countUser')->middleware('auth.basic.once');
+
+Route::resource('posts', 'PostController')->middleware('auth.basic.once');
 Route::get('posts/category/{id}', 'PostNoAuthController@showPostsByCategoryId');
 Route::get('posts/{id}/noauth', 'PostNoAuthController@showPost');
 Route::get('posts/category/{id}/drafts', 'PostController@showDraftsByCategoryId')->middleware('auth.basic.once');
+Route::get('posts/calendar/show', 'PostController@showPostsCalendar')->middleware('auth.basic.once');
+Route::get('posts/count/show', 'PostController@countPost')->middleware('auth.basic.once');
 
 Route::post('login', 'GetSelfController@getSelf')->middleware('auth.basic.once');
 
