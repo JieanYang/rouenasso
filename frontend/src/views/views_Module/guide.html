@@ -43,42 +43,68 @@
 
 <div class="container">
   <div class="row">
-      <div class="panel" ng-show="vm.tab===0"></div>
-  <div class="panel" ng-show="vm.tab===1">
-    <h4>交通</h4>
-    <p>...</p>
-  </div>
-  <div class="panel" ng-show="vm.tab===2">
-    <h4>运营商</h4>
-    <p>...</p>
-  </div>
-  <div class="panel" ng-show="vm.tab===3">
-    <h4>生活饮食</h4>
-    <p>...</p>
-  </div>
-  <div class="panel" ng-show="vm.tab===4">
-    <h4>运动</h4>
-    <p>...</p>
-  </div>
-  <div class="panel" ng-show="vm.tab===5">
-    <h4>娱乐</h4>
-    <p>...</p>
-  </div>
-  <div class="panel" ng-show="vm.tab===6">
-    <h4>房补</h4>
-    <p>...</p>
-  </div>
-  <div class="panel" ng-show="vm.tab===7">
-    <h4>就医指南</h4>
-    <p>...</p>
-  </div>
-  <div class="panel" ng-show="vm.tab===8">
-    <h4>银行</h4>
-    <p>...</p>
-  </div>
-  <div class="panel" ng-show="vm.tab===9">
-    <h4>应用推荐</h4>
-    <p>...</p>
-  </div>
+      <div class="panel" ng-show="vm.tab===0" style="height: 600px;"></div>
+      <div class="panel" ng-show="vm.tab===1">
+        <h4>交通</h4>
+        <p>...</p>
+      </div>
+      <div class="panel" ng-show="vm.tab===2">
+        <h4>运营商</h4>
+        <p>...</p>
+      </div>
+      <div class="panel" ng-show="vm.tab===3">
+        <h4>生活饮食</h4>
+        <p>...</p>
+      </div>
+      <div class="panel" ng-show="vm.tab===4">
+        <h4>运动</h4>
+        <p>...</p>
+      </div>
+      <div class="panel" ng-show="vm.tab===5">
+        <h4>娱乐</h4>
+        <p>...</p>
+      </div>
+      <div class="panel" ng-show="vm.tab===6">
+        <h4>房补</h4>
+        <p>...</p>
+      </div>
+      <div class="panel" ng-show="vm.tab===7">
+        <h4>就医指南</h4>
+        <p>...</p>
+      </div>
+      <div class="panel" ng-show="vm.tab===8">
+        <h4>银行</h4>
+        <p>...</p>
+      </div>
+      <div class="panel" ng-show="vm.tab===9">
+        <div ng-repeat="app in vm.data_9">
+            <div class="row row-content">
+                <div class="col-xs-12 col-sm-3">
+                    <p style="padding:10px;"></p>
+                    <h3 align=center>{{app.title}}</h3>
+                </div>
+
+                <div class="col-xs-12 col-sm-9">
+                          <!-- div ng-if="!showPromotion">
+                              <h3>{{message}}</h3>
+                          </div> -->
+                    <div class="media">
+                        <div class="media-body">
+                            <!-- <h2 class="media-heading">promotion.name
+                                <span class="label label-danger">promotion.label</span>
+                                <span class="badge">promotion.price|currency</span>
+                            </h2> -->
+                            <p>{{app.description}}</p>
+                        </div>
+                        <div class="media-right media-middle">
+                            <a href="{{app.url}}" target="_blank">
+                              <img ng-src="{{app.image}}" alt="promotion" height="120">
+                            </a>            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
   </div>
 </div>

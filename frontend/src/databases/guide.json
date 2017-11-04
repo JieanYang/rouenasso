@@ -1,0 +1,178 @@
+{
+	"应用推荐":[
+		{
+			"title": "软件推荐",
+			"description": "",
+			"url": "",
+			"image": ""
+		},
+		{
+			"title": "Google Map",
+			"description": "出行必备，基本覆盖了所有地点，输入你的目的地跟着指 向走就是了。暂不支持鲁昂的公交线路。",
+			"url": "https://www.google.fr/maps?source=tldsi&hl=fr",
+			"image": "../../images/生活指南9_应用推荐/google-maps-logo.jpg"
+		},
+		{
+			"title": "Réseau Astuce",
+			"description": "用于规划鲁昂地区的公交的线路及查询公交时刻表，很多公交线路二十多分钟才有一班车，需要提前规划好时间。",
+			"url": "https://www.reseau-astuce.fr/",
+			"image": "../../images/生活指南9_应用推荐/Reseau Astuce-logo.jpg"
+		},
+		{
+			"title": "Voyages-SNCF",
+			"description": "购买火车电子票，方便快捷，无需取票打票。",
+			"url": "https://www.voyages-sncf.com/",
+			"image": "../../images/生活指南9_应用推荐/Voyages SNCF-logo.png"
+		},
+		{
+			"title": "Tripadvisor / 蜂窝自由行／穷游网",
+			"description": "Tripadvisor主要用户为外国人，方便查找餐厅。另外 两个中文网站方便制定出游行程。",
+			"url": "https://www.tripadvisor.fr/",
+			"image": "../../images/生活指南9_应用推荐/tripadvisor-logo.gif"
+		},
+		{
+			"title": "Booking",
+			"description": "Booking预订酒店，预定时注意选择安全的地段。",
+			"url": "https://www.booking.com/",
+			"image": "../../images/生活指南9_应用推荐/logo-booking.png"
+		},
+		{
+			"title": "Hotels",
+			"description": "Hotels预订酒店，预定时注意选择安全的地段。",
+			"url": "https://fr.hotels.com/",
+			"image": "../../images/生活指南9_应用推荐/logo-hotels.jpg"
+		},
+		{
+			"title": "Airbnb",
+			"description": "Airbnb预订民宿，预定时注意选择安全的地段。",
+			"url": "https://www.airbnb.fr/",
+			"image": "../../images/生活指南9_应用推荐/logo-airbnb.jpg"
+		},
+		{
+			"title": "RATP",
+			"description": "巴黎交通必备，查询时刻表，定位查询路线。",
+			"url": "https://www.ratp.fr/",
+			"image": "../../images/生活指南9_应用推荐/RATP-logo.png"
+		},
+		{
+			"title": "寻味",
+			"description": "在巴黎寻找好吃中餐的必备APP。",
+			"url": "https://www.newsavour.com/restaurants/",
+			"image": "../../images/生活指南9_应用推荐/寻味-logo.png"
+		},
+		{
+			"title": "各银行 APP",
+			"description": "可以不受时间限制查到自己的银行账户内的存款，RIB账号和进行转账。消费后流水一般会有一两个工作日的延迟。",
+			"url": "",
+			"image": "../../images/生活指南9_应用推荐/"
+		},
+		{
+			"title": "Facebook",
+			"description": "",
+			"url": "https://www.facebook.com/",
+			"image": "../../images/生活指南9_应用推荐/facebook-logo.png"
+		},
+		{
+			"title": "Messenger",
+			"description": "最常用的聊天软件，小组作业全靠它。",
+			"url": "https://www.messenger.com/",
+			"image": "../../images/生活指南9_应用推荐/messenger-logo.png"
+		},
+		{
+			"title": "Instagram",
+			"description": "喜欢拍照片又喜欢分享的同学不要错过这个软件哦",
+			"url": "https://www.instagram.com/?hl=fr",
+			"image": "../../images/生活指南9_应用推荐/instagram-logo.png"
+		},
+		{
+			"title": "Allociné",
+			"description": "查询在映电影、影院排片、网友评分，支持部分影院的在线订票，也可以查询电视剧的播出时间。",
+			"url": "http://www.allocine.fr/",
+			"image": "../../images/生活指南9_应用推荐/allocine-logo.png"
+		},
+		{
+			"title": "Franceinfo/ 20Minutes/ Le Monde / ...",
+			"description": "新闻资讯类APP",
+			"url": "",
+			"image": "../../images/生活指南9_应用推荐/"
+		},
+		{
+			"title": "Deliveroo",
+			"description": "外卖APP。需要外送费。活动时会赠送一些优惠券。",
+			"url": "https://deliveroo.fr/fr/",
+			"image": "../../images/生活指南9_应用推荐/deliveroo-logo.png"
+		},
+		{
+			"title": "租房类",
+			"description": "",
+			"url": "",
+			"image": ""
+		},
+		{
+			"title": "CROUS",
+			"description": "为在鲁昂读书的学生提供的crous学生公寓，需要的资料和信息都在网站里面。",
+			"url": "http://www.crous-rouen.fr/",
+			"image": "../../images/生活指南9_应用推荐/logo-crous.jpg"
+		},
+		{
+			"title": "Le boncoin",
+			"description": "最大的二手转卖网站，也提供租房和工作职位。最好直接发短信或者打电话，否则可能收不到回复。",
+			"url": "https://www.leboncoin.fr/",
+			"image": "../../images/生活指南9_应用推荐/boncoin-logo.jpg"
+		},
+		{
+			"title": "Lokaviz",
+			"description": "这个是crous为学生提供房源的网站，没有那么贵，而且是房东也比较愿意租给学生的类型。",
+			"url": "http://www.lokaviz.fr/",
+			"image": "../../images/生活指南9_应用推荐/logo-lokaviz.png"
+		},
+		{
+			"title": "华人社区",
+			"description": "在这既可以查到房源，二手货，也可以看到各种活动。",
+			"url": "",
+			"image": ""
+		},
+		{
+			"title": "新欧洲",
+			"description": "主要面向学生，公众号经常举行活动和提供资讯。",
+			"url": "http://www.xineurope.com/",
+			"image": "../../images/生活指南9_应用推荐/logo-xineurope.jpg"
+		},
+		{
+			"title": "华人街",
+			"description": "用户以在法定居的华人为主。",
+			"url": "https://faguo.huarenjie.com/",
+			"image": "../../images/生活指南9_应用推荐/logo-chinese street.jpg"
+		},
+		{
+			"title": "法国学生汇",
+			"description": "华人街旗下，公众号经常举行活动。",
+			"url": "https://www.xuesheng.fr/",
+			"image": "../../images/生活指南9_应用推荐/logo-xueshenghui.png"
+		},
+		{
+			"title": "购物",
+			"description": "",
+			"url": "",
+			"image": ""
+		},
+		{
+			"title": "Vente-privée",
+			"description": "炒鸡好用的购物网站，每天都有更新，各种品牌各种打折，不单只是化妆品还有门票啊电器等等。经常会出现知名大品牌。",
+			"url": "https://secure.fr.vente-privee.com/authentication/portal/FR",
+			"image": "../../images/生活指南9_应用推荐/logo-vente privee.jpg"
+		},
+		{
+			"title": "Showroom",
+			"description": "SP和VP有点像，也是注册了就可以用。",
+			"url": "https://www.showroomprive.com/",
+			"image": "../../images/生活指南9_应用推荐/logo-Showroom.jpg"
+		},
+		{
+			"title": "一分钱",
+			"description": "折扣资讯整理网站，帮你寻找最优折扣，和最热打折品。",
+			"url": "https://www.ecentime.com/",
+			"image": "../../images/生活指南9_应用推荐/logo-yifenqian.png"
+		}
+	]
+}
