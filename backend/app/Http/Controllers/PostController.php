@@ -284,9 +284,10 @@ class PostController extends Controller
      *
      * Show posts record as calendar events
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function showPostsCalendar() {
+    public function showPostsCalendar(Request $request) {
         if(!($this->department == Department::ZHUXITUAN || 
              $this->department == Department::XUANCHUANBU || 
              $this->department == Department::MISHUBU || 
@@ -294,11 +295,28 @@ class PostController extends Controller
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         
-        return DB::table('posts')
-            ->select('title', 
-                     DB::raw('date(created_at) as start'),
-                     'published_at')
+        $prefix = $request->local ? 'http://localhost:8000/posts/' : 'https://api.acecrouen.com/posts/';
+        
+        $posts = DB::table('posts')
+            ->select('title', 'id', 
+                     DB::raw('date(published_at) as published_at'),
+                     DB::raw('date(created_at) as created_at'))
             ->get();
+        
+        foreach($posts as $p) {
+            if($p->published_at == null) {
+                $p->description = 'draft';
+                $p->start = $p->created_at;
+                $p->backgroundColor = '#689F38';
+            } else {
+                $p->description = 'published';
+                $p->start = $p->published_at;
+                $p->backgroundColor = '#303F9F';
+            }
+            $p->url = $prefix . $p->id;
+        }
+        
+        return $posts;
     }
 
     /**

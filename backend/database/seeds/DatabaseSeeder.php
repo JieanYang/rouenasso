@@ -65,17 +65,17 @@ class DatabaseSeeder extends Seeder
             'user_id' => '1',
             'html_content' => 'h',
             'category' => 1,    
-            'published_at' => '2017-01-02',
-            'view' => 15,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'published_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'view' => 15
         ]);
         DB::table('posts')->insert([
             'title' => 'title 2',
             'user_id' => '1',
             'html_content' => 'hh',
             'category' => 1,
-            'published_at' => '2017-01-03',
             'created_at' => '2017-11-02',
+            'published_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'view' => 20
         ]);
         DB::table('posts')->insert([
@@ -83,8 +83,8 @@ class DatabaseSeeder extends Seeder
             'user_id' => '1',
             'html_content' => 'hhh',
             'category' => 2,
-            'published_at' => '2017-01-04',
             'created_at' => '2017-11-02',
+            'published_at' => '2017-10-30',
             'view' => 25
         ]);
         DB::table('posts')->insert([
@@ -92,8 +92,8 @@ class DatabaseSeeder extends Seeder
             'user_id' => '2',
             'html_content' => 'hhhh',
             'category' => 2,
-            'published_at' => '2017-01-05',
             'created_at' => '2017-11-01',
+            'published_at' => '2017-11-03',
             'view' => 30
         ]);
         DB::table('posts')->insert([
@@ -101,8 +101,8 @@ class DatabaseSeeder extends Seeder
             'user_id' => '2',
             'html_content' => 'hhhhh',
             'category' => 3,
-            'published_at' => '2017-01-01',
-            'created_at' => '2017-11-01',
+            'published_at' => '2017-11-01',
+            'created_at' => '2017-11-02',
             'view' => 35
         ]);
         DB::table('posts')->insert([
@@ -112,8 +112,8 @@ class DatabaseSeeder extends Seeder
                 <h4 class="light muted">Hi，小朋友们大家好，还记得我是谁吗？对了！我就是为蓝猫配音的演员，葛平！</h4>
                 <img src="//upload.wikimedia.org/wikipedia/zh/c/cf/Ge_Ping_2.JPG" alt="葛平"/>',
             'category' => 99, // 公告
-            'published_at' => '2017-01-01',
-            'created_at' => '2017-11-01',
+            'published_at' => '2017-10-31',
+            'created_at' => '2017-11-02',
             'view' => 99
         ]);
         // 草稿 （无published——at）
@@ -138,7 +138,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => '1',
             'html_content' => 'non pub',
             'category' => 3,
-            'created_at' => '2017-11-01',
+            'created_at' => '2017-10-31',
             'view' => 0
         ]);
         
