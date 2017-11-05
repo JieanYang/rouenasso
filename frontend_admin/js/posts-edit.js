@@ -64,7 +64,7 @@ $(window).on('load', function () {
                     ajaxSaveDraft();
                 });
                 $("#btn-publish").on('click', function () {
-                    alert(5);
+                    ajaxPublishPost();
                 });
 
                 // select options
@@ -74,9 +74,11 @@ $(window).on('load', function () {
                         text: name
                     }));
                 });
-                
+
                 // seleted option
-                $('#post-category').val(post.category);
+                if (!isNewPost) {
+                    $('#post-category').val(post.category);
+                }
 
                 disableInputs(false);
 
@@ -150,24 +152,23 @@ function ajaxGetPost() {
 
 // ajax - save draft
 function ajaxSaveDraft() {
-    if (isNewPost) {    // 新草稿
-        if (!($("#post-title").val() && ue.hasContents())) {
-            alert("必须填写标题和内容");
-            return;
-        }
-
+    if (!($("#post-title").val() && ue.hasContents())) {
+        alert("必须填写标题和内容");
+        return;
+    }
+    if (isNewPost) { // 新草稿
         // disable all, show loader
         disableInputs(true);
         ue.setDisabled('fullscreen');
         $("#loader").addClass("show");
-        
+
         postData = {
             title: $("#post-title").val(),
             user_id: user_id,
             category: $("#post-category").val(),
             html_content: ue.getContent()
         };
-        
+
         return ajaxAuthPost('https://api.acecrouen.com/posts/', postData,
             function (response) {
                 // reload, with id and url
@@ -178,22 +179,18 @@ function ajaxSaveDraft() {
                 console.log(response);
             });
     } else if (!post.published_at) { // 修改草稿
-        if (!($("#post-title").val() && ue.hasContents())) {
-            alert("必须填写标题和内容");
-            return;
-        }
 
         // disable all, show loader
         disableInputs(true);
         ue.setDisabled('fullscreen');
         $("#loader").addClass("show");
-        
+
         postData = post;
         postData.title = $("#post-title").val();
         postData.category = $("#post-category").val();
         postData.html_content = ue.getContent();
         delete postData.published_at; // value is null, remove this, else validator will say it is not a date format.
-        
+
         return ajaxAuthPut('https://api.acecrouen.com/posts/' + post.id, postData,
             function (response) {
                 // enable all, hide loader
@@ -207,5 +204,57 @@ function ajaxSaveDraft() {
             });
     } else {
         alert("已发布文章无法保存为草稿。");
+    }
+}
+
+// ajax - save draft
+function ajaxPublishPost() {
+    if (!($("#post-title").val() && ue.hasContents())) {
+        alert("必须填写标题和内容");
+        return;
+    }
+
+    // disable all, show loader
+    disableInputs(true);
+    ue.setDisabled('fullscreen');
+    $("#loader").addClass("show");
+
+    if (isNewPost) {
+        postData = {
+            title: $("#post-title").val(),
+            user_id: user_id,
+            category: $("#post-category").val(),
+            html_content: ue.getContent(),
+            published_at: formatDateTime(new Date())
+        };
+
+        //return ajaxAuthPost('https://api.acecrouen.com/posts/', postData,
+        return ajaxAuthPost('http://localhost:8000/posts/', postData,
+            function (response) {
+                // reload, with id and url
+                window.location.replace("?id=" + response.id + "&url=" + response.url);
+            },
+            function (response) {
+                alert('error');
+                console.log(response);
+            });
+    } else {
+        postData = post;
+        postData.title = $("#post-title").val();
+        postData.category = $("#post-category").val();
+        postData.html_content = ue.getContent();
+        postData.published_at = formatDateTime(new Date());
+
+        return ajaxAuthPut('https://api.acecrouen.com/posts/' + post.id, postData,
+            function (response) {
+                // enable all, hide loader
+                disableInputs(false);
+                ue.setEnabled();
+                $("#loader").removeClass("show");
+            },
+            function (response) {
+                alert('error');
+                console.log(response);
+            });
     }
 }

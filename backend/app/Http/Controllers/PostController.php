@@ -178,6 +178,7 @@ class PostController extends Controller
         $postDB->title = $request->title;
         $postDB->category = $request->category;
         $postDB->html_content = $request->html_content;
+        $postDB->published_at = $request->published_at;
 
         $postDB->save();
 
