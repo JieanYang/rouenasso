@@ -15,7 +15,7 @@ function ContentsController($http, $sce) {
 });
 
   $http
-.get('//localhost:8000/posts/category/99')
+.get('//api.acecrouen.com/posts/category/99?latest=true')
 .then(function (response) {
   vm.announcement = $sce.trustAsHtml(response.data[0].html_content);
 });

@@ -22,7 +22,7 @@ $(window).on('load', function () {
         logout();
     });
 
-    disableButtons(true);
+    disableInputs(true);
 
     // login check
     $.when(checkLogin()).done(function () {
@@ -55,6 +55,11 @@ $(window).on('load', function () {
                 });
 
                 // buttons
+                if (!isNewPost) {
+                    if (post.published_at) {
+                        $("#btn-save-draft").css('display', 'none');
+                    }
+                }
                 $("#btn-save-draft").on('click', function () {
                     ajaxSaveDraft();
                 });
@@ -69,8 +74,11 @@ $(window).on('load', function () {
                         text: name
                     }));
                 });
+                
+                // seleted option
+                $('#post-category').val(post.category);
 
-                disableButtons(false);
+                disableInputs(false);
 
                 // 隐藏loader
                 $("#loader").removeClass("show");
@@ -79,10 +87,12 @@ $(window).on('load', function () {
     });
 });
 
-// enable / disable save draft btn and publish btn
-function disableButtons(enable) {
+// enable / disable inputs
+function disableInputs(enable) {
     $("#btn-save-draft").prop('disabled', enable);
     $("#btn-publish").prop('disabled', enable);
+    $("#post-title").prop('disabled', enable);
+    $('#post-category').prop('disabled', enable);
 }
 
 // ajax - 检查登陆，参数，权限
@@ -115,10 +125,6 @@ function checkLogin() {
         }
 
         isNewPost = getParameterByName('url') == 'new' ? true : false;
-        if (!isNewPost) {
-            $("#btn-save-draft").css('display', 'none');
-        }
-
     }, function () {
         window.location.replace("../login.html");
     });
@@ -144,26 +150,59 @@ function ajaxGetPost() {
 
 // ajax - save draft
 function ajaxSaveDraft() {
-    if (isNewPost) {
-        if(!($("#post-title").val() && ue.hasContents())){
+    if (isNewPost) {    // 新草稿
+        if (!($("#post-title").val() && ue.hasContents())) {
             alert("必须填写标题和内容");
             return;
         }
-        
+
         // disable all, show loader
+        disableInputs(true);
+        ue.setDisabled('fullscreen');
+        $("#loader").addClass("show");
+        
         postData = {
             title: $("#post-title").val(),
             user_id: user_id,
             category: $("#post-category").val(),
             html_content: ue.getContent()
         };
+        
         return ajaxAuthPost('https://api.acecrouen.com/posts/', postData,
             function (response) {
                 // reload, with id and url
                 window.location.replace("?id=" + response.id + "&url=" + response.url);
-                console.log(response);
             },
             function (response) {
+                alert('error');
+                console.log(response);
+            });
+    } else if (!post.published_at) { // 修改草稿
+        if (!($("#post-title").val() && ue.hasContents())) {
+            alert("必须填写标题和内容");
+            return;
+        }
+
+        // disable all, show loader
+        disableInputs(true);
+        ue.setDisabled('fullscreen');
+        $("#loader").addClass("show");
+        
+        postData = post;
+        postData.title = $("#post-title").val();
+        postData.category = $("#post-category").val();
+        postData.html_content = ue.getContent();
+        delete postData.published_at; // value is null, remove this, else validator will say it is not a date format.
+        
+        return ajaxAuthPut('https://api.acecrouen.com/posts/' + post.id, postData,
+            function (response) {
+                // enable all, hide loader
+                disableInputs(false);
+                ue.setEnabled();
+                $("#loader").removeClass("show");
+            },
+            function (response) {
+                alert('error');
                 console.log(response);
             });
     } else {
