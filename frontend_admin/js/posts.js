@@ -40,7 +40,7 @@ function checkLogin() {
 
 // ajax - full calendar
 function ajaxPostsTable() {
-    ajaxAuthGet('http://localhost:8000/posts/calendar/show?local=true',
+    ajaxAuthGet('https://api.acecrouen.com/posts/calendar/show?local=true',
         function (response) {
             console.log(response);
         
