@@ -296,7 +296,7 @@ class PostController extends Controller
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         
-        $prefix = '//' . env('APP_URL') . '/posts/';
+        $prefix = env('APP_URL') . '/posts/';
         
         $posts = DB::table('posts')
             ->select('title', 'id', 'category',

@@ -157,8 +157,7 @@ function ajaxSaveDraft() {
             category: $("#post-category").val(),
             html_content: ue.getContent()
         };
-        //return ajaxAuthPost('https://api.acecrouen.com/posts/', postData,
-        return ajaxAuthPost('http://localhost:8000/posts/', postData,
+        return ajaxAuthPost('https://api.acecrouen.com/posts/', postData,
             function (response) {
                 // reload, with id and url
                 window.location.replace("?id=" + response.id + "&url=" + response.url);
