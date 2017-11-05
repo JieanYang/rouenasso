@@ -97,6 +97,18 @@ gulp.task('copy', function() {
 
     gulp.src(['bower_components/raphael/raphael.js', 'bower_components/raphael/raphael.min.js'])
         .pipe(gulp.dest('vendor/raphael'))
+
+    gulp.src(['bower_components/fullcalendar/dist/*'])
+        .pipe(gulp.dest('vendor/fullcalendar'))
+
+    gulp.src(['bower_components/fullcalendar/dist/locale/*'])
+        .pipe(gulp.dest('vendor/fullcalendar/locale'))
+
+    gulp.src(['bower_components/moment/min/moment.min.js'])
+        .pipe(gulp.dest('vendor/moment'))
+
+    gulp.src(['bower_components/moment/locale/*'])
+        .pipe(gulp.dest('vendor/moment/locale'))
 })
 
 // Run everything
