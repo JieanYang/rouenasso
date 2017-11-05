@@ -9,7 +9,7 @@
  * 当升级编辑器时，可直接使用旧版配置文件替换新版配置文件,不用担心旧版配置文件中因缺少新功能所需的参数而导致脚本报错。
  **************************提示********************************/
 window.UEDITOR_HOME_URL = '/pages/post/neditor/';
-window.NEDITOR_UPLOAD = 'http://localhost:8000/editor';
+window.NEDITOR_UPLOAD = 'https://api.acecrouen.com/editor';
 (function() {
   /**
      * 编辑器资源文件根路径。它所表示的含义是：以编辑器实例化页面为当前路径，指向编辑器资源文件（即dialog等文件夹）的路径。

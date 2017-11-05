@@ -106,7 +106,7 @@ function ajaxVisitorsChart() {
 
 // ajax - full calendar
 function ajaxCalendar() {
-    ajaxAuthGet('http://localhost:8000/posts/calendar/show?local=true',
+    ajaxAuthGet('https://api.acecrouen.com/posts/calendar/show',
         function (response) {
             $('#calendar').fullCalendar({
                 eventClick: function(event) {

@@ -23,10 +23,25 @@ function ajaxAuthGet(url, success, error) {
 }
 
 // base ajax post with auth
-function ajaxAuthPosturl, data, success, error) {
+function ajaxAuthPost(url, data, success, error) {
     return $.ajax({
         url: url,
         type: 'post',
+        headers: {
+            Authorization: auth
+        },
+        data: data,
+        dataType: 'json',
+        success: success,
+        error: error
+    });
+}
+
+// base ajax post with auth
+function ajaxAuthPut(url, data, success, error) {
+    return $.ajax({
+        url: url,
+        type: 'put',
         headers: {
             Authorization: auth
         },
