@@ -655,7 +655,7 @@ section {
 /* Footer */
 
 footer {
-	padding: 140px 0 40px;
+	padding: 40px 0 40px;
 	background: url('../img/footer.jpg');
 	-webkit-background-size: cover;
 	background-size: cover;
@@ -701,7 +701,7 @@ footer .opening-hours {
 }
 
 footer .bottom-footer {
-	margin-top: 150px;
+	margin-top: 10px;
 }
 
 footer .social-footer {
@@ -1110,8 +1110,3 @@ footer .social-footer li:hover a {
 		padding-top: 0;
 	}
 }
-
-
-
-
-
