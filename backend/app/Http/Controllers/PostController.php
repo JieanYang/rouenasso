@@ -298,7 +298,7 @@ class PostController extends Controller
         $prefix = $request->local ? 'http://localhost:8000/posts/' : 'https://api.acecrouen.com/posts/';
         
         $posts = DB::table('posts')
-            ->select('title', 'id', 
+            ->select('title', 'id', 'category',
                      DB::raw('date(published_at) as published_at'),
                      DB::raw('date(created_at) as created_at'))
             ->get();

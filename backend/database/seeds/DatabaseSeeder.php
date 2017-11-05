@@ -88,7 +88,7 @@ class DatabaseSeeder extends Seeder
             'view' => 25
         ]);
         DB::table('posts')->insert([
-            'title' => 'title 4',
+            'title' => 'title 4 loooooooooooooooooooooooooooooo oooooooooooooooooooooooooooooooooo oooooooooooooooooooooooooooooooooooooooooooooo ooooooooooooooooooooooooooooooooooong title',
             'user_id' => '2',
             'html_content' => 'hhhh',
             'category' => 2,
@@ -97,7 +97,7 @@ class DatabaseSeeder extends Seeder
             'view' => 30
         ]);
         DB::table('posts')->insert([
-            'title' => 'title 5',
+            'title' => 'title 很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长5',
             'user_id' => '2',
             'html_content' => 'hhhhh',
             'category' => 3,
