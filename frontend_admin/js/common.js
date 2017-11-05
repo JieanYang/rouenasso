@@ -1,3 +1,11 @@
+var categoryMap = null;
+
+$(window).on('load', function () {
+    $.getJSON("/json/category-map.json", function (json) {
+        categoryMap = json;
+    });
+});
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -50,4 +58,21 @@ function ajaxAuthPut(url, data, success, error) {
         success: success,
         error: error
     });
+}
+
+// categoryMap
+function categoryIdToName(id) {
+    return categoryMap[id];
+}
+
+function categoryNameToId(name) {
+    _.findKey(categoryMap, name);
+}
+
+function listCategoryName() {
+    names = [];
+    $.each(categoryMap, function(i, val) {
+      names.push(val);
+    });
+    return names;
 }

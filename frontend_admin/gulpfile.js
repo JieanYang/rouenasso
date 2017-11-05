@@ -109,6 +109,9 @@ gulp.task('copy', function() {
 
     gulp.src(['bower_components/moment/locale/*'])
         .pipe(gulp.dest('vendor/moment/locale'))
+
+    gulp.src(['bower_components/lodash/lodash.js'])
+        .pipe(gulp.dest('vendor/lodash/'))
 })
 
 // Run everything

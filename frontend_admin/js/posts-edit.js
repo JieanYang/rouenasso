@@ -1,7 +1,8 @@
 var auth = null;
 var user_id = null;
-var post = null;
+var post = null; // input post
 var isNewPost = true;
+var ue = null; // neditor
 
 $(window).on('load', function () {
     // show loader
@@ -29,7 +30,7 @@ $(window).on('load', function () {
             ajaxGetPost() // 获取文章
         ).done(function () {
             // 加载富文本编辑器
-            var ue = UE.getEditor('editor');
+            ue = UE.getEditor('editor');
             ue.ready(function () {
                 // 设置自动宽度
                 $("#edui1").css('width', '100%');
@@ -55,10 +56,18 @@ $(window).on('load', function () {
 
                 // buttons
                 $("#btn-save-draft").on('click', function () {
-                    alert(4);
+                    ajaxSaveDraft();
                 });
                 $("#btn-publish").on('click', function () {
                     alert(5);
+                });
+
+                // select options
+                $.each(categoryMap, function (id, name) {
+                    $('#post-category').append($('<option>', {
+                        value: id,
+                        text: name
+                    }));
                 });
 
                 disableButtons(false);
@@ -106,6 +115,9 @@ function checkLogin() {
         }
 
         isNewPost = getParameterByName('url') == 'new' ? true : false;
+        if (!isNewPost) {
+            $("#btn-save-draft").css('display', 'none');
+        }
 
     }, function () {
         window.location.replace("../login.html");
@@ -126,40 +138,36 @@ function ajaxGetPost() {
             setTimeout(
                 function () {
                     window.close();
-                }, 3000);
+                }, 300000);
         });
 }
 
 // ajax - save draft
 function ajaxSaveDraft() {
     if (isNewPost) {
+        if(!($("#post-title").val() && ue.hasContents())){
+            alert("必须填写标题和内容");
+            return;
+        }
+        
+        // disable all, show loader
         postData = {
-            title: $("#post-title").val();
-            user_id: auth
-            category: ("#post-category").val();
-            html_content: ue.getContent();
-            published_at: null
+            title: $("#post-title").val(),
+            user_id: user_id,
+            category: $("#post-category").val(),
+            html_content: ue.getContent()
         };
-        return ajaxAuthPost('https://api.acecrouen.com/post/', postData,
+        //return ajaxAuthPost('https://api.acecrouen.com/posts/', postData,
+        return ajaxAuthPost('http://localhost:8000/posts/', postData,
             function (response) {
+                // reload, with id and url
+                window.location.replace("?id=" + response.id + "&url=" + response.url);
                 console.log(response);
             },
             function (response) {
                 console.log(response);
             });
     } else {
-        postData = post;
-        postData.title = $("#post-title").val();
-        postData.category = ("#post-category").val();
-        postData.html_content = ue.getContent();
-        postData.published_at = null;
-
-        return ajaxAuthPut('https://api.acecrouen.com/post/' + post.id, postData,
-            function (response) {
-                console.log(response);
-            },
-            function (response) {
-                console.log(response);
-            });
+        alert("已发布文章无法保存为草稿。");
     }
 }

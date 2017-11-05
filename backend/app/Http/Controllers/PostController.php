@@ -91,8 +91,9 @@ class PostController extends Controller
         $post->view = 0;
 
         $post->save();
-
-        return response()->json(['status' => 200, 'msg' => 'success']);
+        error_log(env('APP_URL'));
+        return response()->json(['status' => 200, 'msg' => 'success', 'id' => $post->id, 
+                                'url' => env('APP_URL') . '/posts/' . $post->id]);
     }
 
     /**
@@ -295,7 +296,7 @@ class PostController extends Controller
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
         
-        $prefix = $request->local ? 'http://localhost:8000/posts/' : 'https://api.acecrouen.com/posts/';
+        $prefix = '//' . env('APP_URL') . '/posts/';
         
         $posts = DB::table('posts')
             ->select('title', 'id', 'category',
