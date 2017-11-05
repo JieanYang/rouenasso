@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ACEC Rouen, admin page">
+    <meta name="author" content="Junyang HE">
+
+    <title>ACEC Rouen - Admin</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <script type="text/javascript" charset="utf-8" src="neditor/neditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="neditor/neditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="neditor/neditor.parse.js"></script>
+    <script type="text/javascript" charset="utf-8" src="neditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+
+<body>
+    <div id="loader">
+        <div></div>
+        <div></div>
+    </div>
+
+    <div id="wrapper">
+        <div class="row" style="padding: 0 30px;">
+            <div class="col-lg-6">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label>文章标题</label>
+                                    <input id="post-title" class="form-control" type="text" required />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                <button id="btn-save-draft" class="btn btn-default">保存草稿</button>
+                                <button id="btn-publish" class="btn btn-default">发布文章</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <script id="editor" type="text/plain" style="height:500px;"></script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 id="preview-title"></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- row -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="../../vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="../../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="../../vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../../dist/js/sb-admin-2.js"></script>
+
+    <!-- JavaScript Cookie -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+    <!-- login -->
+    <script src="../../js/login.js"></script>
+
+    <!-- common -->
+    <script src="../../js/common.js"></script>
+
+    <!-- categoryMap -->
+    <script src="../../js/category-map.js"></script>
+
+    <!-- main -->
+    <script src="../../js/posts-edit.js"></script>
+</body>
+
+</html>
