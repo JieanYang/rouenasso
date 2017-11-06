@@ -13,7 +13,17 @@
 }*/
 
 
-
+/*银行*/
+ul li {  
+	list-style-type:none;
+}  
+a {
+	color: gray;
+	font-size: 18px;
+}
+p {
+	color: #231f20;
+}
 
 /*应用推荐*/
 .panel{
@@ -21,9 +31,9 @@
 	/*margin: 0;*/
 }
 .row-content {
-	margin: 0px auto;
-	padding: 50px 0px;
-	border-bottom: 1px ridge;
+	/*margin: 0 auto;
+	padding:50px 0;
+	border-bottom: 1px ridge;*/
 	min-height: 200px;
 }
 
