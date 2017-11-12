@@ -3,13 +3,11 @@
 @import "ajax-loader.less";
 
 // Global Styles
-
 body {
     background-color: @gray-lightest;
 }
 
 // Wrappers
-
 #wrapper {
     width: 100%;
 }
@@ -30,9 +28,7 @@ body {
 }
 
 // Navigation
-
 // --Topbar
-
 .navbar-top-links {
     margin-right: 0;
 }
@@ -92,7 +88,6 @@ body {
 }
 
 // --Sidebar
-
 .sidebar {
     .sidebar-nav.navbar-collapse {
         padding-left: 0;
@@ -154,7 +149,6 @@ body {
 }
 
 // Buttons
-
 .btn-outline {
     color: inherit;
     background-color: transparent;
@@ -190,7 +184,6 @@ body {
 }
 
 // Chat Widget
-
 .chat {
     margin: 0;
     padding: 0;
@@ -226,13 +219,11 @@ body {
 }
 
 // Login Page
-
 .login-panel {
     margin-top: 25%;
 }
 
 // Flot Charts Containers
-
 .flot-chart {
     display: block;
     height: 400px;
@@ -244,7 +235,6 @@ body {
 }
 
 // DataTables Overrides
-
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_asc,
 table.dataTable thead .sorting_desc,
@@ -269,11 +259,10 @@ table.dataTable thead .sorting:after {
     content: "\f0dc";
     float: right;
     font-family: fontawesome;
-    color: rgba(50,50,50,.5);
+    color: rgba(50, 50, 50, .5);
 }
 
 // Circle Buttons 
-
 .btn-circle {
     width: 30px;
     height: 30px;
@@ -303,7 +292,6 @@ table.dataTable thead .sorting:after {
 }
 
 // Grid Demo Elements
-
 .show-grid [class^="col-"] {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -316,7 +304,6 @@ table.dataTable thead .sorting:after {
 }
 
 // Custom Colored Panels
-
 .huge {
     font-size: 40px;
 }
@@ -416,8 +403,8 @@ table.dataTable thead .sorting:after {
     padding: 20px;
     border: 1px solid #d4d4d4;
     border-radius: 2px;
-    -webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.175);
-    box-shadow: 0 1px 6px rgba(0,0,0,0.175);
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
 }
 
 .timeline > li > .timeline-panel:before {
@@ -546,4 +533,26 @@ table.dataTable thead .sorting:after {
         border-right-width: 14px;
         border-left-width: 0;
     }
+}
+
+
+// custom
+.legent-general {
+    display: inline-block;
+    width: 2em;
+    height: 1em;
+    vertical-align: middle;
+}
+
+.legend-published {
+    background-color: #303F9F;
+}
+
+.legend-draft {
+    background-color: #689F38;
+}
+
+#editor {
+    padding-right: 15px;
+    padding-left: 15px;
 }
