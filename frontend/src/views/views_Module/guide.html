@@ -220,177 +220,160 @@
          <p>...</p>
       </div>
 
+
       <div class="panel" ng-show="vm.tab===8">
-        <!--  <h4>银行</h4>
-         <p>...</p> -->
-
-              <div class="col-sm-3" style="margin-top: 100px;">
-                <ul class="section-nav">
-
-                  <li class="toc-entry toc-h2"><a href="#法国三大银行">法国三大银行</a>
-                    <ul>
-                      <li class="toc-entry toc-h3"><a href="#LCL">LCL</a></li>
-                      <li class="toc-entry toc-h3"><a href="#BNP Paribas">BNP Paribas</a></li>
-                      <li class="toc-entry toc-h3"><a href="#Société Générale">Société Générale</a></li>
-                    </ul>
-                  </li>
-
-                  <li class="toc-entry toc-h2"><a href="#RIB">RIB</a></li>
-                  
-                  <li class="toc-entry toc-h2"><a href="#手续">手续</a>
-                    <ul>
-                      <li class="toc-entry toc-h3"><a href="#开户">开户</a></li>
-                      <li class="toc-entry toc-h3"><a href="#额度">额度</a></li>
-                      <li class="toc-entry toc-h3"><a href="#透支">透支</a></li>
-                    </ul>
-                  </li>
-
-                  <li class="toc-entry toc-h2"><a href="#账户类型">账户类型</a>
-                    <ul>
-                      <li class="toc-entry toc-h3"><a href="#Livret Jeune">Livret Jeune</a></li>
-                      <li class="toc-entry toc-h3"><a href="#Livret A">Livret A</a></li>
-                    </ul>
-                  </li>
-
-                  <li class="toc-entry toc-h2"><a href="#银行卡">银行卡</a>
-                    <ul>
-                      <li class="toc-entry toc-h3"><a href="#丢卡">丢卡</a></li>
-                      <li class="toc-entry toc-h3"><a href="#吞卡">吞卡</a></li>
-                    </ul>
-                  </li>
-
-                  <li class="toc-entry toc-h2"><a href="#支票">支票</a>
-                    <ul>
-                      <li class="toc-entry toc-h3"><a href="#填写支票">填写支票</a></li>
-                      <li class="toc-entry toc-h3"><a href="#收支票">收支票</a></li>
-                    </ul>
-                  </li>
-
-                  <li class="toc-entry toc-h2"><a href="#现金">现金</a>
-                    <ul>
-                      <li class="toc-entry toc-h3"><a href="#取现">取现</a></li>
-                      <li class="toc-entry toc-h3"><a href="#来法须知">来法须知</a></li>
-                    </ul>
-                  </li>
-                  
-                </ul>
-              </div>
-
-               <div class="col-sm-9" style="margin-top: 100px;">
-
-                  <h3 id="法国三大银行" style="padding-bottom: 25px;">法国三大银行</h3>
-                  <div ng-repeat="bank in vm.data_8.banks">
-                    <div class="row row-content" id="{{bank.title}}">
-                      <!-- <div class="col-xs-12 col-sm-2" id="{{bank.title}}">
+        <div class="col-sm-3" style="margin-top: 100px;">
+          <ul class="section-nav">
+            <li class="toc-entry toc-h2"><a href="#法国三大银行">法国三大银行</a>
+              <ul>
+                <li class="toc-entry toc-h3"><a href="#LCL">LCL</a></li>
+                <li class="toc-entry toc-h3"><a href="#BNP Paribas">BNP Paribas</a></li>
+                <li class="toc-entry toc-h3"><a href="#Société Générale">Société Générale</a></li>
+              </ul>
+            </li>
+            <li class="toc-entry toc-h2"><a href="#RIB">RIB</a></li>
+            <li class="toc-entry toc-h2"><a href="#手续">手续</a>
+              <ul>
+                <li class="toc-entry toc-h3"><a href="#开户">开户</a></li>
+                <li class="toc-entry toc-h3"><a href="#额度">额度</a></li>
+                <li class="toc-entry toc-h3"><a href="#透支">透支</a></li>
+              </ul>
+            </li>
+            <li class="toc-entry toc-h2"><a href="#账户类型">账户类型</a>
+              <ul>
+                <li class="toc-entry toc-h3"><a href="#Livret Jeune">Livret Jeune</a></li>
+                <li class="toc-entry toc-h3"><a href="#Livret A">Livret A</a></li>
+              </ul>
+            </li>
+            <li class="toc-entry toc-h2"><a href="#银行卡">银行卡</a>
+              <ul>
+                <li class="toc-entry toc-h3"><a href="#丢卡">丢卡</a></li>
+                <li class="toc-entry toc-h3"><a href="#吞卡">吞卡</a></li>
+              </ul>
+            </li>
+            <li class="toc-entry toc-h2"><a href="#支票">支票</a>
+              <ul>
+                <li class="toc-entry toc-h3"><a href="#填写支票">填写支票</a></li>
+                <li class="toc-entry toc-h3"><a href="#收支票">收支票</a></li>
+              </ul>
+            </li>
+            <li class="toc-entry toc-h2"><a href="#现金">现金</a>
+              <ul>
+                <li class="toc-entry toc-h3"><a href="#取现">取现</a></li>
+                <li class="toc-entry toc-h3"><a href="#来法须知">来法须知</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-9" style="margin-top: 100px;">
+          <h3 id="法国三大银行" style="padding-bottom: 25px;">法国三大银行</h3>
+          <div ng-repeat="bank in vm.data_8.banks">
+            <div class="row row-content" id="{{bank.title}}">
+              <!-- <div class="col-xs-12 col-sm-2" id="{{bank.title}}">
                                   <p style="padding:10px;"></p>
                                   <h3 align=center>{{bank.title}}</h3>
                                </div> -->
-                      <div class="col-xs-12 col-sm-12">
-                        <div class="media">
-                          <div class="media-body">
-                             <!-- <h2 class="media-heading">promotion.name
+              <div class="col-xs-12 col-sm-12">
+                <div class="media">
+                  <div class="media-body">
+                    <!-- <h2 class="media-heading">promotion.name
                                  <span class="label label-danger">promotion.label</span>
                                  <span class="badge">promotion.price|currency</span>
                              </h2> -->
-                            <p>{{bank.description}}</p>
-                          </div>
-                          <div class="media-right media-middle">
-                            <a href="{{bank.url}}" target="_blank">
+                    <p>{{bank.description}}</p>
+                  </div>
+                  <div class="media-right media-middle">
+                    <a href="{{bank.url}}" target="_blank">
                               <img ng-src="{{bank.image}}" height="120">
                             </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <hr>
                   </div>
-                  
-                  <div style="padding-top: 25px;"></div>
-
-                  <div>
-                    <h3 id="{{vm.data_8.RIB.title}}">{{vm.data_8.RIB.title}}</h3>
-                    <br>
-                    <p>{{vm.data_8.RIB.description}}</p>
-                    <p>{{vm.data_8.RIB.description1}}</p>
-                    <hr>
-                 </div>
-                 
-                 <h3 id="手续" style="padding: 25px 0;">手续</h3>
-                 <div ng-repeat="data in vm.data_8.shouxu">
-                   <h4 id="{{data.title}}">{{data.title}}</h4>
-                    <br>
-                    <p>{{data.description}}</p>
-                    <p>{{data.description1}}</p>
-                    <p>{{data.description2}}</p>
-                    <hr>
-                 </div>
-
-                 <h3 id="账户类型" style="padding: 25px 0;">账户类型</h3>
-                 <div ng-repeat="data in vm.data_8.account">
-                   <h4 id="{{data.title}}">{{data.title}}</h4>
-                    <br>
-                    <p>{{data.description}}</p>
-                    <hr>
-                 </div>
-
-                 <h3 id="银行卡" style="padding: 25px 0;">银行卡</h3>
-                 <div ng-repeat="data in vm.data_8.card">
-                   <h4 id="{{data.title}}">{{data.title}}</h4>
-                    <br>
-                    <p>{{data.description}}</p>
-                    <p>{{data.description1}}</p>
-                    <p>{{data.description2}}</p>
-                    <p>{{data.description3}}</p>
-                    <p>{{data.description4}}</p>
-                    <hr>
-                 </div>
-
-                 <h3 id="支票" style="padding: 25px 0;">支票</h3>
-                 <div ng-repeat="data in vm.data_8.check">
-                   <h4 id="{{data.title}}">{{data.title}}</h4>
-                    <br>
-                    <p>{{data.description}}</p>
-                    <hr>
-                 </div>
-
-                 <h3 id="现金" style="padding: 25px 0;">现金</h3>
-                 <div ng-repeat="data in vm.data_8.cash">
-                   <h4 id="{{data.title}}">{{data.title}}</h4>
-                    <br>
-                    <p>{{data.description}}</p>
-                    <p>{{data.description1}}</p>
-                    <p>{{data.description2}}</p>
-                    <hr>
-                 </div>
-
-               </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div style="padding-top: 25px;"></div>
+          <div>
+            <h3 id="{{vm.data_8.RIB.title}}">{{vm.data_8.RIB.title}}</h3>
+            <br>
+            <p>{{vm.data_8.RIB.description}}</p>
+            <p>{{vm.data_8.RIB.description1}}</p>
+            <hr>
+          </div>
+          <h3 id="手续" style="padding: 25px 0;">手续</h3>
+          <div ng-repeat="data in vm.data_8.shouxu">
+            <h4 id="{{data.title}}">{{data.title}}</h4>
+            <br>
+            <p>{{data.description}}</p>
+            <p>{{data.description1}}</p>
+            <p>{{data.description2}}</p>
+            <hr>
+          </div>
+          <h3 id="账户类型" style="padding: 25px 0;">账户类型</h3>
+          <div ng-repeat="data in vm.data_8.account">
+            <h4 id="{{data.title}}">{{data.title}}</h4>
+            <br>
+            <p>{{data.description}}</p>
+            <hr>
+          </div>
+          <h3 id="银行卡" style="padding: 25px 0;">银行卡</h3>
+          <div ng-repeat="data in vm.data_8.card">
+            <h4 id="{{data.title}}">{{data.title}}</h4>
+            <br>
+            <p>{{data.description}}</p>
+            <p>{{data.description1}}</p>
+            <p>{{data.description2}}</p>
+            <p>{{data.description3}}</p>
+            <p>{{data.description4}}</p>
+            <hr>
+          </div>
+          <h3 id="支票" style="padding: 25px 0;">支票</h3>
+          <div ng-repeat="data in vm.data_8.check">
+            <h4 id="{{data.title}}">{{data.title}}</h4>
+            <br>
+            <p>{{data.description}}</p>
+            <hr>
+          </div>
+          <h3 id="现金" style="padding: 25px 0;">现金</h3>
+          <div ng-repeat="data in vm.data_8.cash">
+            <h4 id="{{data.title}}">{{data.title}}</h4>
+            <br>
+            <p>{{data.description}}</p>
+            <p>{{data.description1}}</p>
+            <p>{{data.description2}}</p>
+            <hr>
+          </div>
+        </div>
       </div>
+
 
       <div class="panel" ng-show="vm.tab===9">
-         <div ng-repeat="app in vm.data_9">
-            <div class="row row-content">
-               <div class="col-xs-12 col-sm-3">
-                  <p style="padding:10px;"></p>
-                  <h3 align=center>{{app.title}}</h3>
-               </div>
-               <div class="col-xs-12 col-sm-9">
-                  <div class="media">
-                     <div class="media-body">
-                        <!-- <h2 class="media-heading">promotion.name
-                           <span class="label label-danger">promotion.label</span>
-                           <span class="badge">promotion.price|currency</span>
-                           </h2> -->
-                        <p>{{app.description}}</p>
-                     </div>
-                     <div class="media-right media-middle">
-                        <a href="{{app.url}}" target="_blank">
-                        <img ng-src="{{app.image}}" height="120">
-                        </a>
-                     </div>
-                  </div>
-               </div>
+        <div ng-repeat="app in vm.data_9">
+          <div class="row row-content">
+            <div class="col-xs-12 col-sm-3">
+              <p style="padding:10px;"></p>
+              <h3 align=center>{{app.title}}</h3>
             </div>
-         </div>
+            <div class="col-xs-12 col-sm-9">
+              <div class="media">
+                <div class="media-body">
+                  <!-- <h2 class="media-heading">promotion.name
+                                 <span class="label label-danger">promotion.label</span>
+                                 <span class="badge">promotion.price|currency</span>
+                                 </h2> -->
+                  <p>{{app.description}}</p>
+                </div>
+                <div class="media-right media-middle">
+                  <a href="{{app.url}}" target="_blank">
+                              <img ng-src="{{app.image}}" height="120">
+                              </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-   </div>
+
+
+</div>
 </div>

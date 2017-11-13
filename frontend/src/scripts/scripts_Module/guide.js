@@ -7,7 +7,7 @@ module.exports = {
 /** @ngInject */
 function GuideController($http) {
   var vm = this;
-  vm.tab=0;
+  vm.tab=7;
 
   vm.data_8 = {};
 
