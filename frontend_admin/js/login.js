@@ -1,3 +1,16 @@
+// ajax - check if logged in
+function checkLoginInLoginPage() {
+    return attempt(Cookies.get('Authorization'), function (response) {
+        auth = Cookies.get('Authorization');
+        $("#loader").removeClass("show");
+        $("#btn-submit").prop('disabled', false);
+        window.location.replace("index.html");
+    }, function () {
+        Cookies.remove('Authorization');
+        window.location.replace("login.html");
+    });
+}
+
 function attemptLogin() {    
     var email = $('#email').val();
     var pw = $('#password').val();
