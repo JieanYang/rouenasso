@@ -42,6 +42,12 @@ Route::post('/register',[
 ]);
 
 /**
+ * Neditor
+ */
+Route::get('editor', 'NeditorController@main');
+Route::post('editor', 'NeditorController@main');
+
+/**
  * View Log
  */
 Route::get('log/', 'ViewLogController@addLog');

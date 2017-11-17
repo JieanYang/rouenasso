@@ -455,3 +455,19 @@ table.dataTable thead .sorting:after {
     border-left-width: 0;
   }
 }
+.legent-general {
+  display: inline-block;
+  width: 2em;
+  height: 1em;
+  vertical-align: middle;
+}
+.legend-published {
+  background-color: #303F9F;
+}
+.legend-draft {
+  background-color: #689F38;
+}
+#editor {
+  padding-right: 15px;
+  padding-left: 15px;
+}

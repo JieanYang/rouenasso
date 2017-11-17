@@ -23,6 +23,6 @@ function GuideController($http) {
     vm.data_8.check = response.data.银行.支票;
     vm.data_8.cash = response.data.银行.现金;
 
-  	console.log(vm.data_8);
+  	console.log(vm.data_8);  
   });
 }
