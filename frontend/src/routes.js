@@ -78,5 +78,28 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         }
       }
     })
-    ;
+    .state('home.movements', {
+      url: '/movements',
+      views: {
+        'content@': {
+          template: '<h2>这是活动目录页面</h2>'
+        }
+      }
+    })
+    .state('home.works', {
+      url: '/works',
+      views: {
+        'content@': {
+          template: '<h2>这是工作目录页面</h2>'
+        }
+      }
+    })
+    .state('home.writing', {
+      url: '/writing',
+      views: {
+        'content@': {
+          template: '<h2>这是生活随笔目录页面</h2>'
+        }
+      }
+    });
 }
