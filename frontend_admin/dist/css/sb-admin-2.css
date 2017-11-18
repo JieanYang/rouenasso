@@ -26,6 +26,10 @@
 #hint {
   display: none;
 }
+.ajax-loader {
+  width: 50px;
+  height: auto;
+}
 body {
   background-color: #f8f8f8;
 }

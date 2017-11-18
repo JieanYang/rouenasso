@@ -26,12 +26,18 @@ $(window).on('load', function () {
 
         $.when(ajaxBlockVisitors(), // dashboard
             ajaxBlockUsers(), // dashboard
-            ajaxBlockPosts(), // dashboard
-            ajaxVisitorsChart(), // chart
-            ajaxCalendar() // calendar
+            ajaxBlockPosts() // dashboard
         ).done(function () {
             // hide loader
-            $("#loader").removeClass("show");
+            //$("#loader").removeClass("show");
+        });
+        $.when(ajaxVisitorsChart()).done(function () {
+            // hide loader
+            $("#visitor-chart-loader").hide();
+        });
+        $.when(ajaxCalendar()).done(function () {
+            // hide loader
+            $("#calendar-loader").hide();
         });
     });
 });
