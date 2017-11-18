@@ -11,6 +11,11 @@
 |
 */
 
+
+// Route::get('foo', function () {
+// 	return redirect()->route('posts.showPostsCalendar');
+// });
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,23 +28,30 @@ Route::get('/test', function() {
  * RESTful api
  */
 Route::resource('users', 'UserController');
-Route::get('users/{id}/posts', 'UserController@showPostsByUserId')->middleware('auth.basic.once');
-Route::get('users/count/show', 'UserController@countUser')->middleware('auth.basic.once');
+Route::get('users/{id}/posts', 'UserController@showPostsByUserId')->name('users.countUser')->middleware('auth.basic.once');
+Route::get('users/count/show', 'UserController@countUser')->name('users.showPostsByUserId')->middleware('auth.basic.once');
+
 
 Route::resource('posts', 'PostController')->middleware('auth.basic.once');
-Route::get('posts/category/{id}', 'PostNoAuthController@showPostsByCategoryId');
-Route::get('posts/{id}/noauth', 'PostNoAuthController@showPost');
-Route::get('posts/category/{id}/drafts', 'PostController@showDraftsByCategoryId')->middleware('auth.basic.once');
-Route::get('posts/calendar/show', 'PostController@showPostsCalendar')->middleware('auth.basic.once');
-Route::get('posts/count/show', 'PostController@countPost')->middleware('auth.basic.once');
+Route::get('posts/category/{id}/drafts', 'PostController@showDraftsByCategoryId')->name('posts.showDraftsByCategoryId')->middleware('auth.basic.once');
+Route::get('posts/calendar/show', 'PostController@showPostsCalendar')->name('posts.showPostsCalendar')->middleware('auth.basic.once');
+Route::get('posts/count/show', 'PostController@countPost')->name('posts.countPost')->middleware('auth.basic.once');
 
-Route::post('login', 'GetSelfController@getSelf')->middleware('auth.basic.once');
+Route::get('posts/category/{id}', 'PostNoAuthController@showPostsByCategoryId')->name('posts.showPostsByCategoryId');
+Route::get('posts/{id}/noauth', 'PostNoAuthController@showPost')->name('posts.showPost');
 
-Route::post('/register/{link}',['uses'=>'UserController@store']); //随机链接路由注册
-Route::post('/createlink',['uses'=>'CreatelinkController@store'])->middleware('auth.basic.once');//测试创建链接
-Route::post('/register',[
-  'uses' => 'UserController@store'
-]);
+
+Route::post('login', 'GetSelfController@getSelf')->name('users.getSelf')->middleware('auth.basic.once');
+
+Route::post('/register/{link}',['uses'=>'UserController@store'])->name('users.shore'); //随机链接路由注册
+Route::post('/createlink',['uses'=>'CreatelinkController@store'])->name('links.store')->middleware('auth.basic.once');//测试创建链接
+
+
+//固定注册删除 
+//Route::post('/register',[
+//   'uses' => 'UserController@store'
+// ]);
+
 
 /**
  * Neditor
