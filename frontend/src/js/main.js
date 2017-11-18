@@ -112,7 +112,7 @@ function onScroll() {
     }
 }
 
-window.addEventListener('scroll', onScroll, false);
+// window.addEventListener('scroll', onScroll, false);
 
 // Window Resize
 $(window).resize(function () {

@@ -14,9 +14,6 @@ require('./fonts/font-awesome-4.1.0/css/font-awesome.min.css');
 require('./fonts/eleganticons/et-icons.css');
 require('./css/cardio.css');
 
-require('./styles/index.css');
-require('./styles/guide.css');
-
 //favicon
 require('./img/favicons/apple-touch-icon.png');
 require('./img/favicons/favicon-32x32.png');
@@ -42,6 +39,7 @@ require('./styles/index.css');
 require('./styles/guide.css');
 require('./styles/register.css');
 require('./styles/contactus.css');
+require('./styles/contents.css')
 
 
 angular

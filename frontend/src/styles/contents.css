@@ -1,0 +1,4 @@
+section#services div.service {
+	cursor:pointer;
+	/*visibility: hidden;;*/
+}
