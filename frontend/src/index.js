@@ -33,7 +33,6 @@ var contentsModule = require('./scripts/index');
 var bigHeader = require('./scripts/scripts_base/BigHeader');
 var smallHeader = require('./scripts/scripts_base/SmallHeader');
 var footer = require('./scripts/scripts_base/footer');
-var main = require('./scripts/main');
 
 require('./styles/index.css');
 require('./styles/guide.css');
@@ -45,7 +44,6 @@ require('./styles/contents.css')
 angular
   .module('app', [contentsModule, 'ui.router', 'base64'])
   .config(routesConfig)
-  .component('app', main)
   .component('bigHeader', bigHeader)
   .component('smallHeader', smallHeader)
   .component('fountainFooter', footer);
