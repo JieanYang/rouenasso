@@ -82,7 +82,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/movements',
       views: {
         'content@': {
-          template: '<h2>这是活动目录页面</h2>'
+          component: 'movement'
         }
       }
     })
@@ -90,7 +90,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/works',
       views: {
         'content@': {
-          template: '<h2>这是工作目录页面</h2>'
+          component: 'work'
         }
       }
     })
@@ -98,7 +98,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/writing',
       views: {
         'content@': {
-          template: '<h2>这是生活随笔目录页面</h2>'
+          component: 'writing'
         }
       }
     });
