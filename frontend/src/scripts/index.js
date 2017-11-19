@@ -8,7 +8,7 @@ var movementDetails =require('./scripts_Module/movementDetails')
 var work = require('./scripts_Module/work');
 var writing = require('./scripts_Module/writing');
 var contactus = require('./scripts_Module/contactus');
-
+var aboutus = require('./scripts_Module/aboutus');
 
 var register = require('./scripts_Module/register');
 var login = require('./scripts_Module/loginSample');
@@ -27,8 +27,6 @@ angular
   .component('work', work)
   .component('writing', writing)
   .component('contactus', contactus)
-
+  .component('aboutus',aboutus)
   .component('register', register)
   .component('login', login);
-
-

@@ -37,7 +37,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         }
       }
     })
-    
+
     .state('home.register', {
       url: '/register',
       views: {
@@ -54,11 +54,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         }
       }
     })
-    .state('home.present', {
-      url: '/present',
+    .state('home.aboutus', {
+      url: '/aboutus',
       views: {
         'content@': {
-          template: '<h2>这里是学联介绍</h2>'
+          component: 'aboutus'
         }
       }
     })
