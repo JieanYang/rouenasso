@@ -349,23 +349,19 @@ class PostController extends Controller
              || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
-        error_log("1");
 
         $validator = Validator::make($request->all(), [
             'preview_img' => 'required|image'
         ]);
 
-        error_log("2");
         if ($validator->fails()) {
             return $validator->errors();
         }
 
-        error_log("3");
         $md5Name = md5_file($request->file('preview_img')->getRealPath());
         $guessExtension = $request->file('preview_img')->guessExtension();
         $path = $request->file('preview_img')->storeAs('preview_img', $md5Name.'.'.$guessExtension);
 
-        error_log("4");
         return response()->json(['status' => 200, 'path' => $path], 200);
     }
 
