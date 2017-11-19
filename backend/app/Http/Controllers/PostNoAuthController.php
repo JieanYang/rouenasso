@@ -41,7 +41,8 @@ class PostNoAuthController extends Controller
         
         // count
         $postsCount = 0;
-        $postsCount = Post::where([['category', $category_id], ['published_at', '!=', null]])->get()->count();
+        $postsCount = Post::where([['category', $category_id], ['published_at', '!=', null]])
+            ->whereNull('deleted_at')->get()->count();
         
         if($count){
             $result = response()->json(['category' => $category_id, 'count' => $postsCount]);
@@ -55,16 +56,19 @@ class PostNoAuthController extends Controller
                                 ['category', $category_id], 
                                 ['published_at', '!=', null]
                             ])
-                           ->get();
+                            ->whereNull('deleted_at')
+                            ->get();
         } 
         
         else if($latest) {
-            $result = Post::where('category', $category_id)->orderBy('published_at', 'desc')->first();
+            $result = Post::where('category', $category_id)
+                ->whereNull('deleted_at')->orderBy('published_at', 'desc')->first();
         } 
         
         else {
         // all
-            $result = Post::where([['category', $category_id], ['published_at', '!=', null]])->get();
+            $result = Post::where([['category', $category_id], ['published_at', '!=', null]])
+                ->whereNull('deleted_at')->get();
         }
         
         // hide html content
