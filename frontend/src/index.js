@@ -38,7 +38,9 @@ require('./styles/index.css');
 require('./styles/guide.css');
 require('./styles/register.css');
 require('./styles/contactus.css');
-require('./styles/contents.css')
+require('./styles/contents.css');
+require('./styles/movements.css');
+require('./styles/movementDetails.css');
 
 
 angular

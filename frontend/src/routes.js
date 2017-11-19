@@ -82,7 +82,15 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/movements',
       views: {
         'content@': {
-          component: 'movement'
+          component: 'movements'
+        }
+      }
+    })
+    .state('home.movementDetails', {
+      url: '/movements/:id',
+      views: {
+        'content@': {
+          component: 'movementDetails'
         }
       }
     })
