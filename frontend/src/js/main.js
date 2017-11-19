@@ -157,3 +157,15 @@ $('body').on('click', '.mobile-nav a', function (event) {
         }
     }
 });
+/*
+ $(window).scroll(function(){
+    if ($(window).scrollTop() >= 210)
+    {
+        $(".nav1").css({position:'fixed',top:'0'});     
+    }
+    else
+    {
+        $(".nav1").css({position:'absolute',top:'0'});
+    }
+});
+*/

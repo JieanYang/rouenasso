@@ -1,82 +1,88 @@
-html, body, #root {
-  margin: 0;
-  height: 100%;
-  font-family: 'Open Sans', sans-serif;
+html,
+body,
+#root {
+    margin: 0;
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
 }
 
-body, h1, h2, h3 {
-  font-weight: 300
+body,
+h1,
+h2,
+h3 {
+    font-weight: 300
 }
 
 a {
-  color: white;
-  text-decoration: none;
+    color: white;
+    text-decoration: none;
 }
 
 a:hover {
-  color: #5aadbb;
+    color: #5aadbb;
 }
 
 .main-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
+
 .main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
-  display: flex;
-  align-items: center;
-/*  background-color: #1f1f1f;*/
-  border-bottom-style: solid;
-  border-width: 1px;
-  border-color: green;
+    display: flex;
+    align-items: center;
+    /*  background-color: #1f1f1f;*/
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: green;
 }
 
 .header-title {
-  flex: 1;
-  font-size: 1.5rem;
-  margin: 1rem;
+    flex: 1;
+    font-size: 1.5rem;
+    margin: 1rem;
 }
 
 .header-date {
-  flex: 1;
-  text-align: right;
-  margin: 1rem;
-  color: white;
+    flex: 1;
+    text-align: right;
+    margin: 1rem;
+    color: white;
 }
 
 .footer {
-  padding: 0.5rem;
-  font-size: 1rem;
-/*  background-color: #1f1f1f;*/
-/*  text-align: center;*/
-/*  color: white;*/
-  border-top-style: solid;
-  border-width: 1px;
-  border-color: green;
+    padding: 0.5rem;
+    font-size: 1rem;
+    /*  background-color: #1f1f1f;*/
+    /*  text-align: center;*/
+    /*  color: white;*/
+    border-top-style: solid;
+    border-width: 1px;
+    border-color: green;
 }
 
 .contactLogo {
-  width: 33px;
-  height: auto;
+    width: 33px;
+    height: auto;
 }
 
 #div1 {
-   display: none;
- }
- 
- .showPicture {
-   width: 120px;
-   height: auto;
- }
- 
- .form-select {
-   font-size: 12px;
+    display: none;
+}
+
+.showPicture {
+    width: 120px;
+    height: auto;
+}
+
+.form-select {
+    font-size: 12px;
     position: relative;
     left: 0;
     height: auto;
@@ -84,9 +90,9 @@ a:hover {
     border: 1px;
     border-radius: 0;
     box-shadow: 0;
- }
+}
 
 .nav-logo {
-  height: 50px ! important;
-  width: auto;
+    height: 50px ! important;
+    width: auto;
 }

@@ -96,3 +96,29 @@ div#panel_9 p {
 .media-body {
 	vertical-align: middle;
 }
+
+div#menu li {  
+	list-style-type:square;
+}  
+div#menu a {
+	color: #767676;
+	font-size: 18px;
+	font-weight: 500;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+
+div.nav1 {
+    line-height:30px;
+    background-color:white;
+    height:auto;
+    width:240px;
+    float:left;
+    padding:5px; 
+}
+div.section {
+    width:720px;
+    float:left;
+    padding:10px; 
+}
