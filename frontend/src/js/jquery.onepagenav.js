@@ -219,5 +219,16 @@
 			new OnePageNav(this, options).init();
 		});
 	};
+    
+    $(window).scroll(function(){
+    if ($(window).scrollTop() >= 200)
+    {
+        $(".nav").css({position:'fixed',left:'0',top:'0'});
+    }
+    else
+    {
+        $(".nav").css({position:'absolute',left:'0',top:'200px'});
+    }
+});
 
 })( jQuery, window , document );

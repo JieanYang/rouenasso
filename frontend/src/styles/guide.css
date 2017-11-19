@@ -4,7 +4,7 @@
 }
 .guide_nav{
   /*margin: 15px;*/
-  width: 145px;
+  width: 144px;
   padding: 0;
   text-align: center;
 }
@@ -12,7 +12,113 @@
   width:150px;
 }*/
 
+/*就医指南*/
+div#panel_7 p {
+	color: #231f20;
+}
+div#panel_7 a{
+	color: #767676;
+}
+.aligncenter {
+ clear: both;
+ display: block;
+ margin:auto;
+}/*使图片居中*/
+/*.alignleft {
+ display: inline;
+ float: left;
+}使图片放于左侧
+.alignright {
+ display: inline;
+ float: right;
+}使图片放于右侧*/
+
+
+#customers/*表格*/
+  {
+  font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+  width:100%;
+  border-collapse:collapse;
+  }
+#customers td, #customers th 
+  {
+  font-size:1em;
+  border:1px solid #98bf21;
+  padding:3px 7px 2px 7px;
+  }
+#customers th 
+  {
+  font-size:1.1em;
+  text-align:left;
+  padding-top:5px;
+  padding-bottom:4px;
+  background-color:#A7C942;
+  color:#ffffff;
+  }
+#customers tr.alt td 
+  {
+  color:#000000;
+  background-color:#EAF2D3;
+  }/*表格*/
+
+/*银行*/
+
+div#panel_8 > div > ul li {  
+
+	list-style-type:none;
+}  
+div#panel_8 > div > ul li > a {
+	color: #767676;
+	font-size: 15px;
+	font-weight: 500;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+div#panel_8 p {
+	color: #231f20;
+}
+
+/*应用推荐*/
+div#panel_9 p {
+	color: #231f20;
+}
 .panel{
-	height: 600px;
+	/*height: 600px;*/
 	/*margin: 0;*/
+}
+.row-content {
+	/*margin: 0 auto;
+	padding:50px 0;
+	border-bottom: 1px ridge;*/
+	min-height: 200px;
+}
+
+.media-body {
+	vertical-align: middle;
+}
+
+div#menu li {  
+	list-style-type:square;
+}  
+div#menu a {
+	color: #767676;
+	font-size: 18px;
+	font-weight: 500;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+
+div.nav1 {
+    line-height:30px;
+    background-color:white;
+    height:auto;
+    width:240px;
+    float:left;
+    padding:5px; 
+}
+div.section {
+    width:720px;
+    float:left;
+    padding:10px; 
 }

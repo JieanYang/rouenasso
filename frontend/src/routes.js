@@ -6,12 +6,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-    .state('home', {
-      url: '/',
-      // this two forms are valid writing
-      // component: 'app'
-      // template: '<app></app>'
-      views: {
+    .state('index', {
+        url: '/',
+        // this two forms are valid writing
+        // component: 'app'
+        // template: '<app></app>'
+        views: {
         header: {
           component: 'bigHeader'
         },
@@ -22,78 +22,84 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
           component: 'fountainFooter'
         }
       }
-    })
-    .state('home.data', {
-      url: 'data',
+      })
+    .state('home', {
+      url: '/home',
       views: {
-        // this change the content views in the state home
-        // and hold the header and footer views
-        'header@': {
+        header: {
           component: 'smallHeader'
         },
-        'content@': {
-          template: '<h2>I\'m the home.data page</h2>'
+        content: {
+          component: 'fountainContents'
+        },
+        footer: {
+          component: 'fountainFooter'
         }
       }
     })
+    
     .state('home.register', {
-      url: 'register',
+      url: '/register',
       views: {
-        // this change the content views in the state home
-        // and hold the header and footer views
-        'header@': {
-          component: 'smallHeader'
-        },
         'content@': {
           component: 'register'
         }
       }
     })
-    .state('guide', {
+    .state('home.guide', {
       url: '/guide',
       views: {
-        // this change the content views in the state home
-        // and hold the header and footer views
-        header: {
-          component: 'smallHeader'
-        },
-        content: {
+        'content@': {
           component: 'guide'
-        },
-        footer: {
-          component: 'fountainFooter'
         }
       }
     })
-    .state('contactus', {
+    .state('home.present', {
+      url: '/present',
+      views: {
+        'content@': {
+          template: '<h2>这里是学联介绍</h2>'
+        }
+      }
+    })
+    .state('home.contactus', {
       url: '/contactus',
       views: {
-        // this change the content views in the state home
-        // and hold the header and footer views
-        header: {
-          component: 'smallHeader'
-        },
-        content: {
+        'content@': {
           component: 'contactus'
-        },
-        footer: {
-          component: 'fountainFooter'
         }
       }
     })
-    .state('login', {
+    .state('home.login', {
       url: '/login',
       views: {
-        header: {
-          component: 'smallHeader'
-        },
-        content: {
+        'content@': {
           component: 'login'
-        },
-        footer: {
-          component: 'fountainFooter'
         }
       }
     })
-    ;
+    .state('home.movements', {
+      url: '/movements',
+      views: {
+        'content@': {
+          component: 'movement'
+        }
+      }
+    })
+    .state('home.works', {
+      url: '/works',
+      views: {
+        'content@': {
+          component: 'work'
+        }
+      }
+    })
+    .state('home.writing', {
+      url: '/writing',
+      views: {
+        'content@': {
+          component: 'writing'
+        }
+      }
+    });
 }

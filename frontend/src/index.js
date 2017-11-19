@@ -14,9 +14,6 @@ require('./fonts/font-awesome-4.1.0/css/font-awesome.min.css');
 require('./fonts/eleganticons/et-icons.css');
 require('./css/cardio.css');
 
-require('./styles/index.css');
-require('./styles/guide.css');
-
 //favicon
 require('./img/favicons/apple-touch-icon.png');
 require('./img/favicons/favicon-32x32.png');
@@ -36,18 +33,17 @@ var contentsModule = require('./scripts/index');
 var bigHeader = require('./scripts/scripts_base/BigHeader');
 var smallHeader = require('./scripts/scripts_base/SmallHeader');
 var footer = require('./scripts/scripts_base/footer');
-var main = require('./scripts/main');
 
 require('./styles/index.css');
 require('./styles/guide.css');
 require('./styles/register.css');
 require('./styles/contactus.css');
+require('./styles/contents.css')
 
 
 angular
   .module('app', [contentsModule, 'ui.router', 'base64'])
   .config(routesConfig)
-  .component('app', main)
   .component('bigHeader', bigHeader)
   .component('smallHeader', smallHeader)
   .component('fountainFooter', footer);
