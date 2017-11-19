@@ -1,1 +1,36 @@
-<h2>这是生活随笔目录页面-component</h2>
+<h2>生活随笔</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="writing" ui-sref="home.writing({id:vm.id})">
+            <div class="col-sm-3">
+            <img ng-src="../../images/活动推广/天猫.jpg", width="120px", height="auto">
+            </div>   
+            <div class="col-sm-2">
+            <h4>标题1</h4>
+            <h4>作者1</h4>
+            <h4>日期1</h4>
+            </div>
+            <div class="col-sm-4">
+            <p>blablablablabla</p>
+            </div>
+            
+        </div>
+     </div>
+        <div class="row" ng-repeat="writing in vm.data">
+            <div class="writing" ui-sref="home.writing({id:writing.id})">
+            <div class="col-sm-3">
+            <img ng-src="../../images/活动推广/天猫.jpg", width="120px", height="auto">
+            </div>   
+            <div class="col-sm-2">
+            <h4>标题2</h4>
+            <h4>作者2</h4>
+            <h4>日期2</h4>
+            </div>
+            <div class="col-sm-4">
+            <p>blablablablabla</p>
+            </div>      
+            </div>
+        </div>
+
+</div>

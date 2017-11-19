@@ -1,4 +1,4 @@
-module.exports = routesConfig;
+        module.exports = routesConfig;
 
 /** @ngInject */
 function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {

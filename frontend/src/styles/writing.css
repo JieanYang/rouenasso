@@ -1,0 +1,9 @@
+.writing {
+	width: 100%;
+	height:120px;
+	margin: 20px 0;
+	text-align: inline;
+	border: 1px solid #ddd;
+	overflow: hidden;
+	cursor: pointer;
+}
