@@ -128,8 +128,8 @@ class ViewLogController extends Controller
         $logs = DB::table('viewlogs')->select(DB::raw('date(created_at) as date'), DB::raw('count(*) as count'))
 	        ->whereDate('created_at', '>=', date($start))
 	        ->whereDate('created_at', '<=', date($end))
-	        ->groupBy('created_at')->get();
-
+	        ->groupBy(DB::raw('date(created_at)'))->get();
+error_log($logs);
         // get all available dates in logs
         $logDates = Array();
         foreach($logs as $obj) {
@@ -140,7 +140,7 @@ class ViewLogController extends Controller
         foreach ($period as $date) {
             $date_str = $date->format('Y-m-d');
             if(!in_array($date_str, $logDates)) {
-              $logs->push(['date' => $date_str, 'count' => 0]);
+            	$logs->push(['date' => $date_str, 'count' => 0]);
             }
         }
 
