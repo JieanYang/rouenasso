@@ -125,9 +125,10 @@ class ViewLogController extends Controller
         );
 
         // get visit logs from db
-        $logs = DB::table('viewlogs')->select(DB::raw('date(created_at) as date'), DB::raw('count(*) as count'))->where(
-            [['created_at', '>=', $start],['created_at', '<=', $end]]
-        )->groupBy('created_at')->get();
+        $logs = DB::table('viewlogs')->select(DB::raw('date(created_at) as date'), DB::raw('count(*) as count'))
+	        ->whereDate('created_at', '>=', date($start))
+	        ->whereDate('created_at', '<=', date($end))
+	        ->groupBy('created_at')->get();
 
         // get all available dates in logs
         $logDates = Array();
