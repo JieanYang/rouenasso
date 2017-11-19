@@ -40,6 +40,8 @@ Route::get('posts/count/show', 'PostController@countPost')->name('posts.countPos
 Route::get('posts/category/{id}', 'PostNoAuthController@showPostsByCategoryId')->name('posts.showPostsByCategoryId');
 Route::get('posts/{id}/noauth', 'PostNoAuthController@showPost')->name('posts.showPost');
 
+Route::post('uploadimg/', 'PostController@uploadImg')->middleware('auth.basic.once');
+Route::get('downloadimg/', 'PostNoAuthController@retrieveImg');
 
 Route::post('login', 'GetSelfController@getSelf')->name('users.getSelf')->middleware('auth.basic.once');
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use Storage;
 use Validator;
 use Illuminate\Validation\Rule;
 use App\Model\Department;
@@ -117,5 +119,26 @@ class PostNoAuthController extends Controller
         $p->view++;
         $p->save();
         return $p;
+    }
+
+    /**
+     * GET /downloadimg/
+     *
+     * Download an image
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function retrieveImg(Request $request) {
+        $url = $request->url;
+        $content = Storage::get($url);
+        $mimetype = Storage::mimeType($url);
+        error_log($mimetype);
+
+        return Storage::exists($url) ? 
+            response($content, 200)
+                  ->header('Content-Type', $mimetype)
+            : 
+            response()->json(['status' => 404, 'msg' => 'file not found'], 404);
     }
 }

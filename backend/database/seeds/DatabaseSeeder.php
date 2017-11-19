@@ -67,7 +67,9 @@ class DatabaseSeeder extends Seeder
             'category' => 1,    
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'published_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'view' => 15
+            'view' => 15,
+            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
+            'preview_text' => 'preview text'
         ]);
         DB::table('posts')->insert([
             'title' => 'title 2',
@@ -76,7 +78,9 @@ class DatabaseSeeder extends Seeder
             'category' => 1,
             'created_at' => '2017-11-02',
             'published_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'view' => 20
+            'view' => 20,
+            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
+            'preview_text' => 'preview text'
         ]);
         DB::table('posts')->insert([
             'title' => 'title 3',
@@ -85,7 +89,9 @@ class DatabaseSeeder extends Seeder
             'category' => 2,
             'created_at' => '2017-11-02',
             'published_at' => '2017-10-30',
-            'view' => 25
+            'view' => 25,
+            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
+            'preview_text' => 'preview text'
         ]);
         DB::table('posts')->insert([
             'title' => 'title 4 loooooooooooooooooooooooooooooo oooooooooooooooooooooooooooooooooo oooooooooooooooooooooooooooooooooooooooooooooo ooooooooooooooooooooooooooooooooooong title',
@@ -94,7 +100,9 @@ class DatabaseSeeder extends Seeder
             'category' => 2,
             'created_at' => '2017-11-01',
             'published_at' => '2017-11-03',
-            'view' => 30
+            'view' => 30,
+            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
+            'preview_text' => 'preview text'
         ]);
         DB::table('posts')->insert([
             'title' => 'title 很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长5',
@@ -103,7 +111,9 @@ class DatabaseSeeder extends Seeder
             'category' => 3,
             'published_at' => '2017-11-01',
             'created_at' => '2017-11-02',
-            'view' => 35
+            'view' => 35,
+            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
+            'preview_text' => 'preview text'
         ]);
         DB::table('posts')->insert([
             'title' => 'show',
@@ -114,7 +124,9 @@ class DatabaseSeeder extends Seeder
             'category' => 99, // 公告
             'published_at' => '2017-10-31',
             'created_at' => '2017-11-02',
-            'view' => 99
+            'view' => 99,
+            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
+            'preview_text' => 'preview text'
         ]);
         // 草稿 （无published——at）
         DB::table('posts')->insert([
@@ -123,7 +135,9 @@ class DatabaseSeeder extends Seeder
             'html_content' => 'non pub',
             'category' => 1,
             'created_at' => '2017-11-02',
-            'view' => 0
+            'view' => 0,
+            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
+            'preview_text' => 'preview text'
         ]);
         DB::table('posts')->insert([
             'title' => 'title 7',
@@ -131,7 +145,9 @@ class DatabaseSeeder extends Seeder
             'html_content' => 'non pub',
             'category' => 2,
             'created_at' => '2017-11-01',
-            'view' => 0
+            'view' => 0,
+            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
+            'preview_text' => 'preview text'
         ]);
         DB::table('posts')->insert([
             'title' => 'title 8',
@@ -139,7 +155,9 @@ class DatabaseSeeder extends Seeder
             'html_content' => 'non pub',
             'category' => 3,
             'created_at' => '2017-10-31',
-            'view' => 0
+            'view' => 0,
+            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
+            'preview_text' => 'preview text'
         ]);
         
         /* View Logs */

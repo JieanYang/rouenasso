@@ -21,6 +21,8 @@ class CreatePostsTable extends Migration
             $table->longText('html_content')->nullable(false);
             $table->timestamp('published_at')->nullable()->index();
             $table->bigInteger('view')->unsigned()->nullable(false);
+            $table->string('preview_img_url')->nullable(true);
+            $table->string('preview_text')->nullable(true);
             $table->timestamps();
             $table->softDeletes();
         });
