@@ -41,6 +41,7 @@ require('./styles/contactus.css');
 require('./styles/contents.css');
 require('./styles/movements.css');
 require('./styles/movementDetails.css');
+require('./styles/work.css');
 require('./styles/writing.css');
 
 angular
