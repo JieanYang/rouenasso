@@ -263,5 +263,24 @@ class DatabaseSeeder extends Seeder
             'user' => '1',
             'created_at' => '2017-10-25'
         ]);
+
+
+
+        /*works*/
+        DB::table('works')->insert([
+            'title_work' => '秘书',
+            'company_work' => '秘书协会',
+            'city_work' => 'rouen',
+            'salary_work' => 1500,
+            'created_at' => '2017-11-02',
+            'html_work' => '<h2>here is the job content.</h2>'
+        ]);
+        DB::table('works')->insert([
+            'title_work' => '花生',
+            'company_work' => '花生油协会',
+            'city_work' => 'rouen',
+            'salary_work' => 1000,
+            'html_work' => '<h2>我是花生</h2>'
+        ]);
     }
 }
