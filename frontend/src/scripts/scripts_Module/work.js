@@ -5,12 +5,12 @@ module.exports = {
 };
 
 /** @ngInject */
-function workController($http) {
+function workController($http, $location, $sce) {
   var vm = this;
 
-  // $http.get('http://localhost:8000/works')
-  // .then(function(response) {
-  // 	vm.works = response.data;
-  // 	console.log(vm.works);
-  // });
+  vm.id=$location.url().slice(12);
+  $http.get('http://localhost:8000/works/'+vm.id)
+  .then(function(response) {
+  	vm.work = $sce.trustAsHtml(response.data.html_work);
+  });
 }
