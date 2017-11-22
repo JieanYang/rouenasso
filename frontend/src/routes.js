@@ -98,6 +98,14 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/works',
       views: {
         'content@': {
+          component: 'works'
+        }
+      }
+    })
+    .state('home.work', {
+      url: '/works/:id',
+      views: {
+        'content@': {
           component: 'work'
         }
       }
