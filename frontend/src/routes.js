@@ -117,5 +117,13 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
           component: 'writing'
         }
       }
+    })
+    .state('home.writing_detail', {
+      url: '/writing/:id',
+      views: {
+        'content@': {
+          component: 'writingDetail'
+        }
+      }
     });
 }

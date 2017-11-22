@@ -8,6 +8,7 @@ var movementDetails =require('./scripts_Module/movementDetails')
 var works = require('./scripts_Module/works');
 var work = require('./scripts_Module/work');
 var writing = require('./scripts_Module/writing');
+var writing_detail = require('./scripts_Module/writing_detail');
 var contactus = require('./scripts_Module/contactus');
 var aboutus = require('./scripts_Module/aboutus');
 
@@ -28,6 +29,7 @@ angular
   .component('works', works)
   .component('work', work)
   .component('writing', writing)
+  .component('writingDetail', writing_detail)
   .component('contactus', contactus)
   .component('aboutus',aboutus)
   .component('register', register)

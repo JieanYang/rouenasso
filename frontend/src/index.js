@@ -44,6 +44,7 @@ require('./styles/movementDetails.css');
 require('./styles/works.css');
 require('./styles/work.css');
 require('./styles/writing.css');
+require('./styles/writing_detail.css');
 
 angular
   .module('app', [contentsModule, 'ui.router', 'base64'])
