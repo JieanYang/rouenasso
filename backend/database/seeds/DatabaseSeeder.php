@@ -303,5 +303,25 @@ class DatabaseSeeder extends Seeder
             'html_writing' => '<p>寻寻觅觅，冷冷清清，凄凄惨惨戚戚。乍暖还寒时候，最难将息。三杯两盏淡酒，怎敌他晚来风急？雁过也，正伤心，却是旧时相识。满地黄花堆积，憔悴损，如今有谁堪摘？守着窗儿，独自怎生得黑？梧桐更兼细雨，到黄昏、点点滴滴。这次第，怎一个愁字了得！</p>'
         ]);
 
+
+        // leaveMessages
+        DB::table('leaveMessages')->insert([
+            'name_leaveMessage' => '李白',
+            'phone_leaveMessage' => '0123456789',
+            'email_leaveMessage' => 'libai@test.com',
+            'agreeContact_leaveMessage' => true,
+            'contactWay_leaveMessage' => 'email',
+            'message_leaveMessage' => '哪个小混蛋乱放我的诗到网上，小心我穿越时空来打死你，我的版权费快点给我寄过来！！'
+        ]);
+
+        DB::table('leaveMessages')->insert([
+            'name_leaveMessage' => '李清照',
+            'phone_leaveMessage' => '0123456789',
+            'email_leaveMessage' => 'liqingzhao@test.com',
+            'agreeContact_leaveMessage' => true,
+            'contactWay_leaveMessage' => 'phone',
+            'message_leaveMessage' => '哎呀，臣妾好高兴，竟然有人欣赏我的诗！！'
+        ]);
+
     }
 }

@@ -52,6 +52,9 @@ Route::resource('works', 'WorkController', ['only' => ['index', 'show', 'store',
 // Writings
 Route::resource('writings', 'WritingController', [ 'only' => ['index', 'show', 'store', 'update', 'destroy']]);
 
+// LeaveMessages
+Route::resource('leaveMessages', 'LeaveMessageController', [ 'only' => ['index', 'show', 'store', 'update', 'destroy']]);
+
 /**
  * Neditor
  */
