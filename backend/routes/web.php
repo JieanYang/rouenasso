@@ -46,7 +46,11 @@ Route::post('login', 'GetSelfController@getSelf')->name('users.getSelf')->middle
 Route::post('/register/{link}',['uses'=>'UserController@store'])->name('users.shore'); //随机链接路由注册
 Route::post('/createlink',['uses'=>'CreatelinkController@store'])->name('links.store')->middleware('auth.basic.once');//测试创建链接
 
+// Works
 Route::resource('works', 'WorkController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
+
+// Writings
+Route::resource('writings', 'WritingController', [ 'only' => ['index', 'show', 'store', 'update', 'destroy']]);
 
 /**
  * Neditor
