@@ -8,11 +8,10 @@ module.exports = {
 function writingController($http) {
   var vm = this;
     
-   $http.get('https://api.acecrouen.com//posts/category/1')//活动类型
+   $http.get('http://localhost:8000/writings')
   .then(function(response){
-  	vm.data = response.data;
-  	vm.id=0;
+  	vm.writings = response.data;
 
-  	console.log(vm.data)
+  	console.log(vm.writings)
   });
 }

@@ -8,9 +8,9 @@ module.exports = {
 function writingDetailController($http, $location, $sce) {
   var vm = this;
     
-  // vm.id=$location.url().slice(12);
-  // $http.get('http://localhost:8000/works/'+vm.id)
-  // .then(function(response) {
-  //   vm.work = $sce.trustAsHtml(response.data.html_work);
-  // });
+  vm.id=$location.url().slice(14);
+  $http.get('http://localhost:8000/writings/'+vm.id)
+  .then(function(response) {
+    vm.writing = $sce.trustAsHtml(response.data.html_writing);
+  });
 }

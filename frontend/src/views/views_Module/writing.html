@@ -2,33 +2,19 @@
 
 <div class="container">
     <div class="row">
-        <div class="writing" ui-sref="home.writing_detail({id:vm.id})">
-            <div class="col-sm-3">
-            <img ng-src="../../images/活动推广/天猫.jpg", width="120px", height="auto">
-            </div>   
-            <div class="col-sm-2">
-            <h4>标题1</h4>
-            <h4>作者1</h4>
-            <h4>日期1</h4>
-            </div>
-            <div class="col-sm-4">
-            <p>blablablablabla</p>
-            </div>
-            
-        </div>
      </div>
-        <div class="row" ng-repeat="writing in vm.data">
-            <div class="writing" ui-sref="home.writing_detail({id:1})">
+        <div class="row" ng-repeat="writing in vm.writings">
+            <div class="writing" ui-sref="home.writing_detail({id:writing.id})">
             <div class="col-sm-3">
-            <img ng-src="../../images/活动推广/天猫.jpg", width="120px", height="auto">
+            <img ng-src="{{writing.image_writing}}", width="120px", height="auto">
             </div>   
             <div class="col-sm-2">
-            <h4>标题2</h4>
-            <h4>作者2</h4>
-            <h4>日期2</h4>
+            <h4>{{writing.title_writing}}</h4>
+            <h4>{{writing.user_writing}}</h4>
+            <h4>{{writing.published_writing}}</h4>
             </div>
             <div class="col-sm-4">
-            <p>blablablablabla</p>
+            <p>{{writing.introduction_writing}}</p>
             </div>      
             </div>
         </div>
