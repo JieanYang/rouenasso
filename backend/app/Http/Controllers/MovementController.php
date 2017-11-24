@@ -65,9 +65,10 @@ class MovementController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'title_movement' => 'required',
-            'introduction_movement' => 'required',
-            'html_movement' => 'required'
+            'title' => 'required',
+            'introduction' => 'required',
+            'html_content' => 'required',
+            'published_at' => 'date'
         ]);
 
         if ($validator->fails()) {
@@ -75,13 +76,13 @@ class MovementController extends Controller
         }
 
         $movement = new Movement;
-        $movement->title_movement = $request->title_movement;
-        $movement->introduction_movement = $request->introduction_movement;
-        $movement->html_movement = $request->html_movement;
-        $movement->image_movement = $request->image_movement ? $request->image_movement : null;
-        $movement->published_movement = $request->published_movement ? $request->published_movement : null;
+        $movement->title = $request->title;
+        $movement->introduction = $request->introduction;
+        $movement->html_content = $request->html_content;
+        $movement->image = $request->image ? $request->image : null;
+        $movement->published_at = $request->published_at ? $request->published_at : null;
         $movement->user_id = Auth::id();
-        $movement->view_movement = 0;
+        $movement->view = 0;
 
         $movement->save();
 
@@ -132,10 +133,10 @@ class MovementController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'title_movement' => 'required',
-            'introduction_movement' => 'required',
-            'html_movement' => 'required',
-            'published_movement' => 'date'
+            'title' => 'required',
+            'introduction' => 'required',
+            'html_content' => 'required',
+            'published_at' => 'date'
         ]);
 
         if ($validator->fails()) {
@@ -148,11 +149,11 @@ class MovementController extends Controller
             return response()->json(['status' => 404, 'msg' => 'Movement not exists']);
         }
 
-        $movementDB->title_movement = $request->title_movement;
-        $movementDB->introduction_movement = $request->introduction_movement;
-        $movementDB->html_movement = $request->html_movement;
-        $movementDB->image_movement = $request->image_movement?$request->image_movement:null;
-        $movementDB->published_movement = $request->published_movement?$request->published_movement:null;
+        $movementDB->title = $request->title;
+        $movementDB->introduction = $request->introduction;
+        $movementDB->html_content = $request->html_content;
+        $movementDB->image = $request->image?$request->image:null;
+        $movementDB->published_at = $request->published_at?$request->published_at:null;
 
         $movementDB->save();
 
@@ -187,7 +188,7 @@ class MovementController extends Controller
         }
 
         //已发布内容
-        if($movementDel->published_movement != null) {
+        if($movementDel->published_at != null) {
             if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XIANGMUKAIFABU
                 || ($this->department == Department::XUANCHUANBU
                 && ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG) ))) {
