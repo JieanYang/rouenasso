@@ -290,21 +290,23 @@ class DatabaseSeeder extends Seeder
 
         // writing
         DB::table('writings')->insert([
-            'title_writing' => '静夜思',
-            'user_writing' => '李白',
-            'created_at' => '2017-11-23',
-            'introduction_writing' => '思念家人的诗',
-            'image_writing' => '../../images/帖子/writings/静夜思-李白.jpg',
-            'html_writing' => '<p>床前明月光,<br>疑是地上霜。<br>举头望明月,<br>低头思故乡。</p>'
+            'user_id'=>2,
+            'title' => '静夜思',
+            'username' => '李白',
+            'introduction' => '思念家人的诗',
+            'image' => '../../images/帖子/writings/静夜思-李白.jpg',
+            'html_content' => '<p>床前明月光,<br>疑是地上霜。<br>举头望明月,<br>低头思故乡。</p>',
+            'view' => 3
         ]);
 
         DB::table('writings')->insert([
-            'title_writing' => '声声慢',
-            'user_writing' => '李清照',
-            'created_at' => '2017-11-23',
-            'introduction_writing' => '愁',
-            'image_writing' => '../../images/帖子/writings/声声慢-李清照.jpg',
-            'html_writing' => '<p>寻寻觅觅，冷冷清清，凄凄惨惨戚戚。乍暖还寒时候，最难将息。三杯两盏淡酒，怎敌他晚来风急？雁过也，正伤心，却是旧时相识。满地黄花堆积，憔悴损，如今有谁堪摘？守着窗儿，独自怎生得黑？梧桐更兼细雨，到黄昏、点点滴滴。这次第，怎一个愁字了得！</p>'
+            'user_id' => 1,
+            'title' => '声声慢',
+            'username' => '李清照',
+            'introduction' => '愁',
+            'image' => '../../images/帖子/writings/声声慢-李清照.jpg',
+            'html_content' => '<p>寻寻觅觅，冷冷清清，凄凄惨惨戚戚。乍暖还寒时候，最难将息。三杯两盏淡酒，怎敌他晚来风急？雁过也，正伤心，却是旧时相识。满地黄花堆积，憔悴损，如今有谁堪摘？守着窗儿，独自怎生得黑？梧桐更兼细雨，到黄昏、点点滴滴。这次第，怎一个愁字了得！</p>',
+            'view' => 3
         ]);
 
 
