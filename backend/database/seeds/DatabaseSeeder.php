@@ -273,14 +273,18 @@ class DatabaseSeeder extends Seeder
             'city_work' => 'rouen',
             'salary_work' => 1500,
             'created_at' => '2017-11-02',
-            'html_work' => '<h2>here is the job content.</h2>'
+            'html_work' => '<h2>here is the job content.</h2>',
+            'user_id' => 1,
+            'view_work' =>0
         ]);
         DB::table('works')->insert([
             'title_work' => '花生',
             'company_work' => '花生油协会',
             'city_work' => 'rouen',
             'salary_work' => 1000,
-            'html_work' => '<h2>我是花生</h2>'
+            'html_work' => '<h2>我是花生</h2>',
+            'user_id' => 2,
+            'view_work' =>0
         ]);
 
 
@@ -327,19 +331,19 @@ class DatabaseSeeder extends Seeder
         // movement
         DB::table('movements')->insert([
             'user_id' => 1,
-            'title_movement' => '天猫双十一活动斩手会',
-            'introduction_movement' => '这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!',
-            'html_movement' => '<h2>这里是活动详细页面-component</h2>',
-            'image_movement' => '../../images/活动推广/天猫.jpg',
-            'view_movement' => 2
+            'title' => '天猫双十一活动斩手会',
+            'introduction' => '这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!',
+            'html_content' => '<h2>来来来，疯狂购！！双十一剁手剁到爽！！</h2>',
+            'image' => '../../images/活动推广/天猫.jpg',
+            'view' => 2
         ]);
         DB::table('movements')->insert([
             'user_id' => 2,
-            'title_movement' => '苏宁易购双十一提前买',
-            'introduction_movement' => '这里是苏宁易购拍卖会，买一送一，买二送十，欢迎光临苏宁电器!为您的家带来温暖的额感觉!',
-            'html_movement' => '<h2>这里是活动详细页面-component</h2>',
-            'image_movement' => '../../images/活动推广/苏宁易购.jpg',
-            'view_movement' => 1
+            'title' => '苏宁易购双十一提前买',
+            'introduction' => '这里是苏宁易购拍卖会，买一送一，买二送十，欢迎光临苏宁电器!为您的家带来温暖的额感觉!',
+            'html_content' => '<h2>去去去，多买多送，双手放在炉上烤不停，带给你无尽的香气和温暖！！</h2>',
+            'image' => '../../images/活动推广/苏宁易购.jpg',
+            'view' => 1
         ]);
 
     }

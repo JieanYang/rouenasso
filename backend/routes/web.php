@@ -50,10 +50,10 @@ Route::get('posts/{id}/noauth', 'PostNoAuthController@showPost')->name('posts.sh
 Route::resource('movements', 'MovementController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
 // Works
 Route::resource('works', 'WorkController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
-// Writings
+// Writings未完成
 Route::resource('writings', 'WritingController', [ 'only' => ['index', 'show', 'store', 'update', 'destroy']]);
 // LeaveMessages
-Route::resource('leaveMessages', 'LeaveMessageController', [ 'only' => ['index', 'show', 'store', 'update', 'destroy']]);
+Route::resource('leaveMessages', 'LeaveMessageController', [ 'only' => ['index', 'show', 'store', 'destroy']]);
 
 
 
