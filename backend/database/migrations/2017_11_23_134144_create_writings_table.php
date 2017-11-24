@@ -15,12 +15,14 @@ class CreateWritingsTable extends Migration
     {
         Schema::create('writings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title_writing')->nullable(false);
-            $table->string('user_writing')->nullable(false);
-            $table->timestamp('published_writing')->nullable()->index();
-            $table->string('introduction_writing')->nullable(false);
-            $table->string('image_writing')->nullable();
-            $table->longText('html_writing')->nullable(false);
+            $table->bigInteger('user_id')->unsigned()->index()->nullable(false);
+            $table->string('image')->nullable();
+            $table->string('title')->nullable(false);
+            $table->string('username')->nullable(false);
+            $table->string('introduction')->nullable(false);
+            $table->longText('html_content')->nullable(false);
+            $table->bigInteger('view')->unsigned()->nullable(false);
+            $table->timestamp('published_at')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
         });

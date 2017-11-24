@@ -152,8 +152,8 @@ class MovementController extends Controller
         $movementDB->title = $request->title;
         $movementDB->introduction = $request->introduction;
         $movementDB->html_content = $request->html_content;
-        $movementDB->image = $request->image?$request->image:null;
-        $movementDB->published_at = $request->published_at?$request->published_at:null;
+        $movementDB->image = $request->image?$request->image:$movementDB->image;
+        $movementDB->published_at = $request->published_at?$request->published_at:$movementDB->published_at;
 
         $movementDB->save();
 
@@ -198,7 +198,7 @@ class MovementController extends Controller
 
         $movementDel->delete();
 
-        return response()->json(['status' => 200, 'msg' => 'the delete of id movement: '.$movementDel->id.' deletes successfully! ']);
+        return response()->json(['status' => 200, 'msg' => 'the movement id : '.$movementDel->id.' deletes successfully! ']);
 
     }
 }
