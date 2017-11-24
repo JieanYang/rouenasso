@@ -18,11 +18,11 @@
 			<li class="item_job_5 col-sm-2">5</li>
 		</div>
 		<div class="item_job col-sm-12 col-xs-12" ng-repeat="work in vm.works" ui-sref="home.work({id:work.id})">
-			<li class="item_job_1 col-sm-3">{{work.title_work}}</li>
-			<li class="item_job_2 col-sm-3">{{work.company_work}}</li>
-			<li class="item_job_3 col-sm-2">{{work.city_work}}</li>
-			<li class="item_job_4 col-sm-2">{{work.salary_work}}</li>
-			<li class="item_job_5 col-sm-2">{{work.published_work}}</li>
+			<li class="item_job_1 col-sm-3">{{work.job}}</li>
+			<li class="item_job_2 col-sm-3">{{work.company}}</li>
+			<li class="item_job_3 col-sm-2">{{work.city}}</li>
+			<li class="item_job_4 col-sm-2">{{work.salary}}</li>
+			<li class="item_job_5 col-sm-2">{{work.published_at}}</li>
 		</div>
 		</ul>
 	</div>
