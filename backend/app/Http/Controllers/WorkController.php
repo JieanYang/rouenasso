@@ -63,12 +63,12 @@ class WorkController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'title_work' => 'required',
-            'company_work' => 'required',
-            'city_work'=>'required',
-            'salary_work'=>'required',
-            'html_work' => 'required',
-            'published_work'=>'date'
+            'job' => 'required',
+            'company' => 'required',
+            'city'=>'required',
+            'salary'=>'required',
+            'html_content' => 'required',
+            'published_at'=>'date'
         ]);
 
         if ($validator->fails()) {
@@ -76,14 +76,14 @@ class WorkController extends Controller
         }
 
         $newWork = new Work;
-        $newWork->title_work = $request->title_work;
-        $newWork->company_work = $request->company_work;
-        $newWork->city_work = $request->city_work;
-        $newWork->salary_work = $request->salary_work;
-        $newWork->html_work = $request->html_work;
-        $newWork->published_work = $request->published_work ? $request->published_work : null;
+        $newWork->job = $request->job;
+        $newWork->company = $request->company;
+        $newWork->city = $request->city;
+        $newWork->salary = $request->salary;
+        $newWork->html_content = $request->html_content;
+        $newWork->published_at = $request->published_at ? $request->published_at : null;
         $newWork->user_id = Auth::id();
-        $newWork->view_work = 0;
+        $newWork->view = 0;
 
         $newWork->save();
 
@@ -134,12 +134,12 @@ class WorkController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'title_work' => 'required',
-            'company_work' => 'required',
-            'city_work'=>'required',
-            'salary_work'=>'required',
-            'html_work' => 'required',
-            'published_work'=>'date'
+            'job' => 'required',
+            'company' => 'required',
+            'city'=>'required',
+            'salary'=>'required',
+            'html_content' => 'required',
+            'published_at'=>'date'
         ]);
 
         if ($validator->fails()) {
@@ -152,12 +152,12 @@ class WorkController extends Controller
             return response()->json(['status' => 404, 'msg' => 'Work not exists']);
         }
 
-        $updateWork->title_work = $request->title_work;
-        $updateWork->company_work = $request->company_work;
-        $updateWork->city_work = $request->city_work;
-        $updateWork->salary_work = $request->salary_work;
-        $updateWork->html_work = $request->html_work;
-        $updateWork->published_work = $request->published_work ? $request->published_work : null;
+        $updateWork->job = $request->job;
+        $updateWork->company = $request->company;
+        $updateWork->city = $request->city;
+        $updateWork->salary = $request->salary;
+        $updateWork->html_content = $request->html_content;
+        $updateWork->published_at = $request->published_at ? $request->published_at : $updateWork->published_at;
 
         $updateWork->save();
 
@@ -191,7 +191,7 @@ class WorkController extends Controller
         }
 
         //已发布内容
-        if($WorkDel->published_work != null) {
+        if($WorkDel->published_at != null) {
             if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XIANGMUKAIFABU
                 || ($this->department == Department::XUANCHUANBU
                 && ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG) ))) {

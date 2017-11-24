@@ -268,23 +268,22 @@ class DatabaseSeeder extends Seeder
 
         // works
         DB::table('works')->insert([
-            'title_work' => '秘书',
-            'company_work' => '秘书协会',
-            'city_work' => 'rouen',
-            'salary_work' => 1500,
-            'created_at' => '2017-11-02',
-            'html_work' => '<h2>here is the job content.</h2>',
-            'user_id' => 1,
-            'view_work' =>0
+            'user_id' => 2,
+            'job' => '秘书',
+            'company' => '秘书协会',
+            'city' => 'rouen',
+            'salary' => 1500,
+            'html_content' => '<h2>here is the job content.</h2>',
+            'view' =>0
         ]);
         DB::table('works')->insert([
-            'title_work' => '花生',
-            'company_work' => '花生油协会',
-            'city_work' => 'rouen',
-            'salary_work' => 1000,
-            'html_work' => '<h2>我是花生</h2>',
-            'user_id' => 2,
-            'view_work' =>0
+            'user_id' => 1,
+            'job' => '花生',
+            'company' => '花生油协会',
+            'city' => 'rouen',
+            'salary' => 1000,
+            'html_content' => '<h2>我是花生</h2>',
+            'view' =>0
         ]);
 
 
