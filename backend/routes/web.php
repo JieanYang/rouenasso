@@ -31,29 +31,31 @@ Route::resource('users', 'UserController');
 Route::get('users/{id}/posts', 'UserController@showPostsByUserId')->name('users.countUser')->middleware('auth.basic.once');
 Route::get('users/count/show', 'UserController@countUser')->name('users.showPostsByUserId')->middleware('auth.basic.once');
 
+Route::post('login', 'GetSelfController@getSelf')->name('users.getSelf')->middleware('auth.basic.once');
+Route::post('/register/{link}',['uses'=>'UserController@store'])->name('users.shore'); //随机链接路由注册
+Route::post('/createlink',['uses'=>'CreatelinkController@store'])->name('links.store')->middleware('auth.basic.once');//测试创建链接
+
+
 
 Route::resource('posts', 'PostController')->middleware('auth.basic.once');
 Route::get('posts/category/{id}/drafts', 'PostController@showDraftsByCategoryId')->name('posts.showDraftsByCategoryId')->middleware('auth.basic.once');
 Route::get('posts/calendar/show', 'PostController@showPostsCalendar')->name('posts.showPostsCalendar')->middleware('auth.basic.once');
 Route::get('posts/count/show', 'PostController@countPost')->name('posts.countPost')->middleware('auth.basic.once');
-
 Route::get('posts/category/{id}', 'PostNoAuthController@showPostsByCategoryId')->name('posts.showPostsByCategoryId');
 Route::get('posts/{id}/noauth', 'PostNoAuthController@showPost')->name('posts.showPost');
 
 
-Route::post('login', 'GetSelfController@getSelf')->name('users.getSelf')->middleware('auth.basic.once');
 
-Route::post('/register/{link}',['uses'=>'UserController@store'])->name('users.shore'); //随机链接路由注册
-Route::post('/createlink',['uses'=>'CreatelinkController@store'])->name('links.store')->middleware('auth.basic.once');//测试创建链接
-
+// Movements
+Route::resource('movements', 'MovementController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
 // Works
 Route::resource('works', 'WorkController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
-
 // Writings
 Route::resource('writings', 'WritingController', [ 'only' => ['index', 'show', 'store', 'update', 'destroy']]);
-
 // LeaveMessages
 Route::resource('leaveMessages', 'LeaveMessageController', [ 'only' => ['index', 'show', 'store', 'update', 'destroy']]);
+
+
 
 /**
  * Neditor
