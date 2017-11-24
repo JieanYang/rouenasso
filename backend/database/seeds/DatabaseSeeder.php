@@ -304,7 +304,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        // leaveMessages
+        // leaveMessage
         DB::table('leaveMessages')->insert([
             'name_leaveMessage' => '李白',
             'phone_leaveMessage' => '0123456789',
@@ -321,6 +321,25 @@ class DatabaseSeeder extends Seeder
             'agreeContact_leaveMessage' => true,
             'contactWay_leaveMessage' => 'phone',
             'message_leaveMessage' => '哎呀，臣妾好高兴，竟然有人欣赏我的诗！！'
+        ]);
+
+
+        // movement
+        DB::table('movements')->insert([
+            'user_id' => 1,
+            'title_movement' => '天猫双十一活动斩手会',
+            'introduction_movement' => '这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!',
+            'html_movement' => '<h2>这里是活动详细页面-component</h2>',
+            'image_movement' => '../../images/活动推广/天猫.jpg',
+            'view_movement' => 2
+        ]);
+        DB::table('movements')->insert([
+            'user_id' => 2,
+            'title_movement' => '苏宁易购双十一提前买',
+            'introduction_movement' => '这里是苏宁易购拍卖会，买一送一，买二送十，欢迎光临苏宁电器!为您的家带来温暖的额感觉!',
+            'html_movement' => '<h2>这里是活动详细页面-component</h2>',
+            'image_movement' => '../../images/活动推广/苏宁易购.jpg',
+            'view_movement' => 1
         ]);
 
     }
