@@ -21,7 +21,7 @@ class LeaveMessageController extends Controller
 
     public function __construct() {
 
-        $this->middleware('auth.basic.once')->except('store');
+        $this->middleware('auth.basic.once')->only('destroy');
 
         $this->middleware(function ($request, $next) {
             $this->department = Auth::user() ? Auth::user()->department : null;

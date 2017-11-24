@@ -329,7 +329,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
             'title_movement' => '天猫双十一活动斩手会',
             'introduction_movement' => '这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!',
-            'html_movement' => '<h2>这里是活动详细页面-component</h2>',
+            'html_movement' => '<h2>来来来，疯狂购！！双十一剁手剁到爽！！</h2>',
             'image_movement' => '../../images/活动推广/天猫.jpg',
             'view_movement' => 2
         ]);
@@ -337,7 +337,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => 2,
             'title_movement' => '苏宁易购双十一提前买',
             'introduction_movement' => '这里是苏宁易购拍卖会，买一送一，买二送十，欢迎光临苏宁电器!为您的家带来温暖的额感觉!',
-            'html_movement' => '<h2>这里是活动详细页面-component</h2>',
+            'html_movement' => '<h2>去去去，多买多送，双手放在炉上烤不停，带给你无尽的香气和温暖！！</h2>',
             'image_movement' => '../../images/活动推广/苏宁易购.jpg',
             'view_movement' => 1
         ]);
