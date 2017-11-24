@@ -82,6 +82,10 @@ div#panel_8 p {
 div#panel_9 p {
 	color: #231f20;
 }
+
+
+
+
 .panel{
 	/*height: 600px;*/
 	/*margin: 0;*/
@@ -98,7 +102,7 @@ div#panel_9 p {
 }
 
 div#menu li {  
-	list-style-type:square;
+	list-style-type:none;
 }  
 div#menu a {
 	color: #767676;
