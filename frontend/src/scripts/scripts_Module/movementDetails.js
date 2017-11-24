@@ -5,8 +5,14 @@ module.exports = {
 };
 
 /** @ngInject */
-function movementDetailsController($http) {
+function movementDetailsController($http, $location, $sce) {
   var vm = this;
-  
+
+  vm.id=$location.url().slice(16);
+  // console.log(vm.id)
+  $http.get('http://localhost:8000/movements/'+vm.id)
+  .then(function(response) {
+  	vm.movement = $sce.trustAsHtml(response.data.html_movement);
+  });
 
 }

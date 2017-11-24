@@ -1,21 +1,12 @@
-<h2>这里是活动目录页面-component</h2>
+<!-- <h2>这里是活动目录页面-component</h2> -->
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm-4">
-			<div class="movement" ui-sref="home.movementDetails({id:vm.id})">
-				<h5>天猫双十一活动斩手会</h5>
-				<img ng-src="../../images/活动推广/天猫.jpg"><br>
-				这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!
-				这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!
-			</div>
-		</div>
 		<div class="col-sm-4" ng-repeat="movement in vm.data">
 			<div class="movement" ui-sref="home.movementDetails({id:movement.id})">
-				<h5>天猫双十一活动斩手会</h5>
-				<img ng-src="../../images/活动推广/天猫.jpg"><br>
-				这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!
-				这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!
+				<h5>{{movement.title_movement}}</h5>
+				<img ng-src="{{movement.image_movement}}"><br>
+				{{movement.introduction_movement}}
 			</div>
 		</div>
 	</div>
