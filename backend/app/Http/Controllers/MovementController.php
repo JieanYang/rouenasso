@@ -86,7 +86,7 @@ class MovementController extends Controller
         $movement->save();
 
         error_log(env('APP_URL'));
-        return response()->json(['status' => 200, 'msg' => 'success', 'id' => $movement->id, 
+        return response()->json(['status' => 200, 'msg' => 'the store of movement successful', 'id' => $movement->id, 
                                 'url' => env('APP_URL') . '/movements/' . $movement->id]);
     }
 
@@ -128,7 +128,7 @@ class MovementController extends Controller
         // 修改草稿 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN 
              || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+            return response()->json(['status' => 403, 'msg' => 'invalid identity!']);
         }
 
         $validator = Validator::make($request->all(), [
@@ -156,7 +156,7 @@ class MovementController extends Controller
 
         $movementDB->save();
 
-        return response()->json(['status' => 200, 'msg' => 'the update of id movement: '.$movementDB->id." updates successfully! "]);
+        return response()->json(['status' => 200, 'msg' => 'the movement id : '.$movementDB->id." updates successfully! "]);
 
 
     }

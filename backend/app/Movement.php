@@ -13,4 +13,9 @@ class Movement extends Model
 
     // sofe deleted date 
     protected $dates = ['deleted_at'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

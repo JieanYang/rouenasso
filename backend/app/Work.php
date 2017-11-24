@@ -14,5 +14,9 @@ class Work extends Model
     // Sofe deleted date
 	protected $dates = ['deleted_at'];
 
+	public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     
 }
