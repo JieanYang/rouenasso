@@ -11,6 +11,6 @@ function writingDetailController($http, $location, $sce) {
   vm.id=$location.url().slice(14);
   $http.get('http://localhost:8000/writings/'+vm.id)
   .then(function(response) {
-    vm.writing = $sce.trustAsHtml(response.data.html_writing);
+    vm.writing = $sce.trustAsHtml(response.data.html_content);
   });
 }
