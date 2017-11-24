@@ -4,9 +4,9 @@
 	<div class="row">
 		<div class="col-sm-4" ng-repeat="movement in vm.data">
 			<div class="movement" ui-sref="home.movementDetails({id:movement.id})">
-				<h5>{{movement.title_movement}}</h5>
-				<img ng-src="{{movement.image_movement}}"><br>
-				{{movement.introduction_movement}}
+				<h5>{{movement.title}}</h5>
+				<img ng-src="{{movement.image}}"><br>
+				{{movement.introduction}}
 			</div>
 		</div>
 	</div>
