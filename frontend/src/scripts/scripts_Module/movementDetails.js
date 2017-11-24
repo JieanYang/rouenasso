@@ -12,7 +12,7 @@ function movementDetailsController($http, $location, $sce) {
   // console.log(vm.id)
   $http.get('http://localhost:8000/movements/'+vm.id)
   .then(function(response) {
-  	vm.movement = $sce.trustAsHtml(response.data.html_movement);
+  	vm.movement = $sce.trustAsHtml(response.data.html_content);
   });
 
 }
