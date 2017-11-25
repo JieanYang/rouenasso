@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Work;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 // 表单验证
 use Validator;
@@ -20,9 +21,9 @@ class WorkController extends Controller
 
     public function __construct() {
 
-        $this->middleware('auth.basic.once')->only(['store', 'update', 'destroy']);
+        $this->middleware('auth.basic.once')->only(['store', 'update', 'destroy', 'index_user_drafts', 'show_user_draft', 'countPost', 'showPostsCalendar']);
 
-         $this->middleware(function ($request, $next) {
+        $this->middleware(function ($request, $next) {
             $this->department = Auth::user() ? Auth::user()->department : null;
             $this->position = Auth::user() ? Auth::user()->position : null;
             return $next($request);
@@ -46,8 +47,8 @@ class WorkController extends Controller
 
     // 显示草稿某个id用户所有的草稿，需用户认证
     public function index_user_drafts() {
-        $movement_drafts = Work::whereNull('published_at')->where('user_id', Auth::id())->get();
-        return $movement_drafts;
+        $work_drafts = Work::whereNull('published_at')->where('user_id', Auth::id())->get();
+        return $work_drafts;
     }
 
     /**
@@ -96,7 +97,7 @@ class WorkController extends Controller
         $newWork->published_at = $request->published_at ? $request->published_at : null;
         $newWork->user_id = Auth::id();
         $newWork->view = 0;
-        $movement->created_at = date("Y-m-d");
+        $newWork->created_at = date("Y-m-d");
 
         $newWork->save();
 
@@ -116,10 +117,6 @@ class WorkController extends Controller
     {
         $work = Work::whereNotNull('published_at')->where('id', $id)->get();
 
-        if($work === null) {
-            return response()->json(['status' => 404, 'msg' => 'The id work :'.$id.' not exists']);
-        }
-
         // 隐藏不必要信息
         $work[0]->setHidden([ 'user_id', 'updated_at', 'deleted_at']);
         return $work[0];
@@ -128,10 +125,6 @@ class WorkController extends Controller
     //显示某个id用户的某一个id草稿 
     public function show_user_draft($id) {
         $work = Work::whereNull('published_at')->where(['id' => $id, 'user_id' => Auth::id()])->get();
-
-        if($work === null) {
-            return response()->json(['status' => 404, 'msg' => 'The id work draft :'.$id.' not exists']);
-        }
 
         return $work[0];
     }
@@ -235,5 +228,67 @@ class WorkController extends Controller
         $WorkDel->delete();
 
         return response()->json(['status' => 200, 'msg' => 'the work id : '.$WorkDel->id.' deletes successfully! ']);
+    }
+
+    public function countPost(Request $request)
+    {
+        // 搜索查看成员 => 主席团&秘书部
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::MISHUBU 
+             || $this->department == Department::XUANCHUANBU 
+             || $this->department == Department::XIANGMUKAIFABU)) {
+            return response()->json(['status' => 403, 'msg' => 'invalid identity']);
+        }
+
+        if($request->published && $request->draft) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Mixed param.']);
+        }else if($request->published) {
+            return Work::whereNotNull('published_at')->count();
+        } else if ($request->draft) {
+            return Work::whereNull('published_at')->count();
+        } else {
+            return Work::All()->count();
+        }
+    }
+
+    public function showPostsCalendar() 
+    {
+        if(!($this->department == Department::ZHUXITUAN || 
+             $this->department == Department::XUANCHUANBU || 
+             $this->department == Department::MISHUBU || 
+             $this->department == Department::XIANGMUKAIFABU)) {
+            return response()->json(['status' => 403, 'msg' => 'invalid identity!']);
+        }
+
+        $prefix = env('APP_URL') . '/works/';
+
+        $works = Work::select('job', 'id',
+                     DB::raw('date(published_at) as published_at'),
+                     DB::raw('date(created_at) as created_at'))
+            ->get();
+
+        foreach($works as $p) {
+            if($p->published_at == null) {
+                $p->description = 'draft';
+                $p->start = $p->created_at;
+                $p->backgroundColor = '#689F38';
+            } else {
+                $p->description = 'published';
+                $p->start = $p->published_at;
+                $p->backgroundColor = '#303F9F';
+            }
+            $p->url = $prefix . $p->id;
+        }
+
+        return $works;
+    }
+
+
+    private function incrementView(Work $p) {
+        if($p->published_at){
+            $p->view++;
+            $p->save();
+        }
+        return $p;
     }
 }

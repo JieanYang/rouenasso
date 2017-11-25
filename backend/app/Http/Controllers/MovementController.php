@@ -119,10 +119,6 @@ class MovementController extends Controller
     {
         $movement = Movement::whereNotNull('published_at')->where('id', $id)->get();
 
-        if($movement === null) {
-            return response()->json(['status' => 404, 'msg' => 'The id Movement :'.$id.' not exists']);
-        }
-
         // 隐藏不必要信息
         $movement[0]->setHidden([ 'user_id', 'updated_at', 'deleted_at']);
         return $movement[0];
@@ -131,10 +127,6 @@ class MovementController extends Controller
     //显示某个id用户的某一个id草稿 
     public function show_user_draft($id) {
         $movement = Movement::whereNull('published_at')->where(['id' => $id, 'user_id' => Auth::id()])->get();
-
-        if($movement === null) {
-            return response()->json(['status' => 404, 'msg' => 'The id Movement draft :'.$id.' not exists']);
-        }
 
         return $movement[0];
     }
