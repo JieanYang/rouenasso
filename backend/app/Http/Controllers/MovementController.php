@@ -21,7 +21,7 @@ class MovementController extends Controller
 
     public function __construct() {
 
-        $this->middleware('auth.basic.once')->only(['store', 'update', 'destroy']);
+        $this->middleware('auth.basic.once')->only(['store', 'update', 'destroy', 'index_user_drafts', 'show_user_draft']);
 
          $this->middleware(function ($request, $next) {
             $this->department = Auth::user() ? Auth::user()->department : null;
@@ -35,9 +35,23 @@ class MovementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // 已发布的全部活动
     public function index()
     {
-        return Movement::All();
+        $movements = Movement::whereNotNull('published_at')->get();
+
+        // 不返回html
+        foreach ($movements as $ch) {
+            $ch->setHidden(['html_content', 'user_id', 'updated_at', 'deleted_at']);
+        };
+        return $movements;
+    }
+
+
+    // 显示草稿某个id用户所有的草稿，需用户认证
+    public function index_user_drafts() {
+        $movement_drafts = Movement::whereNull('published_at')->where('user_id', Auth::id())->get();
+        return $movement_drafts;
     }
 
     /**
@@ -83,6 +97,7 @@ class MovementController extends Controller
         $movement->published_at = $request->published_at ? $request->published_at : null;
         $movement->user_id = Auth::id();
         $movement->view = 0;
+        $movement->created_at = date("Y-m-d");
 
         $movement->save();
 
@@ -97,9 +112,29 @@ class MovementController extends Controller
      * @param  \App\Movement  $movement
      * @return \Illuminate\Http\Response
      */
+    // 已发布特定id的活动
     public function show($id)
     {
-        return Movement::find($id);
+        $movement = Movement::whereNotNull('published_at')->where('id', $id)->get();
+
+        if($movement === null) {
+            return response()->json(['status' => 404, 'msg' => 'The id Movement :'.$id.' not exists']);
+        }
+
+        // 隐藏不必要信息
+        $movement[0]->setHidden([ 'user_id', 'updated_at', 'deleted_at']);
+        return $movement[0];
+    }
+
+    //显示某个id用户的某一个id草稿 
+    public function show_user_draft($id) {
+        $movement = Movement::whereNull('published_at')->where(['id' => $id, 'user_id' => Auth::id()])->get();
+
+        if($movement === null) {
+            return response()->json(['status' => 404, 'msg' => 'The id Movement draft :'.$id.' not exists']);
+        }
+
+        return $movement[0];
     }
 
     /**

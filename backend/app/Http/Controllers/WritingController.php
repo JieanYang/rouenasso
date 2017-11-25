@@ -82,6 +82,7 @@ class WritingController extends Controller
         $newWriting->published_at = $request->published_at ? $request->published_at : null;
         $newWriting->user_id = Auth::id();
         $newWriting->view = 0;
+        $movement->created_at = date("Y-m-d");
 
         $newWriting->save();
 
