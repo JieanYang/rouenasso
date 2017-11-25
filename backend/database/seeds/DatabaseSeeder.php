@@ -274,11 +274,31 @@ class DatabaseSeeder extends Seeder
             'city' => 'rouen',
             'salary' => 1500,
             'html_content' => '<h2>here is the job content.</h2>',
-            'view' =>0
+            'view' =>0,
+            'published_at' => '2019-06-06'
         ]);
         DB::table('works')->insert([
             'user_id' => 1,
             'job' => '花生',
+            'company' => '花生油协会',
+            'city' => 'rouen',
+            'salary' => 1000,
+            'html_content' => '<h2>我是花生</h2>',
+            'view' =>0,
+            'published_at' => '2018-01-01'
+        ]);
+        DB::table('works')->insert([
+            'user_id' => 2,
+            'job' => '草稿1',
+            'company' => '秘书协会',
+            'city' => 'rouen',
+            'salary' => 1500,
+            'html_content' => '<h2>here is the job content.</h2>',
+            'view' =>0
+        ]);
+        DB::table('works')->insert([
+            'user_id' => 1,
+            'job' => '草稿2',
             'company' => '花生油协会',
             'city' => 'rouen',
             'salary' => 1000,

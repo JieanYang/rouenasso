@@ -35,7 +35,19 @@ class WorkController extends Controller
      */
     public function index()
     {
-        return Work::All();
+        $works = Work::whereNotNull('published_at')->get();
+
+        // 不返回html
+        foreach ($works as $ch) {
+            $ch->setHidden(['html_content', 'user_id', 'updated_at', 'deleted_at']);
+        };
+        return $works;
+    }
+
+    // 显示草稿某个id用户所有的草稿，需用户认证
+    public function index_user_drafts() {
+        $movement_drafts = Work::whereNull('published_at')->where('user_id', Auth::id())->get();
+        return $movement_drafts;
     }
 
     /**
@@ -99,9 +111,29 @@ class WorkController extends Controller
      * @param  \App\Work  $work
      * @return \Illuminate\Http\Response
      */
+    // 已发布特定id的活动
     public function show($id)
     {
-        return Work::find($id);
+        $work = Work::whereNotNull('published_at')->where('id', $id)->get();
+
+        if($work === null) {
+            return response()->json(['status' => 404, 'msg' => 'The id work :'.$id.' not exists']);
+        }
+
+        // 隐藏不必要信息
+        $work[0]->setHidden([ 'user_id', 'updated_at', 'deleted_at']);
+        return $work[0];
+    }
+
+    //显示某个id用户的某一个id草稿 
+    public function show_user_draft($id) {
+        $work = Work::whereNull('published_at')->where(['id' => $id, 'user_id' => Auth::id()])->get();
+
+        if($work === null) {
+            return response()->json(['status' => 404, 'msg' => 'The id work draft :'.$id.' not exists']);
+        }
+
+        return $work[0];
     }
 
     /**
