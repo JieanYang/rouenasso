@@ -12,6 +12,6 @@ function writingController($http) {
   .then(function(response){
   	vm.writings = response.data;
 
-  	console.log(vm.writings)
+  	// console.log(vm.writings)
   });
 }
