@@ -336,11 +336,29 @@ class DatabaseSeeder extends Seeder
             'introduction' => '这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!',
             'html_content' => '<h2>来来来，疯狂购！！双十一剁手剁到爽！！</h2>',
             'image' => '../../images/活动推广/天猫.jpg',
-            'view' => 2
+            'view' => 2,
+            'published_at' => '2017-10-25'
         ]);
         DB::table('movements')->insert([
             'user_id' => 2,
             'title' => '苏宁易购双十一提前买',
+            'introduction' => '这里是苏宁易购拍卖会，买一送一，买二送十，欢迎光临苏宁电器!为您的家带来温暖的额感觉!',
+            'html_content' => '<h2>去去去，多买多送，双手放在炉上烤不停，带给你无尽的香气和温暖！！</h2>',
+            'image' => '../../images/活动推广/苏宁易购.jpg',
+            'view' => 1,
+            'published_at' => '2017-10-25'
+        ]);
+        DB::table('movements')->insert([
+            'user_id' => 1,
+            'title' => '草稿1',
+            'introduction' => '这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!',
+            'html_content' => '<h2>来来来，疯狂购！！双十一剁手剁到爽！！</h2>',
+            'image' => '../../images/活动推广/天猫.jpg',
+            'view' => 2
+        ]);
+        DB::table('movements')->insert([
+            'user_id' => 2,
+            'title' => '草稿2',
             'introduction' => '这里是苏宁易购拍卖会，买一送一，买二送十，欢迎光临苏宁电器!为您的家带来温暖的额感觉!',
             'html_content' => '<h2>去去去，多买多送，双手放在炉上烤不停，带给你无尽的香气和温暖！！</h2>',
             'image' => '../../images/活动推广/苏宁易购.jpg',

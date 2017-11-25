@@ -42,4 +42,16 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Post');
     }
+    public function movements()
+    {
+        return $this->hasMany('App\Movement');
+    }
+    public function works()
+    {
+        return $this->hasMany('App\Work');
+    }
+    public function writings()
+    {
+        return $this->hasMany('App\Writing');
+    }
 }

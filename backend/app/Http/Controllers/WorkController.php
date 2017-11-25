@@ -84,6 +84,7 @@ class WorkController extends Controller
         $newWork->published_at = $request->published_at ? $request->published_at : null;
         $newWork->user_id = Auth::id();
         $newWork->view = 0;
+        $movement->created_at = date("Y-m-d");
 
         $newWork->save();
 
