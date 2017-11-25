@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Movement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 // 表单验证
 use Validator;
@@ -21,7 +23,7 @@ class MovementController extends Controller
 
     public function __construct() {
 
-        $this->middleware('auth.basic.once')->only(['store', 'update', 'destroy', 'index_user_drafts', 'show_user_draft']);
+        $this->middleware('auth.basic.once')->only(['store', 'update', 'destroy', 'index_user_drafts', 'show_user_draft', 'countPost', 'showPostsCalendar']);
 
          $this->middleware(function ($request, $next) {
             $this->department = Auth::user() ? Auth::user()->department : null;
@@ -236,4 +238,69 @@ class MovementController extends Controller
         return response()->json(['status' => 200, 'msg' => 'the movement id : '.$movementDel->id.' deletes successfully! ']);
 
     }
+
+
+    public function countPost(Request $request)
+    {
+        // 搜索查看成员 => 主席团&秘书部
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::MISHUBU 
+             || $this->department == Department::XUANCHUANBU 
+             || $this->department == Department::XIANGMUKAIFABU)) {
+            return response()->json(['status' => 403, 'msg' => 'invalid identity']);
+        }
+
+        if($request->published && $request->draft) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Mixed param.']);
+        }else if($request->published) {
+            return Movement::whereNotNull('published_at')->count();
+        } else if ($request->draft) {
+            return Movement::whereNull('published_at')->count();
+        } else {
+            return Movement::All()->count();
+        }
+    }
+
+    public function showPostsCalendar() 
+    {
+        if(!($this->department == Department::ZHUXITUAN || 
+             $this->department == Department::XUANCHUANBU || 
+             $this->department == Department::MISHUBU || 
+             $this->department == Department::XIANGMUKAIFABU)) {
+            return response()->json(['status' => 403, 'msg' => 'invalid identity!']);
+        }
+
+        $prefix = env('APP_URL') . '/movements/';
+
+        $movements = Movement::select('title', 'id',
+                     DB::raw('date(published_at) as published_at'),
+                     DB::raw('date(created_at) as created_at'))
+            ->get();
+
+        foreach($movements as $p) {
+            if($p->published_at == null) {
+                $p->description = 'draft';
+                $p->start = $p->created_at;
+                $p->backgroundColor = '#689F38';
+            } else {
+                $p->description = 'published';
+                $p->start = $p->published_at;
+                $p->backgroundColor = '#303F9F';
+            }
+            $p->url = $prefix . $p->id;
+        }
+
+        return $movements;
+    }
+
+
+    private function incrementView(Movement $p) {
+        if($p->published_at){
+            $p->view++;
+            $p->save();
+        }
+        return $p;
+    }
+
+
 }

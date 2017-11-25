@@ -61,10 +61,15 @@ Route::get('posts/{id}/noauth', 'PostNoAuthController@showPost')->name('posts.sh
 // Movements
 Route::get('movements/drafts', 'MovementController@index_user_drafts');
 Route::get('movements/drafts/{id}', 'MovementController@show_user_draft');
+Route::get('movements/count', 'MovementController@countPost');
+Route::get('movements/calendar', 'MovementController@showPostsCalendar');
 Route::resource('movements', 'MovementController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
 
 // Works
+// Route::get('works/drafts', 'WorkController@index_user_drafts');
+// Route::get('works/drafts/{id}', 'WorkController@show_user_draft');
 Route::resource('works', 'WorkController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
+
 // Writings
 Route::resource('writings', 'WritingController', [ 'only' => ['index', 'show', 'store', 'update', 'destroy']]);
 // LeaveMessages
