@@ -66,8 +66,10 @@ Route::get('movements/calendar', 'MovementController@showPostsCalendar');
 Route::resource('movements', 'MovementController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
 
 // Works
-// Route::get('works/drafts', 'WorkController@index_user_drafts');
-// Route::get('works/drafts/{id}', 'WorkController@show_user_draft');
+Route::get('works/drafts', 'WorkController@index_user_drafts');
+Route::get('works/drafts/{id}', 'WorkController@show_user_draft');
+Route::get('works/count', 'WorkController@countPost');
+Route::get('works/calendar', 'WorkController@showPostsCalendar');
 Route::resource('works', 'WorkController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
 
 // Writings
