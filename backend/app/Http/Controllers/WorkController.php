@@ -41,6 +41,8 @@ class WorkController extends Controller
         // 不返回html
         foreach ($works as $ch) {
             $ch->setHidden(['html_content', 'user_id', 'updated_at', 'deleted_at']);
+            $dateArray = explode(" ", $ch->published_at);
+            $ch->published_at = $dateArray[0];
         };
         return $works;
     }
