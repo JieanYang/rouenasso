@@ -23,7 +23,7 @@ class WorkController extends Controller
 
         $this->middleware('auth.basic.once')->only(['store', 'update', 'destroy', 'index_user_drafts', 'show_user_draft', 'countPost', 'showPostsCalendar']);
 
-         $this->middleware(function ($request, $next) {
+        $this->middleware(function ($request, $next) {
             $this->department = Auth::user() ? Auth::user()->department : null;
             $this->position = Auth::user() ? Auth::user()->position : null;
             return $next($request);
@@ -97,7 +97,7 @@ class WorkController extends Controller
         $newWork->published_at = $request->published_at ? $request->published_at : null;
         $newWork->user_id = Auth::id();
         $newWork->view = 0;
-        $movement->created_at = date("Y-m-d");
+        $newWork->created_at = date("Y-m-d");
 
         $newWork->save();
 
@@ -230,7 +230,7 @@ class WorkController extends Controller
         return response()->json(['status' => 200, 'msg' => 'the work id : '.$WorkDel->id.' deletes successfully! ']);
     }
 
-        public function countPost(Request $request)
+    public function countPost(Request $request)
     {
         // 搜索查看成员 => 主席团&秘书部
         if(!($this->department == Department::ZHUXITUAN 

@@ -73,6 +73,10 @@ Route::get('works/calendar', 'WorkController@showPostsCalendar');
 Route::resource('works', 'WorkController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
 
 // Writings
+Route::get('writings/drafts', 'WritingController@index_user_drafts');
+Route::get('writings/drafts/{id}', 'WritingController@show_user_draft');
+Route::get('writings/count', 'WritingController@countPost');
+Route::get('writings/calendar', 'WritingController@showPostsCalendar');
 Route::resource('writings', 'WritingController', [ 'only' => ['index', 'show', 'store', 'update', 'destroy']]);
 // LeaveMessages
 Route::resource('leaveMessages', 'LeaveMessageController', [ 'only' => ['index', 'show', 'store', 'destroy']]);

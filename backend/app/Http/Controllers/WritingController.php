@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Writing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 // 表单验证
 use Validator;
@@ -19,7 +20,7 @@ class WritingController extends Controller
 
     public function __construct() {
 
-        $this->middleware('auth.basic.once')->only(['store', 'update', 'destroy']);
+        $this->middleware('auth.basic.once')->only(['store', 'update', 'destroy', 'index_user_drafts', 'show_user_draft', 'countPost', 'showPostsCalendar']);
 
          $this->middleware(function ($request, $next) {
             $this->department = Auth::user() ? Auth::user()->department : null;
@@ -34,7 +35,19 @@ class WritingController extends Controller
      */
     public function index()
     {
-        return Writing::All();
+        $writings = Writing::whereNotNull('published_at')->get();
+
+        // 不返回html
+        foreach ($writings as $ch) {
+            $ch->setHidden(['html_content', 'user_id', 'updated_at', 'deleted_at']);
+        };
+        return $writings;
+    }
+
+    // 显示草稿某个id用户所有的草稿，需用户认证
+    public function index_user_drafts() {
+        $writing_drafts = Writing::whereNull('published_at')->where('user_id', Auth::id())->get();
+        return $writing_drafts;
     }
 
     /**
@@ -82,7 +95,7 @@ class WritingController extends Controller
         $newWriting->published_at = $request->published_at ? $request->published_at : null;
         $newWriting->user_id = Auth::id();
         $newWriting->view = 0;
-        $movement->created_at = date("Y-m-d");
+        $newWriting->created_at = date("Y-m-d");
 
         $newWriting->save();
 
@@ -99,7 +112,18 @@ class WritingController extends Controller
      */
     public function show($id)
     {
-        return Writing::find($id);
+        $writing = Writing::whereNotNull('published_at')->where('id', $id)->get();
+
+        // 隐藏不必要信息
+        $writing[0]->setHidden([ 'user_id', 'updated_at', 'deleted_at']);
+        return $writing[0];
+    }
+
+    //显示某个id用户的某一个id草稿 
+    public function show_user_draft($id) {
+        $writing = Writing::whereNull('published_at')->where(['id' => $id, 'user_id' => Auth::id()])->get();
+
+        return $writing[0];
     }
 
     /**
@@ -200,5 +224,68 @@ class WritingController extends Controller
         $writingDel->delete();
 
         return response()->json(['status' => 200, 'msg' => 'the writing id : '.$writingDel->id.' deletes successfully! ']);
+    }
+
+
+    public function countPost(Request $request)
+    {
+        // 搜索查看成员 => 主席团&秘书部
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::MISHUBU 
+             || $this->department == Department::XUANCHUANBU 
+             || $this->department == Department::XIANGMUKAIFABU)) {
+            return response()->json(['status' => 403, 'msg' => 'invalid identity']);
+        }
+
+        if($request->published && $request->draft) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Mixed param.']);
+        }else if($request->published) {
+            return Writing::whereNotNull('published_at')->count();
+        } else if ($request->draft) {
+            return Writing::whereNull('published_at')->count();
+        } else {
+            return Writing::All()->count();
+        }
+    }
+
+    public function showPostsCalendar() 
+    {
+        if(!($this->department == Department::ZHUXITUAN || 
+             $this->department == Department::XUANCHUANBU || 
+             $this->department == Department::MISHUBU || 
+             $this->department == Department::XIANGMUKAIFABU)) {
+            return response()->json(['status' => 403, 'msg' => 'invalid identity!']);
+        }
+
+        $prefix = env('APP_URL') . '/writings/';
+
+        $writings = Writing::select('title', 'username', 'id',
+                     DB::raw('date(published_at) as published_at'),
+                     DB::raw('date(created_at) as created_at'))
+            ->get();
+
+        foreach($writings as $p) {
+            if($p->published_at == null) {
+                $p->description = 'draft';
+                $p->start = $p->created_at;
+                $p->backgroundColor = '#689F38';
+            } else {
+                $p->description = 'published';
+                $p->start = $p->published_at;
+                $p->backgroundColor = '#303F9F';
+            }
+            $p->url = $prefix . $p->id;
+        }
+
+        return $writings;
+    }
+
+
+    private function incrementView(Writing $p) {
+        if($p->published_at){
+            $p->view++;
+            $p->save();
+        }
+        return $p;
     }
 }
