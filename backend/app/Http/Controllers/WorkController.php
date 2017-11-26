@@ -117,11 +117,16 @@ class WorkController extends Controller
     // 已发布特定id的活动
     public function show($id)
     {
+        if(!ctype_digit($id)) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
+        }
+        
         $work = Work::whereNotNull('published_at')->where('id', $id)->get();
 
         // 隐藏不必要信息
         $work[0]->setHidden([ 'user_id', 'updated_at', 'deleted_at']);
-        return $work[0];
+
+        return $work[0] ? $this->incrementView($work[0]) : Response()->josn(['status' => 404, 'msg' => 'the id work '.$id.' Not found!']);
     }
 
     //显示某个id用户的某一个id草稿 

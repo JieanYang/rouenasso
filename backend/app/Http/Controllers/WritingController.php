@@ -114,11 +114,16 @@ class WritingController extends Controller
      */
     public function show($id)
     {
+        if(!ctype_digit($id)) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
+        }
+        
         $writing = Writing::whereNotNull('published_at')->where('id', $id)->get();
 
         // 隐藏不必要信息
         $writing[0]->setHidden([ 'user_id', 'updated_at', 'deleted_at']);
-        return $writing[0];
+
+        return $writing[0] ? $this->incrementView($writing[0]) : Response()->josn(['status' => 404, 'msg' => 'the id writing '.$id.' Not found!']);
     }
 
     //显示某个id用户的某一个id草稿 

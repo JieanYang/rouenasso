@@ -122,11 +122,16 @@ class MovementController extends Controller
     // 已发布特定id的活动
     public function show($id)
     {
+        if(!ctype_digit($id)) {
+            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
+        }
+
         $movement = Movement::whereNotNull('published_at')->where('id', $id)->get();
 
         // 隐藏不必要信息
         $movement[0]->setHidden([ 'user_id', 'updated_at', 'deleted_at']);
-        return $movement[0];
+        
+        return $movement[0] ? $this->incrementView($movement[0]) : Response()->josn(['status' => 404, 'msg' => 'the id movement '.$id.' Not found!']);
     }
 
     //显示某个id用户的某一个id草稿 
