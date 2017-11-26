@@ -58,26 +58,18 @@ Route::get('posts/{id}/noauth', 'PostNoAuthController@showPost')->name('posts.sh
 
 
 
-// 三个类型的帖子统计
+// 三个类型的9个动态API
 Route::get('{category}/count', 'MovementController@countPost');
 Route::get('{category}/calendar', 'MovementController@showPostsCalendar');
 
-// Movements
-Route::get('movements/drafts', 'MovementController@index_user_drafts');
-Route::get('movements/drafts/{id}', 'MovementController@show_user_draft');
-Route::resource('movements', 'MovementController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
-// Works
-Route::get('works/drafts', 'WorkController@index_user_drafts');
-Route::get('works/drafts/{id}', 'WorkController@show_user_draft');
-// Route::get('works/count', 'WorkController@countPost');
-// Route::get('works/calendar', 'WorkController@showPostsCalendar');
-Route::resource('works', 'WorkController', ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
-// Writings
-Route::get('writings/drafts', 'WritingController@index_user_drafts');
-Route::get('writings/drafts/{id}', 'WritingController@show_user_draft');
-// Route::get('writings/count', 'WritingController@countPost');
-// Route::get('writings/calendar', 'WritingController@showPostsCalendar');
-Route::resource('writings', 'WritingController', [ 'only' => ['index', 'show', 'store', 'update', 'destroy']]);
+Route::get('{category}/drafts', 'MovementController@index_user_drafts');
+Route::get('{category}/drafts/{id}', 'MovementController@show_user_draft');
+// resource API
+Route::get('{category}', 'MovementController@index');
+Route::get('{category}/{id}', 'MovementController@show');
+Route::post('{category}', 'MovementController@store');
+Route::put('{category}/{id}', 'MovementController@update');
+Route::delete('{category}/{id}', 'MovementController@destroy');
 
 
 // LeaveMessages

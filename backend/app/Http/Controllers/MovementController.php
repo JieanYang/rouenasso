@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Model\Department;
 use App\Model\Position;
 
-// 统计帖子时使用
+// category 判断后使用
 use App\Work;
 use App\Writing;
 
@@ -41,24 +41,39 @@ class MovementController extends Controller
      * @return \Illuminate\Http\Response
      */
     // 已发布的全部活动
-    public function index()
+    public function index($category)
     {
-        $movements = Movement::whereNotNull('published_at')->get();
+        if($category === 'movements')
+            $posts = Movement::whereNotNull('published_at')->get();
+        else if($category === 'works')
+            $posts = Work::whereNotNull('published_at')->get();
+        else if($category === 'writings')
+            $posts = Writing::whereNotNull('published_at')->get();
+        else 
+            return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
 
         // 不返回html
-        foreach ($movements as $ch) {
+        foreach ($posts as $ch) {
             $ch->setHidden(['html_content', 'user_id', 'updated_at', 'deleted_at']);
             $dateArray = explode(" ", $ch->published_at);
             $ch->published_at = $dateArray[0];
         };
-        return $movements;
+        return $posts;
     }
 
 
     // 显示草稿某个id用户所有的草稿，需用户认证
-    public function index_user_drafts() {
-        $movement_drafts = Movement::whereNull('published_at')->where('user_id', Auth::id())->get();
-        return $movement_drafts;
+    public function index_user_drafts($category) {
+        if($category === 'movements')
+            $posts_drafts = Movement::whereNull('published_at')->where('user_id', Auth::id())->get();
+        else if($category === 'works')
+            $posts_drafts = Work::whereNull('published_at')->where('user_id', Auth::id())->get();
+        else if($category === 'writings')
+            $posts_drafts = Writing::whereNull('published_at')->where('user_id', Auth::id())->get();
+        else 
+            return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
+        
+        return $posts_drafts;
     }
 
     /**
@@ -77,7 +92,7 @@ class MovementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($category, Request $request)
     {
         // 新增内容 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN 
@@ -85,32 +100,77 @@ class MovementController extends Controller
             return response()->json(['status' => 403, 'msg' => 'invalid identity'], 403);
         }
 
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'introduction' => 'required',
-            'html_content' => 'required',
-            'published_at' => 'date'
-        ]);
+        if($category === 'movements'){
+            $validator = Validator::make($request->all(), [
+                'title' => 'required',
+                'introduction' => 'required',
+                'html_content' => 'required',
+                'published_at' => 'date'
+            ]);
 
-        if ($validator->fails()) {
-            return $validator->errors();
+            if ($validator->fails()) {
+                return $validator->errors();
+            }
+
+            $newPost = new Movement;
+            $newPost->title = $request->title;
+            $newPost->introduction = $request->introduction;
+            $newPost->image = $request->image ? $request->image : null;
         }
+        else if($category === 'works'){
+            $validator = Validator::make($request->all(), [
+                'job' => 'required',
+                'company' => 'required',
+                'city'=>'required',
+                'salary'=>'required',
+                'html_content' => 'required',
+                'published_at'=>'date'
+            ]);
 
-        $movement = new Movement;
-        $movement->title = $request->title;
-        $movement->introduction = $request->introduction;
-        $movement->html_content = $request->html_content;
-        $movement->image = $request->image ? $request->image : null;
-        $movement->published_at = $request->published_at ? $request->published_at : null;
-        $movement->user_id = Auth::id();
-        $movement->view = 0;
-        $movement->created_at = date("Y-m-d");
+            if ($validator->fails()) {
+                return $validator->errors();
+            }
 
-        $movement->save();
+            $newPost = new Work;
+            $newPost->job = $request->job;
+            $newPost->company = $request->company;
+            $newPost->city = $request->city;
+            $newPost->salary = $request->salary;
+        }
+        else if($category === 'writings'){
+            $validator = Validator::make($request->all(), [
+                'title' => 'required',
+                'username' => 'required',
+                'introduction' => 'required',
+                'html_content' => 'required',
+                'published_at' => 'date'
+            ]);
+
+            if ($validator->fails()) {
+                return $validator->errors();
+            }
+
+            $newPost = new Writing;
+            $newPost->title = $request->title; 
+            $newPost->username = $request->username; 
+            $newPost->introduction = $request->introduction; 
+            $newPost->image = $request->image ? $request->image : null;
+        }
+        else 
+            return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
+
+        //三种类型帖子共同属性
+        $newPost->html_content = $request->html_content; 
+        $newPost->published_at = $request->published_at ? $request->published_at : null;
+        $newPost->user_id = Auth::id();
+        $newPost->view = 0;
+        $newPost->created_at = date("Y-m-d H:i:s");
+
+        $newPost->save();
 
         error_log(env('APP_URL'));
-        return response()->json(['status' => 200, 'msg' => 'the store of movement successful', 'id' => $movement->id, 
-                                'url' => env('APP_URL') . '/movements/' . $movement->id]);
+        return response()->json(['status' => 200, 'msg' => 'the store of '.substr($category, 0, -1).' successful!', 'id' => $newPost->id, 
+                                'url' => env('APP_URL') . '/'.$category.'/' . $newPost->id]);
     }
 
     /**
@@ -120,25 +180,36 @@ class MovementController extends Controller
      * @return \Illuminate\Http\Response
      */
     // 已发布特定id的活动
-    public function show($id)
+    public function show($category,$id)
     {
-        if(!ctype_digit($id)) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
-        }
-
-        $movement = Movement::whereNotNull('published_at')->where('id', $id)->get();
+        if($category === 'movements')
+                $post = Movement::whereNotNull('published_at')->where('id', $id)->get();
+            else if($category === 'works')
+                $post = Work::whereNotNull('published_at')->where('id', $id)->get();
+            else if($category === 'writings')
+                $post = Writing::whereNotNull('published_at')->where('id', $id)->get();
+            else 
+                return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
 
         // 隐藏不必要信息
-        $movement[0]->setHidden([ 'user_id', 'updated_at', 'deleted_at']);
-        
-        return $movement[0] ? $this->incrementView($movement[0]) : Response()->josn(['status' => 404, 'msg' => 'the id movement '.$id.' Not found!']);
+        $post[0]->setHidden([ 'user_id', 'updated_at', 'deleted_at']);
+
+        return $post[0];
     }
 
     //显示某个id用户的某一个id草稿 
-    public function show_user_draft($id) {
-        $movement = Movement::whereNull('published_at')->where(['id' => $id, 'user_id' => Auth::id()])->get();
+    public function show_user_draft($category, $id) {
+        if($category === 'movements')
+            $post = Movement::whereNull('published_at')->where(['id' => $id, 'user_id' => Auth::id()])->get();
+        else if($category === 'works')
+            $post = Work::whereNull('published_at')->where(['id' => $id, 'user_id' => Auth::id()])->get();
+        else if($category === 'writings')
+            $post = Writing::whereNull('published_at')->where(['id' => $id, 'user_id' => Auth::id()])->get();
+        else 
+            return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
+        
 
-        return $movement[0];
+        return $post[0];
     }
 
     /**
@@ -159,7 +230,7 @@ class MovementController extends Controller
      * @param  \App\Movement  $movement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($category, Request $request, $id)
     {
         if(!ctype_digit($id)) {
             return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input. id must be a number'], 400);
@@ -171,32 +242,87 @@ class MovementController extends Controller
             return response()->json(['status' => 403, 'msg' => 'invalid identity!']);
         }
 
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'introduction' => 'required',
-            'html_content' => 'required',
-            'published_at' => 'date'
-        ]);
 
-        if ($validator->fails()) {
-            return $validator->errors();
+        if($category === 'movements'){
+            $validator = Validator::make($request->all(), [
+                'title' => 'required',
+                'introduction' => 'required',
+                'html_content' => 'required',
+                'published_at' => 'date'
+            ]);
+
+            if ($validator->fails()) {
+                return $validator->errors();
+            }
+
+            $updatePost = Movement::find($id);
+
+            if($updatePost === null) {
+                return response()->json(['status' => 404, 'msg' => substr($category, 0, -1).' not exists']);
+            }
+
+            $updatePost->title = $request->title;
+            $updatePost->introduction = $request->introduction;
+            $updatePost->image = $request->image?$request->image:$updatePost->image;
         }
+        else if($category === 'works'){
+            $validator = Validator::make($request->all(), [
+                'job' => 'required',
+                'company' => 'required',
+                'city'=>'required',
+                'salary'=>'required',
+                'html_content' => 'required',
+                'published_at'=>'date'
+            ]);
 
-        $movementDB = Movement::find($id);
+            if ($validator->fails()) {
+                return $validator->errors();
+            }
 
-        if($movementDB === null) {
-            return response()->json(['status' => 404, 'msg' => 'Movement not exists']);
+            $updatePost = Work::find($id);
+
+            if($updatePost === null) {
+                return response()->json(['status' => 404, 'msg' => substr($category, 0, -1).' not exists']);
+            }
+
+            $updatePost->job = $request->job;
+            $updatePost->company = $request->company;
+            $updatePost->city = $request->city;
+            $updatePost->salary = $request->salary;
         }
+        else if($category === 'writings'){
+            $validator = Validator::make($request->all(), [
+                'title' => 'required',
+                'username' => 'required',
+                'introduction' => 'required',
+                'html_content' => 'required',
+                'published_at' => 'date'
+            ]);
 
-        $movementDB->title = $request->title;
-        $movementDB->introduction = $request->introduction;
-        $movementDB->html_content = $request->html_content;
-        $movementDB->image = $request->image?$request->image:$movementDB->image;
-        $movementDB->published_at = $request->published_at?$request->published_at:$movementDB->published_at;
+            if ($validator->fails()) {
+                return $validator->errors();
+            }
 
-        $movementDB->save();
+            $updatePost = Writing::find($id);
 
-        return response()->json(['status' => 200, 'msg' => 'the movement id : '.$movementDB->id." updates successfully! "]);
+            if($updatePost === null) {
+                return response()->json(['status' => 404, 'msg' => substr($category, 0, -1).' not exists']);
+            }
+
+            $updatePost->title = $request->title; 
+            $updatePost->username = $request->username; 
+            $updatePost->introduction = $request->introduction; 
+            $updatePost->image = $request->image ? $request->image:$updatePost->image;
+        }
+        else 
+            return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
+
+        $updatePost->html_content = $request->html_content;
+        $updatePost->published_at = $request->published_at?$request->published_at:$updatePost->published_at;
+
+        $updatePost->save();
+
+        return response()->json(['status' => 200, 'msg' => 'the '.substr($category, 0, -1).' id : '.$updatePost->id." updates successfully! "]);
 
 
     }
@@ -207,7 +333,7 @@ class MovementController extends Controller
      * @param  \App\Movement  $movement
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($category, $id)
     {
         if(!ctype_digit($id)) {
             return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input. id must be a number!']);
@@ -220,14 +346,22 @@ class MovementController extends Controller
             return response()->json(['status' => 403, 'msg' => 'invalide department']);
         }
 
-        $movementDel = Movement::find($id);
 
-        if($movementDel === null) {
-            return response()->json(['status' => 404, 'msg' => 'Movement not exists']);
+        if($category === 'movements')
+            $deletePost = Movement::find($id);
+        else if($category === 'works')
+            $deletePost = Work::find($id);
+        else if($category === 'writings')
+            $deletePost = Writing::find($id);
+        else 
+            return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
+
+        if($deletePost === null) {
+            return response()->json(['status' => 404, 'msg' => substr($category, 0, -1).' not exists']);
         }
 
         //已发布内容
-        if($movementDel->published_at != null) {
+        if($deletePost->published_at != null) {
             if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XIANGMUKAIFABU
                 || ($this->department == Department::XUANCHUANBU
                 && ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG) ))) {
@@ -235,9 +369,9 @@ class MovementController extends Controller
             }
         }
 
-        $movementDel->delete();
+        $deletePost->delete();
 
-        return response()->json(['status' => 200, 'msg' => 'the movement id : '.$movementDel->id.' deletes successfully! ']);
+        return response()->json(['status' => 200, 'msg' => 'the '.substr($category, 0, -1).' id : '.$deletePost->id.' deletes successfully! ']);
 
     }
 
