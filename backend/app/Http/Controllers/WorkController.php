@@ -232,58 +232,58 @@ class WorkController extends Controller
         return response()->json(['status' => 200, 'msg' => 'the work id : '.$WorkDel->id.' deletes successfully! ']);
     }
 
-    public function countPost(Request $request)
-    {
-        // 搜索查看成员 => 主席团&秘书部
-        if(!($this->department == Department::ZHUXITUAN 
-             || $this->department == Department::MISHUBU 
-             || $this->department == Department::XUANCHUANBU 
-             || $this->department == Department::XIANGMUKAIFABU)) {
-            return response()->json(['status' => 403, 'msg' => 'invalid identity']);
-        }
+    // public function countPost(Request $request)
+    // {
+    //     // 搜索查看成员 => 主席团&秘书部
+    //     if(!($this->department == Department::ZHUXITUAN 
+    //          || $this->department == Department::MISHUBU 
+    //          || $this->department == Department::XUANCHUANBU 
+    //          || $this->department == Department::XIANGMUKAIFABU)) {
+    //         return response()->json(['status' => 403, 'msg' => 'invalid identity']);
+    //     }
 
-        if($request->published && $request->draft) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Mixed param.']);
-        }else if($request->published) {
-            return Work::whereNotNull('published_at')->count();
-        } else if ($request->draft) {
-            return Work::whereNull('published_at')->count();
-        } else {
-            return Work::All()->count();
-        }
-    }
+    //     if($request->published && $request->draft) {
+    //         return response()->json(['status' => 400, 'msg' => 'Bad Request. Mixed param.']);
+    //     }else if($request->published) {
+    //         return Work::whereNotNull('published_at')->count();
+    //     } else if ($request->draft) {
+    //         return Work::whereNull('published_at')->count();
+    //     } else {
+    //         return Work::All()->count();
+    //     }
+    // }
 
-    public function showPostsCalendar() 
-    {
-        if(!($this->department == Department::ZHUXITUAN || 
-             $this->department == Department::XUANCHUANBU || 
-             $this->department == Department::MISHUBU || 
-             $this->department == Department::XIANGMUKAIFABU)) {
-            return response()->json(['status' => 403, 'msg' => 'invalid identity!']);
-        }
+    // public function showPostsCalendar() 
+    // {
+    //     if(!($this->department == Department::ZHUXITUAN || 
+    //          $this->department == Department::XUANCHUANBU || 
+    //          $this->department == Department::MISHUBU || 
+    //          $this->department == Department::XIANGMUKAIFABU)) {
+    //         return response()->json(['status' => 403, 'msg' => 'invalid identity!']);
+    //     }
 
-        $prefix = env('APP_URL') . '/works/';
+    //     $prefix = env('APP_URL') . '/works/';
 
-        $works = Work::select('job', 'id',
-                     DB::raw('date(published_at) as published_at'),
-                     DB::raw('date(created_at) as created_at'))
-            ->get();
+    //     $works = Work::select('job', 'id',
+    //                  DB::raw('date(published_at) as published_at'),
+    //                  DB::raw('date(created_at) as created_at'))
+    //         ->get();
 
-        foreach($works as $p) {
-            if($p->published_at == null) {
-                $p->description = 'draft';
-                $p->start = $p->created_at;
-                $p->backgroundColor = '#689F38';
-            } else {
-                $p->description = 'published';
-                $p->start = $p->published_at;
-                $p->backgroundColor = '#303F9F';
-            }
-            $p->url = $prefix . $p->id;
-        }
+    //     foreach($works as $p) {
+    //         if($p->published_at == null) {
+    //             $p->description = 'draft';
+    //             $p->start = $p->created_at;
+    //             $p->backgroundColor = '#689F38';
+    //         } else {
+    //             $p->description = 'published';
+    //             $p->start = $p->published_at;
+    //             $p->backgroundColor = '#303F9F';
+    //         }
+    //         $p->url = $prefix . $p->id;
+    //     }
 
-        return $works;
-    }
+    //     return $works;
+    // }
 
 
     private function incrementView(Work $p) {

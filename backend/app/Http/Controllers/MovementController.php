@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Model\Department;
 use App\Model\Position;
 
+// 统计帖子时使用
+use App\Work;
+use App\Writing;
 
 class MovementController extends Controller
 {
@@ -234,7 +237,7 @@ class MovementController extends Controller
     }
 
 
-    public function countPost(Request $request)
+    public function countPost(Request $request, $category)
     {
         // 搜索查看成员 => 主席团&秘书部
         if(!($this->department == Department::ZHUXITUAN 
@@ -247,15 +250,38 @@ class MovementController extends Controller
         if($request->published && $request->draft) {
             return response()->json(['status' => 400, 'msg' => 'Bad Request. Mixed param.']);
         }else if($request->published) {
-            return Movement::whereNotNull('published_at')->count();
+            if($category === 'movements')
+                return Movement::whereNotNull('published_at')->count();
+            else if($category === 'works')
+                return Work::whereNotNull('published_at')->count();
+            else if($category === 'writings')
+                return Writing::whereNotNull('published_at')->count();
+            else 
+                return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
+
         } else if ($request->draft) {
-            return Movement::whereNull('published_at')->count();
+            if($category === 'movements')
+                return Movement::whereNull('published_at')->count();
+            else if($category === 'works')
+                return Work::whereNull('published_at')->count();
+            else if($category === 'writings')
+                return Writing::whereNull('published_at')->count();
+            else 
+                return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
+
         } else {
-            return Movement::All()->count();
+            if($category === 'movements')
+                return Movement::All()->count();
+            else if($category === 'works')
+                return Work::All()->count();
+            else if($category === 'writings')
+                return Writing::All()->count();
+            else 
+                return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
         }
     }
 
-    public function showPostsCalendar() 
+    public function showPostsCalendar($category) 
     {
         if(!($this->department == Department::ZHUXITUAN || 
              $this->department == Department::XUANCHUANBU || 
@@ -266,12 +292,27 @@ class MovementController extends Controller
 
         $prefix = env('APP_URL') . '/movements/';
 
-        $movements = Movement::select('title', 'id',
+        if($category === 'movements')
+                $posts = Movement::select('title', 'id',
                      DB::raw('date(published_at) as published_at'),
                      DB::raw('date(created_at) as created_at'))
-            ->get();
+                ->get();
+            else if($category === 'works')
+                $posts = Work::select('job', 'id',
+                     DB::raw('date(published_at) as published_at'),
+                     DB::raw('date(created_at) as created_at'))
+                ->get();
+            else if($category === 'writings')
+                $posts = Writing::select('title', 'username', 'id',
+                         DB::raw('date(published_at) as published_at'),
+                         DB::raw('date(created_at) as created_at'))
+                ->get();
+            else 
+                return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
 
-        foreach($movements as $p) {
+        
+
+        foreach($posts as $p) {
             if($p->published_at == null) {
                 $p->description = 'draft';
                 $p->start = $p->created_at;
@@ -284,7 +325,7 @@ class MovementController extends Controller
             $p->url = $prefix . $p->id;
         }
 
-        return $movements;
+        return $posts;
     }
 
 

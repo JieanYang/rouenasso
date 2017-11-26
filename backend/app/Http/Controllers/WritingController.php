@@ -229,58 +229,58 @@ class WritingController extends Controller
     }
 
 
-    public function countPost(Request $request)
-    {
-        // 搜索查看成员 => 主席团&秘书部
-        if(!($this->department == Department::ZHUXITUAN 
-             || $this->department == Department::MISHUBU 
-             || $this->department == Department::XUANCHUANBU 
-             || $this->department == Department::XIANGMUKAIFABU)) {
-            return response()->json(['status' => 403, 'msg' => 'invalid identity']);
-        }
+    // public function countPost(Request $request)
+    // {
+    //     // 搜索查看成员 => 主席团&秘书部
+    //     if(!($this->department == Department::ZHUXITUAN 
+    //          || $this->department == Department::MISHUBU 
+    //          || $this->department == Department::XUANCHUANBU 
+    //          || $this->department == Department::XIANGMUKAIFABU)) {
+    //         return response()->json(['status' => 403, 'msg' => 'invalid identity']);
+    //     }
 
-        if($request->published && $request->draft) {
-            return response()->json(['status' => 400, 'msg' => 'Bad Request. Mixed param.']);
-        }else if($request->published) {
-            return Writing::whereNotNull('published_at')->count();
-        } else if ($request->draft) {
-            return Writing::whereNull('published_at')->count();
-        } else {
-            return Writing::All()->count();
-        }
-    }
+    //     if($request->published && $request->draft) {
+    //         return response()->json(['status' => 400, 'msg' => 'Bad Request. Mixed param.']);
+    //     }else if($request->published) {
+    //         return Writing::whereNotNull('published_at')->count();
+    //     } else if ($request->draft) {
+    //         return Writing::whereNull('published_at')->count();
+    //     } else {
+    //         return Writing::All()->count();
+    //     }
+    // }
 
-    public function showPostsCalendar() 
-    {
-        if(!($this->department == Department::ZHUXITUAN || 
-             $this->department == Department::XUANCHUANBU || 
-             $this->department == Department::MISHUBU || 
-             $this->department == Department::XIANGMUKAIFABU)) {
-            return response()->json(['status' => 403, 'msg' => 'invalid identity!']);
-        }
+    // public function showPostsCalendar() 
+    // {
+    //     if(!($this->department == Department::ZHUXITUAN || 
+    //          $this->department == Department::XUANCHUANBU || 
+    //          $this->department == Department::MISHUBU || 
+    //          $this->department == Department::XIANGMUKAIFABU)) {
+    //         return response()->json(['status' => 403, 'msg' => 'invalid identity!']);
+    //     }
 
-        $prefix = env('APP_URL') . '/writings/';
+    //     $prefix = env('APP_URL') . '/writings/';
 
-        $writings = Writing::select('title', 'username', 'id',
-                     DB::raw('date(published_at) as published_at'),
-                     DB::raw('date(created_at) as created_at'))
-            ->get();
+    //     $writings = Writing::select('title', 'username', 'id',
+    //                  DB::raw('date(published_at) as published_at'),
+    //                  DB::raw('date(created_at) as created_at'))
+    //         ->get();
 
-        foreach($writings as $p) {
-            if($p->published_at == null) {
-                $p->description = 'draft';
-                $p->start = $p->created_at;
-                $p->backgroundColor = '#689F38';
-            } else {
-                $p->description = 'published';
-                $p->start = $p->published_at;
-                $p->backgroundColor = '#303F9F';
-            }
-            $p->url = $prefix . $p->id;
-        }
+    //     foreach($writings as $p) {
+    //         if($p->published_at == null) {
+    //             $p->description = 'draft';
+    //             $p->start = $p->created_at;
+    //             $p->backgroundColor = '#689F38';
+    //         } else {
+    //             $p->description = 'published';
+    //             $p->start = $p->published_at;
+    //             $p->backgroundColor = '#303F9F';
+    //         }
+    //         $p->url = $prefix . $p->id;
+    //     }
 
-        return $writings;
-    }
+    //     return $writings;
+    // }
 
 
     private function incrementView(Writing $p) {
