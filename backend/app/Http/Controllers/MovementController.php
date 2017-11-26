@@ -194,7 +194,15 @@ class MovementController extends Controller
         // 隐藏不必要信息
         $post[0]->setHidden([ 'user_id', 'updated_at', 'deleted_at']);
 
-        return $post[0];
+
+        if($category === 'movements')
+            return $post[0] ? $this->incrementView_movements($post[0]) : Response()->json(['status' => 404, 'msg' => 'Not found']);
+        else if($category === 'works')
+            return $post[0] ? $this->incrementView_works($post[0]) : Response()->json(['status' => 404, 'msg' => 'Not found']);
+        else if($category === 'writings')
+            return $post[0] ? $this->incrementView_writings($post[0]) : Response()->json(['status' => 404, 'msg' => 'Not found']);
+        else 
+            return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);   
     }
 
     //显示某个id用户的某一个id草稿 
@@ -468,7 +476,21 @@ class MovementController extends Controller
     }
 
 
-    private function incrementView(Movement $p) {
+    private function incrementView_movements(Movement $p) {
+        if($p->published_at){
+            $p->view++;
+            $p->save();
+        }
+        return $p;
+    }
+    private function incrementView_works(Work $p) {
+        if($p->published_at){
+            $p->view++;
+            $p->save();
+        }
+        return $p;
+    }
+    private function incrementView_writings(Writing $p) {
         if($p->published_at){
             $p->view++;
             $p->save();
