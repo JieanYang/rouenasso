@@ -9,7 +9,7 @@ class Movement extends Model
 {
    	use SoftDeletes;
 
-    protected $fillable=[ 'user_id', 'title', 'introduction', 'image', 'html_content', 'published_at'];
+    protected $fillable=[ 'user_id', 'title', 'introduction', 'image', 'html_content', 'published_at' ,'expiry_at'];
 
     // sofe deleted date 
     protected $dates = ['deleted_at'];

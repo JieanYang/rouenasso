@@ -105,7 +105,8 @@ class MovementController extends Controller
                 'title' => 'required',
                 'introduction' => 'required',
                 'html_content' => 'required',
-                'published_at' => 'date'
+                'published_at' => 'date',
+                'expiry_at' => 'date'
             ]);
 
             if ($validator->fails()) {
@@ -124,7 +125,8 @@ class MovementController extends Controller
                 'city'=>'required',
                 'salary'=>'required',
                 'html_content' => 'required',
-                'published_at'=>'date'
+                'published_at'=>'date',
+                'expiry_at' => 'date'
             ]);
 
             if ($validator->fails()) {
@@ -143,7 +145,8 @@ class MovementController extends Controller
                 'username' => 'required',
                 'introduction' => 'required',
                 'html_content' => 'required',
-                'published_at' => 'date'
+                'published_at' => 'date',
+                'expiry_at' => 'date'
             ]);
 
             if ($validator->fails()) {
@@ -162,6 +165,7 @@ class MovementController extends Controller
         //三种类型帖子共同属性
         $newPost->html_content = $request->html_content; 
         $newPost->published_at = $request->published_at ? $request->published_at : null;
+        $newPost->expiry_at = $request->expiry_at ? $request->expiry_at : null;
         $newPost->user_id = Auth::id();
         $newPost->view = 0;
         $newPost->created_at = date("Y-m-d H:i:s");
@@ -196,11 +200,11 @@ class MovementController extends Controller
 
 
         if($category === 'movements')
-            return $post[0] ? $this->incrementView_movements($post[0]) : Response()->json(['status' => 404, 'msg' => 'Not found']);
+            return $post[0] ? $this->incrementView_movements($post[0]) : Response()->json(['status' => 404, 'msg' => 'movement Not found']);
         else if($category === 'works')
-            return $post[0] ? $this->incrementView_works($post[0]) : Response()->json(['status' => 404, 'msg' => 'Not found']);
+            return $post[0] ? $this->incrementView_works($post[0]) : Response()->json(['status' => 404, 'msg' => 'work Not found']);
         else if($category === 'writings')
-            return $post[0] ? $this->incrementView_writings($post[0]) : Response()->json(['status' => 404, 'msg' => 'Not found']);
+            return $post[0] ? $this->incrementView_writings($post[0]) : Response()->json(['status' => 404, 'msg' => 'writing Not found']);
         else 
             return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);   
     }
@@ -217,7 +221,7 @@ class MovementController extends Controller
             return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
         
 
-        return $post[0];
+        return $post[0] ? $post[0] : Response()->json(['status' => 404, 'msg' => $id.' draft Not found']);
     }
 
     /**
@@ -256,7 +260,8 @@ class MovementController extends Controller
                 'title' => 'required',
                 'introduction' => 'required',
                 'html_content' => 'required',
-                'published_at' => 'date'
+                'published_at' => 'date',
+                'expiry_at' => 'date'
             ]);
 
             if ($validator->fails()) {
@@ -280,7 +285,8 @@ class MovementController extends Controller
                 'city'=>'required',
                 'salary'=>'required',
                 'html_content' => 'required',
-                'published_at'=>'date'
+                'published_at'=>'date',
+                'expiry_at' => 'date'
             ]);
 
             if ($validator->fails()) {
@@ -304,7 +310,8 @@ class MovementController extends Controller
                 'username' => 'required',
                 'introduction' => 'required',
                 'html_content' => 'required',
-                'published_at' => 'date'
+                'published_at' => 'date',
+                'expiry_at' => 'date'
             ]);
 
             if ($validator->fails()) {
@@ -326,7 +333,8 @@ class MovementController extends Controller
             return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
 
         $updatePost->html_content = $request->html_content;
-        $updatePost->published_at = $request->published_at?$request->published_at:$updatePost->published_at;
+        $updatePost->published_at = $request->published_at ? $request->published_at : $updatePost->published_at;
+        $updatePost->expiry_at = $request->expiry_at ? $request->expiry_at : $updatePost->expiry_at;
 
         $updatePost->save();
 
@@ -440,22 +448,25 @@ class MovementController extends Controller
         $prefix = env('APP_URL') . '/movements/';
 
         if($category === 'movements')
-                $posts = Movement::select('title', 'id',
-                     DB::raw('date(published_at) as published_at'),
-                     DB::raw('date(created_at) as created_at'))
-                ->get();
-            else if($category === 'works')
-                $posts = Work::select('job', 'id',
-                     DB::raw('date(published_at) as published_at'),
-                     DB::raw('date(created_at) as created_at'))
-                ->get();
-            else if($category === 'writings')
-                $posts = Writing::select('title', 'username', 'id',
-                         DB::raw('date(published_at) as published_at'),
-                         DB::raw('date(created_at) as created_at'))
-                ->get();
-            else 
-                return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
+            $posts = Movement::select('title', 'id',
+                 DB::raw('date(published_at) as published_at'),
+                 DB::raw('date(created_at) as created_at'),
+                 DB::raw('date(expiry_at) as expiry_at'))
+            ->get();
+        else if($category === 'works')
+            $posts = Work::select('job', 'id',
+                 DB::raw('date(published_at) as published_at'),
+                 DB::raw('date(created_at) as created_at'),
+                 DB::raw('date(expiry_at) as expiry_at'))
+            ->get();
+        else if($category === 'writings')
+            $posts = Writing::select('title', 'username', 'id',
+                 DB::raw('date(published_at) as published_at'),
+                 DB::raw('date(created_at) as created_at'),
+                 DB::raw('date(expiry_at) as expiry_at'))
+            ->get();
+        else 
+            return response()->json(['status' => 400, 'msg' => 'Bad Request : wrong category']);
 
         
 
@@ -468,6 +479,7 @@ class MovementController extends Controller
                 $p->description = 'published';
                 $p->start = $p->published_at;
                 $p->backgroundColor = '#303F9F';
+                $p->end = $p->expiry_at;
             }
             $p->url = $prefix . $p->id;
         }
