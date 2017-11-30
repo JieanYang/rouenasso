@@ -289,6 +289,28 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('works')->insert([
             'user_id' => 2,
+            'job' => '过期1',
+            'company' => '面包协会',
+            'city' => 'rouen',
+            'salary' => 1500,
+            'html_content' => '<h2>here is the job content.</h2>',
+            'view' =>0,
+            'published_at' => '2019-06-06',
+            'expiry_at' => '2017-10-29'
+        ]);
+        DB::table('works')->insert([
+            'user_id' => 1,
+            'job' => '过期2',
+            'company' => '奶茶协会',
+            'city' => 'rouen',
+            'salary' => 1000,
+            'html_content' => '<h2>我是花生</h2>',
+            'view' =>0,
+            'published_at' => '2018-01-01',
+            'expiry_at' => '2019-10-23'
+        ]);
+        DB::table('works')->insert([
+            'user_id' => 2,
             'job' => '草稿1',
             'company' => '秘书协会',
             'city' => 'rouen',
@@ -328,6 +350,29 @@ class DatabaseSeeder extends Seeder
             'html_content' => '<p>寻寻觅觅，冷冷清清，凄凄惨惨戚戚。乍暖还寒时候，最难将息。三杯两盏淡酒，怎敌他晚来风急？雁过也，正伤心，却是旧时相识。满地黄花堆积，憔悴损，如今有谁堪摘？守着窗儿，独自怎生得黑？梧桐更兼细雨，到黄昏、点点滴滴。这次第，怎一个愁字了得！</p>',
             'view' => 3,
             'published_at' => '2013-04-05'
+        ]);
+        DB::table('writings')->insert([
+            'user_id'=>2,
+            'title' => '过期1',
+            'username' => '李白',
+            'introduction' => '思念家人的诗',
+            'image' => '../../images/帖子/writings/静夜思-李白.jpg',
+            'html_content' => '<p>床前明月光,<br>疑是地上霜。<br>举头望明月,<br>低头思故乡。</p>',
+            'view' => 3,
+            'published_at' => '2001-09-07',
+            'expiry_at' => '2017-10-25'
+        ]);
+
+        DB::table('writings')->insert([
+            'user_id' => 1,
+            'title' => '过期2',
+            'username' => '李清照',
+            'introduction' => '愁',
+            'image' => '../../images/帖子/writings/声声慢-李清照.jpg',
+            'html_content' => '<p>寻寻觅觅，冷冷清清，凄凄惨惨戚戚。乍暖还寒时候，最难将息。三杯两盏淡酒，怎敌他晚来风急？雁过也，正伤心，却是旧时相识。满地黄花堆积，憔悴损，如今有谁堪摘？守着窗儿，独自怎生得黑？梧桐更兼细雨，到黄昏、点点滴滴。这次第，怎一个愁字了得！</p>',
+            'view' => 3,
+            'published_at' => '2013-04-05',
+            'expiry_at' => '2017-10-27'
         ]);
         DB::table('writings')->insert([
             'user_id'=>2,
