@@ -58,20 +58,6 @@ Route::get('posts/{id}/noauth', 'PostNoAuthController@showPost')->name('posts.sh
 
 
 
-// 三个类型的9个动态API
-Route::get('{category}/count', 'MovementController@countPost');
-Route::get('{category}/calendar', 'MovementController@showPostsCalendar');
-
-Route::get('{category}/drafts', 'MovementController@index_user_drafts');
-Route::get('{category}/drafts/{id}', 'MovementController@show_user_draft');
-// resource API
-Route::get('{category}', 'MovementController@index');
-Route::get('{category}/{id}', 'MovementController@show');
-Route::post('{category}', 'MovementController@store');
-Route::put('{category}/{id}', 'MovementController@update');
-Route::delete('{category}/{id}', 'MovementController@destroy');
-
-
 // LeaveMessages
 Route::resource('leaveMessages', 'LeaveMessageController', [ 'only' => ['index', 'show', 'store', 'destroy']]);
 
