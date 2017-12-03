@@ -9,7 +9,7 @@ class Work extends Model
 {
     use SoftDeletes;
 
-    protected $fillable=['job', 'company', 'city', 'salary', 'html_content', 'published_at'];
+    protected $fillable=['job', 'company', 'city', 'salary', 'html_content', 'published_at', 'expiry_at'];
 
     // Sofe deleted date
 	protected $dates = ['deleted_at'];

@@ -23,6 +23,7 @@ class CreateWritingsTable extends Migration
             $table->longText('html_content')->nullable(false);
             $table->bigInteger('view')->unsigned()->nullable(false);
             $table->timestamp('published_at')->nullable()->index();
+            $table->timestamp('expiry_at')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
         });

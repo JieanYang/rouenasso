@@ -23,6 +23,7 @@ class CreateWorksTable extends Migration
             $table->longText('html_content')->nullable(false);
             $table->timestamp('published_at')->nullable()->index();
             $table->bigInteger('view')->unsigned()->nullable(false);
+            $table->timestamp('expiry_at')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
         });

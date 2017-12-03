@@ -9,7 +9,7 @@ class Writing extends Model
 {
     use SoftDeletes;
 
-    protected $fillable=[ 'title', 'username', 'introduction', 'image', 'html_content', 'published_at'];
+    protected $fillable=[ 'title', 'username', 'introduction', 'image', 'html_content', 'published_at', 'expiry_at'];
 
     // sofe deleted date 
     protected $dates = ['deleted_at'];

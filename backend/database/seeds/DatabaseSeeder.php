@@ -289,6 +289,28 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('works')->insert([
             'user_id' => 2,
+            'job' => '过期1',
+            'company' => '面包协会',
+            'city' => 'rouen',
+            'salary' => 1500,
+            'html_content' => '<h2>here is the job content.</h2>',
+            'view' =>0,
+            'published_at' => '2019-06-06',
+            'expiry_at' => '2017-10-29'
+        ]);
+        DB::table('works')->insert([
+            'user_id' => 1,
+            'job' => '过期2',
+            'company' => '奶茶协会',
+            'city' => 'rouen',
+            'salary' => 1000,
+            'html_content' => '<h2>我是花生</h2>',
+            'view' =>0,
+            'published_at' => '2018-01-01',
+            'expiry_at' => '2019-10-23'
+        ]);
+        DB::table('works')->insert([
+            'user_id' => 2,
             'job' => '草稿1',
             'company' => '秘书协会',
             'city' => 'rouen',
@@ -328,6 +350,29 @@ class DatabaseSeeder extends Seeder
             'html_content' => '<p>寻寻觅觅，冷冷清清，凄凄惨惨戚戚。乍暖还寒时候，最难将息。三杯两盏淡酒，怎敌他晚来风急？雁过也，正伤心，却是旧时相识。满地黄花堆积，憔悴损，如今有谁堪摘？守着窗儿，独自怎生得黑？梧桐更兼细雨，到黄昏、点点滴滴。这次第，怎一个愁字了得！</p>',
             'view' => 3,
             'published_at' => '2013-04-05'
+        ]);
+        DB::table('writings')->insert([
+            'user_id'=>2,
+            'title' => '过期1',
+            'username' => '李白',
+            'introduction' => '思念家人的诗',
+            'image' => '../../images/帖子/writings/静夜思-李白.jpg',
+            'html_content' => '<p>床前明月光,<br>疑是地上霜。<br>举头望明月,<br>低头思故乡。</p>',
+            'view' => 3,
+            'published_at' => '2001-09-07',
+            'expiry_at' => '2017-10-25'
+        ]);
+
+        DB::table('writings')->insert([
+            'user_id' => 1,
+            'title' => '过期2',
+            'username' => '李清照',
+            'introduction' => '愁',
+            'image' => '../../images/帖子/writings/声声慢-李清照.jpg',
+            'html_content' => '<p>寻寻觅觅，冷冷清清，凄凄惨惨戚戚。乍暖还寒时候，最难将息。三杯两盏淡酒，怎敌他晚来风急？雁过也，正伤心，却是旧时相识。满地黄花堆积，憔悴损，如今有谁堪摘？守着窗儿，独自怎生得黑？梧桐更兼细雨，到黄昏、点点滴滴。这次第，怎一个愁字了得！</p>',
+            'view' => 3,
+            'published_at' => '2013-04-05',
+            'expiry_at' => '2017-10-27'
         ]);
         DB::table('writings')->insert([
             'user_id'=>2,
@@ -388,6 +433,26 @@ class DatabaseSeeder extends Seeder
             'image' => '../../images/活动推广/苏宁易购.jpg',
             'view' => 1,
             'published_at' => '2017-10-25'
+        ]);
+        DB::table('movements')->insert([
+            'user_id' => 2,
+            'title' => '过期1',
+            'introduction' => '这里是苏宁易购拍卖会，买一送一，买二送十，欢迎光临苏宁电器!为您的家带来温暖的额感觉!',
+            'html_content' => '<h2>去去去，多买多送，双手放在炉上烤不停，带给你无尽的香气和温暖！！</h2>',
+            'image' => '../../images/活动推广/苏宁易购.jpg',
+            'view' => 1,
+            'published_at' => '2017-10-25',
+            'expiry_at' => '2017-11-29'
+        ]);
+        DB::table('movements')->insert([
+            'user_id' => 1,
+            'title' => '过期2',
+            'introduction' => '这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!这里是天猫双十一活动斩手会，买一送一，买二送十，欢迎光临天猫旗舰店!',
+            'html_content' => '<h2>来来来，疯狂购！！双十一剁手剁到爽！！</h2>',
+            'image' => '../../images/活动推广/天猫.jpg',
+            'view' => 2,
+            'published_at' => '2017-10-25',
+            'expiry_at' => '2017-11-27'
         ]);
         DB::table('movements')->insert([
             'user_id' => 1,
