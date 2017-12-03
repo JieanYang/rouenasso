@@ -7,6 +7,7 @@ var owlPricing;
 var ratio = 2;
 
 function initBigHeader() {
+  console.log("big init");
     // Preloader
     $('.intro-tables, .parallax, header').css('opacity', '0');
     $('.preloader').addClass('animated fadeOut').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
@@ -43,6 +44,7 @@ function initBigHeader() {
 };
 
 function initSmallHeader() {
+  console.log("small init");
     // Preloader
     $('.intro-tables, .parallax, header').css('opacity', '0');
     $('.preloader').addClass('animated fadeOut').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
@@ -56,8 +58,6 @@ function initSmallHeader() {
     $('nav').addClass('original').clone().insertAfter('nav').addClass('navbar-fixed-top').css('position', 'fixed').css('top', '0').css('margin-top', '0').removeClass('original');
     $('.mobile-nav ul').html($('nav .navbar-nav').html());
     $('nav.navbar-fixed-top .navbar-brand img').attr('src', $('nav.navbar-fixed-top .navbar-brand img').data("active-url"));
-    $('nav.original').css('opacity', '1');
-    $('nav.navbar-fixed-top').css('opacity', '0');
 
     $('#placeHolder').height(160).css('background-color', '#000147');
 
