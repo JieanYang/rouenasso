@@ -8,11 +8,7 @@ module.exports = {
 function ContentsController($http, $sce) {
   var vm = this;
 
-  $http
-.get('../../databases/contents.json')
-.then(function (response) {
-  vm.contents = response.data;
-});
+
 
   $http
 .get('https://api.acecrouen.com/posts/category/99?latest=true')

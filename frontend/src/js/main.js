@@ -66,7 +66,7 @@ function initSmallHeader() {
 		event.preventDefault();
 
 		$('html, body').animate({
-			scrollTop: $($.attr(this, 'href')).offset().top - 110
+			scrollTop: $($.attr(this, 'href')).offset().top - 67
 		}, 500);
 	});
 };
@@ -119,7 +119,7 @@ function onScroll() {
 }
 
 window.addEventListener('scroll', onScroll, false);
-	
+
 // Window Resize
 $(window).resize(function () {
     $('header').height($(window).height());
@@ -161,7 +161,7 @@ $('body').on('click', '.mobile-nav a', function (event) {
  $(window).scroll(function(){
     if ($(window).scrollTop() >= 210)
     {
-        $(".nav1").css({position:'fixed',top:'0'});     
+        $(".nav1").css({position:'fixed',top:'0'});
     }
     else
     {
