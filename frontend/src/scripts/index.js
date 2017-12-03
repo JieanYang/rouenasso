@@ -5,6 +5,7 @@ var contents = require('./scripts_Module/contents');
 var guide = require('./scripts_Module/guide');
 var movement = require('./scripts_Module/movement');
 var work = require('./scripts_Module/work');
+var works = require('./scripts_Module/works');
 var writing = require('./scripts_Module/writing');
 var contactus = require('./scripts_Module/contactus');
 
@@ -23,6 +24,7 @@ angular
   .component('guide', guide)
   .component('movement', movement)
   .component('work', work)
+  .component('works', works)
   .component('writing', writing)
   .component('contactus', contactus)
 
