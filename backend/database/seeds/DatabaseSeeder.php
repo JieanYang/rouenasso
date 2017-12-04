@@ -16,19 +16,19 @@ class DatabaseSeeder extends Seeder
     {
         /* Users */
         DB::table('users')->insert([
-        	'name' => '小何',
-        	'email' => 'xiaohe@test.com',
-        	'password' => bcrypt('he'),
-        	'department' => Department::ZHUXITUAN,
-        	'position' => Position::ZHUXI,
-        	'school' => 'ESIGELEC',
-        	'phone_number' => '06 05 04 03 02',
-        	'isWorking' => True,
-        	'isAvaible' => True,
-        	'birthday' => date('1993-01-01'),
-        	'arrive_date' => date('2012-01-01'),
-        	'dimission_date' => date('2018-01-01'),
-        	'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'name' => '小何',
+            'email' => 'xiaohe@test.com',
+            'password' => bcrypt('he'),
+            'department' => Department::ZHUXITUAN,
+            'position' => Position::ZHUXI,
+            'school' => 'ESIGELEC',
+            'phone_number' => '06 05 04 03 02',
+            'isWorking' => True,
+            'isAvaible' => True,
+            'birthday' => date('1993-01-01'),
+            'arrive_date' => date('2012-01-01'),
+            'dimission_date' => date('2018-01-01'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'name' => '小宋',
@@ -290,6 +290,39 @@ class DatabaseSeeder extends Seeder
 
 
        
-
+        /* 工作咨询 */
+        DB::table('posts')->insert([
+            'title' => 'job 1',
+            'user_id' => '1',
+            'html_content' => 'here is the first job',
+            'category' => 3,
+            'created_at' => '2017-10-31',
+            'view' => 0,
+            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
+            'preview_text' => '{"title" : "tt", "company" : "cpm", "city" : "Rouen", "salary" : "12345"}',
+            'published_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('posts')->insert([
+            'title' => 'job 2',
+            'user_id' => '1',
+            'html_content' => 'here is the second job',
+            'category' => 3,
+            'created_at' => '2017-10-31',
+            'view' => 0,
+            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
+            'preview_text' => '{"title" : "tt22", "company" : "cpm2", "city" : "Rouen222", "salary" : "233"}',
+            'published_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('posts')->insert([
+            'title' => 'job 3',
+            'user_id' => '1',
+            'html_content' => 'here is the third job',
+            'category' => 3,
+            'created_at' => '2017-10-31',
+            'view' => 0,
+            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
+            'preview_text' => '{"title" : "33", "company" : "33", "city" : "3", "salary" : "3"}',
+            'published_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
     }
 }

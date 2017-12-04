@@ -18,6 +18,8 @@ class CreatePostsTable extends Migration
             $table->bigInteger('user_id')->unsigned()->index();
             $table->string('title')->nullable(false);
             $table->integer('category')->nullable(false);
+            $table->string('preview_img_url')->nullable();
+            $table->string('preview_text')->nullable();
             $table->longText('html_content')->nullable(false);
             $table->timestamp('published_at')->nullable()->index();
             $table->bigInteger('view')->unsigned()->nullable(false);
