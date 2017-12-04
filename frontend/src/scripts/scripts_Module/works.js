@@ -13,8 +13,8 @@ function worksController($http) {
   	works = response.data;
   	works.forEach(function(work) {
   		work.preview_text = angular.fromJson(work.preview_text);
-  	})
+  	});
   	vm.works = works;
   	// console.log(vm.works)\;
-  })
+  });
 }
