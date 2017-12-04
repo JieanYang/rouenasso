@@ -6,15 +6,15 @@
         <div class="row" ng-repeat="writing in vm.writings">
             <div class="writing" ui-sref="home.writing_detail({id:writing.id})">
             <div class="col-sm-3">
-            <img ng-src="{{writing.image}}", width="120px", height="auto">
+            <img ng-src="{{writing.preview_img_url}}", width="120px", height="auto">
             </div>   
             <div class="col-sm-2">
             <h4>{{writing.title}}</h4>
-            <h4>{{writing.username}}</h4>
+            <h4>{{writing.preview_text.username}}</h4>
             <span>{{writing.published_at}}</span>
             </div>
             <div class="col-sm-4">
-            <p>{{writing.introduction}}</p>
+            <p>{{writing.preview_text.introduction}}</p>
             </div>      
             </div>
         </div>
