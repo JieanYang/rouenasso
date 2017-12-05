@@ -90,7 +90,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/works',
       views: {
         'content@': {
-          component: 'works'
+          component: 'work'
         }
       }
     })
