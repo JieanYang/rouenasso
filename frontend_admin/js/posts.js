@@ -43,24 +43,7 @@ function ajaxPostsTable() {
                  table_row.append($('<td>', {html: item.title}));
                  table_row.append($('<td>', {html: item.created_at}));
                  table_row.append($('<td>', {html: item.published_at == null ? '草稿' : item.published_at}));
-                 table_row.append($('<td>', {html: '<i class="fa fa-eye fa-2x btn-view" aria-hidden="true"></i>'}));
-                 table_row.append($('<td>', {html: '<i class="fa fa-pencil fa-2x btn-edit" aria-hidden="true"></i>'}));
-                 table_row.append($('<td>', {html: '<i class="fa fa-trash fa-2x btn-delete" aria-hidden="true"></i>'}));
                  table_obj.append(table_row);
-            });
-
-            // view buttons
-            $(".btn-view").on('click', function () {
-                var postId = $(this).parent().parent().attr('id').split('-')[4];
-                alert('前端文章浏览页面 + id = ' + postId);
-                window.location.href = "//";
-            });
-
-            // edit buttons
-            $(".btn-edit").on('click', function () {
-                var postId = $(this).parent().parent().attr('id').split('-')[4];
-                var postUrl = $(this).parent().parent().attr('data-url');
-                window.open('./post/edit.html?id=' + postId + '&url=' + postUrl);
             });
 
             responsiveTable();
@@ -72,7 +55,51 @@ function ajaxPostsTable() {
 
 function responsiveTable() {
     $('#postsTables').DataTable({
-        responsive: true,
-        bAutoWidth: true
+        //responsive: true,
+        bAutoWidth: true,
+        columnDefs: [{
+           targets: 1,
+           render: function(data, type, full, meta){
+              if(type === 'display'){
+                 data = data + '<div class="links">' +
+                     '<a href="#" class="btn-view">查看</a> ' +
+                     '<a href="#" class="btn-edit">修改</a> ' +
+                     '<a href="#" class="btn-delete">删除</a> ' +
+                     '</div>';                     
+              }
+               
+              return data;
+           }
+        }]
+    });
+
+    // view buttons
+    $(".btn-view").on('click', function () {
+        var postId = $(this).parent().parent().parent().attr('id').split('-')[4];
+        alert('前端文章浏览页面 + id = ' + postId);
+        window.location.href = "//";
+    });
+
+    // edit buttons
+    $(".btn-edit").on('click', function () {
+        var postId = $(this).parent().parent().parent().attr('id').split('-')[4];
+        var postUrl = $(this).parent().parent().parent().attr('data-url');
+        window.open('./post/edit.html?id=' + postId + '&url=' + postUrl);
+    });
+
+    // delete buttons
+    $(".btn-delete").on('click', function () {
+        var postId = $(this).parent().parent().parent().attr('id').split('-')[4];
+
+		function success(result) {
+		    $("#table-row-post-id-" + postId).remove();
+		}
+
+		function error(result) {
+		    console.log(result);
+		    alert("你无权限删除文章。");
+		}
+
+        ajaxAuthDelete('https://api.acecrouen.com/posts/' + postId, null, success, error);
     });
 }

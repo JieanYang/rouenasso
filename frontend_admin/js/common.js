@@ -30,7 +30,7 @@ function ajaxAuthGet(url, success, error) {
     });
 }
 
-// base ajax post with auth
+// base ajax GET with auth
 function ajaxAuthPost(url, data, success, error) {
     return $.ajax({
         url: url,
@@ -45,11 +45,26 @@ function ajaxAuthPost(url, data, success, error) {
     });
 }
 
-// base ajax post with auth
+// base ajax POST with auth
 function ajaxAuthPut(url, data, success, error) {
     return $.ajax({
         url: url,
         type: 'put',
+        headers: {
+            Authorization: auth
+        },
+        data: data,
+        dataType: 'json',
+        success: success,
+        error: error
+    });
+}
+
+// base ajax DELETE with auth
+function ajaxAuthDelete(url, data, success, error) {
+    return $.ajax({
+        url: url,
+        type: 'DELETE',
         headers: {
             Authorization: auth
         },

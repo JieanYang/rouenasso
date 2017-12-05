@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use Storage;
 use Validator;
 use Illuminate\Validation\Rule;
 use App\Model\Department;
@@ -41,7 +43,8 @@ class PostNoAuthController extends Controller
         
         // count
         $postsCount = 0;
-        $postsCount = Post::where([['category', $category_id], ['published_at', '!=', null]])->get()->count();
+        $postsCount = Post::where([['category', $category_id], ['published_at', '!=', null]])
+            ->whereNull('deleted_at')->get()->count();
         
         if($count){
             $result = response()->json(['category' => $category_id, 'count' => $postsCount]);
@@ -55,16 +58,19 @@ class PostNoAuthController extends Controller
                                 ['category', $category_id], 
                                 ['published_at', '!=', null]
                             ])
-                           ->get();
+                            ->whereNull('deleted_at')
+                            ->get();
         } 
         
         else if($latest) {
-            $result = Post::where('category', $category_id)->orderBy('published_at', 'desc')->first();
+            $result = Post::where('category', $category_id)
+                ->whereNull('deleted_at')->orderBy('published_at', 'desc')->first();
         } 
         
         else {
         // all
-            $result = Post::where([['category', $category_id], ['published_at', '!=', null]])->get();
+            $result = Post::where([['category', $category_id], ['published_at', '!=', null]])
+                ->whereNull('deleted_at')->get();
         }
         
         // hide html content
@@ -113,5 +119,26 @@ class PostNoAuthController extends Controller
         $p->view++;
         $p->save();
         return $p;
+    }
+
+    /**
+     * GET /downloadimg/
+     *
+     * Download an image
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function retrieveImg(Request $request) {
+        $url = $request->url;
+        $content = Storage::get($url);
+        $mimetype = Storage::mimeType($url);
+        error_log($mimetype);
+
+        return Storage::exists($url) ? 
+            response($content, 200)
+                  ->header('Content-Type', $mimetype)
+            : 
+            response()->json(['status' => 404, 'msg' => 'file not found'], 404);
     }
 }

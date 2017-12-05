@@ -38,7 +38,7 @@ class PostController extends Controller
              || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
-        return Post::All();
+        return Post::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -88,6 +88,12 @@ class PostController extends Controller
         $post->user_id = $request->user_id;
         $post->html_content = $request->html_content;
         $post->published_at = $request->published_at;
+        if($request->preview_img_url) {
+            $post->preview_img_url = $request->preview_img_url;
+        }
+        if($request->preview_text) {
+            $post->preview_text = $request->preview_text;
+        }
         $post->view = 0;
 
         $post->save();
@@ -179,6 +185,12 @@ class PostController extends Controller
         $postDB->category = $request->category;
         $postDB->html_content = $request->html_content;
         $postDB->published_at = $request->published_at;
+        if($request->preview_img_url) {
+            $post->preview_img_url = $request->preview_img_url;
+        }
+        if($request->preview_text) {
+            $post->preview_text = $request->preview_text;
+        }
 
         $postDB->save();
 
@@ -252,7 +264,7 @@ class PostController extends Controller
         } else if ($request->draft) {
             return Post::where('published_at', '=', null)->count();
         } else {
-            return Post::All()->count();
+            return Post::All()->whereNull('deleted_at')->count();
         }
     }
 
@@ -274,7 +286,8 @@ class PostController extends Controller
         }
         
         // hide html content
-        $result = Post::where([['category', $category_id], ['published_at', '=', null]])->get();
+        $result = Post::where([['category', $category_id], ['published_at', '=', null]])
+            ->whereNull('deleted_at')->get();
         foreach($result as $p){
             $p->setHidden(['html_content']);
         };
@@ -303,6 +316,7 @@ class PostController extends Controller
             ->select('title', 'id', 'category',
                      DB::raw('date(published_at) as published_at'),
                      DB::raw('date(created_at) as created_at'))
+            ->whereNull('deleted_at')
             ->get();
         
         foreach($posts as $p) {
@@ -319,6 +333,36 @@ class PostController extends Controller
         }
         
         return $posts;
+    }
+
+    /**
+     * POST /uploadimg/
+     *
+     * Upload an image and return path
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadImg(Request $request) {
+        // 新增内容 => 主席团&宣传部
+        if(!($this->department == Department::ZHUXITUAN 
+             || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
+            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'preview_img' => 'required|image'
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $md5Name = md5_file($request->file('preview_img')->getRealPath());
+        $guessExtension = $request->file('preview_img')->guessExtension();
+        $path = $request->file('preview_img')->storeAs('preview_img', $md5Name.'.'.$guessExtension);
+
+        return response()->json(['status' => 200, 'path' => $path], 200);
     }
 
     /**
