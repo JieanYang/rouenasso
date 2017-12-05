@@ -289,6 +289,15 @@ class DatabaseSeeder extends Seeder
             'message_leaveMessage' => '哎呀，臣妾好高兴，竟然有人欣赏我的诗！！'
         ]);
 
+        DB::table('leaveMessages')->insert([
+            'name_leaveMessage' => '请不要联系我',
+            'phone_leaveMessage' => '0123456789',
+            'email_leaveMessage' => 'buzhidao@test.com',
+            'agreeContact_leaveMessage' => false,
+            'contactWay_leaveMessage' => 'phone',
+            'message_leaveMessage' => '我是路人甲。 。 。'
+        ]);
+
 
          /* View Logs */
         DB::table('viewlogs')->insert([
