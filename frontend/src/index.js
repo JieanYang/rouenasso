@@ -38,8 +38,13 @@ require('./styles/index.css');
 require('./styles/guide.css');
 require('./styles/register.css');
 require('./styles/contactus.css');
-require('./styles/contents.css')
-
+require('./styles/contents.css');
+require('./styles/movements.css');
+require('./styles/movementDetails.css');
+require('./styles/works.css');
+require('./styles/work.css');
+require('./styles/writing.css');
+require('./styles/writing_detail.css');
 
 angular
   .module('app', [contentsModule, 'ui.router', 'base64'])

@@ -1,4 +1,4 @@
-module.exports = routesConfig;
+        module.exports = routesConfig;
 
 /** @ngInject */
 function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -37,7 +37,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         }
       }
     })
-    
+
     .state('home.register', {
       url: '/register',
       views: {
@@ -54,11 +54,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         }
       }
     })
-    .state('home.present', {
-      url: '/present',
+    .state('home.aboutus', {
+      url: '/aboutus',
       views: {
         'content@': {
-          template: '<h2>这里是学联介绍</h2>'
+          component: 'aboutus'
         }
       }
     })
@@ -82,12 +82,28 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/movements',
       views: {
         'content@': {
-          component: 'movement'
+          component: 'movements'
+        }
+      }
+    })
+    .state('home.movementDetails', {
+      url: '/movements/:id',
+      views: {
+        'content@': {
+          component: 'movementDetails'
         }
       }
     })
     .state('home.works', {
       url: '/works',
+      views: {
+        'content@': {
+          component: 'works'
+        }
+      }
+    })
+    .state('home.work', {
+      url: '/works/:id',
       views: {
         'content@': {
           component: 'work'
@@ -99,6 +115,14 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       views: {
         'content@': {
           component: 'writing'
+        }
+      }
+    })
+    .state('home.writing_detail', {
+      url: '/writing/:id',
+      views: {
+        'content@': {
+          component: 'writingDetail'
         }
       }
     });
