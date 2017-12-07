@@ -37,14 +37,14 @@ function ajaxLeavemessage() {
       var leaveMessages_obj = $('#panel_leavemessages');
 
       $.each(response, function(index, item){
-        var leaveMessages_item = $('<div>', {class: 'item_leavemessage', style: 'border:1px solid gray; padding: 6px; margin-bottom: 15px;'});
+        var leaveMessages_item = $('<div>', {class: 'item_leavemessage', style: 'border:1px solid #D5D0D0; padding: 6px; margin-bottom: 15px;'});
         leaveMessages_name = $('<h4>', {html: item.name_leaveMessage});
         leaveMessages_create = $('<small>', {html: item.created_at});
         leaveMessages_name.append(leaveMessages_create);
         leaveMessages_item.append(leaveMessages_name);
         leaveMessages_item.append($('<p>', {html: item.message_leaveMessage}));
         show_contactWay(item, leaveMessages_item);
-        addEventToMessages(leaveMessages_item, item.id);
+        addMessagesBtns(leaveMessages_item, item.id);
         leaveMessages_obj.append(leaveMessages_item);
       });
     },
@@ -61,17 +61,38 @@ function show_contactWay(item, leaveMessages_item) {
           }
         }
 
-function addEventToMessages(leaveMessages_item, id) {
+function addMessagesBtns(leaveMessages_item, id) {
         leaveMessages_item.mouseenter(function() {
             btns = $('<div>', {class: 'btns_leaveMessage'});
-            btn_view = $('<a>', {class: 'btn btn-outline btn-primary', html: '查看', style:'margin-right: 10px;', href: 'leavemessage_pageDetail.html?id='+id});
-            btn_delete = $('<a>', {class: 'btn btn-outline btn-danger', html: '删除'});
-            btns.append(btn_view,btn_delete);
+            btn_view = $('<a>', {href: 'leavemessage_pageDetail.html?id='+id, html: '查看', class: 'btn btn-outline btn-primary', style:'margin-right: 10px;'});
+            btn_delete = $('<a>', {html: '删除', class: 'btn btn-outline btn-danger'});
+            addDeleteEvent(btn_delete, id);
+            btns.append(btn_view, btn_delete);
             $(this).append(btns);
         });
         leaveMessages_item.mouseleave(function(){
             $(this).children(".btns_leaveMessage").remove();
          });
     
+}
+
+function addDeleteEvent(btn_delete, id){
+    btn_delete.click(function() {
+        $(this).attr('id', 'delete');
+        ajaxAuthDelete('http://localhost:8000/leaveMessages/'+id, null,
+            function(response) {
+                console.log(response.status);
+                console.log(response.msg);
+                $('#delete').parent().parent().remove();
+            },
+            function(response){
+                console.log(response.responseJSON.status);
+                console.log(response.responseJSON.msg);
+                if(response.responseJSON.status == 400){
+                    $('#delete').parent().append($('<p>').text('帖子已删除').css('color', 'red'));
+                }
+                $('#delete').removeAttr("id");
+            });
+    });
 }
 
