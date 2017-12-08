@@ -36,6 +36,7 @@ var footer = require('./scripts/scripts_base/footer');
 
 require('./styles/index.css');
 require('./styles/guide.css');
+require('./styles/guides.css');
 require('./styles/register.css');
 require('./styles/contactus.css');
 require('./styles/contents.css');
