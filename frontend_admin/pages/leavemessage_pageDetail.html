@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ACEC Rouen, admin page">
+    <meta name="author" content="Junyang HE">
+
+    <title>ACEC Rouen - Admin</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- full calendar -->
+    <link rel='stylesheet' href='../vendor/fullcalendar/fullcalendar.css' />
+</head>
+
+<body>
+    <div id="loader">
+        <div></div>
+        <div></div>
+    </div>
+
+    <div id="wrapper">
+
+        <div id="navigator"></div>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">留言区</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            留言
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+
+                            <div id="panel_detail_leavemessage" style="border:1px solid #D5D0D0; padding: 6px; margin-bottom: 15px;height: 400px;" hidden>
+                                    <p>id:<span id="id">id</span></p>
+                                    <p>提交时间: <span id="create">create</span></p>
+                                    <h4 id="name">name</h4>
+                                    <br>
+                                    <p id="message" style="font-size: 1.2em;">message</p>
+                                    <br>
+                                    <p>联系方式：<br>
+                                    &emsp;邮件: <span id="email">email</span><br>
+                                    &emsp;电话: <span id="phone">phone</span><br>
+                                    <p>可否联系：<span id="contact">contact<span></p>
+                                    </p>
+                                    <a href="leavemessages.html" class="btn btn-outline btn-primary">返回</a>
+                                </div>
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+    <!-- JavaScript Cookie -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+    <!-- Lodash -->
+    <script src="../../vendor/lodash/lodash.js"></script>
+
+    <!-- login -->
+    <script src="../js/login.js"></script>
+
+    <!-- common -->
+    <script src="../js/common.js"></script>
+
+    <!-- main -->
+    <script src="../js/leavemessage_pageDetail.js"></script>
+</body>
+
+</html>

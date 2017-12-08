@@ -8,15 +8,9 @@ module.exports = {
 function worksController($http) {
   var vm = this;
 
-  $http.get('http://localhost:8000/posts/category/2')
+  $http.get('http://localhost:8000/works')
   .then(function(response) {
-  	works = response.data;
-    
-    works.forEach(function(w) {
-      w.preview_text = angular.fromJson(w.preview_text);
-    });
-    
-    vm.works = works;
-  	console.log(works);
-  });
+  	vm.works = response.data;
+  	console.log(vm.works);
+  })
 }

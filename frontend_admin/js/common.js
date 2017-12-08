@@ -5,6 +5,10 @@ $(window).on('load', function () {
         categoryMap = json;
     });
 });
+// 导入导航栏
+$.get("../pages/common/navigator.html", function(data){
+            $("#navigator").html(data);
+        });
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
