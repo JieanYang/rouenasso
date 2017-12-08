@@ -46,8 +46,16 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         }
       }
     })
+    .state('home.guides', {
+      url: '/guides',
+      views: {
+        'content@': {
+          component: 'guides'
+        }
+      }
+    })
     .state('home.guide', {
-      url: '/guide',
+      url: '/guides/:id',
       views: {
         'content@': {
           component: 'guide'

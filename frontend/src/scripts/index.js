@@ -2,6 +2,7 @@ var angular = require('angular');
 
 var contents = require('./scripts_Module/contents');
 
+var guides = require('./scripts_Module/guides');
 var guide = require('./scripts_Module/guide');
 var movements = require('./scripts_Module/movements');
 var movementDetails =require('./scripts_Module/movementDetails')
@@ -24,6 +25,7 @@ angular
   .component('fountainContents', contents)
 
   .component('guide', guide)
+  .component('guides', guides)
   .component('movements', movements)
   .component('movementDetails', movementDetails)
   .component('works', works)
