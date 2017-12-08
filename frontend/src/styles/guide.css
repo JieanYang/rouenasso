@@ -1,22 +1,25 @@
 /*guide page*/
 .guide_navs{
+  width: 100%;
   background: black;
   margin: 0 0 20px 0;
+  height: 50px;
+  padding-left: 70px;
+  padding-right: -70px;
 }
 .guide_nav{
-  /*background: yellow;*/
   display: block;
-  width: 9%;
+  height: 50px;
+  width: 10%;
   padding: 0;
   text-align: center;
   color: white;
 }
 .guide_nav h5{
   cursor: pointer;
+  height: 50px;
+  line-height: 30px;
 }
-/*.btn_div{
-  width:150px;
-}*/
 
 /*就医指南*/
 div#panel_7 p {
