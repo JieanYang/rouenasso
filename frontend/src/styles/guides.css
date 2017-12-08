@@ -2,7 +2,7 @@
 	height: 700px;
 }
 
-ul,li{margin:15px;padding:0;}   
+ 
 .xttblog{   
 	width: 1200px;   
 	height: 170px;   
@@ -13,7 +13,7 @@ ul,li{margin:15px;padding:0;}
 
 .box{margin-left: 5px;margin-top: 5px;list-style-type:none;}
   
-
+.box li{margin:15px;padding:0;}  
 .box li{
 	cursor:pointer;
 	display:block;
