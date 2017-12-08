@@ -264,7 +264,7 @@ class PostController extends Controller
         } else if ($request->draft) {
             return Post::where('published_at', '=', null)->count();
         } else {
-            return Post::All()->whereNull('deleted_at')->count();
+            return Post::whereNull('deleted_at')->count();
         }
     }
 
