@@ -55,15 +55,17 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group">
-                                <label>文章概要</label>
-                                <input id="post-preview-text" class="form-control" type="text" required />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label>概要图</label>
-                                <input id="post-preview-text" class="form-control" type="text" required />
+                            <div class="form-group" id="category-preview-inputs">
+                                <div class="col-md-8">
+                                    <label>文章概要</label>
+                                    <input id="post-preview-text" class="form-control" type="text" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>概要图</label>
+                                    <form role="form" action="" name="image-form" id="image-form" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                        <input id="post-preview-image" name="preview_img" class="form-control" type="file" accept="image/*" required />
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

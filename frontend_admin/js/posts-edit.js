@@ -3,6 +3,7 @@ var user_id = null;
 var post = null; // input post
 var isNewPost = true;
 var ue = null; // neditor
+var uploadImageUrl = "";
 
 $(window).on('load', function () {
     // show loader
@@ -27,7 +28,7 @@ $(window).on('load', function () {
     // login check
     $.when(checkLogin()).done(function () {
         $.when(
-            ajaxGetPost() // 获取文章
+            ajaxGetOnePost() // 获取文章
         ).done(function () {
             // 加载富文本编辑器
             ue = UE.getEditor('editor');
@@ -89,12 +90,26 @@ $(window).on('load', function () {
     });
 });
 
+// category select onSelect
+$("#post-category").change(function () {
+    $("#post-category option:selected").each(function () {
+        console.log($(this).text());
+    });
+
+}).change();
+
 // enable / disable inputs
 function disableInputs(enable) {
     $("#btn-save-draft").prop('disabled', enable);
     $("#btn-publish").prop('disabled', enable);
     $("#post-title").prop('disabled', enable);
-    $('#post-category').prop('disabled', enable);
+    $("#post-category").prop('disabled', enable);
+    if ($("#post-preview-text")) {
+        $("#post-preview-text").prop('disabled', enable);
+    }
+    if ($("#post-preview-image")) {
+        $("#post-preview-image").prop('disabled', enable);
+    }
 }
 
 // ajax - 检查登陆，参数，权限
@@ -133,7 +148,7 @@ function checkLogin() {
 }
 
 // ajax - get post object
-function ajaxGetPost() {
+function ajaxGetOnePost() {
     if (isNewPost) {
         return true;
     }
@@ -166,18 +181,22 @@ function ajaxSaveDraft() {
             title: $("#post-title").val(),
             user_id: user_id,
             category: $("#post-category").val(),
-            html_content: ue.getContent()
+            html_content: ue.getContent(),
+            preview_text: generatePreviewString()
         };
+        $.when(uploadImage()).done(function () {
+            postData.preview_img = uploadImageUrl;
 
-        return ajaxAuthPost('https://api.acecrouen.com/posts/', postData,
-            function (response) {
-                // reload, with id and url
-                window.location.replace("?id=" + response.id + "&url=" + response.url);
-            },
-            function (response) {
-                alert('error');
-                console.log(response);
-            });
+            return ajaxAuthPost('https://api.acecrouen.com/posts/', postData,
+                function (response) {
+                    // reload, with id and url
+                    window.location.replace("?id=" + response.id + "&url=" + response.url);
+                },
+                function (response) {
+                    alert('error');
+                    console.log(response);
+                });
+        });
     } else if (!post.published_at) { // 修改草稿
 
         // disable all, show loader
@@ -189,19 +208,24 @@ function ajaxSaveDraft() {
         postData.title = $("#post-title").val();
         postData.category = $("#post-category").val();
         postData.html_content = ue.getContent();
+        preview_text: generatePreviewString();
         delete postData.published_at; // value is null, remove this, else validator will say it is not a date format.
 
-        return ajaxAuthPut('https://api.acecrouen.com/posts/' + post.id, postData,
-            function (response) {
-                // enable all, hide loader
-                disableInputs(false);
-                ue.setEnabled();
-                $("#loader").removeClass("show");
-            },
-            function (response) {
-                alert('error');
-                console.log(response);
-            });
+        $.when(uploadImage()).done(function () {
+            postData.preview_img = uploadImageUrl;
+            return ajaxAuthPut('https://api.acecrouen.com/posts/' + post.id, postData,
+                function (response) {
+                    // enable all, hide loader
+                    disableInputs(false);
+                    ue.setEnabled();
+                    $("#loader").removeClass("show");
+                },
+                function (response) {
+                    alert('error');
+                    console.log(response);
+                });
+        });
+
     } else {
         alert("已发布文章无法保存为草稿。");
     }
@@ -225,35 +249,78 @@ function ajaxPublishPost() {
             user_id: user_id,
             category: $("#post-category").val(),
             html_content: ue.getContent(),
-            published_at: formatDateTime(new Date())
+            published_at: formatDateTime(new Date()),
+            preview_text: generatePreviewString()
         };
+        $.when(uploadImage()).done(function () {
+            postData.preview_img = uploadImageUrl;
 
-        return ajaxAuthPost('https://api.acecrouen.com/posts/', postData,
-            function (response) {
-                // reload, with id and url
-                window.location.replace("?id=" + response.id + "&url=" + response.url);
-            },
-            function (response) {
-                alert('error');
-                console.log(response);
-            });
+            return ajaxAuthPost('https://api.acecrouen.com/posts/', postData,
+                function (response) {
+                    // reload, with id and url
+                    window.location.replace("?id=" + response.id + "&url=" + response.url);
+                },
+                function (response) {
+                    alert('error');
+                    console.log(response);
+                });
+        });
     } else {
         postData = post;
         postData.title = $("#post-title").val();
         postData.category = $("#post-category").val();
         postData.html_content = ue.getContent();
         postData.published_at = formatDateTime(new Date());
+        preview_text: generatePreviewString();
 
-        return ajaxAuthPut('https://api.acecrouen.com/posts/' + post.id, postData,
+        $.when(uploadImage()).done(function () {
+            postData.preview_img = uploadImageUrl;
+            return ajaxAuthPut('https://api.acecrouen.com/posts/' + post.id, postData,
+                function (response) {
+                    // enable all, hide loader
+                    disableInputs(false);
+                    ue.setEnabled();
+                    $("#loader").removeClass("show");
+                },
+                function (response) {
+                    alert('error');
+                    console.log(response);
+                });
+        });
+    }
+}
+
+// category special preview helper
+function generatePreviewString() {
+    var selectedCategory = $('#post-category').find(":selected").text();
+    var previewText = "";
+    if (selectedCategory == '工作咨询') {
+        // TODO: get info from different fields, generate a json string
+    } else {
+        // get preview text
+        previewText = $("#post-preview-text").val();
+    }
+
+    return previewText;
+}
+
+// upload image
+function uploadImage() {
+    // upload image
+    if ($("#post-preview-image").val()) {
+        var data = new FormData($('#image-form')[0]);
+        console.log(data);
+        return ajaxAuthPost("https://api.acecrouen.com/uploadimg", data,
             function (response) {
-                // enable all, hide loader
-                disableInputs(false);
-                ue.setEnabled();
-                $("#loader").removeClass("show");
+                console.log(response);
+                uploadImageUrl = response;
             },
             function (response) {
                 alert('error');
                 console.log(response);
+                uploadImageUrl = "";
             });
+    } else {
+        return true;
     }
 }

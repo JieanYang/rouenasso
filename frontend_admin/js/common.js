@@ -16,7 +16,7 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-// base ajax get with auth
+// base ajax GET with auth
 function ajaxAuthGet(url, success, error) {
     return $.ajax({
         url: url,
@@ -30,7 +30,7 @@ function ajaxAuthGet(url, success, error) {
     });
 }
 
-// base ajax GET with auth
+// base ajax POST with auth
 function ajaxAuthPost(url, data, success, error) {
     return $.ajax({
         url: url,
@@ -39,13 +39,13 @@ function ajaxAuthPost(url, data, success, error) {
             Authorization: auth
         },
         data: data,
-        dataType: 'json',
+        //dataType: 'json',
         success: success,
         error: error
     });
 }
 
-// base ajax POST with auth
+// base ajax PUT with auth
 function ajaxAuthPut(url, data, success, error) {
     return $.ajax({
         url: url,
