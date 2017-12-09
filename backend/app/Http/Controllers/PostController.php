@@ -360,7 +360,7 @@ class PostController extends Controller
 
         $md5Name = md5_file($request->file('preview_img')->getRealPath());
         $guessExtension = $request->file('preview_img')->guessExtension();
-        $path = 'https://api.acecrouen.com' . $request->file('preview_img')->storeAs('preview_img', $md5Name.'.'.$guessExtension);
+        $path = 'https://api.acecrouen.com/' . $request->file('preview_img')->storeAs('preview_img', $md5Name.'.'.$guessExtension);
 
         return response()->json(['status' => 200, 'path' => $path], 200);
     }
