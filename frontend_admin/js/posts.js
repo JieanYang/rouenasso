@@ -11,6 +11,13 @@ $(window).on('load', function () {
 
     // login check
     $.when(checkLogin()).done(function () {
+        // category select options
+        $.each(categoryMap, function (id, name) {
+            $('#post-category').append($('<option>', {
+                value: id,
+                text: name
+            }));
+        });
         $.when(ajaxPostsTable()).done(function () {
             // hide loader
             $("#loader").removeClass("show");
@@ -20,7 +27,6 @@ $(window).on('load', function () {
 
 // ajax - check if logged in
 function checkLogin() {
-    if(!Cookies.get('Authorization')) { window.location.replace("login.html"); }
     return attempt(Cookies.get('Authorization'), function (response) {
         auth = Cookies.get('Authorization');
         setAuthCookie(auth);
