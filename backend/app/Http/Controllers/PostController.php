@@ -186,10 +186,10 @@ class PostController extends Controller
         $postDB->html_content = $request->html_content;
         $postDB->published_at = $request->published_at;
         if($request->preview_img_url) {
-            $post->preview_img_url = $request->preview_img_url;
+            $postDB->preview_img_url = $request->preview_img_url;
         }
         if($request->preview_text) {
-            $post->preview_text = $request->preview_text;
+            $postDB->preview_text = $request->preview_text;
         }
 
         $postDB->save();
