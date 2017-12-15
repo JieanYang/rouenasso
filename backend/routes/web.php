@@ -63,6 +63,12 @@ Route::get('downloadimg/', 'PostNoAuthController@retrieveImg');
 // LeaveMessages
 Route::resource('leaveMessages', 'LeaveMessageController', [ 'only' => ['index', 'show', 'store', 'destroy']]);
 
+// TrashCan
+Route::get('TrashCans', 'TrashCanController@index');
+Route::get('TrashCans/{id}', 'TrashCanController@show');
+Route::put('TrashCans/{id}', 'TrashCanController@restore');
+Route::delete('TrashCans/{id}', 'TrashCanController@forceDelete');
+
 
 /**
  * Neditor
