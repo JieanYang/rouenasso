@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ACEC Rouen, admin page">
+    <meta name="author" content="Junyang HE">
+
+    <title>ACEC Rouen - Admin</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" href="../less/TrashCans.css">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- full calendar -->
+    <link rel='stylesheet' href='../vendor/fullcalendar/fullcalendar.css' />
+</head>
+
+<body>
+    <div id="loader">
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="fullbg"></div>
+    <div id="model_view">
+        <p class="close"><a href="#" onclick="closeModelView();"><i class="fa fa-times"></i></a></p>
+        <h3>标题</h3>
+        <hr>
+        <p>内容</p>
+    </div>
+
+
+    <div id="wrapper">
+
+        <div id="navigator"></div>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">文章</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <div class="col-sm-2" style="margin: 5px;">
+                            <select id="TrashCans-category" class="form-control" required>
+                                <option value="posts_deletete" selected>帖子</option>
+                                <option value="leaveMessages_delete">留言</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            回收站
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="postsTables_delete">
+                                <!-- style="word-wrap: break-word; table-layout:fixed;" -->
+                                <thead>
+                                    <tr>
+                                        <th>文章类型</th>
+                                        <th>文章标题</th>
+                                        <th>创建时间</th>
+                                        <th>发布时间</th>
+                                        <th>删除时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+    <!-- JavaScript Cookie -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+    <!-- Lodash -->
+    <script src="../../vendor/lodash/lodash.js"></script>
+
+    <!-- login -->
+    <script src="../js/login.js"></script>
+
+    <!-- common -->
+    <script src="../js/common.js"></script>
+
+    <!-- main -->
+    <script src="../js/TrashCans.js"></script>
+</body>
+
+</html>
