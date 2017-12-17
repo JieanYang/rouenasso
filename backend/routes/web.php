@@ -20,7 +20,7 @@
 // 	$postsNull = $user->movements()->whereNull('published_at')->get();
 // 	$posts = $user->movements()->whereNotNull('published_at')->get();
 // 	return $posts.$postsNull;
-	
+
 // 	// 查看东西关联的用户
 // 	$post = App\Post::find(4);
 // 	$user = $post->user()->get();
@@ -44,7 +44,7 @@ Route::get('users/{id}/posts', 'UserController@showPostsByUserId')->name('users.
 Route::get('users/count/show', 'UserController@countUser')->name('users.showPostsByUserId')->middleware('auth.basic.once');
 
 Route::post('login', 'GetSelfController@getSelf')->name('users.getSelf')->middleware('auth.basic.once');
-Route::post('/register/{link}',['uses'=>'UserController@store'])->name('users.shore'); //随机链接路由注册
+Route::post('/register/{link}',['uses'=>'UserController@store'])->name('users.store'); //随机链接路由注册
 Route::post('/createlink',['uses'=>'CreatelinkController@store'])->name('links.store')->middleware('auth.basic.once');//测试创建链接
 
 

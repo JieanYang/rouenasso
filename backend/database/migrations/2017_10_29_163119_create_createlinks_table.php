@@ -18,6 +18,7 @@ class CreateCreatelinksTable extends Migration
             $table->bigInteger('user_id');
             $table->string('link')->unique()->index();
             $table->timestamps();
+            $table->datetime('expires');
             $table->primary(['link']);
         });
     }

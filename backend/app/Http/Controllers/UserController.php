@@ -10,16 +10,17 @@ use App\Model\Department;
 use App\Model\Position;
 use Illuminate\Support\Facades\Auth;
 use App\Createlink;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
     private $department;
     private $position;
 
-    public function __construct() 
+    public function __construct()
     {
         $this->middleware('auth.basic.once', ['except' => ['store', 'countUser']]);
-        
+
         $this->middleware(function ($request, $next) {
             $this->department = Auth::user() ? Auth::user()->department : null;
             $this->position = Auth::user() ? Auth::user()->position : null;
@@ -37,7 +38,7 @@ class UserController extends Controller
     public function index()
     {
         // 搜索查看成员 => 主席团&秘书部
-        if(!($this->department == Department::ZHUXITUAN 
+        if(!($this->department == Department::ZHUXITUAN
              || $this->department == Department::MISHUBU || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
@@ -72,7 +73,19 @@ class UserController extends Controller
         if($searchlink == null) {
             return response()->json(['status' => 400, 'msg' => 'Invalid token!'], 400);
         }
-        
+        //比较当前注册时间与数据库中expires过期时间，如果大于，不允许注册，链接失效
+        $expires = (Createlink::find($link)->expires);
+        $expires_time = (date_parse_from_format("y-m-d H:i:s",$expires));
+
+
+        $now = Carbon::now();
+        $now_time = (date_parse_from_format("y-m-d H:i:s",$now));
+
+        if($expires_time<($now_time)){
+          return response()->json(['status' => 400, 'msg' => 'Link times out!'], 400);
+        }
+
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|max:255',
             'name' => 'required|max:100',
@@ -88,7 +101,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         }
-        
+
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
@@ -99,10 +112,8 @@ class UserController extends Controller
         $user->birthday = $request->birthday;
         $user->arrive_date = $request->arrive_date;
         $user->password = $request->password;
-
         $user->isWorking = True;
         $user->isAvaible = True;
-
         $user->save();
 
         return response()->json(['status' => 200, 'msg' => 'success']);
@@ -121,9 +132,9 @@ class UserController extends Controller
         if(!ctype_digit($id)) {
             return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
-        
+
         // 搜索查看成员 => 主席团&秘书部
-        if(!($this->department == Department::ZHUXITUAN 
+        if(!($this->department == Department::ZHUXITUAN
              || $this->department == Department::MISHUBU || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
@@ -160,9 +171,9 @@ class UserController extends Controller
         if(!ctype_digit($id)) {
             return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
-        
+
         // 修改成员 => 主席团&秘书部部长&秘书部副部长
-        if(!($this->$department == Department::ZHUXITUAN || 
+        if(!($this->$department == Department::ZHUXITUAN ||
              $this->department == Department::XIANGMUKAIFABU ||
             ($this->$department == Department::MISHUBU &&
                 ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG)))) {
@@ -257,7 +268,7 @@ class UserController extends Controller
         if(!ctype_digit($user_id)) {
             return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
-        
+
         // 删除 => 主席团&秘书部部长&秘书部副部长
         if(!($this->department == Department::ZHUXITUAN ||
             $this->department == Department::XIANGMUKAIFABU ||
@@ -290,9 +301,9 @@ class UserController extends Controller
     public function countUser()
     {
         // 搜索查看成员 => 主席团&秘书部
-        if(!($this->department == Department::ZHUXITUAN 
-             || $this->department == Department::MISHUBU 
-             || $this->department == Department::XUANCHUANBU 
+        if(!($this->department == Department::ZHUXITUAN
+             || $this->department == Department::MISHUBU
+             || $this->department == Department::XUANCHUANBU
              || $this->department == Department::XIANGMUKAIFABU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
@@ -312,7 +323,7 @@ class UserController extends Controller
         if(!ctype_digit($id)) {
             return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
-        
+
         $result = User::find($id)->posts()->get();
         foreach($result as $p){
             $p->setHidden(['html_content']);
