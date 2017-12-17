@@ -186,10 +186,10 @@ class PostController extends Controller
         $postDB->html_content = $request->html_content;
         $postDB->published_at = $request->published_at;
         if($request->preview_img_url) {
-            $post->preview_img_url = $request->preview_img_url;
+            $postDB->preview_img_url = $request->preview_img_url;
         }
         if($request->preview_text) {
-            $post->preview_text = $request->preview_text;
+            $postDB->preview_text = $request->preview_text;
         }
 
         $postDB->save();
@@ -264,7 +264,7 @@ class PostController extends Controller
         } else if ($request->draft) {
             return Post::where('published_at', '=', null)->count();
         } else {
-            return Post::All()->whereNull('deleted_at')->count();
+            return Post::whereNull('deleted_at')->count();
         }
     }
 
@@ -360,7 +360,7 @@ class PostController extends Controller
 
         $md5Name = md5_file($request->file('preview_img')->getRealPath());
         $guessExtension = $request->file('preview_img')->guessExtension();
-        $path = $request->file('preview_img')->storeAs('preview_img', $md5Name.'.'.$guessExtension);
+        $path = 'https://api.acecrouen.com/' . $request->file('preview_img')->storeAs('preview_img', $md5Name.'.'.$guessExtension);
 
         return response()->json(['status' => 200, 'path' => $path], 200);
     }

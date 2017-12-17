@@ -93,7 +93,12 @@ class LeaveMessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+        // $message = LeaveMessage::onlyTrashed()->get();
+        // foreach($message as $p){
+        //     $p->restore();
+        // };
+        // return $message;
         return LeaveMessage::find($id);
     }
 

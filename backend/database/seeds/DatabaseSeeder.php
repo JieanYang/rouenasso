@@ -58,109 +58,22 @@ class DatabaseSeeder extends Seeder
             'arrive_date' => date('2012-01-02'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+        DB::table('users')->insert([
+            'name' => '成员A',
+            'email' => 'a@test.com',
+            'password' => bcrypt('a'),
+            'department' => Department::ZUZHIBU,
+            'position' => Position::CHENGYUAN,
+            'school' => '山鸡大学',
+            'phone_number' => '06 05 04 03 01',
+            'isWorking' => True,
+            'isAvaible' => True,
+            'birthday' => date('1993-01-02'),
+            'arrive_date' => date('2017-01-02'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
 
         /* Posts */
-        DB::table('posts')->insert([
-            'title' => 'title 1',
-            'user_id' => '1',
-            'html_content' => 'h',
-            'category' => 2,    
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'published_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'view' => 15,
-            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
-            'preview_text' => 'preview text'
-        ]);
-        DB::table('posts')->insert([
-            'title' => 'title 2',
-            'user_id' => '1',
-            'html_content' => 'hh',
-            'category' => 2,
-            'created_at' => '2017-11-02',
-            'published_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'view' => 20,
-            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
-            'preview_text' => 'preview text'
-        ]);
-        DB::table('posts')->insert([
-            'title' => 'title 3',
-            'user_id' => '1',
-            'html_content' => 'hhh',
-            'category' => 2,
-            'created_at' => '2017-11-02',
-            'published_at' => '2017-10-30',
-            'view' => 25,
-            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
-            'preview_text' => 'preview text'
-        ]);
-        DB::table('posts')->insert([
-            'title' => 'title 4 loooooooooooooooooooooooooooooo oooooooooooooooooooooooooooooooooo oooooooooooooooooooooooooooooooooooooooooooooo ooooooooooooooooooooooooooooooooooong title',
-            'user_id' => '2',
-            'html_content' => 'hhhh',
-            'category' => 2,
-            'created_at' => '2017-11-01',
-            'published_at' => '2017-11-03',
-            'view' => 30,
-            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
-            'preview_text' => 'preview text'
-        ]);
-        DB::table('posts')->insert([
-            'title' => 'title 很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长5',
-            'user_id' => '2',
-            'html_content' => 'hhhhh',
-            'category' => 2,
-            'published_at' => '2017-11-01',
-            'created_at' => '2017-11-02',
-            'view' => 35,
-            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
-            'preview_text' => 'preview text'
-        ]);
-        DB::table('posts')->insert([
-            'title' => 'show',
-            'user_id' => '2',
-            'html_content' => '
-                <h4 class="light muted">Hi，小朋友们大家好，还记得我是谁吗？对了！我就是为蓝猫配音的演员，葛平！</h4>
-                <img src="//upload.wikimedia.org/wikipedia/zh/c/cf/Ge_Ping_2.JPG" alt="葛平"/>',
-            'category' => 99, // 公告
-            'published_at' => '2017-10-31',
-            'created_at' => '2017-11-02',
-            'view' => 99,
-            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
-            'preview_text' => 'preview text'
-        ]);
-        // 草稿 （无published——at）
-        DB::table('posts')->insert([
-            'title' => 'title 6',
-            'user_id' => '1',
-            'html_content' => 'non pub',
-            'category' => 2,
-            'created_at' => '2017-11-02',
-            'view' => 0,
-            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
-            'preview_text' => 'preview text'
-        ]);
-        DB::table('posts')->insert([
-            'title' => 'title 7',
-            'user_id' => '1',
-            'html_content' => 'non pub',
-            'category' => 2,
-            'created_at' => '2017-11-01',
-            'view' => 0,
-            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
-            'preview_text' => 'preview text'
-        ]);
-        DB::table('posts')->insert([
-            'title' => 'title 8',
-            'user_id' => '1',
-            'html_content' => 'non pub',
-            'category' => 2,
-            'created_at' => '2017-10-31',
-            'view' => 0,
-            'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
-            'preview_text' => 'preview text'
-        ]);
-
-
        
         /* 工作咨询 */
         DB::table('posts')->insert([
@@ -198,7 +111,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        // 活动推途
+        // 活动推广
         DB::table('posts')->insert([
             'user_id' => '1',
             'category' => 1,
@@ -233,7 +146,7 @@ class DatabaseSeeder extends Seeder
             'created_at' => '2017-10-31',
         ]);
 
-        // 活动推途
+        // 生活随笔
         DB::table('posts')->insert([
             'user_id' => '1',
             'category' => 4,
@@ -277,7 +190,8 @@ class DatabaseSeeder extends Seeder
             'email_leaveMessage' => 'libai@test.com',
             'agreeContact_leaveMessage' => true,
             'contactWay_leaveMessage' => 'email',
-            'message_leaveMessage' => '哪个小混蛋乱放我的诗到网上，小心我穿越时空来打死你，我的版权费快点给我寄过来！！'
+            'message_leaveMessage' => '哪个小混蛋乱放我的诗到网上，小心我穿越时空来打死你，我的版权费快点给我寄过来！！',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         DB::table('leaveMessages')->insert([
@@ -286,7 +200,8 @@ class DatabaseSeeder extends Seeder
             'email_leaveMessage' => 'liqingzhao@test.com',
             'agreeContact_leaveMessage' => true,
             'contactWay_leaveMessage' => 'phone',
-            'message_leaveMessage' => '哎呀，臣妾好高兴，竟然有人欣赏我的诗！！'
+            'message_leaveMessage' => '哎呀，臣妾好高兴，竟然有人欣赏我的诗！！',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         DB::table('leaveMessages')->insert([
@@ -295,7 +210,8 @@ class DatabaseSeeder extends Seeder
             'email_leaveMessage' => 'buzhidao@test.com',
             'agreeContact_leaveMessage' => false,
             'contactWay_leaveMessage' => 'phone',
-            'message_leaveMessage' => '我是路人甲。 。 。'
+            'message_leaveMessage' => '我是路人甲。 。 。',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 

@@ -13,7 +13,7 @@ class CreateLeaveMessagesTables extends Migration
      */
     public function up()
     {
-        Schema::create('leavemessages', function (Blueprint $table) {
+        Schema::create('leaveMessages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name_leaveMessage')->nullable(false);
             $table->string('phone_leaveMessage')->nullable(false);

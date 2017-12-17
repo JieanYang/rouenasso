@@ -11,6 +11,13 @@ $(window).on('load', function () {
 
     // login check
     $.when(checkLogin()).done(function () {
+        // category select options
+        $.each(categoryMap, function (id, name) {
+            $('#post-category').append($('<option>', {
+                value: id,
+                text: name
+            }));
+        });
         $.when(ajaxPostsTable()).done(function () {
             // hide loader
             $("#loader").removeClass("show");
