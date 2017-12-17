@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LeaveMessage extends Model
 {
-	protected $table = 'leavemessages';
+	protected $table = 'leaveMessages';
 
     use SoftDeletes;
 
