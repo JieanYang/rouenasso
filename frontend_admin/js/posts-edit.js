@@ -140,7 +140,7 @@ function ajaxGetOnePost() {
     return ajaxAuthGet(getParameterByName('url'),
         function (response) {
             post = response;
-            category = post.category;
+            category = post.category.toString();
         },
         function () {
             $("#wrapper").html("<h1>无法获取文章</h1>")
@@ -285,12 +285,12 @@ function ajaxPublishPost() {
 function generatePreviewString() {
     var jsonObj = null;
     switch (category) {
-        case 1: // 活动推广
+        case '1': // 活动推广
             jsonObj = {
                 "introduction": $("#preview-activity-introduction").val()
             };
             break;
-        case 3: // 工作咨询
+        case '3': // 工作咨询
             jsonObj = {
                 "title": $("#preview-job-title").val(),
                 "company": $("#preview-job-company").val(),
@@ -298,27 +298,40 @@ function generatePreviewString() {
                 "salary": $("#preview-job-salary").val()
             };
             break;
-        case 4: // 生活随笔
+        case '4': // 生活随笔
             jsonObj = {
                 "username": $("#preview-writing-username").val(),
                 "introduction": $("#preview-writing-introduction").val()
             };
+            break;
+        case '99':
+            jsonObj = "showing";
             break;
         default:
             paramError();
             break;
     }
 
-    return JSON.stringify(jsonObj);
+    if (category == '99') {
+        return jsonObj;
+    }
+    else {
+        return JSON.stringify(jsonObj);
+    }
 }
 
 function initFields() {
-    $("#post-title").val(post.title);
-
-    jsonPreviewTextObj = JSON.parse(post.preview_text);
+    if (!isNewPost) {
+        $("#post-title").val(post.title);
+        if (post.category == 99) {
+            jsonPreviewTextObj = post.preview_text;
+        } else {
+            jsonPreviewTextObj = JSON.parse(post.preview_text);
+        }
+    }
 
     switch (category) {
-        case 1: // 活动推广
+        case '1': // 活动推广
             $("#category-preview-inputs").html(`
                 <div class="col-lg-8">
                     <label>简介</label>
@@ -329,7 +342,7 @@ function initFields() {
                 $("#preview-activity-introduction").val(jsonPreviewTextObj.introduction);
             }
             break;
-        case 3: // 工作咨询
+        case '3': // 工作咨询
             $("#category-preview-inputs").html(`
                 <div class="col-sm-3">
                     <label>职位</label>
@@ -356,7 +369,7 @@ function initFields() {
             }
             $("#post-preview-image").hide();
             break;
-        case 4: // 生活随笔
+        case '4': // 生活随笔
             $("#category-preview-inputs").html(`
                 <div class="col-sm-4">
                     <label>作者</label>
@@ -372,12 +385,16 @@ function initFields() {
                 $("#preview-writing-introduction").val(jsonPreviewTextObj.introduction);
             }
             break;
+        case '99':
+            $("#post-preview-image").hide();
+            break;
         default:
+            alert('in');
             paramError();
             break;
     }
 
-    if(post.preview_img_url) {
+    if (!isNewPost && post.preview_img_url) {
         $("#post-preview-image-preview-div").html("<img id='post-preview-image-image' src='" + post.preview_img_url + "' alt='preview image' height='50px' width='auto' />");
     }
 }
@@ -386,8 +403,8 @@ function initFields() {
 function uploadImage() {
     // upload image
     if ($("#post-preview-image").val()) {
-        var file_data = $('#post-preview-image').prop('files')[0];   
-        var data = new FormData();                  
+        var file_data = $('#post-preview-image').prop('files')[0];
+        var data = new FormData();
         data.append('preview_img', file_data);
         console.log(data);
         return $.ajax({
@@ -403,12 +420,12 @@ function uploadImage() {
             success: function (response) {
                 console.log(response);
                 uploadImageUrl = response.path;
-                if($('#post-preview-image-image').length){ // if img exists
+                if ($('#post-preview-image-image').length) { // if img exists
                     $("#post-preview-image-image").attr("src", response.path);
                 } else { // if not exist, append
                     $("#post-preview-image-preview-div").html("<img id='post-preview-image-image' src='" + post.preview_img_url + "' alt='preview image' height='50px' width='auto' />");
                 }
-                
+
             },
             error: function (response) {
                 alert('error');
