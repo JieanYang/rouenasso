@@ -31,7 +31,7 @@ function checkLogin() {
 
 // 显示目录
 function ajaxLeavemessage() {
-  ajaxAuthGet('http://localhost:8000/leaveMessages',
+  ajaxAuthGet('https://api.acecrouen.com/leaveMessages',
     function(response){
 
       var leaveMessages_obj = $('#panel_leavemessages');
@@ -79,7 +79,7 @@ function addMessagesBtns(leaveMessages_item, id) {
 function addDeleteEvent(btn_delete, id){
     btn_delete.click(function() {
         $(this).attr('id', 'delete');
-        ajaxAuthDelete('http://localhost:8000/leaveMessages/'+id, null,
+        ajaxAuthDelete('https://api.acecrouen.com/leaveMessages/'+id, null,
             function(response) {
                 console.log(response.status);
                 console.log(response.msg);

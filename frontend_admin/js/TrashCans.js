@@ -36,7 +36,7 @@ function checkLogin() {
 
 // ajax - full calendar
 function ajaxPostsTable() {
-    ajaxAuthGet('http://localhost:8000/TrashCans',
+    ajaxAuthGet('https://api.acecrouen.com/TrashCans',
         function (response) {
             console.log(response);
 
@@ -84,7 +84,7 @@ function responsivePostDeleteTable() {
         var postId = $(this).parent().parent().parent().attr('id').split('-')[4];
         // alert('前端文章浏览页面 + id = ' + postId);
         // window.location.href = "posts_delete_detail.html?id="+postId;
-        ajaxAuthGet('http://localhost:8000/TrashCans/'+postId,function(response){
+        ajaxAuthGet('https://api.acecrouen.com/TrashCans/'+postId,function(response){
           console.log(response);
           if (response.status == 404 ){
             $('#model_view h3').text('错误');
@@ -120,7 +120,7 @@ function responsivePostDeleteTable() {
         function error_restore(result){
           alert('错误！');
         }
-        ajaxAuthPut('http://localhost:8000/TrashCans/'+postId, null, success_restore, error_restore);
+        ajaxAuthPut('https://api.acecrouen.com/TrashCans/'+postId, null, success_restore, error_restore);
     });
 
     // delete buttons
@@ -148,7 +148,7 @@ function responsivePostDeleteTable() {
         alert("你无权限删除文章。");
     }
 
-        ajaxAuthDelete('http://localhost:8000/TrashCans/'+postId, null, success, error);
+        ajaxAuthDelete('https://api.acecrouen.com/TrashCans/'+postId, null, success, error);
     });
 }
 
