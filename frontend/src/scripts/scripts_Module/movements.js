@@ -8,7 +8,7 @@ module.exports = {
 function movementsController($http) {
   var vm = this;
 
-  $http.get('http://localhost:8000/posts/category/1')
+  $http.get('https://api.acecrouen.com/posts/category/1')
   .then(function(response) {
   	movements = response.data;
   	movements.forEach(function(movement) {

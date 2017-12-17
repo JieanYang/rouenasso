@@ -8,7 +8,7 @@ module.exports = {
 function writingController($http) {
   var vm = this;
     
-  $http.get('http://localhost:8000/posts/category/4')
+  $http.get('https://api.acecrouen.com/posts/category/4')
   .then(function(response) {
   	writings = response.data;
   	writings.forEach(function(writing) {

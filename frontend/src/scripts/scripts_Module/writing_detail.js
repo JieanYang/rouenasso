@@ -9,7 +9,7 @@ function writingDetailController($http, $location, $sce) {
   var vm = this;
     
   vm.id=$location.url().slice(14);
-  $http.get('http://localhost:8000/posts/'+vm.id+'/noauth')
+  $http.get('https://api.acecrouen.com/posts/'+vm.id+'/noauth')
   .then(function(response) {
     vm.writing = $sce.trustAsHtml(response.data.html_content);
   });
