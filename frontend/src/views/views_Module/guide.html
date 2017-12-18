@@ -10,39 +10,39 @@
    <div class="col-sm-1 guide_div"><a class="btn btn-primary btn_div">应用推荐</a></div>
    </div> -->
 <ul class="nav nav-pills guide_navs">
-    <li ng-class="{ active: vm.tab===1 }" class="guide_nav">
+    <li ng-class="{ active: vm.tab==1 }" class="guide_nav">
             <h5 onclick="location.href='home/guides/1'">交通</h5>
     </li>
-    <li ng-class="{ active: vm.tab===2 }" class="guide_nav">
+    <li ng-class="{ active: vm.tab==2 }" class="guide_nav">
             <h5 onclick="location.href='home/guides/2'">运营商</h5>
     </li>
-    <li ng-class="{ active: vm.tab===3 }" class="guide_nav">
+    <li ng-class="{ active: vm.tab==3 }" class="guide_nav">
             <h5 onclick="location.href='home/guides/3'">生活饮食</h5>
     </li>
-    <li ng-class="{ active: vm.tab===4 }" class="guide_nav">
+    <li ng-class="{ active: vm.tab==4 }" class="guide_nav">
             <h5 onclick="location.href='home/guides/4'">运动</h5>
     </li>
-    <li ng-class="{ active: vm.tab===5 }" class="guide_nav">
+    <li ng-class="{ active: vm.tab==5 }" class="guide_nav">
             <h5 onclick="location.href='home/guides/5'">娱乐</h5>
     </li>
-    <li ng-class="{ active: vm.tab===6 }" class="guide_nav">
+    <li ng-class="{ active: vm.tab==6 }" class="guide_nav">
             <h5 onclick="location.href='home/guides/6'">房补</h5>
     </li>
-    <li ng-class="{ active: vm.tab===7 }" class="guide_nav">
+    <li ng-class="{ active: vm.tab==7 }" class="guide_nav">
             <h5 onclick="location.href='home/guides/7'">就医指南</h5>
     </li>
-    <li ng-class="{ active: vm.tab===8 }" class="guide_nav">
+    <li ng-class="{ active: vm.tab==8 }" class="guide_nav">
             <h5 onclick="location.href='home/guides/8'">银行</h5>
     </li>
-    <li ng-class="{ active: vm.tab===9 }" class="guide_nav">
+    <li ng-class="{ active: vm.tab==9 }" class="guide_nav">
             <h5 onclick="location.href='home/guides/9'">应用推荐</h5>
     </li>
 </ul>
 <div class="container">
     <div class="row">
 
-        <div class="panel" ng-show="vm.tab===1">
-            <div id="menu" class="nav1" ng-show="vm.tab===1">
+        <div class="panel" ng-show="vm.tab==1">
+            <div id="menu" class="nav1" ng-show="vm.tab==1">
                 <h2>交通</h2>
                 <ul>
                     <li class="toc-entry toc-h2"><a href="#DTGJ">地铁&amp;公交</a></li>
@@ -110,7 +110,7 @@
                 </blockquote>
             </div>
         </div>
-        <div class="panel" ng-show="vm.tab===2">
+        <div class="panel" ng-show="vm.tab==2">
             <div id="menu" class="nav1">
                 <h2>运营商</h2>
                 <ul class="section-nav">
@@ -172,7 +172,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel" ng-show="vm.tab===3">
+        <div class="panel" ng-show="vm.tab==3">
             <div id="menu" class="nav1">
                 <h2><span>生活饮食</span></h2>
                 <ul>
@@ -244,7 +244,7 @@
                 </blockquote>
             </div>
         </div>
-        <div class="panel" ng-show="vm.tab===4">
+        <div class="panel" ng-show="vm.tab==4">
             <div id="menu" class="nav1">
                 <h2><span>运动</span></h2>
                 <ul>
@@ -303,7 +303,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel" ng-show="vm.tab===5">
+        <div class="panel" ng-show="vm.tab==5">
             <div id="menu" class="nav1">
                 <h2><span>娱乐</span></h2>
                 <ul>
@@ -357,7 +357,7 @@
             </div>
         </div>
 
-        <div class="panel" ng-show="vm.tab===6">
+        <div class="panel" ng-show="vm.tab==6">
             <div id="menu" class="nav1">
                <h2><strong>房补</strong></h2>
                 <ul>
@@ -411,7 +411,7 @@
                 </div>
             </div>
         </div>
-        <div id="panel_7" class="panel" ng-show="vm.tab===7">
+        <div id="panel_7" class="panel" ng-show="vm.tab==7">
             <!-- <h3>就医指南</h3>
          <p>...</p> -->
             <div class="row">
@@ -528,7 +528,7 @@
 
 
 
-        <div id="panel_8" class="panel" ng-show="vm.tab===8">
+        <div id="panel_8" class="panel" ng-show="vm.tab==8">
 
             <div class="col-sm-3" style="margin-top: 100px;">
                 <ul class="section-nav">
@@ -655,7 +655,7 @@
         </div>
 
 
-        <div id="panel_9" class="panel" ng-show="vm.tab===9">
+        <div id="panel_9" class="panel" ng-show="vm.tab==9">
             <div ng-repeat="app in vm.data_9">
                 <div class="row row-content">
                     <div class="col-xs-12 col-sm-3">
