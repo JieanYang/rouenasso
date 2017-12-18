@@ -1,7 +1,9 @@
 <!-- <h2>单页生活随笔-component</h2> -->
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12 col-sm-12" ng-bind-html="vm.writing">
+		<h3 class="col-sm-12 col-xs-12">{{vm.title}}</h3>
+		<sapn class="col-sm-4 writing_detail_publish">{{vm.published}}</sapn>
+		<div class="col-xs-12 col-sm-12 writing_detail_content" ng-bind-html="vm.writing">
 		</div>
 	</div>
 </div>

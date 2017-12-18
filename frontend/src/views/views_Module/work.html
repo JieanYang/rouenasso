@@ -1,7 +1,9 @@
 <!-- <h2>这是单个工作详情页面-component</h2> -->
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12 col-sm-12" ng-bind-html="vm.work">
+		<h3 class="col-sm-12 col-xs-12">{{vm.title}}</h3>
+		<sapn class="col-sm-4 work_detail_publish">{{vm.published}}</sapn>
+		<div class="col-xs-12 col-sm-12 work_detail_content" ng-bind-html="vm.work">
 		</div>
 	</div>
 </div>

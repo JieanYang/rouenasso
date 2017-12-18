@@ -13,6 +13,8 @@ function movementDetailsController($http, $location, $sce) {
   $http.get('https://api.acecrouen.com/posts/'+vm.id+'/noauth')
   .then(function(response) {
   	vm.movement = $sce.trustAsHtml(response.data.html_content);
+    vm.title = response.data.title;
+    vm.published = response.data.published_at;
   });
 
 }
