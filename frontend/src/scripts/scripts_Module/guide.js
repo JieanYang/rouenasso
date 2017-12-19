@@ -8,9 +8,8 @@ module.exports = {
 function GuideController($http) {
   var vm = this;
   
-  url = window.location.href.slice(34);
+  url = window.location.href.slice(38);
   vm.tab = parseInt(url);
-
   
   if(vm.tab === 8){
       $http.get('../../databases/guide.json')
