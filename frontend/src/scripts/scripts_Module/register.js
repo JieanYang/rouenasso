@@ -7,11 +7,13 @@ module.exports = {
 /** @ngInject */
 function registerController($http) {
   var vm = this;
+  // 注册链接
+  var link = window.location.href.slice(36);
   //for the tag selection ng-options
-  vm.department_channels=[{label:"项目开发部", value:"项目开发部"}, 
-  						  {label:"组织部", value:"组织部"},
-  						  {label:"安全部", value:"安全部"}];
-  vm.positions = [{label:"成员", value:"成员"}];
+  vm.department_channels=[{label:"项目开发部", value:"XIANGMUKAIFABU"}, 
+  						  {label:"组织部", value:"ZUZHIBU"},
+  						  {label:"安全部", value:"ANQUANBU"}];
+  vm.positions = [{label:"成员", value:"CHENGYUAN"}];
 
   vm.birthday;//input birthday
   vm.arrive_date;//input arrive_date
@@ -30,14 +32,14 @@ function registerController($http) {
 				// 	"arrive_date": "2025-10-18",
 				// 	"password": "yang"
 				// }
-
+  
   vm.sendRegister = function () {
   	vm.register.birthday = vm.birthday.toLocaleDateString('zh-Hans-CN');
   	vm.register.arrive_date = vm.arrive_date.toLocaleDateString('zh-Hans-CN');
 
   	console.log(vm.register);
 
-  	$http.post('http://localhost:8000/register', vm.register, true)
+  	$http.post('http://localhost:8000/register/'+link, vm.register, true)
   	.then(function(response) {
   		if(response.data.msg){
   			vm.message = response.data.msg;
