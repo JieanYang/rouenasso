@@ -38,11 +38,11 @@
             <h5 onclick="location.href='home/guides/9'">应用推荐</h5>
     </li>
 </ul>
+
 <div class="container">
     <div class="row">
-
-        <div class="panel" ng-show="vm.tab==1">
-            <div id="menu" class="nav1" ng-show="vm.tab==1">
+        <div class="panel" ng-show="vm.tab===1">
+            <div id="menu" class="nav1">
                 <h2>交通</h2>
                 <ul>
                     <li class="toc-entry toc-h2"><a href="#DTGJ">地铁&amp;公交</a></li>
@@ -110,7 +110,9 @@
                 </blockquote>
             </div>
         </div>
-        <div class="panel" ng-show="vm.tab==2">
+
+<!-- ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
+        <div class="panel" ng-show="vm.tab===2">
             <div id="menu" class="nav1">
                 <h2>运营商</h2>
                 <ul class="section-nav">
@@ -172,7 +174,8 @@
                 </div>
             </div>
         </div>
-        <div class="panel" ng-show="vm.tab==3">
+<!-- ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
+        <div class="panel" ng-show="vm.tab===3">
             <div id="menu" class="nav1">
                 <h2><span>生活饮食</span></h2>
                 <ul>
@@ -244,7 +247,8 @@
                 </blockquote>
             </div>
         </div>
-        <div class="panel" ng-show="vm.tab==4">
+<!-- ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
+        <div class="panel" ng-show="vm.tab===4">
             <div id="menu" class="nav1">
                 <h2><span>运动</span></h2>
                 <ul>
@@ -303,7 +307,8 @@
                 </div>
             </div>
         </div>
-        <div class="panel" ng-show="vm.tab==5">
+<!-- ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
+        <div class="panel" ng-show="vm.tab===5">
             <div id="menu" class="nav1">
                 <h2><span>娱乐</span></h2>
                 <ul>
@@ -356,8 +361,8 @@
                 </div>
             </div>
         </div>
-
-        <div class="panel" ng-show="vm.tab==6">
+<!-- ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
+        <div class="panel" ng-show="vm.tab===6">
             <div id="menu" class="nav1">
                <h2><strong>房补</strong></h2>
                 <ul>
@@ -411,7 +416,8 @@
                 </div>
             </div>
         </div>
-        <div id="panel_7" class="panel" ng-show="vm.tab==7">
+<!-- ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
+        <div id="panel_7" class="panel" ng-show="vm.tab===7">
             <!-- <h3>就医指南</h3>
          <p>...</p> -->
             <div class="row">
@@ -525,8 +531,7 @@
                 </div>
             </div>
         </div>
-
-
+<!-- ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
 
         <div id="panel_8" class="panel" ng-show="vm.tab==8">
 
@@ -653,9 +658,8 @@
                 </div>
             </div>
         </div>
-
-
-        <div id="panel_9" class="panel" ng-show="vm.tab==9">
+<!-- ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
+        <div id="panel_9" class="panel" ng-show="vm.tab===9">
             <div ng-repeat="app in vm.data_9">
                 <div class="row row-content">
                     <div class="col-xs-12 col-sm-3">
