@@ -39,7 +39,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     })
 
     .state('home.register', {
-      url: '/register',
+      url: '/register/:link',
       views: {
         'content@': {
           component: 'register'
