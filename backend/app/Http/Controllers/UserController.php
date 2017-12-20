@@ -89,8 +89,14 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|max:255',
             'name' => 'required|max:100',
-            'department' => 'required|in:' . implode(",", \App\Model\Department::getValues()),
-            'position' => 'required|in:' . implode(",", \App\Model\Position::getValues()),
+            'department' => [
+            	'required',
+            	Rule::in(\App\Model\Department::getKeys()),
+            ],
+            'position' => [
+            	'required',
+            	Rule::in(\App\Model\Position::getKeys()),
+            ],
             'school' => 'required|max:100',
             'phone_number' => 'required|digits_between:10,15',
             'birthday' => 'required|date',
@@ -101,6 +107,22 @@ class UserController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         }
+
+        // 转化传进来部门和位置的字母为中文
+        $array_key_department = \App\Model\Department::getKeys();
+        $array_value_department = \App\Model\Department::getValues();
+    	for($x=0;$x<count($array_key_department);$x++){
+    		if ($array_key_department[$x] == $request->department){
+    			$request->department = $array_value_department[$x];
+    		}
+    	}
+    	$array_key_position = \App\Model\Position::getKeys();
+        $array_value_position = \App\Model\Position::getValues();
+    	for($x=0;$x<count($array_key_position);$x++){
+    		if ($array_key_position[$x] == $request->position){
+    			$request->position = $array_value_position[$x];
+    		}
+    	}
 
         $user = new User;
         $user->name = $request->name;
@@ -190,8 +212,14 @@ class UserController extends Controller
                 Rule::unique('users')->ignore($id),
             ],
             'name' => 'max:100',
-            'department' => 'in:' . implode(",", \App\Model\Department::getValues()),
-            'position' => 'in:' . implode(",", \App\Model\Position::getValues()),
+            'department' => [
+            	'required',
+            	Rule::in(\App\Model\Department::getKeys()),
+            ],
+            'position' => [
+            	'required',
+            	Rule::in(\App\Model\Position::getKeys()),
+            ],
             'school' => 'max:100',
             'phone_number' => 'digits_between:10,15',
             'birthday' => 'date',
@@ -205,6 +233,22 @@ class UserController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         }
+
+        // 转化传进来部门和位置的字母为中文
+        $array_key_department = \App\Model\Department::getKeys();
+        $array_value_department = \App\Model\Department::getValues();
+    	for($x=0;$x<count($array_key_department);$x++){
+    		if ($array_key_department[$x] == $request->department){
+    			$request->department = $array_value_department[$x];
+    		}
+    	}
+    	$array_key_position = \App\Model\Position::getKeys();
+        $array_value_position = \App\Model\Position::getValues();
+    	for($x=0;$x<count($array_key_position);$x++){
+    		if ($array_key_position[$x] == $request->position){
+    			$request->position = $array_value_position[$x];
+    		}
+    	}
 
 
         $userDb = User::find($id);
