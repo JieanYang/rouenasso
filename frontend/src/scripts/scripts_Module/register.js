@@ -10,10 +10,22 @@ function registerController($http) {
   // 注册链接
   var link = window.location.href.slice(36);
   //for the tag selection ng-options
-  vm.department_channels=[{label:"项目开发部", value:"XIANGMUKAIFABU"}, 
-  						  {label:"组织部", value:"ZUZHIBU"},
-  						  {label:"安全部", value:"ANQUANBU"}];
-  vm.positions = [{label:"成员", value:"CHENGYUAN"}];
+  vm.department_channels=[
+  	{label:"主席团", value:"ZHUXITUAN"}, 
+  	{label:"组织部", value:"ZUZHIBU"}, 
+  	{label:"宣传部", value:"XUANCHUANBU"}, 
+  	{label:"外联部", value:"WAILIANBU"}, 
+  	{label:"秘书部", value:"MISHUBU"},
+  	{label:"安全部", value:"XIANGMUKAIFABU"}
+  	];
+
+  vm.positions = [
+  	{label:"主席", value:"ZHUXI"},
+  	{label:"副主席", value:"FUZHUXI"},
+  	{label:"部长", value:"BUZHANG"},
+  	{label:"副部长", value:"FUBUZHANG"},
+  	{label:"成员", value:"CHENGYUAN"}
+  ];
 
   vm.birthday;//input birthday
   vm.arrive_date;//input arrive_date
@@ -32,26 +44,40 @@ function registerController($http) {
 				// 	"arrive_date": "2025-10-18",
 				// 	"password": "yang"
 				// }
-  
   vm.sendRegister = function () {
   	vm.register.birthday = vm.birthday.toLocaleDateString('zh-Hans-CN');
   	vm.register.arrive_date = vm.arrive_date.toLocaleDateString('zh-Hans-CN');
-
-  	console.log(vm.register);
 
   	$http.post('http://localhost:8000/register/'+link, vm.register, true)
   	.then(function(response) {
   		if(response.data.msg){
   			vm.message = response.data.msg;
-  		console.log(vm.message);
+  			vm.response = vm.message;
+  			clearForm();
+			$('#alert_register').text(vm.response);
   		}
   		if(response.data.email){
   			vm.message = response.data.email;
-  			console.log(vm.message);
+  			vm.response = vm.message;
+  			clearForm();
+  			$('#alert_register').text(vm.response);
   		}
   		
   	},function(){
-  		console.log("It meets an error!");
+  		$('#alert_register').text("It meets an error on server!");
   	});
   };
+
+  function clearForm(){
+  	$('#email').val('');
+  	$('#password').val('');
+  	$('#password_confirm').val('');
+  	$('#name').val('');
+  	$('#department').val('');
+  	$('#position').val('');
+  	$('#school').val('');
+  	$('#phone_number').val('');
+  	$('#birthday').val('');
+  	$('#arrive_date').val('');
+  }
 }
