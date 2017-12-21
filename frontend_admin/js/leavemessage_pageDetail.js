@@ -32,10 +32,10 @@ function checkLogin() {
 
 function ajaxLeavemessage() {
     var url = document.URL;
-    var id = url.slice(60);
+    var id = url.slice(71);
     ajaxAuthGet('http://localhost:8000/leaveMessages/'+id,
         function(response){
-            console.log(response);
+            // console.log(response);
             $('#id').text(response.id);
             $('#create').text(response.created_at);
             $('#name').text(response.name_leaveMessage);
