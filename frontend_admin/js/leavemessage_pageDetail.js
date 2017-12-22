@@ -4,6 +4,9 @@ $(window).on('load', function () {
     // show loader
     $("#loader").addClass("show");
 
+    // navigation
+    importLeftNavigation();
+
     // logout btn
     $("#btn-logout").click(function () {
         logout();
@@ -11,7 +14,7 @@ $(window).on('load', function () {
 
     // login check
     $.when(checkLogin()).done(function () {
-        $.when(ajaxLeavemessage()).done(function () {
+        $.when(ajaxLeavemessage_pageDetail()).done(function () {
             // hide loader
             $("#loader").removeClass("show");
         });
@@ -30,10 +33,10 @@ function checkLogin() {
 }
 
 
-function ajaxLeavemessage() {
+function ajaxLeavemessage_pageDetail() {
     var url = document.URL;
     var id = url.slice(71);
-
+    console.log(id);
 
     ajaxAuthGet('https://api.acecrouen.com/leaveMessages/'+id,
         function(response){
@@ -62,30 +65,3 @@ function show_contactWay(response, leaveMessages_item) {
               leaveMessages_item.text('否');
           }
         }
-
-
-
-// 显示单个页面
-// function addEventToMessage_btns (btn_view, btn_delete, id) {
-    
-//     btn_view.click(function() {
-
-//         ajaxAuthGet('https://api.acecrouen.com/leaveMessages/'+id,
-//             function(response){
-//                 // console.log(response);
-//                 $('#panel_leavemessages').hide();
-//                 leaveMessage_detail_obj = $('#panel_detail_leavemessage');
-//                 var leaveMessages_detail = $('<div>', {class: 'item_leavemessage', style: 'border:1px solid gray; padding: 6px; margin-bottom: 15px;'});
-//                 var name = $('<h4>', {html: response.name_leaveMessage});
-//                 create = $('<small>', {html: response.created_at});
-//                 name.append(create);
-//                 leaveMessages_detail.append(name);
-//                 leaveMessages_detail.append($('<p>', {html: response.message_leaveMessage}));
-//                 show_contactWay(response, leaveMessages_detail);
-//                 // addEventToMessages(leaveMessages_detail, response.id);
-//                 leaveMessage_detail_obj.append(leaveMessages_detail);
-//             },
-//             function(response){console.log(response.statusText);});
-
-//     });
-// }
