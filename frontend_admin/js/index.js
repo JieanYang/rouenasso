@@ -7,7 +7,7 @@ $(window).on('load', function () {
 
     // navigation
     importLeftNavigation();
-    
+
     // smooth anchor scroll
     $(document).on('click', 'a[href^="#"]', function (event) {
         event.preventDefault();
@@ -17,13 +17,13 @@ $(window).on('load', function () {
         }, 750);
     });
 
-    // logout btn
-    $("#btn-logout").click(function () {
-        logout();
-    });
-
     // login check
     $.when(checkLogin()).done(function () {
+        // logout btn
+        $("#btn-logout").click(function () {
+            logout();
+        });
+        
         // dashboard
         $("#block-date").text((new Date).toLocaleDateString());
         $("#block-time").text((new Date).toLocaleTimeString());

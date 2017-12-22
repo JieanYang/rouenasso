@@ -3,17 +3,17 @@ var auth = null;
 $(window).on('load', function () {
     // show loader
     $("#loader").addClass("show");
-    
+
     // navigation
     importLeftNavigation();
-    
-    // logout btn
-    $("#btn-logout").click(function () {
-        logout();
-    });
 
     // login check
     $.when(checkLogin()).done(function () {
+        // logout btn
+        $("#btn-logout").click(function () {
+            logout();
+        });
+
         // category select options
         $.each(categoryMap, function (id, name) {
             $('#post-category').append($('<option>', {
