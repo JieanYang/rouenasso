@@ -36,9 +36,9 @@ function checkLogin() {
 
 // ajax - full calendar
 function ajaxPostsTable() {
-    ajaxAuthGet('http://localhost:8000/TrashCans',
+    ajaxAuthGet('https://api.acecrouen.com/TrashCans',
         function (response) {
-            console.log(response);
+            // console.log(response);
 
             var table_obj = $('#postsTables_delete');
 

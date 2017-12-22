@@ -31,7 +31,7 @@ function checkLogin() {
 
 // 显示目录
 function ajaxLeavemessage() {
-  ajaxAuthGet('http://localhost:8000/leaveMessages',
+  ajaxAuthGet('https://api.acecrouen.com/leaveMessages',
     function(response){
 
       var leaveMessages_obj = $('#panel_leavemessages');
