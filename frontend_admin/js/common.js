@@ -6,9 +6,11 @@ $(window).on('load', function () {
     });
 });
 // 导入导航栏
-$.get("../pages/common/navigator.html", function(data){
-            $("#navigator").html(data);
-        });
+function importLeftNavigation() {
+    $.get("../pages/common/navigator.html", function (data) {
+        $("#navigator").html(data);
+    });
+}
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -90,8 +92,8 @@ function categoryNameToId(name) {
 
 function listCategoryName() {
     names = [];
-    $.each(categoryMap, function(i, val) {
-      names.push(val);
+    $.each(categoryMap, function (i, val) {
+        names.push(val);
     });
     return names;
 }
@@ -118,6 +120,6 @@ function formatDateTime(date) {
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
 
-    return [year, month, day].join('-') + " " + 
+    return [year, month, day].join('-') + " " +
         date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 }

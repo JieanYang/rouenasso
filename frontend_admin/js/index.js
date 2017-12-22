@@ -5,6 +5,9 @@ $(window).on('load', function () {
     // show loader
     $("#loader").addClass("show");
 
+    // navigation
+    importLeftNavigation();
+    
     // smooth anchor scroll
     $(document).on('click', 'a[href^="#"]', function (event) {
         event.preventDefault();
