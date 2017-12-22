@@ -33,6 +33,8 @@ function checkLogin() {
 function ajaxLeavemessage() {
     var url = document.URL;
     var id = url.slice(71);
+
+
     ajaxAuthGet('https://api.acecrouen.com/leaveMessages/'+id,
         function(response){
             // console.log(response);
@@ -68,7 +70,7 @@ function show_contactWay(response, leaveMessages_item) {
     
 //     btn_view.click(function() {
 
-//         ajaxAuthGet('http://localhost:8000/leaveMessages/'+id,
+//         ajaxAuthGet('https://api.acecrouen.com/leaveMessages/'+id,
 //             function(response){
 //                 // console.log(response);
 //                 $('#panel_leavemessages').hide();
