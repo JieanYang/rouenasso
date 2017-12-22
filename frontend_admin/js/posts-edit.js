@@ -423,7 +423,7 @@ function uploadImage() {
                 if ($('#post-preview-image-image').length) { // if img exists
                     $("#post-preview-image-image").attr("src", response.path);
                 } else { // if not exist, append
-                    $("#post-preview-image-preview-div").html("<img id='post-preview-image-image' src='" + post.preview_img_url + "' alt='preview image' height='50px' width='auto' />");
+                    $("#post-preview-image-preview-div").html("<img id='post-preview-image-image' src='" + uploadImageUrl + "' alt='preview image' height='50px' width='auto' />");
                 }
 
             },
