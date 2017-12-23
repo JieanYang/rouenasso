@@ -1,22 +1,20 @@
 <!-- <h2>生活随笔</h2> -->
-
 <div class="container">
-    <div class="row">
-     </div>
-        <div class="row" ng-repeat="writing in vm.writings">
-            <div class="writing" ui-sref="home.writing_detail({id:writing.id})">
-            <div class="col-sm-3">
-            <img ng-src="{{writing.preview_img_url}}", width="120px", height="auto">
-            </div>   
-            <div class="col-sm-2">
-            <h4>{{writing.title}}</h4>
-            <h4>{{writing.preview_text.username}}</h4>
-            <span>{{writing.published_at}}</span>
-            </div>
-            <div class="col-sm-4">
-            <p>{{writing.preview_text.introduction}}</p>
-            </div>      
-            </div>
-        </div>
-
+  <div class="row">
+  </div>
+  <div class="row" ng-repeat="writing in vm.writings">
+    <div class="writing" ui-sref="home.writing_detail({id:writing.id})">
+      <div class="col-sm-3 image">
+        <img ng-src="{{writing.preview_img_url}}" , width="120px" , height="auto">
+      </div>
+      <div class="col-sm-2">
+        <h5>{{writing.title}}</h5>
+        <h5>{{writing.preview_text.username}}</h5>
+        <span>{{writing.published_at}}</span>
+      </div>
+      <div class="col-sm-4">
+        <p>{{writing.preview_text.introduction}}</p>
+      </div>
+    </div>
+  </div>
 </div>

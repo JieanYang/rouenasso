@@ -13,8 +13,8 @@ function writingController($http) {
   	writings = response.data;
   	writings.forEach(function(writing) {
   		writing.preview_text = angular.fromJson(writing.preview_text);
+      writing.published_at = writing.published_at.split(' ')[0];
   	});
   	vm.writings = writings;
-  	// console.log(vm.works)\;
   });
 }

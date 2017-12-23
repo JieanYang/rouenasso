@@ -1,12 +1,14 @@
+
 ul#list_job {
 	list-style: none;
 }
 ul#list_job>div.titles_job {
-	/*background-color: pink;*/
+	/*background-color: yellow;*/
 	height: 30px;
 	line-height: 30px;
-	/*text-align: center;*/
 	border-bottom:1px solid #EEE;
+	padding: 0;
+	font-weight: normal;
 }
 ul#list_job>div.item_job {
 	/*background-color: pink;*/
@@ -17,4 +19,5 @@ ul#list_job>div.item_job {
 	border-bottom: 1px dotted #ddd;
 	margin-bottom: 2px;
 	cursor: pointer;
+	color: black;
 }
