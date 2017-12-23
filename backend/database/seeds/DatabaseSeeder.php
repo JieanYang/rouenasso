@@ -201,7 +201,7 @@ class DatabaseSeeder extends Seeder
             'agreeContact_leaveMessage' => true,
             'contactWay_leaveMessage' => 'phone',
             'message_leaveMessage' => '哎呀，臣妾好高兴，竟然有人欣赏我的诗！！',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'created_at' => Carbon::now()->addHours(2)->format('Y-m-d H:i:s')
         ]);
 
         DB::table('leaveMessages')->insert([
@@ -211,7 +211,7 @@ class DatabaseSeeder extends Seeder
             'agreeContact_leaveMessage' => false,
             'contactWay_leaveMessage' => 'phone',
             'message_leaveMessage' => '我是路人甲。 。 。',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'created_at' => Carbon::now()->addHours(4)->format('Y-m-d H:i:s')
         ]);
 
 
