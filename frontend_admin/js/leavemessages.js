@@ -37,9 +37,17 @@ function ajaxLeavemessage() {
     ajaxAuthGet('https://api.acecrouen.com/leaveMessages',
         function (response) {
 
+
             var leaveMessages_obj = $('#panel_leavemessages');
 
             $.each(response, function (index, item) {
+
+                var hour = (parseInt(item.created_at.split(' ')[1].split(':')[0])+1).toString();
+                var cut1 = item.created_at.split(':')[0].split(' ')[0];
+                var cut2 = item.created_at.split(':')[1];
+                var cut3 = item.created_at.split(':')[2];
+                item.created_at = cut1+' '+hour+':'+cut2+':'+cut3;
+
                 var leaveMessages_item = $('<div>', {
                     class: 'item_leavemessage',
                     style: 'border:1px solid #D5D0D0; padding: 6px; margin-bottom: 15px;'
@@ -83,6 +91,7 @@ function addMessagesBtns(leaveMessages_item, id) {
     leaveMessages_item.mouseenter(function () {
         btns = $('<div>', {
             class: 'btns_leaveMessage'
+
         });
         btn_view = $('<a>', {
             href: 'leavemessage_pageDetail.html?id=' + id,
@@ -90,6 +99,7 @@ function addMessagesBtns(leaveMessages_item, id) {
             class: 'btn btn-outline btn-primary',
             style: 'margin-right: 10px;'
         });
+
         btn_delete = $('<a>', {
             html: '删除',
             class: 'btn btn-outline btn-danger'
