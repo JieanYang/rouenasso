@@ -21,7 +21,7 @@ class LeaveMessageController extends Controller
 
     public function __construct() {
 
-        $this->middleware('auth.basic.once')->only('destroy');
+        $this->middleware('auth.basic.once')->only(['index', 'destroy']);
 
         $this->middleware(function ($request, $next) {
             $this->department = Auth::user() ? Auth::user()->department : null;
@@ -36,7 +36,7 @@ class LeaveMessageController extends Controller
      */
     public function index()
     {
-        return LeaveMessage::All();
+        return LeaveMessage::orderBy('created_at', 'desc')->get();
     }
 
     /**
