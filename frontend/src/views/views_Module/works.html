@@ -3,20 +3,20 @@
 <div class="container">
 	<div class="row">
 		<ul id="list_job">
-		<div class="col-sm-12 col-xs-12 titles_job">
-			<li class="col-sm-3">职位名</li>
-			<li class="col-sm-3">公司名</li>
-			<li class="col-sm-2">工作地点</li>
-			<li class="col-sm-2">薪资</li>
-			<li class="col-sm-2">发布时间</li>
-		</div>
-		<div class="item_job col-sm-12 col-xs-12" ng-repeat="work in vm.works" ui-sref="home.work({id:work.id})">
-			<li class="item_job_1 col-sm-3">{{work.preview_text.title}}</li>
-			<li class="item_job_2 col-sm-3">{{work.preview_text.company}}</li>
-			<li class="item_job_3 col-sm-2">{{work.preview_text.city}}</li>
-			<li class="item_job_4 col-sm-2">{{work.preview_text.salary}}</li>
-			<li class="item_job_5 col-sm-2">{{work.published_at}}</li>
-		</div>
+			<div class="col-sm-12 col-xs-12 titles_job">
+				<li class="col-sm-3">职位名</li>
+				<li class="col-sm-3">公司名</li>
+				<li class="col-sm-2">工作地点</li>
+				<li class="col-sm-2">薪资</li>
+				<li class="col-sm-2">发布时间</li>
+			</div>
+			<div class="item_job col-sm-12 col-xs-12" ng-repeat="work in vm.works" ui-sref="home.work({id:work.id})">
+				<li class="item_job_1 col-sm-3">{{work.preview_text.title}}</li>
+				<li class="item_job_2 col-sm-3">{{work.preview_text.company}}</li>
+				<li class="item_job_3 col-sm-2">{{work.preview_text.city}}</li>
+				<li class="item_job_4 col-sm-2">{{work.preview_text.salary}}</li>
+				<li class="item_job_5 col-sm-2">{{work.published_at}}</li>
+			</div>
 		</ul>
 	</div>
 	
