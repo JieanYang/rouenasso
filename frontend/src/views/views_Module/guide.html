@@ -9,37 +9,39 @@
    <div class="col-sm-1 guide_div"><a class="btn btn-primary btn_div">银行</a></div>
    <div class="col-sm-1 guide_div"><a class="btn btn-primary btn_div">应用推荐</a></div>
    </div> -->
-
-<ul class="nav nav-pills guide_navs">
-    <li ng-class="{ active: vm.tab==1 }" class="guide_nav">
-            <h5 onclick="location.href='home/guides/1'">交通</h5>
-    </li>
-    <li ng-class="{ active: vm.tab==2 }" class="guide_nav">
-            <h5 onclick="location.href='home/guides/2'">运营商</h5>
-    </li>
-    <li ng-class="{ active: vm.tab==3 }" class="guide_nav">
-            <h5 onclick="location.href='home/guides/3'">生活饮食</h5>
-    </li>
-    <li ng-class="{ active: vm.tab==4 }" class="guide_nav">
-            <h5 onclick="location.href='home/guides/4'">运动</h5>
-    </li>
-    <li ng-class="{ active: vm.tab==5 }" class="guide_nav">
-            <h5 onclick="location.href='home/guides/5'">娱乐</h5>
-    </li>
-    <li ng-class="{ active: vm.tab==6 }" class="guide_nav">
-            <h5 onclick="location.href='home/guides/6'">房补</h5>
-    </li>
-    <li ng-class="{ active: vm.tab==7 }" class="guide_nav">
-            <h5 onclick="location.href='home/guides/7'">就医指南</h5>
-    </li>
-    <li ng-class="{ active: vm.tab==8 }" class="guide_nav">
-            <h5 onclick="location.href='home/guides/8'">银行</h5>
-    </li>
-    <li ng-class="{ active: vm.tab==9 }" class="guide_nav">
-            <h5 onclick="location.href='home/guides/9'">应用推荐</h5>
-    </li>
-</ul>
-
+<div class="container">
+    <div class="row">
+        <ul class="nav nav-pills guide_navs">
+            <li ng-class="{ active: vm.tab==1 }" class="guide_nav">
+                    <h5 onclick="location.href='home/guides/1'">交通</h5>
+            </li>
+            <li ng-class="{ active: vm.tab==2 }" class="guide_nav">
+                    <h5 onclick="location.href='home/guides/2'">运营商</h5>
+            </li>
+            <li ng-class="{ active: vm.tab==3 }" class="guide_nav">
+                    <h5 onclick="location.href='home/guides/3'">生活饮食</h5>
+            </li>
+            <li ng-class="{ active: vm.tab==4 }" class="guide_nav">
+                    <h5 onclick="location.href='home/guides/4'">运动</h5>
+            </li>
+            <li ng-class="{ active: vm.tab==5 }" class="guide_nav">
+                    <h5 onclick="location.href='home/guides/5'">娱乐</h5>
+            </li>
+            <li ng-class="{ active: vm.tab==6 }" class="guide_nav">
+                    <h5 onclick="location.href='home/guides/6'">房补</h5>
+            </li>
+            <li ng-class="{ active: vm.tab==7 }" class="guide_nav">
+                    <h5 onclick="location.href='home/guides/7'">就医指南</h5>
+            </li>
+            <li ng-class="{ active: vm.tab==8 }" class="guide_nav">
+                    <h5 onclick="location.href='home/guides/8'">银行</h5>
+            </li>
+            <li ng-class="{ active: vm.tab==9 }" class="guide_nav">
+                    <h5 onclick="location.href='home/guides/9'">应用推荐</h5>
+            </li>
+        </ul>
+    </div>
+</div>
 
 <!-- ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo -->
 <div class="container">
@@ -213,11 +215,11 @@
                 <h2 id="ZCJZC"><strong><span style="color: #993300;">中超及中餐</span></strong></h2>
                 <br/>
                 <p><strong><span style="color: #993300;">&nbsp;
-            <img ng-src="../../images/生活指南3_生活饮食/Map.png" alt="Map.png" width="650" height="auto" /></span></strong>
+            <img class="col-sm-12 col-xs-12" ng-src="../../images/生活指南3_生活饮食/Map.png" alt="Map.png" width="650" height="auto" /></span></strong>
                 </p>
                 <blockquote>
                     <br />&nbsp;
-                    <table style="height: 163px;" width="634">
+                    <table class="col-sm-12 col-xs-12" style="height: 163px;" width="634">
                         <tbody>
                             <tr>
                                 <td style="width: 309px;"><span style="color: #ff0000;"><strong>1. Asia Store：</strong></span>店面比较大，商品品种很多：15 Rue de la Vicomte</td>
@@ -363,13 +365,17 @@
                     <table>
                         <tr>
                             <td>
-                                <img ng-src="../../images/生活指南5_娱乐/娱乐1.png" alt="娱乐.png" width="400" height="auto" />
+                                <img class="col-sm-12 col-xs-12" ng-src="../../images/生活指南5_娱乐/娱乐1.png" alt="娱乐.png" width="400" height="auto" />
                                 <blockquote>KTV店面</blockquote>
                             </td>
+                        </tr>
+                        <tr>
                             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </td>
+                        </tr>  
+                        <tr>
                             <td>
-                                <img ng-src="../../images/生活指南5_娱乐/娱乐2.png" alt="娱乐.png" width="300" height="auto" />
+                                <img class="col-sm-12 col-xs-12" ng-src="../../images/生活指南5_娱乐/娱乐2.png" alt="娱乐.png" width="300" height="auto" />
                                 <blockquote>KTV内景</blockquote>
                             </td>
                         </tr>
@@ -421,7 +427,7 @@
                         <div class="column">
                             <p>3. 进入到新页面后点击第一个Aide au logement, 然后选择&ldquo;Vous souhaitez faire une demande d'aide au logement&rdquo;,将自己相关信息完成,然后设置完密码,账户就申请成功了。对于不确定的词善用谷歌翻译。想要对 自己房补进行估算的同学可以点击&ldquo;Vous souhaitez faire une simulation&rdquo;。</p>
                             <blockquote>注意:最好填写常用邮箱,因为CAF经常会发邮件进行联系。你可以用这个账户查到自己的房补是否到账,有房 补未到账问题也可以直接在APP或者官网上查询原因。</blockquote>
-                            <img ng-src="../../images/生活指南6_房补/房补1.png" alt="房补.png" width="400px" height="auto" />
+                            <img class="col-sm-12 col-xs-12" ng-src="../../images/生活指南6_房补/房补1.png" alt="房补.png" width="400px" height="auto" />
                             <blockquote>CAF官网界面</blockquote>
                             <h3 id="BSC"><strong><span style="color: #333399;">2.办事处现场申请</span></strong></h3>
                             <p>CAF办事处地址: 4 Rue des Forgettes, 76000 Rouen, France。</p>
