@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Createlink;
 use Carbon\Carbon;
 
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -126,20 +126,20 @@ class UserController extends Controller
         }
 
         // 转化传进来部门和位置的字母为中文
-        $array_key_department = \App\Model\Department::getKeys();
-        $array_value_department = \App\Model\Department::getValues();
-    	for($x=0;$x<count($array_key_department);$x++){
-    		if ($array_key_department[$x] == $request->department){
-    			$request->department = $array_value_department[$x];
-    		}
-    	}
-    	$array_key_position = \App\Model\Position::getKeys();
-        $array_value_position = \App\Model\Position::getValues();
-    	for($x=0;$x<count($array_key_position);$x++){
-    		if ($array_key_position[$x] == $request->position){
-    			$request->position = $array_value_position[$x];
-    		}
-    	}
+     //    $array_key_department = \App\Model\Department::getKeys();
+     //    $array_value_department = \App\Model\Department::getValues();
+    	// for($x=0;$x<count($array_key_department);$x++){
+    	// 	if ($array_key_department[$x] == $request->department){
+    	// 		$request->department = $array_value_department[$x];
+    	// 	}
+    	// }
+    	// $array_key_position = \App\Model\Position::getKeys();
+     //    $array_value_position = \App\Model\Position::getValues();
+    	// for($x=0;$x<count($array_key_position);$x++){
+    	// 	if ($array_key_position[$x] == $request->position){
+    	// 		$request->position = $array_value_position[$x];
+    	// 	}
+    	// }
 
         $user = new User;
         $user->name = $request->name;
@@ -150,7 +150,7 @@ class UserController extends Controller
         $user->phone_number = $request->phone_number;
         $user->birthday = $request->birthday;
         $user->arrive_date = $request->arrive_date;
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
         $user->isWorking = True;
         $user->isAvaible = True;
         $user->save();
@@ -299,7 +299,7 @@ class UserController extends Controller
             $userDb->arrive_date = $request->arrive_date;
         }
         if($request->password) {
-            $userDb->password = $request->password;
+            $userDb->password = Hash::make($request->password);
         }
         if($request->isWorking) {
             $userDb->isWorking = $request->isWorking;

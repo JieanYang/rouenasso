@@ -36,14 +36,40 @@ class CreatelinkController extends Controller
         if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
-        // $validator = Validator::make($request->all(), [
-        //     // 'user_id' => 'required|integer',
-        //     // 'link' => 'required',
-        // ]);
-        //
-        // if ($validator->fails()) {
-        //     return $validator->errors();
-        // }  //暂不需要validator进行输入验证
+
+
+        $validator = Validator::make($request->all(), [
+            // 'user_id' => 'required|integer',
+            // 'link' => 'required',
+            'department' => [
+            	'required',
+            	Rule::in(\App\Model\Department::getKeys()),
+            ],
+            'position' => [
+            	'required',
+            	Rule::in(\App\Model\Position::getKeys()),
+            ],
+        ]);
+        
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $array_key_department = \App\Model\Department::getKeys();
+        $array_value_department = \App\Model\Department::getValues();
+    	for($x=0;$x<count($array_key_department);$x++){
+    		if ($array_key_department[$x] == $request->department){
+    			$request->department = $array_value_department[$x];
+    		}
+    	}
+    	$array_key_position = \App\Model\Position::getKeys();
+        $array_value_position = \App\Model\Position::getValues();
+    	for($x=0;$x<count($array_key_position);$x++){
+    		if ($array_key_position[$x] == $request->position){
+    			$request->position = $array_value_position[$x];
+    		}
+    	}
+
         $createlink =new Createlink;
         $createlink->user_id = Auth::user()->id; //自动获取用户id
         // $createlink->link = $request->link;//手动写token
