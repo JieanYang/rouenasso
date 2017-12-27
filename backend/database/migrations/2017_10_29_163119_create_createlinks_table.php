@@ -20,6 +20,8 @@ class CreateCreatelinksTable extends Migration
             $table->timestamps();
             $table->datetime('expires');
             $table->primary(['link']);
+            $table->string('department');
+            $table->string('position');
         });
     }
 

@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use App\Model\Department;
 use App\Model\Position;
 use Illuminate\Support\Facades\Auth;
+//一小时过期
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 
@@ -45,6 +46,9 @@ class CreatelinkController extends Controller
         // }  //暂不需要validator进行输入验证
         $createlink =new Createlink;
         $createlink->user_id = Auth::user()->id; //自动获取用户id
+        // $createlink->link = $request->link;//手动写token
+        $createlink->department = $request->department;
+        $createlink->position = $request->position;
         $createlink->link = str_random(30); //自动生成30位字符token
         //增加链接过期时间
         $createlink->expires=Carbon::now()->addHours(1);

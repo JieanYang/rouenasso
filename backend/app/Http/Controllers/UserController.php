@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Createlink;
 use Carbon\Carbon;
 
+use Carbon\Carbon;
+
+
 class UserController extends Controller
 {
     private $department;
@@ -70,6 +73,8 @@ class UserController extends Controller
     {
         //尝试加入搜索link功能,如果找到可以注册，找不到返回一个错误
         $searchlink = Createlink::find($link);
+        $depart=Createlink::find($link)->department;
+        $posit=Createlink::find($link)->position;
         if($searchlink == null) {
             return response()->json(['status' => 404, 'msg' => '没有此注册链接!']);
         }
@@ -85,18 +90,30 @@ class UserController extends Controller
           return response()->json(['status' => 400, 'msg' => '注册链接已过期!']);
         }
 
+        //比较当前注册时间与数据库中expires过期时间，如果大于，不允许注册，链接失效
+        $expires = (Createlink::find($link)->expires);
+        $expires_time = (date_parse_from_format("y-m-d H:i:s",$expires));
+
+
+        $now = Carbon::now();
+        $now_time = (date_parse_from_format("y-m-d H:i:s",$now));
+
+        if($expires_time<($now_time)){
+          return response()->json(['status' => 400, 'msg' => 'Link times out!'], 400);
+        }
+
 
         $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|max:255',
             'name' => 'required|max:100',
-            'department' => [
+            /*'department' => [
             	'required',
             	Rule::in(\App\Model\Department::getKeys()),
             ],
             'position' => [
             	'required',
             	Rule::in(\App\Model\Position::getKeys()),
-            ],
+            ],*/
             'school' => 'required|max:100',
             'phone_number' => 'required|digits_between:10,15',
             'birthday' => 'required|date',
@@ -127,8 +144,8 @@ class UserController extends Controller
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->department = $request->department;
-        $user->position = $request->position;
+        $user->department = $depart;
+        $user->position = $posit;
         $user->school = $request->school;
         $user->phone_number = $request->phone_number;
         $user->birthday = $request->birthday;
