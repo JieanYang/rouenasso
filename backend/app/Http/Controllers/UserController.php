@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Createlink;
 use Carbon\Carbon;
 
+use Illuminate\Support\Facades\Hash;
+
+
 class UserController extends Controller
 {
     private $department;
@@ -70,6 +73,8 @@ class UserController extends Controller
     {
         //尝试加入搜索link功能,如果找到可以注册，找不到返回一个错误
         $searchlink = Createlink::find($link);
+        $depart=Createlink::find($link)->department;
+        $posit=Createlink::find($link)->position;
         if($searchlink == null) {
             return response()->json(['status' => 404, 'msg' => '没有此注册链接!']);
         }
@@ -85,18 +90,30 @@ class UserController extends Controller
           return response()->json(['status' => 400, 'msg' => '注册链接已过期!']);
         }
 
+        //比较当前注册时间与数据库中expires过期时间，如果大于，不允许注册，链接失效
+        $expires = (Createlink::find($link)->expires);
+        $expires_time = (date_parse_from_format("y-m-d H:i:s",$expires));
+
+
+        $now = Carbon::now();
+        $now_time = (date_parse_from_format("y-m-d H:i:s",$now));
+
+        if($expires_time<($now_time)){
+          return response()->json(['status' => 400, 'msg' => 'Link times out!'], 400);
+        }
+
 
         $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|max:255',
             'name' => 'required|max:100',
-            'department' => [
+            /*'department' => [
             	'required',
             	Rule::in(\App\Model\Department::getKeys()),
             ],
             'position' => [
             	'required',
             	Rule::in(\App\Model\Position::getKeys()),
-            ],
+            ],*/
             'school' => 'required|max:100',
             'phone_number' => 'required|digits_between:10,15',
             'birthday' => 'required|date',
@@ -109,31 +126,31 @@ class UserController extends Controller
         }
 
         // 转化传进来部门和位置的字母为中文
-        $array_key_department = \App\Model\Department::getKeys();
-        $array_value_department = \App\Model\Department::getValues();
-    	for($x=0;$x<count($array_key_department);$x++){
-    		if ($array_key_department[$x] == $request->department){
-    			$request->department = $array_value_department[$x];
-    		}
-    	}
-    	$array_key_position = \App\Model\Position::getKeys();
-        $array_value_position = \App\Model\Position::getValues();
-    	for($x=0;$x<count($array_key_position);$x++){
-    		if ($array_key_position[$x] == $request->position){
-    			$request->position = $array_value_position[$x];
-    		}
-    	}
+     //    $array_key_department = \App\Model\Department::getKeys();
+     //    $array_value_department = \App\Model\Department::getValues();
+    	// for($x=0;$x<count($array_key_department);$x++){
+    	// 	if ($array_key_department[$x] == $request->department){
+    	// 		$request->department = $array_value_department[$x];
+    	// 	}
+    	// }
+    	// $array_key_position = \App\Model\Position::getKeys();
+     //    $array_value_position = \App\Model\Position::getValues();
+    	// for($x=0;$x<count($array_key_position);$x++){
+    	// 	if ($array_key_position[$x] == $request->position){
+    	// 		$request->position = $array_value_position[$x];
+    	// 	}
+    	// }
 
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->department = $request->department;
-        $user->position = $request->position;
+        $user->department = $depart;
+        $user->position = $posit;
         $user->school = $request->school;
         $user->phone_number = $request->phone_number;
         $user->birthday = $request->birthday;
         $user->arrive_date = $request->arrive_date;
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
         $user->isWorking = True;
         $user->isAvaible = True;
         $user->save();
@@ -282,7 +299,7 @@ class UserController extends Controller
             $userDb->arrive_date = $request->arrive_date;
         }
         if($request->password) {
-            $userDb->password = $request->password;
+            $userDb->password = Hash::make($request->password);
         }
         if($request->isWorking) {
             $userDb->isWorking = $request->isWorking;
