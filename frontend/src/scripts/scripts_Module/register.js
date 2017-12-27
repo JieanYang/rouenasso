@@ -10,22 +10,22 @@ function registerController($http) {
   // 注册链接
   var link = window.location.href.slice(36);
   //for the tag selection ng-options
-  vm.department_channels=[
-  	{label:"主席团", value:"ZHUXITUAN"}, 
-  	{label:"组织部", value:"ZUZHIBU"}, 
-  	{label:"宣传部", value:"XUANCHUANBU"}, 
-  	{label:"外联部", value:"WAILIANBU"}, 
-  	{label:"秘书部", value:"MISHUBU"},
-  	{label:"安全部", value:"XIANGMUKAIFABU"}
-  	];
+  // vm.department_channels=[
+  // 	{label:"主席团", value:"ZHUXITUAN"}, 
+  // 	{label:"组织部", value:"ZUZHIBU"}, 
+  // 	{label:"宣传部", value:"XUANCHUANBU"}, 
+  // 	{label:"外联部", value:"WAILIANBU"}, 
+  // 	{label:"秘书部", value:"MISHUBU"},
+  // 	{label:"安全部", value:"XIANGMUKAIFABU"}
+  // 	];
 
-  vm.positions = [
-  	{label:"主席", value:"ZHUXI"},
-  	{label:"副主席", value:"FUZHUXI"},
-  	{label:"部长", value:"BUZHANG"},
-  	{label:"副部长", value:"FUBUZHANG"},
-  	{label:"成员", value:"CHENGYUAN"}
-  ];
+  // vm.positions = [
+  // 	{label:"主席", value:"ZHUXI"},
+  // 	{label:"副主席", value:"FUZHUXI"},
+  // 	{label:"部长", value:"BUZHANG"},
+  // 	{label:"副部长", value:"FUBUZHANG"},
+  // 	{label:"成员", value:"CHENGYUAN"}
+  // ];
 
   vm.birthday;//input birthday
   vm.arrive_date;//input arrive_date
@@ -73,8 +73,8 @@ function registerController($http) {
   	$('#password').val('');
   	$('#password_confirm').val('');
   	$('#name').val('');
-  	$('#department').val('');
-  	$('#position').val('');
+  	// $('#department').val('');
+  	// $('#position').val('');
   	$('#school').val('');
   	$('#phone_number').val('');
   	$('#birthday').val('');
