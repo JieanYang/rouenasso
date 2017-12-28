@@ -81,6 +81,6 @@ class CreatelinkController extends Controller
 
 
         $createlink->save();
-        return response()->json(['status' => 200, 'msg' => 'success']);
+        return response()->json(['status' => 200, 'msg' => 'success!', 'link' => $createlink->link]);
     }
 }
