@@ -31,7 +31,7 @@ function contactusController($http) {
 		
 		$http.post("https://api.acecrouen.com/leaveMessages", vm.feedback)
 		.then(function (response) {
-			console.log(response);
+			// console.log(response);
 			if(response.data.msg == "success") {
 					vm.feedback = {name_leaveMessage:"", phone_leaveMessage:"", email_leaveMessage:"",
 								   agreeContact_leaveMessage:false, contactWay_leaveMessage:"", message_leaveMessage:""};

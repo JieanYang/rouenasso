@@ -101,7 +101,7 @@ function responsivePostDeleteTable() {
         // alert('前端文章浏览页面 + id = ' + postId);
         // window.location.href = "posts_delete_detail.html?id="+postId;
         ajaxAuthGet('https://api.acecrouen.com/TrashCans/' + postId, function (response) {
-            console.log(response);
+            // console.log(response);
             if (response.status == 404) {
                 $('#model_view h3').text('错误');
                 $('#model_view').children('p').last().text(response.msg + '!');
@@ -161,7 +161,7 @@ function responsivePostDeleteTable() {
         }
 
         function error(result) {
-            console.log(result);
+            // console.log(result);
             alert("你无权限删除文章。");
         }
 

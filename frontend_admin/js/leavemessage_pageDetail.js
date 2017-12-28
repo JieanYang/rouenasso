@@ -36,7 +36,7 @@ function checkLogin() {
 function ajaxLeavemessage_pageDetail() {
     var url = document.URL;
     var id = url.slice(71);
-    console.log(id);
+    // console.log(id);
 
     ajaxAuthGet('https://api.acecrouen.com/leaveMessages/'+id,
         function(response){
@@ -50,7 +50,7 @@ function ajaxLeavemessage_pageDetail() {
             show_contactWay(response, $('#contact'));
             $('#panel_detail_leavemessage').show();
         },
-        function(response){console.log(response.statusText);});
+        function(response){alert('服务器问题!');});
 }
 
 function show_contactWay(response, leaveMessages_item) {

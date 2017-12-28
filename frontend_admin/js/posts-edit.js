@@ -172,8 +172,8 @@ function ajaxSaveDraft() {
         };
         $.when(uploadImage()).done(function () {
             postData.preview_img_url = uploadImageUrl;
-            console.log("draft - new");
-            console.log(postData);
+            // console.log("draft - new");
+            // console.log(postData);
             return ajaxAuthPost('https://api.acecrouen.com/posts/', postData,
                 function (response) {
                     // reload, with id and url
@@ -181,7 +181,7 @@ function ajaxSaveDraft() {
                 },
                 function (response) {
                     alert('error');
-                    console.log(response);
+                    // console.log(response);
                 });
         });
     } else if (!post.published_at) { // 修改草稿
@@ -200,8 +200,8 @@ function ajaxSaveDraft() {
 
         $.when(uploadImage()).done(function () {
             postData.preview_img_url = uploadImageUrl;
-            console.log("draft - old");
-            console.log(postData);
+            // console.log("draft - old");
+            // console.log(postData);
             return ajaxAuthPut('https://api.acecrouen.com/posts/' + post.id, postData,
                 function (response) {
                     // enable all, hide loader
@@ -211,7 +211,7 @@ function ajaxSaveDraft() {
                 },
                 function (response) {
                     alert('error');
-                    console.log(response);
+                    // console.log(response);
                 });
         });
     } else {
@@ -242,8 +242,8 @@ function ajaxPublishPost() {
         };
         $.when(uploadImage()).done(function () {
             postData.preview_img_url = uploadImageUrl;
-            console.log("publish - new");
-            console.log(postData);
+            // console.log("publish - new");
+            // console.log(postData);
             return ajaxAuthPost('https://api.acecrouen.com/posts/', postData,
                 function (response) {
                     // reload, with id and url
@@ -251,7 +251,7 @@ function ajaxPublishPost() {
                 },
                 function (response) {
                     alert('error');
-                    console.log(response);
+                    // console.log(response);
                 });
         });
     } else {
@@ -264,8 +264,8 @@ function ajaxPublishPost() {
 
         $.when(uploadImage()).done(function () {
             postData.preview_img_url = uploadImageUrl;
-            console.log("publish - old");
-            console.log(postData);
+            // console.log("publish - old");
+            // console.log(postData);
             return ajaxAuthPut('https://api.acecrouen.com/posts/' + post.id, postData,
                 function (response) {
                     // enable all, hide loader
@@ -275,7 +275,7 @@ function ajaxPublishPost() {
                 },
                 function (response) {
                     alert('error');
-                    console.log(response);
+                    // console.log(response);
                 });
         });
     }
@@ -406,7 +406,7 @@ function uploadImage() {
         var file_data = $('#post-preview-image').prop('files')[0];
         var data = new FormData();
         data.append('preview_img', file_data);
-        console.log(data);
+        // console.log(data);
         return $.ajax({
             type: 'POST',
             url: "https://api.acecrouen.com/uploadimg",
@@ -418,7 +418,7 @@ function uploadImage() {
             contentType: false,
             processData: false, // must be false if there is image
             success: function (response) {
-                console.log(response);
+                // console.log(response);
                 uploadImageUrl = response.path;
                 if ($('#post-preview-image-image').length) { // if img exists
                     $("#post-preview-image-image").attr("src", response.path);
@@ -429,7 +429,7 @@ function uploadImage() {
             },
             error: function (response) {
                 alert('error');
-                console.log(response);
+                // console.log(response);
                 uploadImageUrl = "";
             }
         });

@@ -36,7 +36,7 @@ function checkLogin() {
 function ajaxUsersTable() {
     ajaxAuthGet('https://api.acecrouen.com/users',
         function (response) {
-            console.log(response);
+            // console.log(response);
 
             var table_obj = $('#listOfUsers');
 

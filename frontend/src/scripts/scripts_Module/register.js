@@ -48,7 +48,7 @@ function registerController($http) {
   	vm.register.birthday = vm.birthday.toLocaleDateString('zh-Hans-CN');
   	vm.register.arrive_date = vm.arrive_date.toLocaleDateString('zh-Hans-CN');
 
-  	$http.post('http://localhost:8000/register/'+link, vm.register, true)
+  	$http.post('https://api.acecrouen.com/register/'+link, vm.register, true)
   	.then(function(response) {
   		if(response.data.msg){
   			vm.message = response.data.msg;

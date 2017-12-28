@@ -43,7 +43,7 @@ function checkLogin() {
 function ajaxPostsTable() {
     ajaxAuthGet('https://api.acecrouen.com/posts/calendar/show',
         function (response) {
-            console.log(response);
+            // console.log(response);
 
             var table_obj = $('#postsTables');
 
@@ -114,7 +114,7 @@ function responsiveTable() {
                     url = "https://www.acecrouen.com/";
                     break;
                 default:
-                    console.log('category error : category = ' + postCategory);
+                    // console.log('category error : category = ' + postCategory);
                     break;
             }
             window.open(url);
@@ -136,7 +136,7 @@ function responsiveTable() {
             }
 
             function error(result) {
-                console.log(result);
+                // console.log(result);
                 alert("你无权限删除文章。");
             }
 

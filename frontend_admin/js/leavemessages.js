@@ -69,7 +69,7 @@ function ajaxLeavemessage() {
             });
         },
         function (response) {
-            console.log(response.statusText);
+            // console.log(response.statusText);
         })
 }
 
@@ -119,13 +119,13 @@ function addDeleteEvent(btn_delete, id) {
         $(this).attr('id', 'delete');
         ajaxAuthDelete('https://api.acecrouen.com/leaveMessages/' + id, null,
             function (response) {
-                console.log(response.status);
-                console.log(response.msg);
+                // console.log(response.status);
+                // console.log(response.msg);
                 $('#delete').parent().parent().remove();
             },
             function (response) {
-                console.log(response.responseJSON.status);
-                console.log(response.responseJSON.msg);
+                // console.log(response.responseJSON.status);
+                // console.log(response.responseJSON.msg);
                 if (response.responseJSON.status == 400) {
                     $('#delete').parent().append($('<p>').text('帖子已删除').css('color', 'red'));
                 }
