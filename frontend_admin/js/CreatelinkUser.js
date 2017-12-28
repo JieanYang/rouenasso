@@ -47,7 +47,7 @@ function addEventCreateButton(){
 }
 
 function createLink(department, position) {
-    ajaxAuthPost("http://api.acecrouen.com/createlink",
+    ajaxAuthPost("https://api.acecrouen.com/createlink",
         {"department": department, "position": position},
         function(response){
             // console.log(response);
