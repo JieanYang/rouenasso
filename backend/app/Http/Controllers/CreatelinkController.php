@@ -70,7 +70,6 @@ class CreatelinkController extends Controller
     		}
     	}
 
-
         $createlink =new Createlink;
         $createlink->user_id = Auth::user()->id; //自动获取用户id
         // $createlink->link = $request->link;//手动写token
@@ -82,6 +81,6 @@ class CreatelinkController extends Controller
 
 
         $createlink->save();
-        return response()->json(['status' => 200, 'msg' => 'success']);
+        return response()->json(['status' => 200, 'msg' => 'success!', 'link' => $createlink->link]);
     }
 }
