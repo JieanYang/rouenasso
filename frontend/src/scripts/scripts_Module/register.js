@@ -8,7 +8,7 @@ module.exports = {
 function registerController($http) {
   var vm = this;
   // 注册链接
-  var link = window.location.href.slice(36);
+  var link = window.location.href.slice(40);
   //for the tag selection ng-options
   // vm.department_channels=[
   // 	{label:"主席团", value:"ZHUXITUAN"}, 
