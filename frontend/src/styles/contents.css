@@ -2,3 +2,7 @@ section#services div.service {
 	cursor:pointer;
 	/*visibility: hidden;;*/
 }
+
+div > #contactWay_leaveMessage{
+	padding: 2px;
+}
