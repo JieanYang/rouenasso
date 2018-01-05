@@ -63,7 +63,8 @@
                             <span ng-show="feedbackForm.lastname.$error.required && !feedbackForm.lastname.$pristine" class="help-block">Your Last name is required.</span>
                         </div>
                     </div> -->
-                    <div class="form-group">
+
+                    <div class="form-group" ng-class="{ 'has-error' : (feedbackForm.telnum.$error.required && !feedbackForm.telnum.$pristine) || ((feedbackForm.telnum.$error.minlength || feedbackForm.telnum.$error.maxlength) && feedbackForm.telnum.$dirty) }">
                         <label for="telnum" class="col-sm-2 control-label">联系电话</label>
                       <!--   <div class="col-xs-5 col-sm-4 col-md-3">
                             <div class="input-group">
@@ -74,9 +75,13 @@
                         </div>
                         <div class="col-xs-7 col-sm-6 col-md-7"> -->
                          <div class="col-sm-10">
-                            <input type="tel" class="form-control contactus_input" id="telnum" name="telnum" placeholder="Tel. number" ng-model="vm.feedback.phone_leaveMessage">
+                            <input type="tel" class="form-control contactus_input" id="telnum" name="telnum" placeholder="Tel.number" ng-model="vm.feedback.phone_leaveMessage" ng-minlength="10" ng-maxlength="15" required>
+                            <span ng-show="feedbackForm.telnum.$error.required && !feedbackForm.telnum.$pristine" class="help-block">Your phone number is required.</span>
+                            <span ng-show="((feedbackForm.telnum.$error.minlength || feedbackForm.telnum.$error.maxlength) && feedbackForm.telnum.$dirty)" class="help-block">电话号码需要10-15位.</span>
                         </div>
                     </div>
+
+
                     <div class="form-group" ng-class="{ 'has-error has-feedback' : feedbackForm.emailid.$invalid && !feedbackForm.emailid.$pristine }">
                         <label for="emailid" class="col-sm-2 control-label">邮箱</label>
                         <div class="col-sm-10">
@@ -88,6 +93,7 @@
                              class="help-block">Enter a valid email address.</span>
                         </div>
                     </div>
+
                     <div class="form-group" ng-class="{ 'has-error':invalidChannelSelection }">
                        <div class="col-sm-5 col-sm-offset-2">
                             <label class="checkbox-inline">
@@ -97,12 +103,13 @@
                             </label>
                         </div>
                         <div class="col-sm-3 col-sm-offset-1" ng-show="vm.feedback.agreeContact_leaveMessage">
-                            <select class="form-control" ng-model="vm.feedback.contactWay_leaveMessage"
+                            <select class="form-control" id="contactWay_leaveMessage" ng-model="vm.feedback.contactWay_leaveMessage"
                                ng-options="channel.value as channel.label for channel in vm.channels">
                             </select>
                             <span ng-show="invalidChannelSelection" class="help-block">Select an option.</span>
                         </div>
-                    </div>                    
+                    </div>    
+
                     <div class="form-group" ng-class="{ 'has-error' : feedbackForm.feedbackText.$invalid && !feedbackForm.feedbackText.$pristine }">
                         <label for="feedback" class="col-sm-2 control-label">你的留言</label>
                         <div class="col-sm-10">
