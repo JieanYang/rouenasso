@@ -96,7 +96,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => '2',
             'html_content' => 'here is the first job',
             'category' => 3,
-            'created_at' => '2017-10-31',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'view' => 0,
             'preview_img_url' => 'http://www.endlessicons.com/wp-content/uploads/2012/11/image-holder-icon-614x460.png',
             'preview_text' => '{"title" : "title1", "company" : "company1", "city" : "Rouen", "salary" : "1"}',
