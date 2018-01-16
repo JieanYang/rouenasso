@@ -49,26 +49,3 @@ function attemptLogin() {
     return false;
 }
 
-function attempt(auth, success, error) {
-    return $.ajax({
-        url: 'https://api.acecrouen.com/login',
-        type: 'post',
-        headers: {
-            Authorization: auth
-        },
-        dataType: 'json',
-        success: success,
-        error: error
-    });
-}
-
-function logout() {
-    Cookies.remove('Authorization');
-    window.location.replace("login.html");
-}
-
-function setAuthCookie(auth) {
-    Cookies.set('Authorization', auth, {
-        expires: 1 / 48 // 半小时失效
-    });
-}

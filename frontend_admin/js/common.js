@@ -1,3 +1,31 @@
+
+// =============================================================================
+// 尝试得到用户
+function attempt(auth, success, error) {
+    return $.ajax({
+        url: 'https://api.acecrouen.com/login',
+        type: 'post',
+        headers: {
+            Authorization: auth
+        },
+        dataType: 'json',
+        success: success,
+        error: error
+    });
+}
+// 登出
+function logout() {
+    Cookies.remove('Authorization');
+    window.location.replace("login.html");
+}
+// 设置cookie
+function setAuthCookie(auth) {
+    Cookies.set('Authorization', auth, {
+        expires: 1 / 48 // 半小时失效
+    });
+}
+
+// ==============================================================
 var categoryMap = null;
 
 $(window).on('load', function () {
