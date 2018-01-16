@@ -19,6 +19,9 @@ class CreatelinkController extends Controller
     private $position;
 
     public function __construct() {
+
+        $this->middleware('auth.basic.once');
+
         $this->middleware(function ($request, $next) {
             $this->department = Auth::user()->department;
             $this->position = Auth::user()->position;
@@ -28,12 +31,13 @@ class CreatelinkController extends Controller
 
     public function index()
     {
-        return Createlink::All();
+        // return Createlink::All();
+        return view('404');
     }
 
     public function store(Request $request)
     {
-        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XUANCHUANBU)) {
+        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU)) {
             return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
         }
 
@@ -81,6 +85,6 @@ class CreatelinkController extends Controller
 
 
         $createlink->save();
-        return response()->json(['status' => 200, 'msg' => 'success!', 'link' => $createlink->link]);
+        return response()->json(['status' => 200, 'msg' => 'success to create a new link!', 'link' => $createlink->link]);
     }
 }

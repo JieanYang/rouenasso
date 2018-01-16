@@ -73,38 +73,34 @@ class UserController extends Controller
     {
         //尝试加入搜索link功能,如果找到可以注册，找不到返回一个错误
         $searchlink = Createlink::find($link);
-        $depart=Createlink::find($link)->department;
-        $posit=Createlink::find($link)->position;
         if($searchlink == null) {
             return response()->json(['status' => 404, 'msg' => '没有此注册链接!']);
         }
+        $depart=Createlink::find($link)->department;
+        $posit=Createlink::find($link)->position;
         //比较当前注册时间与数据库中expires过期时间，如果大于，不允许注册，链接失效
         $expires = (Createlink::find($link)->expires);
         $expires_time = (date_parse_from_format("y-m-d H:i:s",$expires));
-
-
         $now = Carbon::now();
         $now_time = (date_parse_from_format("y-m-d H:i:s",$now));
-
         if($expires_time<($now_time)){
           return response()->json(['status' => 400, 'msg' => '注册链接已过期!']);
         }
 
         //比较当前注册时间与数据库中expires过期时间，如果大于，不允许注册，链接失效
-        $expires = (Createlink::find($link)->expires);
-        $expires_time = (date_parse_from_format("y-m-d H:i:s",$expires));
-
-
-        $now = Carbon::now();
-        $now_time = (date_parse_from_format("y-m-d H:i:s",$now));
-
-        if($expires_time<($now_time)){
-          return response()->json(['status' => 400, 'msg' => 'Link times out!'], 400);
-        }
+        // 该段代码重复了
+        // $expires = (Createlink::find($link)->expires);
+        // $expires_time = (date_parse_from_format("y-m-d H:i:s",$expires));
+        // $now = Carbon::now();
+        // $now_time = (date_parse_from_format("y-m-d H:i:s",$now));
+        // if($expires_time<($now_time)){
+        //   return response()->json(['status' => 400, 'msg' => 'Link times out!'], 400);
+        // }
 
 
         $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|max:255',
+            'password' => 'required',
             'name' => 'required|max:100',
             /*'department' => [
             	'required',
@@ -117,8 +113,8 @@ class UserController extends Controller
             'school' => 'required|max:100',
             'phone_number' => 'required|digits_between:10,15',
             'birthday' => 'required|date',
-            'arrive_date' => 'required|date',
-            'password' => 'required'
+            'arrive_date' => 'required|date'
+            
         ]);
 
         if ($validator->fails()) {
@@ -155,7 +151,7 @@ class UserController extends Controller
         $user->isAvaible = True;
         $user->save();
 
-        return response()->json(['status' => 200, 'msg' => '用户: '.$user->name.', 邮箱: '.$user->email.', 对应部门: '.$user->department.', 职位: '.$user->position.' 创建成功!']);
+        return response()->json(['status' => 200, 'msg' => '用户: '.$user->name.', 邮箱: '.$user->email.', 部门: '.$user->department.', 职位: '.$user->position.' 创建成功!']);
     }
 
     /**
@@ -313,7 +309,7 @@ class UserController extends Controller
 
         $userDb->save();
 
-        return response()->json(['status' => 200, 'msg' => 'success']);
+        return response()->json(['status' => 200, 'msg' => 'success to update']);
     }
 
     /**
@@ -349,7 +345,7 @@ class UserController extends Controller
 
         $userDel->delete();
 
-        return response()->json(['status' => 200, 'msg' => 'success']);
+        return response()->json(['status' => 200, 'msg' => 'success to delete']);
     }
 
     /**

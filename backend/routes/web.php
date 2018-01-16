@@ -40,12 +40,13 @@ Route::get('/test', function() {
  * RESTful api
  */
 Route::resource('users', 'UserController');
-Route::get('users/{id}/posts', 'UserController@showPostsByUserId')->name('users.countUser')->middleware('auth.basic.once');
-Route::get('users/count/show', 'UserController@countUser')->name('users.showPostsByUserId')->middleware('auth.basic.once');
+Route::post('/register/{link}',['uses'=>'UserController@store']); // 用户注册，需要链接
+//另外加的API
+Route::post('login', 'GetSelfController@getSelf')；
+Route::get('users/{id}/posts', 'UserController@showPostsByUserId')；
+Route::get('users/count/show', 'UserController@countUser')；
 
-Route::post('login', 'GetSelfController@getSelf')->name('users.getSelf')->middleware('auth.basic.once');
-Route::post('/register/{link}',['uses'=>'UserController@store'])->name('users.store'); //随机链接路由注册
-Route::post('/createlink',['uses'=>'CreatelinkController@store'])->name('links.store')->middleware('auth.basic.once');//测试创建链接
+Route::post('/createlink',['uses'=>'CreatelinkController@store'])；//随机链接路由注册
 
 
 
