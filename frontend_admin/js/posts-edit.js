@@ -367,7 +367,7 @@ function initFields() {
                 $("#preview-job-city").val(jsonPreviewTextObj.city);
                 $("#preview-job-salary").val(jsonPreviewTextObj.salary);
             }
-            $("#post-preview-image").hide();
+            $("#form-post-preview-image").hide();
             break;
         case '4': // 生活随笔
             $("#category-preview-inputs").html(`
@@ -386,7 +386,7 @@ function initFields() {
             }
             break;
         case '99':
-            $("#post-preview-image").hide();
+            $("#form-post-preview-image").hide();
             break;
         default:
             alert('in');
