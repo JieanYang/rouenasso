@@ -13,6 +13,14 @@ class GetSelfController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
+
+
+    public function __construct() {
+
+        $this->middleware('auth.basic.once');
+    }
+
+
     public function getSelf()
     {
         return Auth::user();
