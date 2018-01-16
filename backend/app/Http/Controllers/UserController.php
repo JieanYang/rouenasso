@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth.basic.once', ['except' => ['store', 'countUser']]);
+        $this->middleware('auth.basic.once', ['except' => ['store']]);
 
         $this->middleware(function ($request, $next) {
             $this->department = Auth::user() ? Auth::user()->department : null;
