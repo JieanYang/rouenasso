@@ -42,11 +42,11 @@ Route::get('/test', function() {
 Route::resource('users', 'UserController');
 Route::post('/register/{link}',['uses'=>'UserController@store']); // 用户注册，需要链接
 //另外加的API
-Route::post('login', 'GetSelfController@getSelf')；
-Route::get('users/{id}/posts', 'UserController@showPostsByUserId')；
-Route::get('users/count/show', 'UserController@countUser')；
+Route::post('login', 'GetSelfController@getSelf');
+Route::get('users/{id}/posts', 'UserController@showPostsByUserId');
+Route::get('users/count/show', 'UserController@countUser');
 
-Route::post('/createlink',['uses'=>'CreatelinkController@store'])；//随机链接路由注册
+Route::post('/createlink',['uses'=>'CreatelinkController@store']); //随机链接路由注册
 
 
 
