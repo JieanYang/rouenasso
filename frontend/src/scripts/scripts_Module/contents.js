@@ -15,6 +15,7 @@ function ContentsController($http, $sce) {
 		if (response.data.preview_text == 'hiding'){
 			vm.showAnnouncement = false;
 		}else if (response.data.preview_text == 'showing'){
+			vm.announcement_title = $sce.trustAsHtml(response.data.title);
 			vm.announcement = $sce.trustAsHtml(response.data.html_content);
 			vm.showAnnouncement = true;
 		}
