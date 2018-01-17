@@ -125,8 +125,7 @@ function ajaxCalendar() {
             $('#calendar').fullCalendar({
                 eventClick: function (event) {
                     if (event.url) {
-                        alert('前端文章浏览页面 + id = ' + event.id);
-                        window.open('//' + id);
+                        window.open(event.url);
                         return false;
                     }
                 },
