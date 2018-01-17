@@ -17,6 +17,9 @@ class PostController extends Controller
     private $position;
 
     public function __construct() {
+
+        $this->middleware('auth.basic.once');
+
         $this->middleware(function ($request, $next) {
             $this->department = Auth::user() ? Auth::user()->department : null;
             $this->position = Auth::user() ? Auth::user()->position : null;
@@ -36,7 +39,7 @@ class PostController extends Controller
         // 所有 包括草稿 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN 
              || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+            return response()->json(['status' => 403, 'msg' => '主席团，宣创部']);
         }
         return Post::orderBy('created_at', 'desc')->get();
     }
@@ -66,7 +69,7 @@ class PostController extends Controller
         // 新增内容 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN 
              || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+            return response()->json(['status' => 403, 'msg' => '主席团，宣创部']);
         }
         
         $validator = Validator::make($request->all(), [
@@ -120,7 +123,7 @@ class PostController extends Controller
         // 所有 包括草稿 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN 
              || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+            return response()->json(['status' => 403, 'msg' => '主席团，宣创部']);
         }
         
         $p = Post::find($id);
@@ -161,7 +164,7 @@ class PostController extends Controller
         // 修改草稿 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN 
              || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+            return response()->json(['status' => 403, 'msg' => '主席团，宣传部'], 403);
         }
         
         $validator = Validator::make($request->all(), [
@@ -194,7 +197,7 @@ class PostController extends Controller
 
         $postDB->save();
 
-        return response()->json(['status' => 200, 'msg' => 'success']);
+        return response()->json(['status' => 200, 'msg' => 'success to update']);
     }
 
     /**
@@ -215,7 +218,7 @@ class PostController extends Controller
         // 删除草稿 => 主席团&宣传部
         if(!($this->department == Department::ZHUXITUAN 
              || $this->department == Department::XUANCHUANBU || $this->department == Department::XIANGMUKAIFABU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+            return response()->json(['status' => 403, 'msg' => '主席团,宣传部'], 403);
         }
 
         $postDel = Post::find($id);
@@ -228,13 +231,13 @@ class PostController extends Controller
             if(!($this->department == Department::ZHUXITUAN || $this->department == Department::XIANGMUKAIFABU
                 || ($this->department == Department::XUANCHUANBU
                 && ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG) ))) {
-                return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+                return response()->json(['status' => 403, 'msg' => '主席团,宣传部部长,宣传部副部长'], 403);
             }
         }
 
         $postDel->delete();
 
-        return response()->json(['status' => 200, 'msg' => 'success']);
+        return response()->json(['status' => 200, 'msg' => 'success to delete']);
     }
 
     /**
@@ -252,7 +255,7 @@ class PostController extends Controller
              || $this->department == Department::MISHUBU 
              || $this->department == Department::XUANCHUANBU 
              || $this->department == Department::XIANGMUKAIFABU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+            return response()->json(['status' => 403, 'msg' => '主席团, 秘书部, 宣创部']);
         }
         
         if($request->published && $request->draft) {
@@ -282,7 +285,7 @@ class PostController extends Controller
         if(!($this->department == Department::ZHUXITUAN || 
              $this->department == Department::XUANCHUANBU || 
              $this->department == Department::XIANGMUKAIFABU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+            return response()->json(['status' => 403, 'msg' => '主席团，宣创部'], 403);
         }
         
         // hide html content
@@ -307,7 +310,7 @@ class PostController extends Controller
              $this->department == Department::XUANCHUANBU || 
              $this->department == Department::MISHUBU || 
              $this->department == Department::XIANGMUKAIFABU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+            return response()->json(['status' => 403, 'msg' => '主席团, 秘书部, 宣传部']);
         }
         
         $prefix = env('APP_URL') . '/posts/';

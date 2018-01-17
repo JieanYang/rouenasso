@@ -105,8 +105,8 @@ class PostNoAuthController extends Controller
         return $p ? (
                         $p->published_at ? $this->incrementView($p)
                         :
-                        Response()->json(['status' => 404, 'msg' => 'Post not found.'], 400)
-                    ) : Response()->json(['status' => 404, 'msg' => 'Post not found.'], 404);
+                        Response()->json(['status' => 400, 'msg' => '不返回草稿, bad request'])
+                    ) : Response()->json(['status' => 404, 'msg' => 'Post not found.']);
     }
 
     /**

@@ -49,15 +49,18 @@ Route::get('users/count/show', 'UserController@countUser');
 Route::post('/createlink',['uses'=>'CreatelinkController@store']); //随机链接路由注册
 
 
+//需要用户验证
+Route::resource('posts', 'PostController');
+Route::get('posts/count/show', 'PostController@countPost');
+Route::get('posts/category/{id}/drafts', 'PostController@showDraftsByCategoryId');
+Route::get('posts/calendar/show', 'PostController@showPostsCalendar');
 
-Route::resource('posts', 'PostController')->middleware('auth.basic.once');
-Route::get('posts/category/{id}/drafts', 'PostController@showDraftsByCategoryId')->name('posts.showDraftsByCategoryId')->middleware('auth.basic.once');
-Route::get('posts/calendar/show', 'PostController@showPostsCalendar')->name('posts.showPostsCalendar')->middleware('auth.basic.once');
-Route::get('posts/count/show', 'PostController@countPost')->name('posts.countPost')->middleware('auth.basic.once');
-Route::get('posts/category/{id}', 'PostNoAuthController@showPostsByCategoryId')->name('posts.showPostsByCategoryId');
-Route::get('posts/{id}/noauth', 'PostNoAuthController@showPost')->name('posts.showPost');
+//无需用户认证
+Route::get('posts/category/{id}', 'PostNoAuthController@showPostsByCategoryId');
+Route::get('posts/{id}/noauth', 'PostNoAuthController@showPost');
 
-Route::post('uploadimg/', 'PostController@uploadImg')->middleware('auth.basic.once');
+//editor 处理的图片上传和下载API
+Route::post('uploadimg/', 'PostController@uploadImg');
 Route::get('downloadimg/', 'PostNoAuthController@retrieveImg');
 
 
