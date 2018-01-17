@@ -1,8 +1,12 @@
 var auth = null;
+var announcement = null;
 
 $(window).on('load', function () {
     // show loader
     $("#loader").addClass("show");
+
+    // navigation
+    importLeftNavigation();
 
     // smooth anchor scroll
     $(document).on('click', 'a[href^="#"]', function (event) {
@@ -13,13 +17,13 @@ $(window).on('load', function () {
         }, 750);
     });
 
-    // logout btn
-    $("#btn-logout").click(function () {
-        logout();
-    });
-
     // login check
     $.when(checkLogin()).done(function () {
+        // logout btn
+        $("#btn-logout").click(function () {
+            logout();
+        });
+        
         // dashboard
         $("#block-date").text((new Date).toLocaleDateString());
         $("#block-time").text((new Date).toLocaleTimeString());
@@ -38,6 +42,10 @@ $(window).on('load', function () {
         $.when(ajaxCalendar()).done(function () {
             // hide loader
             $("#calendar-loader").hide();
+        });
+        $.when(ajaxAnnouncement()).done(function () {
+            // hide loader
+            $("#announcement-loader").hide();
         });
     });
 });
@@ -115,10 +123,9 @@ function ajaxCalendar() {
     ajaxAuthGet('https://api.acecrouen.com/posts/calendar/show',
         function (response) {
             $('#calendar').fullCalendar({
-                eventClick: function(event) {
+                eventClick: function (event) {
                     if (event.url) {
-                        alert('前端文章浏览页面 + id = ' + event.id);
-                        window.open('//' + id);
+                        window.open(event.url);
                         return false;
                     }
                 },
@@ -131,20 +138,44 @@ function ajaxCalendar() {
 }
 
 
-
-
-
-
-// base ajax get with auth
-function ajaxAuthGet(url, success, error) {
-    return $.ajax({
-        url: url,
-        type: 'get',
-        headers: {
-            Authorization: auth
+// ajax - announcement
+function ajaxAnnouncement() {
+    ajaxAuthGet('https://api.acecrouen.com/posts/category/99?latest=true',
+        function (response) {
+            announcement = response;
+            $("#announcement").html(response.html_content);
+            if (response.preview_text == "showing") {
+                $("#show-or-hide-announcement").text("隐藏公告");
+            } else {
+                $("#show-or-hide-announcement").text("显示公告");
+            }
+            $("#show-or-hide-announcement").on('click', function () {
+                $("#show-or-hide-announcement").prop("disabled", true);
+                ajaxShowHideAnnouncement();
+            });
+            $("#show-or-hide-announcement").prop("disabled", false);
         },
-        dataType: 'json',
-        success: success,
-        error: error
-    });
+        function (respinse) {
+
+        })
+}
+
+function ajaxShowHideAnnouncement() {
+    if (announcement.preview_text == 'showing') {
+        announcement.preview_text = 'hiding';
+    } else {
+        announcement.preview_text = 'showing';
+    }
+    ajaxAuthPut('https://api.acecrouen.com/posts/' + announcement.id, announcement,
+        function (response) {
+            if (announcement.preview_text == 'showing') {
+                $("#show-or-hide-announcement").text("隐藏公告");
+            } else {
+                $("#show-or-hide-announcement").text("显示公告");
+            }
+            $("#show-or-hide-announcement").prop("disabled", false);
+        },
+        function (response) {
+            alert("error");
+        });
 }
