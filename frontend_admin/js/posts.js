@@ -78,6 +78,7 @@ function responsiveTable() {
     $('#postsTables').DataTable({
         //responsive: true,
         bAutoWidth: true,
+        order: [[3,'desc'],[2,'desc']],
         columnDefs: [{
             targets: 1,
             render: function (data, type, full, meta) {
@@ -93,6 +94,7 @@ function responsiveTable() {
             }
         }]
     });
+
 
     function initTableButtons() {
         // view buttons
