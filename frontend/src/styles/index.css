@@ -96,3 +96,10 @@ a:hover {
     height: 50px ! important;
     width: auto;
 }
+
+
+/*公告*/
+#announcement > div > p {
+    color: black;
+    /*background-color: yellow; */
+}
