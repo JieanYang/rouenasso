@@ -313,7 +313,8 @@ class PostController extends Controller
             return response()->json(['status' => 403, 'msg' => '主席团, 秘书部, 宣传部']);
         }
         
-        $prefix = env('APP_URL') . '/posts/';
+        // $prefix = env('APP_URL') . '/posts/';
+        $prefix = 'https://www.acecrouen.com/home/';
         
         $posts = DB::table('posts')
             ->select('title', 'id', 'category',
@@ -332,7 +333,17 @@ class PostController extends Controller
                 $p->start = $p->published_at;
                 $p->backgroundColor = '#303F9F';
             }
-            $p->url = $prefix . $p->id;
+
+            //按照category处理url
+            if($p->category==1){
+                $p->url = $prefix . 'movements/' . $p->id;
+            }else if ($p->category==3){
+                $p->url = $prefix . 'works/' . $p->id;
+            }else if ($p->category==4) {
+                $p->url = $prefix . 'writing/' . $p->id;
+            }
+
+           
         }
         
         return $posts;
