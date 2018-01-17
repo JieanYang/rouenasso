@@ -1,22 +1,26 @@
 module.exports = {
   template: require('../../views/views_Module/contents.html'),
   controller: ContentsController,
-  controllerAs: 'controller'
+  controllerAs: 'vm'
 };
 
 /** @ngInject */
 function ContentsController($http, $sce) {
-  var vm = this;
+	var vm = this;
+	vm.showAnnouncement = false;
 
-  $http
-.get('../../databases/contents.json')
-.then(function (response) {
-  vm.contents = response.data;
-});
+	$http
+	.get('https://api.acecrouen.com/posts/category/99?latest=true')
+	.then(function (response) {
+		if (response.data.preview_text == 'hiding'){
+			vm.showAnnouncement = false;
+		}else if (response.data.preview_text == 'showing'){
+			vm.announcement_title = $sce.trustAsHtml(response.data.title);
+			vm.announcement = $sce.trustAsHtml(response.data.html_content);
+			vm.showAnnouncement = true;
+		}
 
-  $http
-.get('https://api.acecrouen.com/posts/category/99?latest=true')
-.then(function (response) {
-  vm.announcement = $sce.trustAsHtml(response.data.html_content);
-});
+	});
+
+	$http.get('https://api.acecrouen.com/log');
 }
