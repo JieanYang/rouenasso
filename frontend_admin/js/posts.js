@@ -49,8 +49,8 @@ function ajaxPostsTable() {
 
             $.each(response, function (index, item) {
                 var table_row = $('<tr>', {
-                    id: 'table-row-post-id-' + item.id + '-category-' + item.category,
-                    'data-url': item.url
+                    id: 'table-row-post-id-' + item.id + '-category-' + item.category
+                    //, 'data-url': item.url
                 });
                 table_row.append($('<td>', {
                     html: categoryIdToName(item.category)
@@ -123,8 +123,8 @@ function responsiveTable() {
         // edit buttons
         $(".btn-edit").on('click', function () {
             var postId = $(this).parent().parent().parent().attr('id').split('-')[4];
-            var postUrl = $(this).parent().parent().parent().attr('data-url');
-            window.open('./post/edit.html?id=' + postId + '&url=' + postUrl);
+            // var postUrl = $(this).parent().parent().parent().attr('data-url');
+            window.open('./post/edit.html?id=' + postId + '&url=https://api.acecrouen.com/posts/' + postId);
         });
 
         // delete buttons
