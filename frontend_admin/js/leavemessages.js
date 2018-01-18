@@ -26,7 +26,7 @@ function checkLogin() {
     return attempt(Cookies.get('Authorization'), function (response) {
         auth = Cookies.get('Authorization');
         setAuthCookie(auth);
-        $("#span-name").text(response.name);
+        $("#span-name").text(response.department+' '+response.name);
     }, function () {
         window.location.replace("login.html");
     });
@@ -36,6 +36,7 @@ function checkLogin() {
 function ajaxLeavemessage() {
     ajaxAuthGet('https://api.acecrouen.com/leaveMessages',
         function (response) {
+
 
             var leaveMessages_obj = $('#panel_leavemessages');
 
@@ -68,7 +69,7 @@ function ajaxLeavemessage() {
             });
         },
         function (response) {
-            console.log(response.statusText);
+            // console.log(response.statusText);
         })
 }
 
@@ -90,6 +91,7 @@ function addMessagesBtns(leaveMessages_item, id) {
     leaveMessages_item.mouseenter(function () {
         btns = $('<div>', {
             class: 'btns_leaveMessage'
+
         });
         btn_view = $('<a>', {
             href: 'leavemessage_pageDetail.html?id=' + id,
@@ -97,6 +99,7 @@ function addMessagesBtns(leaveMessages_item, id) {
             class: 'btn btn-outline btn-primary',
             style: 'margin-right: 10px;'
         });
+
         btn_delete = $('<a>', {
             html: '删除',
             class: 'btn btn-outline btn-danger'
@@ -116,13 +119,13 @@ function addDeleteEvent(btn_delete, id) {
         $(this).attr('id', 'delete');
         ajaxAuthDelete('https://api.acecrouen.com/leaveMessages/' + id, null,
             function (response) {
-                console.log(response.status);
-                console.log(response.msg);
+                // console.log(response.status);
+                // console.log(response.msg);
                 $('#delete').parent().parent().remove();
             },
             function (response) {
-                console.log(response.responseJSON.status);
-                console.log(response.responseJSON.msg);
+                // console.log(response.responseJSON.status);
+                // console.log(response.responseJSON.msg);
                 if (response.responseJSON.status == 400) {
                     $('#delete').parent().append($('<p>').text('帖子已删除').css('color', 'red'));
                 }

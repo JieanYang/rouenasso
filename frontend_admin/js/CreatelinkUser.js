@@ -26,7 +26,7 @@ function checkLogin() {
     return attempt(Cookies.get('Authorization'), function (response) {
         auth = Cookies.get('Authorization');
         setAuthCookie(auth);
-        $("#span-name").text(response.name);
+        $("#span-name").text(response.department+' '+response.name);
     }, function () {
         window.location.replace("login.html");
     });
@@ -47,15 +47,15 @@ function addEventCreateButton(){
 }
 
 function createLink(department, position) {
-    ajaxAuthPost("http://localhost:8000/createlink",
+    ajaxAuthPost("https://api.acecrouen.com/createlink",
         {"department": department, "position": position},
         function(response){
-            console.log(response);
+            // console.log(response);
             $("#alert_response_link").text(response.msg + "  link:" + response.link)
             $("#alert_response_link").addClass("show");
         },
         function(response){
-            console.log(response);
+            // console.log(response);
             $("#alert_createLink").text("服务器问题！");
             $("#alert_createLink").removeClass("show");
         }
