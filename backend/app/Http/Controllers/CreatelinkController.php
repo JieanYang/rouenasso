@@ -37,8 +37,8 @@ class CreatelinkController extends Controller
 
     public function store(Request $request)
     {
-        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU)) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+        if(!($this->department == Department::ZHUXITUAN || $this->department == Department::MISHUBU || $this->department == Department::XIANGMUKAIFABU)) {
+            return response()->json(['status' => 403, 'msg' => '主席团, 秘书部'], 403);
         }
 
 
