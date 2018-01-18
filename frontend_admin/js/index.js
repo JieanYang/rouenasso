@@ -142,8 +142,9 @@ function ajaxCalendar() {
 function ajaxAnnouncement() {
     ajaxAuthGet('https://api.acecrouen.com/posts/category/99?latest=true',
         function (response) {
+        	// console.log(response);
             announcement = response;
-            $("#announcement").html(response.html_content);
+            $("#announcement").html('<h3>'+response.title+'</h3>'+'<p>'+response.html_content+'</p>');
             if (response.preview_text == "showing") {
                 $("#show-or-hide-announcement").text("隐藏公告");
             } else {
