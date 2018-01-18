@@ -26,7 +26,7 @@ function checkLogin() {
     return attempt(Cookies.get('Authorization'), function (response) {
         auth = Cookies.get('Authorization');
         setAuthCookie(auth);
-        $("#span-name").text(response.name);
+        $("#span-name").text(response.department+' '+response.name);
     }, function () {
         window.location.replace("login.html");
     });
@@ -37,7 +37,6 @@ function ajaxUsersTable() {
     ajaxAuthGet('https://api.acecrouen.com/users',
         function (response) {
             // console.log(response);
-
             var table_obj = $('#listOfUsers');
 
             $.each(response, function (index, item) {
@@ -63,33 +62,42 @@ function ajaxUsersTable() {
                 table_obj.append(table_row);
             });
 
-            responsivePostDeleteTable();
-            //         "id": 1,
-            //        "name": "小何",
-            //        "email": "xiaohe@test.com",
-            //        "department": "主席团",
-            //        "position": "主席",
-            //        "school": "ESIGELEC",
-            //        "phone_number": "06 05 04 03 02",
-            //        "isWorking": 1,
-            //        "isAvaible": 1,
-            //        "birthday": "1993-01-01",
-            //        "arrive_date": "2012-01-01",
-            //        "dimission_date": "2018-01-01",
-            //        "deleted_at": null,
-            //        "created_at": "2017-12-19 21:25:07",
-            //        "updated_at": null
+            responsiveUsersTable();
+
         },
         function (response) {
             $('#listOfUsers').after('error').remove();
         });
 }
 
-function responsivePostDeleteTable() {
+function responsiveUsersTable() {
     $('#listOfUsers').DataTable({
         responsive: true,
-        bAutoWidth: true
+        bAutoWidth: true,
+        // columnDefs: [{
+        //     targets: 1,
+        //     render: function (data, type, full, meta) {
+        //         if (type === 'display') {
+        //             data = data + '<div class="links">' +
+        //                 '<a href="#" class="btn-view">查看</a> ' +
+        //                 '<a href="#" class="btn-edit">更新信息</a> ' 
+        //                 //+ '<a href="#" class="btn-delete">删除</a> ' +
+        //                 '</div>';
+        //         }
+
+        //         return data;
+        //     }
+        // }]
     });
+
+//     function initUserTableButtons(){
+
+//     }
+
+// initUserTableButtons();
+// $('#listOfUsers').on('draw.dt', function () {
+//         initUserTableButtons();
+//     });
 }
 
 

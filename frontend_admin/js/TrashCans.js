@@ -31,7 +31,7 @@ function checkLogin() {
     return attempt(Cookies.get('Authorization'), function (response) {
         auth = Cookies.get('Authorization');
         setAuthCookie(auth);
-        $("#span-name").text(response.name);
+        $("#span-name").text(response.department+' '+response.name);
     }, function () {
         window.location.replace("login.html");
     });
