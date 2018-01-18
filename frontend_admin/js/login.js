@@ -20,7 +20,7 @@ function attemptLogin() {
     $("#btn-submit").prop('disabled', true);
 
     attempt(auth, function (response) {
-        if(response.department == "主席团" || response.department == "秘书部" || response.department == "宣传部"){
+        if(response.department == "主席团" || response.department == "秘书部" || response.department == "宣传部" || response.department == "项目开发部"){
 	        $("#hint").text("欢迎，" + response.name);
 	        $("#hint").css('color', 'green');
 	        $("#hint").show();
