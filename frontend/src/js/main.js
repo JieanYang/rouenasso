@@ -7,6 +7,7 @@ var owlPricing;
 var ratio = 2;
 
 function initBigHeader() {
+  // console.log("big init");
     // Preloader
     $('.intro-tables, .parallax, header').css('opacity', '0');
     $('.preloader').addClass('animated fadeOut').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
@@ -23,7 +24,7 @@ function initBigHeader() {
         $('.parallax img').css('width', $('.parallax').height() * ratio + 'px');
     }
 
-    $('header').height($(window).height() + 80);
+    $('header').height($(window).height() - 10);
     $('section .cut').each(function () {
         if ($(this).hasClass('cut-top'))
             $(this).css('border-right-width', $(this).parent().width() + "px");
@@ -33,6 +34,8 @@ function initBigHeader() {
 
     // Navbar Init
     $('nav').addClass('original').clone().insertAfter('nav').addClass('navbar-fixed-top').css('position', 'fixed').css('top', '0').css('margin-top', '0').removeClass('original');
+    $('.navbar-fixed-top').find('a').css('color', '#636363');
+    $('.navbar-fixed-top .navbar-brand').append('<img class="nav-logo" ng-src="../../images/logo-text-white.png" data-active-url="../../images/logo-text-blue.png" alt="ACECR logo">');
     $('.mobile-nav ul').html($('nav .navbar-nav').html());
     $('nav.navbar-fixed-top .navbar-brand img').attr('src', $('nav.navbar-fixed-top .navbar-brand img').data("active-url"));
 
@@ -43,6 +46,7 @@ function initBigHeader() {
 };
 
 function initSmallHeader() {
+  // console.log("small init");
     // Preloader
     $('.intro-tables, .parallax, header').css('opacity', '0');
     $('.preloader').addClass('animated fadeOut').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
@@ -54,19 +58,18 @@ function initSmallHeader() {
 
     // Navbar Init
     $('nav').addClass('original').clone().insertAfter('nav').addClass('navbar-fixed-top').css('position', 'fixed').css('top', '0').css('margin-top', '0').removeClass('original');
+    $('.navbar-fixed-top').find('a').css('color', '#636363');
     $('.mobile-nav ul').html($('nav .navbar-nav').html());
     $('nav.navbar-fixed-top .navbar-brand img').attr('src', $('nav.navbar-fixed-top .navbar-brand img').data("active-url"));
-    $('nav.original').css('opacity', '1');
-    $('nav.navbar-fixed-top').css('opacity', '0');
 
-    $('#placeHolder').height(160).css('background-color', '#000147');
+    $('#placeHolder').height(120).css('background-color', '#000147');
 
 	// smooth anchor scroll
 	$('html, body').on('click', 'a[href^="#"]', function (event) {
 		event.preventDefault();
 
 		$('html, body').animate({
-			scrollTop: $($.attr(this, 'href')).offset().top - 110
+			scrollTop: $($.attr(this, 'href')).offset().top - 67
 		}, 500);
 	});
 };
@@ -119,7 +122,7 @@ function onScroll() {
 }
 
 window.addEventListener('scroll', onScroll, false);
-	
+
 // Window Resize
 $(window).resize(function () {
     $('header').height($(window).height());
@@ -161,7 +164,7 @@ $('body').on('click', '.mobile-nav a', function (event) {
  $(window).scroll(function(){
     if ($(window).scrollTop() >= 210)
     {
-        $(".nav1").css({position:'fixed',top:'0'});     
+        $(".nav1").css({position:'fixed',top:'0'});
     }
     else
     {
