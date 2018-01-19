@@ -1,32 +1,35 @@
-<footer>
+<footer id="footer_page">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 text-center-mobile">
-                <h3 class="white">Links<span class="open-blink"></span></h3>
-                <h4 class="white"><a ui-sref="home.contactus">联系我们</a></h4>
-                <h4 class="white"><a ui-sref="home.aboutus">学联介绍</a></h4>
+                <h5 class="white">Links<span class="open-blink"></span></h5>
+                <p class="white"><a ui-sref="home.contactus">联系我们</a></p>
+                <p class="white"><a ui-sref="home.aboutus">学联介绍</a></p>
             </div>
+
             <div class="col-sm-2 text-center-mobile">
-                <li id="div1"><img class="showPicture" ng-src="../../images/学联微信二维码.jpg"></li>
+                <li id="img_hide"><img class="showPicture" ng-src="../../images/学联微信二维码.jpg"></li>
             </div>
+
             <div class="col-sm-3 text-right text-center-mobile">
                 <ul class="social-footer">
                     <li><a href="https://www.facebook.com/acecrcontact/"><i class="fa fa-facebook-square" style="font-size:36px"></i></a></li>
-                    <li><img class="contactLogo" ng-src="../../images/wechat.png" onmouseover="document.getElementById('div1').style.display = 'block ';" onmouseout="document.getElementById('div1').style.display = 'none';"></li>
+                    <li><img class="contactLogo" ng-src="../../images/wechat.png" onmouseover="document.getElementById('img_hide').style.display = 'block ';" onmouseout="document.getElementById('img_hide').style.display = 'none';"></li>
                     <li><a href="#"><img class="contactLogo" ng-src="../../images/email.png"></a></li>
                     <li><a href="#"><img class="contactLogo" ng-src="../../images/youtube.png"></a></li>
                 </ul>
             </div>
         </div>
+
         <div class="row">
             <div class="col-sm-6 text-center-mobile">
-                <h4 class="white">开发团队</h4>
+                <p class="white">开发团队</p>
             </div>
             <div class="col-sm-6 text-center-mobile">
-                <h5 class="white col-sm-2">何俊阳</h5>
-                <h5 class="white col-sm-2">宋雨舟</h5>
-                <h5 class="white col-sm-2">尤扬</h5>
-                <h5 class="white col-sm-2">杨杰安</h5>
+                <p class="white col-sm-2">何俊阳</p>
+                <p class="white col-sm-2">宋雨舟</p>
+                <p class="white col-sm-2">尤扬</p>
+                <p class="white col-sm-2">杨杰安</p>
             </div>
         </div>
 
@@ -34,13 +37,13 @@
             <div class="col-sm-8">
                 <p>&copy; 2017 acecrouen.com 版权所有</p>
             </div>
-            <div class="col-sm-3 text-right text-center-mobile">
+            <!-- <div class="col-sm-3 text-right text-center-mobile">
                 <select class="form-select">
-          <option>中文(简体)</option>
-          <option>français</option>
-          <option>English</option>
-        </select>
-            </div>
+                  <option>中文(简体)</option>
+                  <option>français</option>
+                  <option>English</option>
+                </select>
+            </div> -->
         </div>
     </div>
 </footer>

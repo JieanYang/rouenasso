@@ -7,7 +7,7 @@ var owlPricing;
 var ratio = 2;
 
 function initBigHeader() {
-  console.log("big init");
+  // console.log("big init");
     // Preloader
     $('.intro-tables, .parallax, header').css('opacity', '0');
     $('.preloader').addClass('animated fadeOut').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
@@ -24,7 +24,7 @@ function initBigHeader() {
         $('.parallax img').css('width', $('.parallax').height() * ratio + 'px');
     }
 
-    $('header').height($(window).height() + 80);
+    $('header').height($(window).height() - 10);
     $('section .cut').each(function () {
         if ($(this).hasClass('cut-top'))
             $(this).css('border-right-width', $(this).parent().width() + "px");
@@ -34,6 +34,8 @@ function initBigHeader() {
 
     // Navbar Init
     $('nav').addClass('original').clone().insertAfter('nav').addClass('navbar-fixed-top').css('position', 'fixed').css('top', '0').css('margin-top', '0').removeClass('original');
+    $('.navbar-fixed-top').find('a').css('color', '#636363');
+    $('.navbar-fixed-top .navbar-brand').append('<img class="nav-logo" ng-src="../../images/logo-text-white.png" data-active-url="../../images/logo-text-blue.png" alt="ACECR logo">');
     $('.mobile-nav ul').html($('nav .navbar-nav').html());
     $('nav.navbar-fixed-top .navbar-brand img').attr('src', $('nav.navbar-fixed-top .navbar-brand img').data("active-url"));
 
@@ -44,7 +46,7 @@ function initBigHeader() {
 };
 
 function initSmallHeader() {
-  console.log("small init");
+  // console.log("small init");
     // Preloader
     $('.intro-tables, .parallax, header').css('opacity', '0');
     $('.preloader').addClass('animated fadeOut').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
@@ -56,10 +58,11 @@ function initSmallHeader() {
 
     // Navbar Init
     $('nav').addClass('original').clone().insertAfter('nav').addClass('navbar-fixed-top').css('position', 'fixed').css('top', '0').css('margin-top', '0').removeClass('original');
+    $('.navbar-fixed-top').find('a').css('color', '#636363');
     $('.mobile-nav ul').html($('nav .navbar-nav').html());
     $('nav.navbar-fixed-top .navbar-brand img').attr('src', $('nav.navbar-fixed-top .navbar-brand img').data("active-url"));
 
-    $('#placeHolder').height(160).css('background-color', '#000147');
+    $('#placeHolder').height(120).css('background-color', '#000147');
 
 	// smooth anchor scroll
 	$('html, body').on('click', 'a[href^="#"]', function (event) {

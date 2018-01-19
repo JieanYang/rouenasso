@@ -1,4 +1,4 @@
-html,
+/*html,
 body,
 #root {
     margin: 0;
@@ -37,7 +37,6 @@ a:hover {
 .header {
     display: flex;
     align-items: center;
-    /*  background-color: #1f1f1f;*/
     border-bottom-style: solid;
     border-width: 1px;
     border-color: green;
@@ -54,34 +53,17 @@ a:hover {
     text-align: right;
     margin: 1rem;
     color: white;
-}
+}*/
 
-.footer {
+/*.footer {
     padding: 0.5rem;
     font-size: 1rem;
-    /*  background-color: #1f1f1f;*/
-    /*  text-align: center;*/
-    /*  color: white;*/
     border-top-style: solid;
     border-width: 1px;
     border-color: green;
-}
+}*/
 
-.contactLogo {
-    width: 33px;
-    height: auto;
-}
-
-#div1 {
-    display: none;
-}
-
-.showPicture {
-    width: 120px;
-    height: auto;
-}
-
-.form-select {
+/*.form-select {
     font-size: 12px;
     position: relative;
     left: 0;
@@ -90,16 +72,51 @@ a:hover {
     border: 1px;
     border-radius: 0;
     box-shadow: 0;
+}*/
+
+/*大头部*/
+#headerBig_page .nav-logo { /* 顶部浮动导航栏 */
+    height: 50px;/* ! important*/
+    width: auto; 
+}
+#headerBig_page .nav a{
+    color: white;
+    /*background-color: yellow;*/
 }
 
-.nav-logo {
-    height: 50px ! important;
+#headerBig_page {
+    background-color: pink;
+}
+
+/*小头部*/
+#headerSmall_page .nav-logo{
+    height: 50px;
     width: auto;
 }
 
-
-/*公告*/
-#announcement > div > p {
-    color: black;
-    /*background-color: yellow; */
+#headerSmall_page .nav a{
+    color: white;
+    /*background-color: yellow;*/
 }
+
+
+/* 尾部 */
+#footer_page .contactLogo {
+    width: 33px;
+    height: auto;
+}
+
+#footer_page #img_hide {
+    display: none;
+}
+
+#footer_page .showPicture {
+    width: 110px;
+    height: auto;
+}
+
+#footer_page a{
+    color: white;
+}
+
+

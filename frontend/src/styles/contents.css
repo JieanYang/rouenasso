@@ -1,8 +1,23 @@
-section#services div.service {
+/*index*/
+#contents_page p{
+    color: black;  /*首页里的<P> 字是黑色 */
+}
+
+#contents_page .service p{
+	color: #8a8e91;
+}
+
+#contents_page #announcement{
+	padding: 20px;
+	margin-top: 40px;
+}
+
+#contents_page > div.container > div.services > div.col-sm-4{
+	width: 45%;
+}
+
+#contents_page div.service {
 	cursor:pointer;
 	/*visibility: hidden;;*/
 }
 
-div > #contactWay_leaveMessage{
-	padding: 2px;
-}
