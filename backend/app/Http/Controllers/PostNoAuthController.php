@@ -59,6 +59,7 @@ class PostNoAuthController extends Controller
                                 ['published_at', '!=', null]
                             ])
                             ->whereNull('deleted_at')
+                            ->orderBy('published_at', 'desc')
                             ->get();
         } 
         
@@ -70,6 +71,7 @@ class PostNoAuthController extends Controller
         else {
         // all
             $result = Post::where([['category', $category_id], ['published_at', '!=', null]])
+                ->orderBy('published_at', 'desc')
                 ->whereNull('deleted_at')->get();
         }
         
