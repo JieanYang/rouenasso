@@ -7,8 +7,9 @@ module.exports = {
 /** @ngInject */
 function movementDetailsController($http, $location, $sce) {
   var vm = this;
-
-  vm.id=$location.url().slice(16);
+  url=$location.url();
+  num=url.slice(url.indexOf('&')+4);
+  vm.id=num;
   // console.log(vm.id)
   $http.get('https://api.acecrouen.com/posts/'+vm.id+'/noauth')
   .then(function(response) {

@@ -7,8 +7,9 @@ module.exports = {
 /** @ngInject */
 function writingDetailController($http, $location, $sce) {
   var vm = this;
-    
-  vm.id=$location.url().slice(14);
+  url=$location.url();
+  num=url.slice(url.indexOf('&')+4);
+  vm.id=num;
   $http.get('https://api.acecrouen.com/posts/'+vm.id+'/noauth')
   .then(function(response) {
     vm.writing = $sce.trustAsHtml(response.data.html_content);
