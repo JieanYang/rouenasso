@@ -55,7 +55,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     })
     .state('home.guide', {
-      url: '/guides/:id',
+      url: '/guides&id=:id',
       views: {
         'content@': {
           component: 'guide'
@@ -95,7 +95,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     })
     .state('home.movementDetails', {
-      url: '/movements/:id',
+      url: '/movements&id=:id',
       views: {
         'content@': {
           component: 'movementDetails'
@@ -111,7 +111,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     })
     .state('home.work', {
-      url: '/works/:id',
+      url: '/works&id=:id',
       views: {
         'content@': {
           component: 'work'
@@ -127,7 +127,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     })
     .state('home.writing_detail', {
-      url: '/writing/:id',
+      url: '/writing&id=:id',
       views: {
         'content@': {
           component: 'writingDetail'

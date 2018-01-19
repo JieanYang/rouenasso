@@ -7,8 +7,10 @@ module.exports = {
 /** @ngInject */
 function workController($http, $location, $sce) {
   var vm = this;
+  url=$location.url();
+  num=url.slice(url.indexOf('&')+4);
+  vm.id=num;
 
-  vm.id=$location.url().slice(12);
   $http.get('https://api.acecrouen.com/posts/'+vm.id+'/noauth')
   .then(function(response) {
   	vm.work = $sce.trustAsHtml(response.data.html_content);
