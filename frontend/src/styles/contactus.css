@@ -10,3 +10,7 @@ form div#prompt_success {
 	color:green;
 	font-size: 2em;
 }
+
+div > #contactWay_leaveMessage{
+	padding: 2px;
+}
