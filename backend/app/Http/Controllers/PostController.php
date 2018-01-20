@@ -336,11 +336,11 @@ class PostController extends Controller
 
             //按照category处理url
             if($p->category==1){
-                $p->url = $prefix . 'movements/' . $p->id;
+                $p->url = $prefix . 'movements&id=' . $p->id;
             }else if ($p->category==3){
-                $p->url = $prefix . 'works/' . $p->id;
+                $p->url = $prefix . 'works&id=' . $p->id;
             }else if ($p->category==4) {
-                $p->url = $prefix . 'writing/' . $p->id;
+                $p->url = $prefix . 'writing&id=' . $p->id;
             }
 
            
