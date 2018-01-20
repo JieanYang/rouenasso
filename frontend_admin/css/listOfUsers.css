@@ -1,4 +1,4 @@
-#model_view{
+#listOfUsers_page #model_view{
 	background-color: white;
 	position: absolute;
 	top: 150px;
@@ -9,7 +9,7 @@
 	border:3px solid rgba(0,0,0, 0.4); 
 	display: none;
 }
-.fullbg{
+#listOfUsers_page.fullbg{
 	background-color: #DFDBDB;
 	position: absolute;
 	top: 0;
@@ -19,4 +19,12 @@
 	z-index: 99;
 	display: none;
 	opacity:0.5;
+}
+
+#listOfUsers_page #listOfUsers tr .links {
+    display:none;
+}
+
+#listOfUsers_page #listOfUsers tr:hover .links {
+    display:block;   
 }

@@ -104,13 +104,13 @@ function responsiveTable() {
             var url = "";
             switch (postCategory) {
                 case '1':
-                    url = "https://www.acecrouen.com/home/movements/" + postId;
+                    url = "https://www.acecrouen.com/home/movements&id=" + postId;
                     break;
                 case '3':
-                    url = "https://www.acecrouen.com/home/works/" + postId;
+                    url = "https://www.acecrouen.com/home/works&id=" + postId;
                     break;
                 case '4':
-                    url = "https://www.acecrouen.com/home/writing/" + postId;
+                    url = "https://www.acecrouen.com/home/writing&id=" + postId;
                     break;
                 case '99':
                     url = "https://www.acecrouen.com/";
