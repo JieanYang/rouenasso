@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ACEC Rouen, admin page">
+    <meta name="author" content="Junyang HE">
+
+    <title>ACEC Rouen - Admin</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/UserDetails.css">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- full calendar -->
+    <link rel='stylesheet' href='../vendor/fullcalendar/fullcalendar.css' />
+</head>
+
+<body id="UserDetails_page">
+    <div id="loader">
+        <div></div>
+        <div></div>
+    </div>
+
+
+    <div id="wrapper">
+
+        <div id="navigator"></div>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">用户信息</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+<!--名字，邮箱，部门，职位，学校，手机号码，是否工作，是否有效，生日，入会时间，退职时间 -->
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-11">
+                    <div class="panel panel-default">
+                        <div class="panel-heading form_view">
+                            查看
+                        </div>
+
+                        <div class="panel-heading form_edit">
+                            更新
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <form class="form-inline form_view">
+                                <div class="row">
+                                    <div class="form-group col-sm-3 col-sm-offset-1">
+                                        <label>名字: <span id="name"></span></label>
+                                        <!-- <input type="text" class="form-control" id="name"> -->
+                                    </div>
+                                    <div class="form-group col-sm-3 col-sm-offset-1">
+                                        <label>邮箱: <span id="email"></span></label>
+                                        <!-- <input type="text" class="form-control" id="email"> -->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-3 col-sm-offset-1">
+                                        <label>学校: <span id="school"></span></label>
+                                    </div>
+                                    <div class="form-group col-sm-3 col-sm-offset-1">
+                                        <label>手机号码: <span id="phone_number"></span></label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-3 col-sm-offset-1">
+                                        <label>部门: <span id="department"></span></label>
+                                    </div>
+                                    <div class="form-group col-sm-3 col-sm-offset-1">
+                                        <label>职位: <span id="position"></span></label>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="form-group col-sm-3 col-sm-offset-1">
+                                        <label>在职: <span id="isWorking"></span></label>
+                                    </div>
+                                    <div class="form-group col-sm-3 col-sm-offset-1">
+                                        <label>生日: <span id="birthday"></span></label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-3 col-sm-offset-1">
+                                        <label>入会时间: <span id="arrive_date"></span></label>
+                                    </div>
+                                    <div class="form-group col-sm-3 col-sm-offset-1">
+                                        <label>退职时间: <span id="dimission_date"></span></label>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                            <div class="row">
+                                <div class="col-sm-3 col-sm-offset-6">
+                                    <button class="btn btn-primary form_view" id="editButton_form_view">更新信息</button>
+                                </div>
+                            </div>
+
+
+
+                            <form class="form-inline form_edit">
+                                <div class="row">
+                                    <div class="form-group col-sm-4 col-sm-offset-1">
+                                        <label for="name" class="col-form-label">名字: </label>
+                                        <input type="text" class="form-control" id="name">
+                                    </div>
+                                    <div class="form-group col-sm-4 col-sm-offset-1">
+                                        <label for="email" class="col-form-label">邮箱: </label>
+                                        <input type="email" class="form-control" id="email">
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="form-group col-sm-4 col-sm-offset-1">
+                                        <label for="school">学校: </label>
+                                        <input type="text" class="form-control" id="school">
+                                    </div>
+                                    <div class="form-group col-sm-4 col-sm-offset-1">
+                                        <label for="phone_number">手机号码: </label>
+                                        <input type="text" class="form-control" id="phone_number">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-4 col-sm-offset-1">
+                                        <label for="department" class="col-form-label">部门: </label>
+                                        <select class="form-control" id="department">
+                                            <option value="choice_department">请选择</option>
+                                            <option value="ZHUXITUAN">主席团</option>
+                                            <option value="ZUZHIBU">组织部</option>
+                                            <option value="XUANCHUANBU">宣传部</option>
+                                            <option value="WAILIANBU">外联部</option>
+                                            <option value="MISHUBU">秘书部</option>
+                                            <option value="ANQUANBU">安全部</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-4 col-sm-offset-1">
+                                        <label for="position" class="col-form-label">职位: </label>
+                                        <select class="form-control" id="position">
+                                            <option value="choice_position">请选择</option>
+                                            <option value="ZHUXI">主席</option>
+                                            <option value="FUZHUXI">副主席</option>
+                                            <option value="BUZHANG">部长</option>
+                                            <option value="FUBUZHANG">副部长</option>
+                                            <option value="CHENGYUAN">成员</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-4 col-sm-offset-1">
+                                        <label id="isWorking">在职: </label>
+                                        <select class="form-control" id="isWorking">
+                                            <option value="choice_position">请选择</option>
+                                            <option value="1">是</option>
+                                            <option value="0">不是</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-4 col-sm-offset-1">
+                                        <label for="birthday">生日: </label>
+                                        <input type="date" class="form-control" id="birthday">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-4 col-sm-offset-1">
+                                        <label for="arrive_date">入会时间: </label>
+                                        <input type="date" class="form-control" id="arrive_date">
+                                    </div>
+                                    <div class="form-group col-sm-4 col-sm-offset-1">
+                                        <label for="dimission_date">退职时间: </label>
+                                        <input type="date" class="form-control" id="dimission_date">
+                                    </div>
+                                </div>
+                                
+                            </form>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-3 col-sm-offset-6 form_edit">
+                                    <button class="btn btn-primary" id="updateButton_form_edit">更新</button>
+                                    <button class="btn btn-primary" id="returnButton_form_edit">返回</button>
+                                </div>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+    <!-- JavaScript Cookie -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+    <!-- Lodash -->
+    <script src="../../vendor/lodash/lodash.js"></script>
+
+    <!-- login -->
+    <!-- <script src="../js/login.js"></script> -->
+
+    <!-- common -->
+    <script src="../js/common.js"></script>
+
+    <!-- main -->
+    <script src="../js/UserDetails.js"></script>
+</body>
+
+</html>

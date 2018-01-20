@@ -97,12 +97,12 @@ function responsiveUsersTable() {
     function initUserTableButtons(){
         $('.btn-view').on('click', function(){
             var UserId = $(this).parent().parent().prev().text();
-            window.open('UserDetails.html?userid='+ UserId+'&look=true');
+            window.location.href='UserDetails.html?userid='+ UserId+'&look=true';
         });
 
         $('.btn-edit').on('click', function(){
             var UserId = $(this).parent().parent().prev().text();
-            window.open('UserDetails.html?userid='+ UserId+'&edit=true');
+            window.location.href='UserDetails.html?userid='+ UserId+'&edit=true';
         });
 
     }

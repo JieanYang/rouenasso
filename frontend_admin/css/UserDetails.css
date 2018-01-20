@@ -1,0 +1,11 @@
+#UserDetails_page form div.row{
+	margin-top: 30px;
+}
+
+#UserDetails_page .form_view {
+	display: none;
+}
+
+#UserDetails_page .form_edit {
+	display: none;
+}
