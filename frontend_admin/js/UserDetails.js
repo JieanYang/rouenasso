@@ -68,6 +68,10 @@ function page_view(id){
             $('#editButton_form_view').on('click',function(){
                 window.location.href=prefix+id+'&edit=true';
             });
+            $('#returnButton_form_view').on('click',function(){
+                window.location.href=url.slice(0,n).slice(0,-16)+'listOfUsers.html';
+            });
+
             if(response[0].department == '项目开发部'){
                 $('#editButton_form_view').css('display', 'none');
             }
@@ -126,6 +130,14 @@ function updateButton(button){
         user_update.arrive_date = $('#UserDetails_page .form_edit #arrive_date').val();
         user_update.dimission_date = $('#UserDetails_page .form_edit #dimission_date').val();
         console.log(user_update);
+
+        ajaxAuthPut('http://localhost:8000/users/7', user_update,
+            function(response){
+                console.log(response);
+            },function(response){
+                console.log(response);
+            });
+        
     });
 }
 
