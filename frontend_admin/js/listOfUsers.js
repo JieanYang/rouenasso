@@ -43,6 +43,7 @@ function ajaxUsersTable() {
                 var table_row = $('<tr>');
                 table_row.append($('<td>', {
                     html: item.id
+                    // user_id: item.id
                 }));
                 table_row.append($('<td>', {
                     html: item.name
@@ -74,34 +75,39 @@ function responsiveUsersTable() {
     $('#listOfUsers').DataTable({
         responsive: true,
         bAutoWidth: true,
-        // columnDefs: [{
-        //     targets: 1,
-        //     render: function (data, type, full, meta) {
-        //         if (type === 'display') {
-        //             data = data + '<div class="links">' +
-        //                 '<a href="#" class="btn-view">查看</a> ' +
-        //                 '<a href="#" class="btn-edit">更新信息</a> ' 
-        //                 //+ '<a href="#" class="btn-delete">删除</a> ' +
-        //                 '</div>';
-        //         }
-
-        //         return data;
-        //     }
-        // }]
+        columnDefs: [{
+            targets: 1,
+            render: function (data, type, full, meta) {
+                if (type === 'display') {
+                    data = data + '<div class="links">' +
+                        '<a class="btn-view">查看</a> ' +
+                        '<a class="btn-edit">更新信息</a> ' 
+                        //+ '<a href="#" class="btn-delete">删除</a> ' +
+                        '</div>';
+                }
+                
+                return data;
+            }
+        }]
     });
 
-//     function initUserTableButtons(){
 
-//     }
 
-// initUserTableButtons();
-// $('#listOfUsers').on('draw.dt', function () {
-//         initUserTableButtons();
-//     });
+    function initUserTableButtons(){
+        $('.btn-view').on('click', function(){
+            var UserId = $(this).parent().parent().prev().text();
+            window.location.href='UserDetails.html?userid='+ UserId+'&look=true';
+        });
+
+        $('.btn-edit').on('click', function(){
+            var UserId = $(this).parent().parent().prev().text();
+            window.location.href='UserDetails.html?userid='+ UserId+'&edit=true';
+        });
+
+    }
+
+    initUserTableButtons();
+    // $('#listOfUsers').on('draw.dt', function () {
+    //         initUserTableButtons();
+    // });
 }
-
-
-// function closeModelView() {
-//   $('.fullbg').removeClass('show');
-//   $('#model_view').removeClass('show');
-// }
