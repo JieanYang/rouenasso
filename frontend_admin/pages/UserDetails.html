@@ -109,8 +109,9 @@
                                 
                             </form>
                             <div class="row">
-                                <div class="col-sm-3 col-sm-offset-7">
-                                    <button class="btn btn-primary form_view" id="editButton_form_view">更新信息</button>
+                                <div class="col-sm-6 col-sm-offset-6 form_view">
+                                    <button class="btn btn-primary" id="editButton_form_view">更新信息</button>
+                                    <button class="btn btn-primary" id="returnButton_form_view">返回</button>
                                 </div>
                             </div>
 
@@ -165,9 +166,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-sm-4 col-sm-offset-1">
-                                        <label id="isWorking">在职: </label>
+                                        <label for="isWorking" class="col-form-label">在职: </label>
                                         <select class="form-control" id="isWorking">
-                                            <option value="choice_position">请选择</option>
+                                            <option value="choice_isWorking">请选择</option>
                                             <option value="1">是</option>
                                             <option value="0">不是</option>
                                         </select>
