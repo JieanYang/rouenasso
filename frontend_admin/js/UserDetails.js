@@ -130,7 +130,7 @@ function updateButton(button, id){
         user_update.arrive_date = $('#UserDetails_page .form_edit #arrive_date').val();
         user_update.dimission_date = $('#UserDetails_page .form_edit #dimission_date').val();
 
-        ajaxAuthPut('http://localhost:8000/users/'+id, user_update,
+        ajaxAuthPut('https://api.acecrouen.com/users/'+id, user_update,
             function(response){
                 var text = JSON.stringify(response);
                 $('#response_update').text(text).css('font-size', '1.2em');
