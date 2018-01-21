@@ -106,7 +106,7 @@ function page_edit(id){
                 window.location.href=prefix+id+'&look=true';
             });
 
-            updateButton($('#updateButton_form_edit'));
+            updateButton($('#updateButton_form_edit'), id);
 
 
 
@@ -116,7 +116,7 @@ function page_edit(id){
         });
 }
 
-function updateButton(button){
+function updateButton(button, id){
     button.on('click', function(){
         var user_update = {};
         user_update.name = $('#UserDetails_page .form_edit input#name').val();
@@ -129,11 +129,11 @@ function updateButton(button){
         user_update.birthday = $('#UserDetails_page .form_edit #birthday').val();
         user_update.arrive_date = $('#UserDetails_page .form_edit #arrive_date').val();
         user_update.dimission_date = $('#UserDetails_page .form_edit #dimission_date').val();
-        console.log(user_update);
 
-        ajaxAuthPut('http://localhost:8000/users/7', user_update,
+        ajaxAuthPut('http://localhost:8000/users/'+id, user_update,
             function(response){
-                console.log(response);
+                var text = JSON.stringify(response);
+                $('#response_update').text(text).css('font-size', '1.2em');
             },function(response){
                 console.log(response);
             });
