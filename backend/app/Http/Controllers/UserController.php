@@ -207,12 +207,13 @@ class UserController extends Controller
             return response()->json(['status' => 400, 'msg' => 'Bad Request. Invalid input.'], 400);
         }
 
+
         // 修改成员 => 主席团&秘书部部长&秘书部副部长
-        if(!($this->$department == Department::ZHUXITUAN ||
+        if(!($this->department == Department::ZHUXITUAN ||
              $this->department == Department::XIANGMUKAIFABU ||
-            ($this->$department == Department::MISHUBU &&
+            ($this->department == Department::MISHUBU &&
                 ($this->position == Position::BUZHANG || $this->position == Position::FUBUZHANG)))) {
-            return response()->json(['status' => 403, 'msg' => 'forbidden'], 403);
+            return response()->json(['status' => 403, 'msg' => '主席团，秘书部; 部长, 副部长']);
         }
 
         $messages = [
@@ -220,11 +221,14 @@ class UserController extends Controller
         ];
 
         $validator = Validator::make($request->all(), [
+            'name' => 'required|max:100',
             'email' => [
+                'required',
                 'max:100',
                 Rule::unique('users')->ignore($id),
             ],
-            'name' => 'max:100',
+            'school' => 'required|max:100',
+            'phone_number' => 'required|digits_between:10,15',
             'department' => [
             	'required',
             	Rule::in(\App\Model\Department::getKeys()),
@@ -233,13 +237,11 @@ class UserController extends Controller
             	'required',
             	Rule::in(\App\Model\Position::getKeys()),
             ],
-            'school' => 'max:100',
-            'phone_number' => 'digits_between:10,15',
-            'birthday' => 'date',
-            'arrive_date' => 'date',
-            'dimission_date' => 'date',
+            'birthday' => 'required|date',
+            'arrive_date' => 'required|date',
+            'dimission_date' => 'date|nullable',
             'isAvaible' => 'boolean',
-            'isWorking' => 'boolean'
+            'isWorking' => 'required|boolean'
         ],
         $messages);
 
@@ -267,7 +269,7 @@ class UserController extends Controller
         $userDb = User::find($id);
 
         if ($userDb === null) {
-            return response()->json(['status' => 400, 'msg' => 'User not exists'], 403);
+            return response()->json(['status' => 404, 'msg' => 'User not exists']);
         }
 
         if($request->name) {
@@ -297,13 +299,15 @@ class UserController extends Controller
         if($request->password) {
             $userDb->password = Hash::make($request->password);
         }
-        if($request->isWorking) {
+        if($request->isWorking || $request->isWorking == 0) {
             $userDb->isWorking = $request->isWorking;
         }
-        if($request->isAvaible) {
+
+        if($request->isAvaible) { //此处数据库里的数值不能是null
             $userDb->isAvaible = $request->isAvaible;
         }
-        if($request->dimission_date) {
+        // return response()->json(['status' => 200, 'msg' => $request->dimission_date]);
+        if($request->dimission_date|| !$request->dimission_date) {
             $userDb->dimission_date = $request->dimission_date;
         }
 
