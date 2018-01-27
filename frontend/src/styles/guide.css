@@ -78,18 +78,20 @@ div#panel_8 > div > ul li {
 }  
 div#panel_8 > div > ul li > a {
 	color: #767676;
-	font-size: 15px;
-	font-weight: 500;
-	padding-top: 1px;
-	padding-bottom: 1px;
+	font-size: 16px;
+	font-weight: 400;
+/*	padding-top: 1px;
+	padding-bottom: 1px;*/
 }
 div#panel_8 p {
 	color: #231f20;
+  font-size: 17px;
 }
 
 /*应用推荐*/
 div#panel_9 p {
 	color: #231f20;
+  font-size: 17px;
 }
 
 
@@ -122,7 +124,7 @@ div#menu a {
 }
 
 
-div.nav1 {
+/*div.nav1 {
     line-height:30px;
     background-color:white;
     height:auto;
@@ -134,4 +136,4 @@ div.section {
     width:100%;
     float:left;
     padding:10px; 
-}
+}*/
